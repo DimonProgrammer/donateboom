@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DonateBoom — Body Font + Lime Palette</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=JetBrains+Mono:wght@400;600;700&family=Manrope:wght@400;500;600;700&family=Golos+Text:wght@400;500;600;700&family=Nunito+Sans:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Rubik:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --bg:#080808;--s1:#111;--s2:#171717;
+    --border:rgba(255,255,255,0.06);--bh:rgba(255,255,255,0.12);
+    --lime:#B9F23E;--lime-bright:#CDFF50;--lime-dim:rgba(185,242,62,0.10);--lime-glow:rgba(185,242,62,0.06);
+    --mint:#7AE8A0;--mint-dim:rgba(122,232,160,0.10);
+    --w:#F2F2F2;--t1:#DADADA;--t2:#8A8A8A;--t3:#555;--t4:#333;
+    --display:'Unbounded',sans-serif;--mono:'JetBrains Mono',monospace;
+    --rl:20px;--rm:14px;--pill:100px;
+  }
+  body{background:var(--bg);color:var(--t1);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased}
+
+  .page-head{text-align:center;padding:60px 40px 40px}
+  .page-head h1{font-family:var(--display);font-size:28px;font-weight:900;color:var(--w);letter-spacing:-0.04em}
+  .page-head h1 span{color:var(--lime)}
+  .page-head p{color:var(--t2);font-size:14px;margin-top:8px}
+
+  .section{max-width:1100px;margin:0 auto;padding:48px 40px;border-bottom:1px solid var(--border)}
+
+  .font-block{margin-bottom:56px}
+  .font-block:last-child{margin-bottom:0}
+
+  .font-label{
+    display:flex;align-items:center;gap:12px;margin-bottom:24px;
+  }
+  .font-label h2{font-family:var(--display);font-size:14px;font-weight:700;color:var(--lime)}
+  .font-label .tag{
+    font-family:var(--mono);font-size:10px;font-weight:600;
+    padding:3px 10px;border-radius:var(--pill);
+    background:var(--lime-dim);color:var(--lime);
+    border:1px solid rgba(185,242,62,0.12);
+  }
+  .font-label .desc{font-size:12px;color:var(--t3);margin-left:auto}
+
+  /* Mock card */
+  .mock-card{
+    background:var(--s1);border:1px solid var(--border);border-radius:var(--rl);
+    padding:40px;display:grid;grid-template-columns:1fr 320px;gap:40px;
+  }
+
+  .mock-hero-tag{
+    font-family:var(--mono);font-size:11px;font-weight:600;color:var(--lime);
+    letter-spacing:0.06em;text-transform:uppercase;margin-bottom:16px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .mock-hero-tag::before{content:'';width:16px;height:1px;background:var(--lime)}
+
+  .mock-h1{font-family:var(--display);font-size:36px;font-weight:900;letter-spacing:-0.04em;color:var(--w);line-height:1.05;margin-bottom:16px}
+  .mock-h1 em{font-style:normal;color:var(--lime)}
+
+  .mock-body{font-size:15px;line-height:1.7;color:var(--t2);margin-bottom:20px;max-width:440px}
+
+  .mock-features{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+  .mock-features li{font-size:13px;color:var(--t2);display:flex;align-items:center;gap:8px;line-height:1.5}
+  .mock-features li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--lime);flex-shrink:0}
+
+  .mock-btn{
+    display:inline-flex;padding:12px 24px;border-radius:var(--pill);
+    font-family:var(--mono);font-size:12px;font-weight:700;
+    background:var(--lime);color:#080808;border:none;cursor:pointer;
+    margin-right:8px;
+  }
+  .mock-btn.ghost{background:none;color:var(--t2);border:1px solid var(--border)}
+
+  .mock-calc{
+    background:var(--s2);border:1px solid var(--border);border-radius:var(--rm);padding:24px;
+  }
+  .mock-calc-head{font-family:var(--display);font-size:13px;font-weight:700;color:var(--w);margin-bottom:16px}
+  .mock-calc label{font-family:var(--mono);font-size:10px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:0.1em;display:block;margin-bottom:4px}
+  .mock-calc .inp{
+    width:100%;padding:12px;border-radius:10px;
+    background:var(--bg);border:1px solid var(--border);
+    font-family:var(--mono);font-size:20px;font-weight:700;color:var(--w);
+    text-align:center;margin-bottom:12px;
+  }
+  .mock-calc .out{
+    width:100%;padding:12px;border-radius:10px;
+    background:var(--lime-dim);border:1px solid rgba(185,242,62,0.1);
+    font-family:var(--mono);font-size:18px;font-weight:700;color:var(--lime);
+    text-align:center;margin-bottom:16px;
+  }
+  .mock-calc .cbtn{
+    width:100%;padding:14px;border-radius:10px;
+    background:var(--lime);color:#080808;
+    font-family:var(--mono);font-size:13px;font-weight:700;
+    border:none;cursor:pointer;
+  }
+  .mock-calc .cnote{text-align:center;font-family:var(--mono);font-size:10px;color:var(--t4);margin-top:8px}
+  .mock-calc .sep{text-align:center;color:var(--t4);margin:4px 0;font-size:14px}
+
+  .mock-faq{margin-top:24px}
+  .mock-faq-item{padding:14px 0;border-bottom:1px solid var(--border)}
+  .mock-faq-q{font-family:var(--display);font-size:13px;font-weight:600;color:var(--w);margin-bottom:6px}
+  .mock-faq-a{font-size:13px;color:var(--t2);line-height:1.7}
+
+  @media(max-width:800px){
+    .mock-card{grid-template-columns:1fr}
+    .mock-h1{font-size:24px}
+    .section{padding:32px 20px}
+  }
+</style>
+</head>
+<body>
+
+<div class="page-head">
+  <h1>Body-шрифт + <span>Lime</span> палитра</h1>
+  <p>Unbounded (заголовки) + JetBrains Mono (кнопки/цены) + [body варианты ниже]</p>
+</div>
+
+<!-- ═══════════════════════════ -->
+<!--  FONT 1: MANROPE            -->
+<!-- ═══════════════════════════ -->
+<div class="section">
+<div class="font-block">
+  <div class="font-label">
+    <h2>Manrope</h2>
+    <span class="tag">Рекомендация</span>
+    <span class="desc">Geometric-humanist · Cyrillic-ext · Mikhail Sharanda (RU)</span>
+  </div>
+  <div class="mock-card" style="font-family:'Manrope',sans-serif">
+    <div>
+      <div class="mock-hero-tag">Моментальное пополнение</div>
+      <div class="mock-h1">Донат в любую игру <em>без ожидания</em></div>
+      <p class="mock-body">Игровая валюта уже на наших аккаунтах. Выбираешь сумму, платишь, получаешь — без посредников и переплат.</p>
+      <ul class="mock-features">
+        <li>Зачисление за 5-15 минут после оплаты</li>
+        <li>Без входа в аккаунт — только Player ID</li>
+        <li>Гарантия возврата при любых проблемах</li>
+        <li>Оплата картой, СБП или криптой</li>
+      </ul>
+      <button class="mock-btn">Выбрать игру</button>
+      <button class="mock-btn ghost">Как это работает</button>
+    </div>
+    <div class="mock-calc">
+      <div class="mock-calc-head">Калькулятор</div>
+      <label>Player ID</label>
+      <div class="inp" style="font-size:13px;text-align:left;color:var(--t3)">Введите ID из профиля</div>
+      <label>Вы платите</label>
+      <div class="inp">500 ₽</div>
+      <div class="sep">↓</div>
+      <label>Вы получаете</label>
+      <div class="out">12 500 Gold</div>
+      <button class="cbtn">Оплатить 500 ₽</button>
+      <div class="cnote">Карта · СБП · Крипта</div>
+    </div>
+  </div>
+  <div class="mock-faq" style="font-family:'Manrope',sans-serif">
+    <div class="mock-faq-item">
+      <div class="mock-faq-q">Могут ли забанить за покупку Gold через DonateBoom?</div>
+      <div class="mock-faq-a">Нет. Зачисление происходит через официальный внутренний маркетплейс Standoff 2 — это стандартный и легальный способ обмена валютой внутри игры. Бан за это невозможен.</div>
+    </div>
+    <div class="mock-faq-item">
+      <div class="mock-faq-q">Как быстро придёт Gold?</div>
+      <div class="mock-faq-a">В среднем 5-15 минут после оплаты. Вы получите видео-инструкцию — нужно выставить любой предмет на маркетплейсе Standoff 2, мы его выкупим, и сумма Gold зачислится автоматически.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════ -->
+<!--  FONT 2: GOLOS TEXT         -->
+<!-- ═══════════════════════════ -->
+<div class="section">
+<div class="font-block">
+  <div class="font-label">
+    <h2>Golos Text</h2>
+    <span class="tag">Российский</span>
+    <span class="desc">Алексей Ванясин · Спец. для Госуслуг · Cyrillic-native</span>
+  </div>
+  <div class="mock-card" style="font-family:'Golos Text',sans-serif">
+    <div>
+      <div class="mock-hero-tag">Моментальное пополнение</div>
+      <div class="mock-h1">Донат в любую игру <em>без ожидания</em></div>
+      <p class="mock-body">Игровая валюта уже на наших аккаунтах. Выбираешь сумму, платишь, получаешь — без посредников и переплат.</p>
+      <ul class="mock-features">
+        <li>Зачисление за 5-15 минут после оплаты</li>
+        <li>Без входа в аккаунт — только Player ID</li>
+        <li>Гарантия возврата при любых проблемах</li>
+        <li>Оплата картой, СБП или криптой</li>
+      </ul>
+      <button class="mock-btn">Выбрать игру</button>
+      <button class="mock-btn ghost">Как это работает</button>
+    </div>
+    <div class="mock-calc">
+      <div class="mock-calc-head">Калькулятор</div>
+      <label>Player ID</label>
+      <div class="inp" style="font-size:13px;text-align:left;color:var(--t3)">Введите ID из профиля</div>
+      <label>Вы платите</label>
+      <div class="inp">500 ₽</div>
+      <div class="sep">↓</div>
+      <label>Вы получаете</label>
+      <div class="out">12 500 Gold</div>
+      <button class="cbtn">Оплатить 500 ₽</button>
+      <div class="cnote">Карта · СБП · Крипта</div>
+    </div>
+  </div>
+  <div class="mock-faq" style="font-family:'Golos Text',sans-serif">
+    <div class="mock-faq-item">
+      <div class="mock-faq-q">Могут ли забанить за покупку Gold через DonateBoom?</div>
+      <div class="mock-faq-a">Нет. Зачисление происходит через официальный внутренний маркетплейс Standoff 2 — это стандартный и легальный способ обмена валютой внутри игры. Бан за это невозможен.</div>
+    </div>
+    <div class="mock-faq-item">
+      <div class="mock-faq-q">Как быстро придёт Gold?</div>
+      <div class="mock-faq-a">В среднем 5-15 минут после оплаты. Вы получите видео-инструкцию — нужно выставить любой предмет на маркетплейсе Standoff 2, мы его выкупим, и сумма Gold зачислится автоматически.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════ -->
+<!--  FONT 3: DM SANS            -->
+<!-- ═══════════════════════════ -->
+<div class="section">
+<div class="font-block">
+  <div class="font-label">
+    <h2>DM Sans</h2>
+    <span class="desc">Geometric · Poppins DNA · Cyrillic · Финтех-вайб</span>
+  </div>
+  <div class="mock-card" style="font-family:'DM Sans',sans-serif">
+    <div>
+      <div class="mock-hero-tag">Моментальное пополнение</div>
+      <div class="mock-h1">Донат в любую игру <em>без ожидания</em></div>
+      <p class="mock-body">Игровая валюта уже на наших аккаунтах. Выбираешь сумму, платишь, получаешь — без посредников и переплат.</p>
+      <ul class="mock-features">
+        <li>Зачисление за 5-15 минут после оплаты</li>
+        <li>Без входа в аккаунт — только Player ID</li>
+        <li>Гарантия возврата при любых проблемах</li>
+        <li>Оплата картой, СБП или криптой</li>
+      </ul>
+      <button class="mock-btn">Выбрать игру</button>
+      <button class="mock-btn ghost">Как это работает</button>
+    </div>
+    <div class="mock-calc">
+      <div class="mock-calc-head">Калькулятор</div>
+      <label>Player ID</label>
+      <div class="inp" style="font-size:13px;text-align:left;color:var(--t3)">Введите ID из профиля</div>
+      <label>Вы платите</label>
+      <div class="inp">500 ₽</div>
+      <div class="sep">↓</div>
+      <label>Вы получаете</label>
+      <div class="out">12 500 Gold</div>
+      <button class="cbtn">Оплатить 500 ₽</button>
+      <div class="cnote">Карта · СБП · Крипта</div>
+    </div>
+  </div>
+  <div class="mock-faq" style="font-family:'DM Sans',sans-serif">
+    <div class="mock-faq-item">
+      <div class="mock-faq-q">Могут ли забанить за покупку Gold через DonateBoom?</div>
+      <div class="mock-faq-a">Нет. Зачисление происходит через официальный внутренний маркетплейс Standoff 2 — это стандартный и легальный способ обмена валютой внутри игры. Бан за это невозможен.</div>
+    </div>
+    <div class="mock-faq-item">
+      <div class="mock-faq-q">Как быстро придёт Gold?</div>
+      <div class="mock-faq-a">В среднем 5-15 минут после оплаты. Вы получите видео-инструкцию — нужно выставить любой предмет на маркетплейсе Standoff 2, мы его выкупим, и сумма Gold зачислится автоматически.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════ -->
+<!--  FONT 4: RUBIK              -->
+<!-- ═══════════════════════════ -->
+<div class="section">
+<div class="font-block">
+  <div class="font-label">
+    <h2>Rubik</h2>
+    <span class="desc">Rounded squares · Cyrillic-ext · Google DNA · Мягче Inter</span>
+  </div>
+  <div class="mock-card" style="font-family:'Rubik',sans-serif">
+    <div>
+      <div class="mock-hero-tag">Моментальное пополнение</div>
+      <div class="mock-h1">Донат в любую игру <em>без ожидания</em></div>
+      <p class="mock-body">Игровая валюта уже на наших аккаунтах. Выбираешь сумму, платишь, получаешь — без посредников и переплат.</p>
+      <ul class="mock-features">
+        <li>Зачисление за 5-15 минут после оплаты</li>
+        <li>Без входа в аккаунт — только Player ID</li>
+        <li>Гарантия возврата при любых проблемах</li>
+        <li>Оплата картой, СБП или криптой</li>
+      </ul>
+      <button class="mock-btn">Выбрать игру</button>
+      <button class="mock-btn ghost">Как это работает</button>
+    </div>
+    <div class="mock-calc">
+      <div class="mock-calc-head">Калькулятор</div>
+      <label>Player ID</label>
+      <div class="inp" style="font-size:13px;text-align:left;color:var(--t3)">Введите ID из профиля</div>
+      <label>Вы платите</label>
+      <div class="inp">500 ₽</div>
+      <div class="sep">↓</div>
+      <label>Вы получаете</label>
+      <div class="out">12 500 Gold</div>
+      <button class="cbtn">Оплатить 500 ₽</button>
+      <div class="cnote">Карта · СБП · Крипта</div>
+    </div>
+  </div>
+  <div class="mock-faq" style="font-family:'Rubik',sans-serif">
+    <div class="mock-faq-item">
+      <div class="mock-faq-q">Могут ли забанить за покупку Gold через DonateBoom?</div>
+      <div class="mock-faq-a">Нет. Зачисление происходит через официальный внутренний маркетплейс Standoff 2 — это стандартный и легальный способ обмена валютой внутри игры. Бан за это невозможен.</div>
+    </div>
+    <div class="mock-faq-item">
+      <div class="mock-faq-q">Как быстро придёт Gold?</div>
+      <div class="mock-faq-a">В среднем 5-15 минут после оплаты. Вы получите видео-инструкцию — нужно выставить любой предмет на маркетплейсе Standoff 2, мы его выкупим, и сумма Gold зачислится автоматически.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════ -->
+<!--  FONT 5: NUNITO SANS        -->
+<!-- ═══════════════════════════ -->
+<div class="section">
+<div class="font-block">
+  <div class="font-label">
+    <h2>Nunito Sans</h2>
+    <span class="desc">Soft rounded · Cyrillic · Friendly-tech · Vercel Docs vibes</span>
+  </div>
+  <div class="mock-card" style="font-family:'Nunito Sans',sans-serif">
+    <div>
+      <div class="mock-hero-tag">Моментальное пополнение</div>
+      <div class="mock-h1">Донат в любую игру <em>без ожидания</em></div>
+      <p class="mock-body">Игровая валюта уже на наших аккаунтах. Выбираешь сумму, платишь, получаешь — без посредников и переплат.</p>
+      <ul class="mock-features">
+        <li>Зачисление за 5-15 минут после оплаты</li>
+        <li>Без входа в аккаунт — только Player ID</li>
+        <li>Гарантия возврата при любых проблемах</li>
+        <li>Оплата картой, СБП или криптой</li>
+      </ul>
+      <button class="mock-btn">Выбрать игру</button>
+      <button class="mock-btn ghost">Как это работает</button>
+    </div>
+    <div class="mock-calc">
+      <div class="mock-calc-head">Калькулятор</div>
+      <label>Player ID</label>
+      <div class="inp" style="font-size:13px;text-align:left;color:var(--t3)">Введите ID из профиля</div>
+      <label>Вы платите</label>
+      <div class="inp">500 ₽</div>
+      <div class="sep">↓</div>
+      <label>Вы получаете</label>
+      <div class="out">12 500 Gold</div>
+      <button class="cbtn">Оплатить 500 ₽</button>
+      <div class="cnote">Карта · СБП · Крипта</div>
+    </div>
+  </div>
+  <div class="mock-faq" style="font-family:'Nunito Sans',sans-serif">
+    <div class="mock-faq-item">
+      <div class="mock-faq-q">Могут ли забанить за покупку Gold через DonateBoom?</div>
+      <div class="mock-faq-a">Нет. Зачисление происходит через официальный внутренний маркетплейс Standoff 2 — это стандартный и легальный способ обмена валютой внутри игры. Бан за это невозможен.</div>
+    </div>
+    <div class="mock-faq-item">
+      <div class="mock-faq-q">Как быстро придёт Gold?</div>
+      <div class="mock-faq-a">В среднем 5-15 минут после оплаты. Вы получите видео-инструкцию — нужно выставить любой предмет на маркетплейсе Standoff 2, мы его выкупим, и сумма Gold зачислится автоматически.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div style="padding:60px 40px;text-align:center">
+  <p style="color:var(--t4);font-family:var(--mono);font-size:11px">Палитра: #B9F23E (lime) + #7AE8A0 (mint-secondary) на #080808</p>
+</div>
+
+</body>
+</html>

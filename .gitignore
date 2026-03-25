@@ -1,0 +1,13 @@
+# Client docs (sensitive)
+*.docx
+*.pdf
+Фил*
+Бриф*
+КП*
+
+# Reference images
+*.webp
+
+# OS
+.DS_Store
+Thumbs.db

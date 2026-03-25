@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DonateBoom — Текстовый прототип</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #080808;
+    --s1: #111;
+    --s2: #171717;
+    --s3: #1E1E1E;
+    --border: rgba(255,255,255,0.06);
+    --bh: rgba(255,255,255,0.12);
+    --flame: #D4513D;
+    --ember: #B83E2D;
+    --amber: #D98E3E;
+    --peach: #E8B07A;
+    --flame10: rgba(212,81,61,0.10);
+    --amber10: rgba(217,142,62,0.10);
+    --w: #F2F2F2;
+    --t1: #DADADA;
+    --t2: #8A8A8A;
+    --t3: #555;
+    --t4: #333;
+    --rl: 20px;
+    --rm: 14px;
+    --rs: 10px;
+    --pill: 100px;
+    --display: 'Unbounded', sans-serif;
+    --body: 'Inter', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  body { background: var(--bg); color: var(--t1); font-family: var(--body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  a { text-decoration: none; color: inherit; }
+
+  .page-label {
+    font-family: var(--display);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--flame);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    text-align: center;
+    padding: 80px 40px 12px;
+  }
+  .page-title {
+    font-family: var(--display);
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--w);
+    text-align: center;
+    letter-spacing: -0.03em;
+    padding-bottom: 48px;
+    border-bottom: 1px solid var(--border);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 56px 40px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--t4);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .section-name {
+    font-family: var(--display);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--flame);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .section-name::before {
+    content: '';
+    width: 16px;
+    height: 2px;
+    background: var(--flame);
+  }
+
+  h2 {
+    font-family: var(--display);
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--w);
+    margin-bottom: 12px;
+  }
+
+  h3 {
+    font-family: var(--display);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--w);
+    margin-bottom: 8px;
+  }
+
+  p { font-size: 14px; color: var(--t2); line-height: 1.7; margin-bottom: 12px; }
+  p.large { font-size: 16px; }
+
+  .text-block { max-width: 640px; }
+
+  .content-grid {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+
+  .field-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--t3);
+    padding-top: 2px;
+  }
+
+  .field-value {
+    font-size: 14px;
+    color: var(--t1);
+    line-height: 1.7;
+  }
+
+  .field-value em {
+    font-style: normal;
+    color: var(--amber);
+  }
+
+  .pill {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: var(--pill);
+    background: var(--s2);
+    color: var(--t2);
+    border: 1px solid var(--border);
+    margin-right: 6px;
+    margin-bottom: 6px;
+  }
+
+  .pill.accent {
+    background: var(--flame10);
+    color: var(--flame);
+    border-color: rgba(212,81,61,0.12);
+  }
+
+  .card-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .card {
+    background: var(--s1);
+    border: 1px solid var(--border);
+    border-radius: var(--rm);
+    padding: 20px;
+  }
+
+  .card h4 {
+    font-family: var(--display);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--w);
+    margin-bottom: 6px;
+  }
+
+  .card p { font-size: 13px; margin-bottom: 0; }
+
+  .steps-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .step {
+    background: var(--s1);
+    border: 1px solid var(--border);
+    border-radius: var(--rm);
+    padding: 20px;
+    position: relative;
+  }
+
+  .step-num {
+    font-family: var(--mono);
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--t4);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .faq-item {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .faq-q {
+    font-family: var(--display);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--w);
+    margin-bottom: 8px;
+  }
+
+  .faq-a { font-size: 13px; color: var(--t2); line-height: 1.7; margin-bottom: 0; }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .price-card {
+    background: var(--s1);
+    border: 1px solid var(--border);
+    border-radius: var(--rs);
+    padding: 16px;
+    text-align: center;
+    transition: border-color 0.2s;
+    cursor: pointer;
+  }
+
+  .price-card:hover { border-color: var(--bh); }
+
+  .price-amount {
+    font-family: var(--mono);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--w);
+  }
+
+  .price-rub {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--amber);
+    margin-top: 4px;
+  }
+
+  .divider {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .divider::before {
+    content: '';
+    position: absolute;
+    left: 40px;
+    right: 40px;
+    height: 1px;
+    background: var(--flame10);
+  }
+  .divider span {
+    background: var(--bg);
+    padding: 0 20px;
+    font-family: var(--display);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--flame);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    position: relative;
+    z-index: 1;
+  }
+
+  .calc-mock {
+    background: var(--s2);
+    border: 1px solid var(--border);
+    border-radius: var(--rm);
+    padding: 24px;
+    max-width: 340px;
+  }
+
+  .calc-mock .input-mock {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--rs);
+    padding: 12px;
+    font-family: var(--mono);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--w);
+    margin-bottom: 12px;
+    text-align: center;
+  }
+
+  .calc-mock .output-mock {
+    background: var(--flame10);
+    border: 1px solid rgba(212,81,61,0.1);
+    border-radius: var(--rs);
+    padding: 12px;
+    font-family: var(--mono);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--flame);
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  .btn-mock {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    border-radius: var(--rs);
+    background: var(--flame);
+    color: #fff;
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+    border: none;
+  }
+
+  .note { font-family: var(--mono); font-size: 11px; color: var(--t4); margin-top: 8px; text-align: center; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 380px; gap: 48px; align-items: start; }
+
+  @media (max-width: 800px) {
+    .content-grid { grid-template-columns: 1fr; gap: 8px; }
+    .two-col { grid-template-columns: 1fr; }
+    .section-wrap { padding: 40px 20px; }
+    .page-label, .page-title { padding-left: 20px; padding-right: 20px; }
+    h2 { font-size: 18px; }
+    .steps-row, .card-row, .pricing-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ╔══════════════════════════════════════════════════════════╗ -->
+<!-- ║  СТРАНИЦА 1: ГЛАВНАЯ                                     ║ -->
+<!-- ╚══════════════════════════════════════════════════════════╝ -->
+<div class="page-label">Страница 1 из 2</div>
+<div class="page-title">Главная / donateboom.com</div>
+
+<!-- ─── NAV ─── -->
+<div class="section-wrap">
+  <div class="section-name">Навигация</div>
+  <div class="content-grid">
+    <div class="field-label">Лого</div>
+    <div class="field-value">donateboom (текст, без графического лого пока)</div>
+
+    <div class="field-label">Пункты меню</div>
+    <div class="field-value">
+      <span class="pill">Каталог</span>
+      <span class="pill">Как это работает</span>
+      <span class="pill">Гарантии</span>
+      <span class="pill">FAQ</span>
+    </div>
+
+    <div class="field-label">Правая часть</div>
+    <div class="field-value">
+      <span class="pill">Войти</span>
+      <span class="pill accent">Каталог</span>
+    </div>
+
+    <div class="field-label">Поведение</div>
+    <div class="field-value">Sticky, frosted glass, blur(24px). Упрощённая на мобильных — бургер.</div>
+  </div>
+</div>
+
+<!-- ─── HERO ─── -->
+<div class="section-wrap">
+  <div class="section-name">Hero</div>
+  <div class="content-grid">
+    <div class="field-label">Тег над заголовком</div>
+    <div class="field-value" style="font-family: var(--mono); font-size: 12px; color: var(--amber);">МОМЕНТАЛЬНОЕ ПОПОЛНЕНИЕ</div>
+
+    <div class="field-label">Заголовок H1</div>
+    <div class="field-value">
+      <h2 style="font-size: 32px;">Донат в любую игру<br><span style="color: var(--flame);">без ожидания</span></h2>
+    </div>
+
+    <div class="field-label">Подзаголовок</div>
+    <div class="field-value"><p class="large">Игровая валюта уже на наших аккаунтах. Выбираешь сумму, платишь, получаешь — без посредников и переплат.</p></div>
+
+    <div class="field-label">CTA кнопки</div>
+    <div class="field-value">
+      <span class="pill accent">Выбрать игру</span>
+      <span class="pill">Как это работает</span>
+    </div>
+
+    <div class="field-label">Правая часть</div>
+    <div class="field-value">
+      <p>Карточки-ссылки на топ-4 категории:</p>
+      <p>🎯 <em>Standoff 2</em> — Золото, кейсы — от 99 ₽ →</p>
+      <p>🎮 <em>PlayStation</em> — PS Store, подписки — от 299 ₽ →</p>
+      <p>🎵 <em>TikTok</em> — Монеты — от 149 ₽ →</p>
+      <p>🍎 <em>App Store</em> — Пополнение баланса — от 199 ₽ →</p>
+    </div>
+
+    <div class="field-label">Layout</div>
+    <div class="field-value">Асимметричный. Текст слева (60%), карточки справа (40%). На мобильных — стек.</div>
+  </div>
+</div>
+
+<!-- ─── STATS ─── -->
+<div class="section-wrap">
+  <div class="section-name">Полоса цифр</div>
+  <div class="content-grid">
+    <div class="field-label">Данные</div>
+    <div class="field-value">
+      <p><em>~5 мин</em> — среднее время доставки</p>
+      <p><em>0%</em> — комиссия сверху</p>
+      <p><em>24/7</em> — поддержка в Telegram</p>
+      <p><em>100%</em> — гарантия возврата</p>
+    </div>
+
+    <div class="field-label">Примечание</div>
+    <div class="field-value"><p>Цифры реальные (подтверждены клиентом). Не выдуманные.</p></div>
+  </div>
+</div>
+
+<!-- ─── CATEGORIES BENTO ─── -->
+<div class="section-wrap">
+  <div class="section-name">Каталог (bento-сетка)</div>
+  <div class="content-grid">
+    <div class="field-label">Заголовок</div>
+    <div class="field-value"><h2>Услуги</h2></div>
+
+    <div class="field-label">Layout</div>
+    <div class="field-value"><p>Bento-сетка 12 колонок. Standoff 2 — крупная карточка (5 col, 2 row). Остальные — разного размера, НЕ одинаковые.</p></div>
+
+    <div class="field-label">Карточки</div>
+    <div class="field-value">
+      <p>🎯 <strong>Standoff 2</strong> — Золото, кейсы, скины — от 99 ₽ <span class="pill accent">Популярное</span> (featured, крупная)</p>
+      <p>🎮 <strong>PlayStation</strong> — PS Store, PS Plus — от 299 ₽ (широкая)</p>
+      <p>🎵 <strong>TikTok</strong> — Монеты — от 149 ₽</p>
+      <p>🍎 <strong>App Store</strong> — Пополнение баланса — от 199 ₽</p>
+      <p>🕹️ <strong>Мобильные игры</strong> — Brawl Stars, Clash Royale — от 99 ₽</p>
+      <p>💻 <strong>ПК-игры</strong> — Steam, CS2, Valorant — от 149 ₽</p>
+    </div>
+
+    <div class="field-label">CTA</div>
+    <div class="field-value"><span class="pill">Все услуги →</span></div>
+  </div>
+</div>
+
+<!-- ─── HOW IT WORKS ─── -->
+<div class="section-wrap">
+  <div class="section-name">Как это работает</div>
+  <div class="content-grid">
+    <div class="field-label">Заголовок</div>
+    <div class="field-value"><h2>Четыре шага</h2></div>
+
+    <div class="field-label">Layout</div>
+    <div class="field-value"><p>Горизонтальный таймлайн с точками. На мобильных — вертикальный.</p></div>
+  </div>
+
+  <div class="steps-row">
+    <div class="step">
+      <div class="step-num">01</div>
+      <h3>Выбираешь игру</h3>
+      <p>Находишь свою игру в каталоге и нужный пакет валюты</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h3>Вводишь ID</h3>
+      <p>Указываешь свой Player ID из профиля игры. Пароль не нужен</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h3>Оплачиваешь</h3>
+      <p>Картой, через СБП или криптовалютой. Без комиссии сверху</p>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <h3>Получаешь</h3>
+      <p>Валюта приходит на аккаунт. Обычно за 5-15 минут</p>
+    </div>
+  </div>
+</div>
+
+<!-- ─── USP ─── -->
+<div class="section-wrap">
+  <div class="section-name">Преимущества (USP)</div>
+  <div class="content-grid">
+    <div class="field-label">Заголовок</div>
+    <div class="field-value"><h2>Почему DonateBoom</h2></div>
+
+    <div class="field-label">Layout</div>
+    <div class="field-value"><p>Bento: 2 крупных + 2 компактных, чередующиеся.</p></div>
+  </div>
+
+  <div class="card-row">
+    <div class="card">
+      <h4>Всё на наших аккаунтах</h4>
+      <p>Мы не маркетплейс и не посредник. Игровая валюта закупается заранее и хранится на аккаунтах сервиса. Поэтому зачисление происходит сразу после оплаты — без очереди и ожидания поставщика.</p>
+    </div>
+    <div class="card">
+      <h4>Гарантия возврата</h4>
+      <p>Если валюта не дошла — мы проверяем заказ и возвращаем деньги или повторяем доставку. Без споров и волокиты.</p>
+    </div>
+    <div class="card">
+      <h4>Цены без наценок</h4>
+      <p>Прямые продажи, без маркетплейсных комиссий. Маржа внутри цены — никаких доплат сверху.</p>
+    </div>
+    <div class="card">
+      <h4>Безопасная оплата</h4>
+      <p>Платежи проходят через FreeKassa — сертифицированный процессинг. Данные аккаунта вводятся только после оплаты. Пароль от игры не нужен.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ─── TRUST / PAYMENTS ─── -->
+<div class="section-wrap">
+  <div class="section-name">Способы оплаты</div>
+  <div class="content-grid">
+    <div class="field-label">Формат</div>
+    <div class="field-value"><p>Тихая полоска с иконками/текстами. Без акцентов.</p></div>
+
+    <div class="field-label">Методы</div>
+    <div class="field-value">
+      <span class="pill">Visa / MC</span>
+      <span class="pill">МИР</span>
+      <span class="pill">СБП</span>
+      <span class="pill">ЮMoney</span>
+      <span class="pill">Крипта</span>
+    </div>
+
+    <div class="field-label">Процессинг</div>
+    <div class="field-value"><p>FreeKassa (указать мелким шрифтом)</p></div>
+  </div>
+</div>
+
+<!-- ─── CTA ─── -->
+<div class="section-wrap">
+  <div class="section-name">CTA-блок</div>
+  <div class="content-grid">
+    <div class="field-label">Layout</div>
+    <div class="field-value"><p>Асимметричный. Текст слева, кнопка справа. Subtle glow в углу.</p></div>
+
+    <div class="field-label">Заголовок</div>
+    <div class="field-value"><h2>Готов пополнить?</h2></div>
+
+    <div class="field-label">Подпись</div>
+    <div class="field-value"><p>Выбери игру и получи валюту за 5 минут</p></div>
+
+    <div class="field-label">CTA</div>
+    <div class="field-value"><span class="pill accent">Перейти в каталог</span></div>
+  </div>
+</div>
+
+<!-- ─── FOOTER ─── -->
+<div class="section-wrap">
+  <div class="section-name">Footer</div>
+  <div class="content-grid">
+    <div class="field-label">Колонка 1</div>
+    <div class="field-value">
+      <p><strong>donateboom</strong></p>
+      <p>Сервис пополнения игровых валют. Продаём напрямую, без посредников.</p>
+    </div>
+
+    <div class="field-label">Каталог</div>
+    <div class="field-value"><p>Standoff 2 · PlayStation · TikTok · App Store · Все услуги</p></div>
+
+    <div class="field-label">Информация</div>
+    <div class="field-value"><p>Как это работает · Гарантии · FAQ · Поддержка</p></div>
+
+    <div class="field-label">Связь</div>
+    <div class="field-value"><p>Telegram · ВКонтакте · support@donateboom.com</p></div>
+
+    <div class="field-label">Юридическое</div>
+    <div class="field-value"><p>Оферта · Политика конфиденциальности · Политика возврата<br><em>ИП/ООО данные — ожидаем от клиента (через FreeKassa)</em></p></div>
+
+    <div class="field-label">Копирайт</div>
+    <div class="field-value"><p>© 2026 DonateBoom. Все права защищены.</p></div>
+  </div>
+</div>
+
+
+<!-- ╔══════════════════════════════════════════════════════════╗ -->
+<!-- ║  СТРАНИЦА 2: STANDOFF 2                                  ║ -->
+<!-- ╚══════════════════════════════════════════════════════════╝ -->
+<div class="divider"><span>Страница 2</span></div>
+<div class="page-label">Страница 2 из 2</div>
+<div class="page-title">Standoff 2 — Золото / donateboom.com/standoff2</div>
+
+<!-- ─── BREADCRUMB + HEADER ─── -->
+<div class="section-wrap">
+  <div class="section-name">Шапка страницы</div>
+  <div class="content-grid">
+    <div class="field-label">Breadcrumb</div>
+    <div class="field-value" style="font-family: var(--mono); font-size: 12px;">Главная / Каталог / <span style="color: var(--flame);">Standoff 2</span></div>
+
+    <div class="field-label">H1</div>
+    <div class="field-value"><h2>Донат Standoff 2 — купить золото</h2></div>
+
+    <div class="field-label">Бейдж</div>
+    <div class="field-value"><span class="pill accent">Моментальная доставка</span></div>
+
+    <div class="field-label">Описание</div>
+    <div class="field-value"><p class="large">Пополнение Gold в Standoff 2 через официальных поставщиков. Вся валюта на наших аккаунтах — зачисление сразу после оплаты. Нужен только Player ID, вход в аккаунт не требуется.</p></div>
+  </div>
+</div>
+
+<!-- ─── PRICING GRID ─── -->
+<div class="section-wrap">
+  <div class="section-name">Выбор пакета</div>
+  <div class="content-grid">
+    <div class="field-label">Layout</div>
+    <div class="field-value"><p>Сетка карточек. Клик выбирает пакет. Активная карточка подсвечивается flame-бордером.</p></div>
+
+    <div class="field-label">Примечание</div>
+    <div class="field-value"><p><em>Цены оставляем пустыми (API). Ниже — референсные данные от конкурентов для структуры.</em></p></div>
+  </div>
+
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="price-amount">100 Gold</div>
+      <div class="price-rub">— ₽</div>
+    </div>
+    <div class="price-card">
+      <div class="price-amount">200 Gold</div>
+      <div class="price-rub">— ₽</div>
+    </div>
+    <div class="price-card">
+      <div class="price-amount">500 Gold</div>
+      <div class="price-rub">— ₽</div>
+    </div>
+    <div class="price-card">
+      <div class="price-amount">1 000 Gold</div>
+      <div class="price-rub">— ₽</div>
+    </div>
+    <div class="price-card">
+      <div class="price-amount">3 000 Gold</div>
+      <div class="price-rub">— ₽</div>
+    </div>
+    <div class="price-card">
+      <div class="price-amount">Gold Pass</div>
+      <div class="price-rub">— ₽</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── PURCHASE FORM ─── -->
+<div class="section-wrap">
+  <div class="section-name">Форма покупки + калькулятор</div>
+
+  <div class="two-col">
+    <div>
+      <div class="content-grid" style="grid-template-columns: 160px 1fr;">
+        <div class="field-label">Поле 1</div>
+        <div class="field-value"><p><strong>Player ID</strong> — текстовое поле. Подпись: «Скопируйте ID из профиля игры»</p></div>
+
+        <div class="field-label">Поле 2</div>
+        <div class="field-value"><p><strong>Сумма</strong> — инпут с цифрами ИЛИ выбор пакета из сетки выше</p></div>
+
+        <div class="field-label">Поле 3 (output)</div>
+        <div class="field-value"><p><strong>Вы получите</strong> — расчёт Gold на основе суммы</p></div>
+
+        <div class="field-label">CTA</div>
+        <div class="field-value"><span class="pill accent">Оплатить [сумма] ₽</span></div>
+
+        <div class="field-label">Под кнопкой</div>
+        <div class="field-value"><p style="font-size: 12px; color: var(--t4);">Оплата через FreeKassa. Карта · СБП · Крипта. Данные аккаунта не передаются.</p></div>
+      </div>
+    </div>
+
+    <div class="calc-mock">
+      <div style="font-family: var(--display); font-size: 14px; font-weight: 700; color: var(--w); margin-bottom: 20px;">Калькулятор</div>
+      <div style="font-family: var(--mono); font-size: 10px; color: var(--t3); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px;">Player ID</div>
+      <div class="input-mock" style="font-size: 14px; text-align: left; color: var(--t3);">Введите ID из профиля</div>
+      <div style="font-family: var(--mono); font-size: 10px; color: var(--t3); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px;">Вы платите</div>
+      <div class="input-mock">500 ₽</div>
+      <div style="text-align: center; color: var(--t4); margin: 4px 0;">↓</div>
+      <div style="font-family: var(--mono); font-size: 10px; color: var(--t3); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px;">Вы получаете</div>
+      <div class="output-mock">12 500 Gold</div>
+      <div class="btn-mock">Оплатить 500 ₽</div>
+      <div class="note">Карта · СБП · Крипта</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── DELIVERY INFO ─── -->
+<div class="section-wrap">
+  <div class="section-name">Информация о доставке</div>
+  <div class="content-grid">
+    <div class="field-label">Строка</div>
+    <div class="field-value"><p><em>Среднее время доставки: 5-15 минут</em>. После оплаты вы получите видео-инструкцию по зачислению валюты.</p></div>
+  </div>
+</div>
+
+<!-- ─── HOW IT WORKS (product-specific) ─── -->
+<div class="section-wrap">
+  <div class="section-name">Как купить Gold в Standoff 2</div>
+
+  <div class="steps-row">
+    <div class="step">
+      <div class="step-num">01</div>
+      <h3>Выберите количество Gold</h3>
+      <p>Выберите готовый пакет или введите свою сумму в калькуляторе</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h3>Введите Player ID</h3>
+      <p>Скопируйте ID из профиля Standoff 2. Пароль от аккаунта не нужен</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h3>Оплатите заказ</h3>
+      <p>Картой, через СБП или криптой. Оплата проходит через FreeKassa</p>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <h3>Получите Gold</h3>
+      <p>Следуйте видео-инструкции. Валюта зачислится через внутренний маркетплейс Standoff 2</p>
+    </div>
+  </div>
+</div>
+
+<!-- ─── TRUST BLOCK ─── -->
+<div class="section-wrap">
+  <div class="section-name">Блок доверия</div>
+
+  <div class="card-row">
+    <div class="card">
+      <h4>Без входа в аккаунт</h4>
+      <p>Для покупки Gold нужен только Player ID из профиля игры. Мы не запрашиваем логин и пароль от вашего аккаунта Standoff 2.</p>
+    </div>
+    <div class="card">
+      <h4>Бан невозможен</h4>
+      <p>Зачисление проходит через официальный внутренний маркетплейс Standoff 2. Это легальный способ пополнения — за него не банят.</p>
+    </div>
+    <div class="card">
+      <h4>Гарантия получения</h4>
+      <p>Если Gold не зачислился — мы проверяем заказ и возвращаем деньги или повторяем доставку. Каждый заказ отслеживается.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ─── DESCRIPTION / SEO ─── -->
+<div class="section-wrap">
+  <div class="section-name">Описание (SEO-текст)</div>
+  <div class="text-block">
+    <h2>Что такое Gold в Standoff 2</h2>
+    <p>Gold — основная премиальная валюта в Standoff 2. За неё можно открывать кейсы, покупать скины для оружия, разблокировать предметы из Gold Pass и участвовать в специальных событиях.</p>
+    <p>В отличие от обычной валюты, Gold позволяет получить доступ к редким и эксклюзивным предметам, недоступным за внутриигровой фарм.</p>
+
+    <h3 style="margin-top: 20px;">Как работает пополнение через DonateBoom</h3>
+    <p>DonateBoom — сервис прямого пополнения. Мы не маркетплейс: вся игровая валюта хранится на аккаунтах сервиса и зачисляется напрямую через внутренний маркетплейс Standoff 2.</p>
+    <p>Механика простая: вы выставляете любой предмет на внутреннем маркетплейсе за нужную сумму, мы выкупаем его — и сумма Gold зачисляется на ваш баланс. Весь процесс занимает 5-15 минут, инструкция прилагается в виде видео.</p>
+
+    <h3 style="margin-top: 20px;">Почему дешевле, чем покупать напрямую</h3>
+    <p>Мы закупаем валюту заранее, отслеживая акции и промо-предложения в Standoff 2. За счёт объёмов получаем лучшие условия и передаём экономию покупателям. Комиссия включена в цену — доплат сверху нет.</p>
+  </div>
+</div>
+
+<!-- ─── FAQ ─── -->
+<div class="section-wrap">
+  <div class="section-name">FAQ (аккордеон)</div>
+  <div class="content-grid">
+    <div class="field-label">Layout</div>
+    <div class="field-value"><p>Аккордеон. Первый вопрос раскрыт по умолчанию. Остальные свёрнуты.</p></div>
+  </div>
+
+  <div style="margin-top: 20px;">
+    <div class="faq-item">
+      <div class="faq-q">Что такое Gold и зачем он нужен в Standoff 2?</div>
+      <div class="faq-a">Gold — премиальная валюта в Standoff 2. За неё можно открывать кейсы, покупать скины, разблокировать Gold Pass и участвовать в ивентах. В отличие от обычных монет, Gold даёт доступ к эксклюзивным предметам.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Нужно ли давать логин и пароль от аккаунта?</div>
+      <div class="faq-a">Нет. Для пополнения нужен только ваш Player ID, который можно скопировать из профиля игры. Мы не запрашиваем и не храним данные для входа в аккаунт.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Могут ли забанить за покупку Gold через DonateBoom?</div>
+      <div class="faq-a">Нет. Зачисление происходит через официальный внутренний маркетплейс Standoff 2 — это стандартный и легальный способ обмена валютой внутри игры. Бан за это невозможен.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Как быстро придёт Gold?</div>
+      <div class="faq-a">В среднем 5-15 минут после оплаты. После оплаты вы получите видео-инструкцию — нужно выставить любой предмет на маркетплейсе Standoff 2, мы его выкупим, и сумма Gold зачислится автоматически.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Как именно происходит зачисление?</div>
+      <div class="faq-a">Через внутренний маркетплейс Standoff 2. Вы выставляете любой предмет (даже самый дешёвый) на продажу за нужную сумму Gold. Мы выкупаем этот предмет — и Gold оказывается на вашем балансе. Подробная видео-инструкция приходит после оплаты.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Какие способы оплаты доступны?</div>
+      <div class="faq-a">Банковские карты (Visa, Mastercard, МИР), Система быстрых платежей (СБП), ЮMoney, криптовалюта. Оплата проходит через сертифицированный процессинг FreeKassa.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Нужна ли регистрация для покупки?</div>
+      <div class="faq-a">Нет. Покупка возможна без регистрации. Но если хотите отслеживать статус заказа — можно создать аккаунт в личном кабинете.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Что делать, если Gold не пришёл?</div>
+      <div class="faq-a">Напишите в поддержку через Telegram — мы проверим заказ. Если зачисление не прошло — вернём деньги или повторим доставку. Гарантия действует на каждый заказ.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Можно ли подарить Gold другому игроку?</div>
+      <div class="faq-a">Да. При оформлении заказа укажите Player ID получателя — Gold будет зачислен на его аккаунт.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Почему у вас дешевле, чем покупать Gold напрямую?</div>
+      <div class="faq-a">Мы закупаем валюту оптом, используя акции и промо-предложения Standoff 2. За счёт объёмов получаем лучшие условия и передаём эту экономию покупателям. Комиссия включена в цену — доплат сверху нет.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── CTA (repeat) ─── -->
+<div class="section-wrap">
+  <div class="section-name">CTA (повтор перед футером)</div>
+  <div class="content-grid">
+    <div class="field-label">Заголовок</div>
+    <div class="field-value"><h2>Пополнить Standoff 2</h2></div>
+
+    <div class="field-label">Текст</div>
+    <div class="field-value"><p>Выбери пакет Gold, оплати и получи валюту за 5-15 минут</p></div>
+
+    <div class="field-label">CTA</div>
+    <div class="field-value"><span class="pill accent">Выбрать пакет</span></div>
+  </div>
+</div>
+
+<!-- ─── RELATED ─── -->
+<div class="section-wrap">
+  <div class="section-name">Связанные услуги</div>
+  <div class="content-grid">
+    <div class="field-label">Карточки</div>
+    <div class="field-value">
+      <p>Ссылки на 4-5 других услуг: PlayStation, TikTok, App Store, Brawl Stars, CS2</p>
+      <p>Формат: маленькие карточки с иконкой + название + «от X ₽»</p>
+    </div>
+  </div>
+</div>
+
+<div style="padding: 80px 40px; text-align: center;">
+  <p style="color: var(--t4); font-family: var(--mono); font-size: 12px;">— конец текстового прототипа —</p>
+</div>
+
+</body>
+</html>
