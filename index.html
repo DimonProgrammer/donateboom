@@ -22,11 +22,11 @@
   --bh:rgba(255,255,255,0.1);
   --b-active:rgba(185,242,62,0.25);
 
-  --lime:#B9F23E;
-  --lime-soft:#D4FF6E;
-  --lime10:rgba(185,242,62,0.08);
-  --lime15:rgba(185,242,62,0.13);
-  --lime-glow:rgba(185,242,62,0.05);
+  --lime:#EA3A3B;
+  --lime-soft:#FF6B6B;
+  --lime10:rgba(234,58,59,0.08);
+  --lime15:rgba(234,58,59,0.13);
+  --lime-glow:rgba(234,58,59,0.05);
   --mint:#7AE8A0;
   --mint10:rgba(122,232,160,0.08);
 
@@ -118,12 +118,12 @@ img{display:block;max-width:100%}
   display:inline-flex;align-items:center;gap:6px;
 }
 .btn-lime{
-  background:var(--lime);color:#080808;
-  box-shadow:0 0 20px rgba(185,242,62,0.22),0 0 40px rgba(185,242,62,0.08);
+  background:var(--lime);color:#fff;
+  box-shadow:0 0 20px rgba(234,58,59,0.22),0 0 40px rgba(234,58,59,0.08);
 }
 .btn-lime:hover{
   background:var(--lime-soft);transform:translateY(-1px);
-  box-shadow:0 0 30px rgba(185,242,62,0.4),0 0 60px rgba(185,242,62,0.14);
+  box-shadow:0 0 30px rgba(234,58,59,0.4),0 0 60px rgba(234,58,59,0.14);
 }
 .btn-ghost{background:none;color:var(--t2);border:1px solid var(--border)}
 .btn-ghost:hover{border-color:var(--bh);color:var(--w)}
@@ -352,8 +352,8 @@ img{display:block;max-width:100%}
 
 /* ── PROMO BAR ── */
 .promo-bar{
-  background:linear-gradient(90deg,rgba(185,242,62,0.05),rgba(185,242,62,0.02));
-  border:1px solid rgba(185,242,62,0.1);
+  background:linear-gradient(90deg,rgba(234,58,59,0.05),rgba(234,58,59,0.02));
+  border:1px solid rgba(234,58,59,0.1);
   border-radius:var(--rm);padding:14px 22px;
   display:flex;align-items:center;justify-content:space-between;gap:16px;
   margin-bottom:40px;flex-wrap:wrap;
@@ -484,11 +484,11 @@ img{display:block;max-width:100%}
 }
 .usp{
   background:var(--s1);border:1px solid var(--border);border-radius:var(--rl);
-  padding:32px;transition:all .3s var(--ease);
+  padding:24px;transition:all .3s var(--ease);
   position:relative;overflow:hidden;
 }
 .usp:hover{border-color:var(--bh);transform:translateY(-3px)}
-.usp.big{grid-column:span 7;padding:40px}
+.usp.big{grid-column:span 7;padding:28px}
 .usp.sm{grid-column:span 5}
 .usp.accent{
   background:linear-gradient(165deg,rgba(185,242,62,0.06),var(--s1) 60%);
@@ -523,9 +523,9 @@ img{display:block;max-width:100%}
 .usp:hover .usp-anim-shield{animation-duration:1.5s}
 .usp:hover .usp-anim-coin{animation-duration:1.5s}
 .usp:hover .usp-anim-refund{animation-duration:1s}
-.usp-t{font-family:var(--d);font-size:17px;font-weight:700;letter-spacing:-0.02em;color:var(--w);margin-bottom:8px}
-.usp.big .usp-t{font-size:22px}
-.usp-d{font-size:14px;color:var(--t2);line-height:1.7;max-width:400px}
+.usp-t{font-family:var(--d);font-size:15px;font-weight:700;letter-spacing:-0.02em;color:var(--w);margin-bottom:6px}
+.usp.big .usp-t{font-size:18px}
+.usp-d{font-size:13px;color:var(--t2);line-height:1.6;max-width:400px}
 .usp.big .usp-d{max-width:460px}
 
 /* ── REVIEWS PREVIEW ── */
@@ -739,7 +739,8 @@ img{display:block;max-width:100%}
   .game-ico{width:72px;height:72px;border-radius:18px}
   .game-name{font-size:10px;max-width:72px}
   .sec{padding:64px 0}
-  .sec-head{flex-direction:column;align-items:flex-start;gap:12px}
+  .sec-head{flex-direction:row;align-items:flex-end;gap:12px}
+  .sec-head>div:first-child{flex:1;min-width:0}
   .catalog-grid{grid-template-columns:1fr 1fr;gap:10px}
   .c-card.feat{grid-column:span 2}
   .c-card-visual{height:130px}
@@ -750,8 +751,11 @@ img{display:block;max-width:100%}
   .timeline{grid-template-columns:1fr 1fr;gap:10px}
   .tl-step{padding:22px 20px}
   .tl-num{font-size:24px}
-  .usp-grid{grid-template-columns:1fr}
+  .usp-grid{grid-template-columns:1fr 1fr;gap:8px}
   .usp.big,.usp.sm{grid-column:span 1}
+  .usp.big{padding:20px}
+  .usp-ico{width:36px;height:36px;border-radius:10px}
+  .usp.big .usp-ico{width:40px;height:40px;border-radius:12px}
   .cta-box{grid-template-columns:1fr;text-align:center;padding:40px 24px}
   .cta-right{align-items:center}
   .about-strip{grid-template-columns:1fr}
@@ -799,8 +803,11 @@ img{display:block;max-width:100%}
   .tl-step{padding:20px 18px}
   .tl-num{font-size:22px;margin-bottom:10px}
   .tl-title{font-size:14px}
-  .usp{padding:24px}
-  .usp-t{font-size:15px}
+  .usp{padding:16px}
+  .usp.big{padding:16px}
+  .usp-t{font-size:13px}
+  .usp.big .usp-t{font-size:14px}
+  .usp-d{font-size:12px;line-height:1.5}
   .usp.big .usp-t{font-size:17px}
   .usp-d{font-size:13px}
   .stat-v{font-size:28px}
