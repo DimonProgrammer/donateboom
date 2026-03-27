@@ -1,0 +1,1685 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DonateBoom — Пополнение игр и&nbsp;сервисов без посредников | Standoff 2, PS Store, Steam</title>
+<meta name="description" content="Пополнение игровых аккаунтов напрямую — Standoff 2, PS Store, Steam, TikTok и&nbsp;другие сервисы. Без регистрации, без пароля, зачисление за&nbsp;5–15 минут. Гарантия возврата.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800;900&family=Rubik:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --bg:#070707;
+  --s1:#0E0E0E;
+  --s2:#141414;
+  --s3:#1A1A1A;
+  --s4:#222;
+  --border:rgba(255,255,255,0.06);
+  --bh:rgba(255,255,255,0.1);
+  --b-active:rgba(234,58,59,0.25);
+
+  --lime:#EA3A3B;
+  --lime-soft:#FF6B6B;
+  --lime10:rgba(234,58,59,0.08);
+  --lime15:rgba(234,58,59,0.13);
+  --lime-glow:rgba(234,58,59,0.05);
+  --mint:#7AE8A0;
+  --mint10:rgba(122,232,160,0.08);
+
+  --w:#F5F5F7;
+  --t1:#E0E0E0;
+  --t2:#B8B8B8;
+  --t3:#8A8A8F;
+  --t4:#555;
+  --t5:#252525;
+
+  --d:'Unbounded',sans-serif;
+  --b:'Rubik',sans-serif;
+  --m:'JetBrains Mono',monospace;
+
+  --rl:20px;--rm:14px;--rs:10px;--pill:100px;
+  --max:1280px;
+  --ease:cubic-bezier(.4,0,.2,1);
+}
+
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--t1);font-family:var(--b);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;position:relative}
+
+/* ── BG GRID ── */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px);
+  background-size:72px 72px;
+  mask-image:radial-gradient(ellipse 80% 70% at 50% 40%, black 20%, transparent 70%);
+  -webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 40%, black 20%, transparent 70%);
+}
+body>*{position:relative;z-index:1}
+/* Noise overlay */
+body::after{
+  content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity:0.03;mix-blend-mode:overlay;
+  background-size:200px 200px;
+}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+
+/* ── UTILITY ── */
+.container{max-width:var(--max);margin:0 auto;padding:0 48px}
+@media(max-width:800px){.container{padding:0 20px}}
+
+/* ── NAV ── */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  height:64px;
+  display:flex;align-items:center;
+  background:rgba(7,7,7,0.85);
+  backdrop-filter:blur(24px) saturate(1.4);
+  border-bottom:1px solid var(--border);
+}
+.nav .container{display:flex;align-items:center;gap:20px;width:100%}
+.logo{display:flex;align-items:center;flex-shrink:0}
+.logo img{height:44px;width:auto}
+/* Search in nav — fills available space */
+.nav-search{
+  flex:1;
+  display:flex;align-items:center;gap:10px;
+  background:var(--s2);border:1px solid var(--border);border-radius:12px;
+  padding:9px 16px;transition:border-color .2s;
+}
+.nav-search:focus-within{border-color:rgba(255,255,255,0.15)}
+.nav-search svg{width:18px;height:18px;color:var(--t3);flex-shrink:0}
+.nav-search input{
+  flex:1;background:none;border:none;outline:none;
+  color:var(--w);font-family:var(--b);font-size:14px;
+}
+.nav-search input::placeholder{color:var(--t3)}
+/* Key nav links */
+.nav-links{display:flex;gap:2px;list-style:none;flex-shrink:0}
+.nav-links a{
+  display:block;padding:7px 14px;border-radius:var(--pill);
+  font-size:13px;font-weight:500;color:var(--t2);
+  transition:color .2s,background .2s;white-space:nowrap;
+}
+.nav-links a:hover{color:var(--w);background:var(--s2)}
+.nav-r{display:flex;gap:8px;align-items:center;flex-shrink:0}
+
+/* ── BUTTONS ── */
+.btn{
+  font-family:var(--m);font-weight:600;font-size:12px;
+  padding:9px 20px;border-radius:var(--pill);
+  border:none;cursor:pointer;transition:all .2s var(--ease);
+  display:inline-flex;align-items:center;gap:6px;
+}
+.btn-lime{
+  background:var(--lime);color:#080808;
+  box-shadow:0 0 20px rgba(234,58,59,0.22),0 0 40px rgba(234,58,59,0.08);
+}
+.btn-lime:hover{
+  background:var(--lime-soft);transform:translateY(-1px);
+  box-shadow:0 0 30px rgba(234,58,59,0.4),0 0 60px rgba(234,58,59,0.14);
+}
+.btn-ghost{background:none;color:var(--t2);border:1px solid var(--border)}
+.btn-ghost:hover{border-color:var(--bh);color:var(--w)}
+
+/* ── HERO ── */
+.hero{
+  padding:140px 0 80px;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;
+  top:40%;left:50%;transform:translate(-50%,-50%);
+  width:800px;height:600px;
+  background:
+    radial-gradient(ellipse at 30% 50%,rgba(88,100,255,0.08),transparent 50%),
+    radial-gradient(ellipse at 70% 40%,rgba(234,58,59,0.06),transparent 50%),
+    radial-gradient(ellipse at 50% 60%,rgba(255,100,50,0.04),transparent 50%);
+  pointer-events:none;
+  filter:blur(60px);
+}
+.hero-grid{
+  text-align:center;
+  max-width:900px;
+  margin:0 auto;
+}
+.hero-pills{
+  display:flex;gap:10px;justify-content:center;flex-wrap:wrap;
+  margin-bottom:0;
+}
+.hero-pill{
+  font-family:var(--b);font-size:13px;font-weight:500;
+  color:var(--t1);
+  padding:8px 20px;border-radius:var(--pill);
+  border:1px solid var(--border);
+  background:rgba(255,255,255,0.03);
+}
+.hero h1{
+  font-family:var(--d);font-size:clamp(32px,4.5vw,54px);
+  font-weight:900;letter-spacing:-0.045em;line-height:1.05;
+  color:var(--w);margin-bottom:24px;
+}
+.hero h1 em{font-style:normal;color:var(--lime)}
+.hero-desc{
+  font-size:18px;color:var(--t2);line-height:1.7;
+  max-width:560px;margin:0 auto 32px;
+}
+/* (hero-btns moved to hero-cta-center below showcase) */
+
+/* (search bar moved into nav) */
+
+/* ── QUICK PURCHASE WIDGET (single togglable) ── */
+.quick-purchases{
+  margin-top:40px;width:100%;max-width:900px;
+  margin-left:auto;margin-right:auto;
+}
+.qp-tabs{display:flex;gap:0;margin-bottom:0;justify-content:center}
+.qp-tab{
+  font-family:var(--b);font-size:13px;font-weight:600;
+  padding:10px 20px;
+  background:var(--s2);color:var(--t3);
+  cursor:pointer;border:1px solid var(--border);border-bottom:none;
+  transition:all .2s;
+  display:flex;align-items:center;gap:8px;
+}
+.qp-tab:first-child{border-radius:14px 0 0 0}
+.qp-tab:last-child{border-radius:0 14px 0 0}
+.qp-tab.active{border-bottom-color:transparent}
+.qp-tab.active{background:var(--s1);color:var(--w);border-bottom-color:var(--s1)}
+.qp-tab:hover:not(.active){color:var(--t1)}
+.qp-tab img{width:18px;height:18px;border-radius:4px}
+.qp-bar{
+  display:flex;align-items:center;gap:12px;
+  background:var(--s1);border:1px solid var(--border);
+  border-radius:14px;padding:14px 16px;
+}
+.qp-bar[hidden]{display:none}
+.qp-service{
+  display:flex;align-items:center;gap:12px;
+  min-width:200px;flex-shrink:0;
+}
+.qp-ico{width:44px;height:44px;border-radius:12px;overflow:hidden;flex-shrink:0}
+.qp-ico img{width:100%;height:100%;object-fit:cover}
+.qp-info{display:flex;flex-direction:column}
+.qp-name{font-family:var(--d);font-size:15px;font-weight:700;color:var(--w)}
+.qp-meta{font-size:11px;color:var(--t3)}
+.qp-meta em{color:var(--lime);font-style:normal;font-weight:600}
+.qp-meta a{color:var(--lime);font-size:11px}
+.qp-input{
+  flex:1;min-width:0;
+  background:var(--s2);border:1px solid var(--border);border-radius:12px;
+  padding:10px 16px;display:flex;flex-direction:column;gap:2px;
+  transition:border-color .2s;
+}
+.qp-input:focus-within{border-color:rgba(255,255,255,0.15)}
+.qp-input-label{font-size:10px;color:var(--t3);font-family:var(--m)}
+.qp-input input{
+  background:none;border:none;outline:none;
+  color:var(--w);font-family:var(--b);font-size:14px;font-weight:500;width:100%;
+}
+.qp-input input::placeholder{color:var(--t4)}
+.qp-amount{min-width:130px;flex:0 0 auto}
+.qp-amount-row{display:flex;align-items:center;gap:6px}
+.qp-amount input{width:70px}
+.qp-pay{
+  font-family:var(--d);font-size:13px;font-weight:700;
+  padding:14px 24px;border-radius:12px;border:none;
+  cursor:pointer;white-space:nowrap;
+  transition:all .25s var(--ease);
+}
+.qp-pay:hover{transform:translateY(-1px);filter:brightness(1.1)}
+.qp-pay.orange{background:linear-gradient(135deg,#FFB74D,#F57C00);color:#111}
+.qp-pay.blue{background:linear-gradient(135deg,#4FC3F7,#0288D1);color:#fff}
+
+/* ── GAMES GRID (Playerok-style icon grid) ── */
+.games-section{margin-top:56px;width:100%;max-width:1280px;margin-left:auto;margin-right:auto}
+.games-header{
+  display:flex;justify-content:center;align-items:center;gap:8px;
+  margin-bottom:24px;
+}
+.games-header-left{display:flex;align-items:center;gap:8px}
+.games-header-left h3{
+  font-family:var(--d);font-size:16px;font-weight:700;color:var(--w);
+}
+.games-header-left .count{font-family:var(--m);font-size:12px;color:var(--t3)}
+.games-header a{font-family:var(--m);font-size:12px;color:var(--t3);transition:color .2s}
+.games-header a:hover{color:var(--w)}
+.games-grid{
+  display:flex;gap:16px;padding-bottom:8px;
+  justify-content:center;flex-wrap:wrap;
+}
+.games-grid::-webkit-scrollbar{display:none}
+.game-item{
+  flex:0 0 80px;display:flex;flex-direction:column;align-items:center;gap:6px;
+  cursor:pointer;transition:transform .2s;position:relative;
+}
+.game-item:hover{transform:translateY(-3px)}
+.game-ico{
+  width:64px;height:64px;border-radius:16px;overflow:hidden;
+  background:var(--s2);border:1px solid var(--border);
+}
+.game-ico img{width:100%;height:100%;object-fit:cover}
+.gi-pad img{padding:16px;object-fit:contain}
+.gi-cover img{padding:0;object-fit:cover}
+.game-name{font-size:10px;color:var(--t2);text-align:center;max-width:72px;line-height:1.2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.game-badge{
+  position:absolute;top:-4px;left:50%;transform:translateX(-50%);
+  font-size:8px;font-weight:600;color:#fff;
+  background:#5865F2;padding:1px 6px;border-radius:6px;
+  white-space:nowrap;
+}
+
+/* CTA under widget */
+.hero-guarantee{
+  margin-top:16px;text-align:center;
+  font-family:var(--m);font-size:11px;color:var(--t3);
+}
+
+/* ── STATS BAR ── */
+.stats{
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  background:#0A0A0A;
+}
+.stats-inner{
+  display:flex;
+  max-width:var(--max);margin:0 auto;padding:0 48px;
+}
+.stat{
+  flex:1;text-align:center;padding:44px 0;
+  position:relative;
+}
+.stat+.stat::before{
+  content:'';position:absolute;left:0;top:16px;bottom:16px;
+  width:1px;background:var(--border);
+}
+.stat-v{font-family:var(--d);font-size:clamp(26px,3.2vw,40px);font-weight:900;letter-spacing:-0.04em;color:var(--w)}
+.stat-v span{color:var(--lime)}
+.stat-l{font-size:12px;color:var(--t3);margin-top:4px}
+
+/* ── SECTION COMMON ── */
+.sec{padding:120px 0}
+.sec-alt{background:#0A0A0A}
+.sec-light{background:var(--s1)}
+.sec-label{
+  font-family:var(--m);font-size:11px;font-weight:600;
+  color:var(--lime);letter-spacing:0.1em;text-transform:uppercase;
+  margin-bottom:8px;
+}
+.sec-title{
+  font-family:var(--d);font-size:clamp(24px,2.8vw,34px);
+  font-weight:900;letter-spacing:-0.04em;color:var(--w);
+}
+.sec-head{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  margin-bottom:40px;
+}
+.sec-head .btn{font-size:11px;padding:8px 16px}
+
+/* ── PROMO BAR ── */
+.promo-bar{
+  background:linear-gradient(90deg,rgba(234,58,59,0.05),rgba(234,58,59,0.02));
+  border:1px solid rgba(234,58,59,0.1);
+  border-radius:var(--rm);padding:14px 22px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  margin-bottom:40px;flex-wrap:wrap;
+}
+.promo-bar-left{display:flex;align-items:center;gap:12px}
+.promo-bar-icon{
+  width:28px;height:28px;background:var(--lime10);border-radius:8px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.promo-bar-icon svg{width:16px;height:16px}
+.promo-bar-text{font-size:13px;color:var(--t1)}
+.promo-bar-text strong{color:var(--lime)}
+.promo-bar-link{
+  font-family:var(--m);font-size:11px;font-weight:600;
+  color:var(--lime);padding:6px 16px;border-radius:var(--pill);
+  border:1px solid rgba(234,58,59,0.2);transition:all .2s;
+  white-space:nowrap;
+}
+.promo-bar-link:hover{background:var(--lime10)}
+
+/* ── CATALOG GRID ── */
+.catalog-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+.c-card{
+  background:var(--s1);border:1px solid var(--border);border-radius:var(--rl);
+  padding:0;overflow:hidden;
+  cursor:pointer;transition:all .4s var(--ease);
+  display:flex;flex-direction:column;
+  position:relative;
+}
+.c-card:hover{
+  transform:translateY(-6px);
+  border-color:var(--bh);
+  box-shadow:0 20px 40px rgba(0,0,0,0.4);
+}
+/* Glassmorphism on hover */
+.c-card:hover{
+  background:rgba(14,14,14,0.7);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+}
+.c-card:hover .c-card-glow{opacity:1}
+
+/* Card visual area */
+.c-card-visual{
+  height:180px;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.c-card-visual img{
+  width:80px;height:80px;object-fit:contain;
+  position:relative;z-index:2;
+  filter:drop-shadow(0 4px 20px rgba(0,0,0,0.5));
+  transition:transform .4s var(--ease);
+}
+.c-card:hover .c-card-visual img{transform:scale(1.1)}
+/* Per-game color atmosphere */
+.c-card-glow{
+  position:absolute;inset:0;opacity:0.5;
+  transition:opacity .4s;pointer-events:none;
+}
+.c-card:hover .c-card-glow{opacity:0.8}
+
+/* Card info */
+.c-card-info{padding:20px 24px 24px}
+.c-card-name{font-family:var(--d);font-size:17px;font-weight:700;color:var(--w);margin-bottom:4px;letter-spacing:-0.02em}
+.c-card-desc{font-size:13px;color:var(--t2);margin-bottom:14px;line-height:1.5}
+.c-card-bottom{display:flex;justify-content:space-between;align-items:center}
+.c-card-price{font-family:var(--m);font-size:13px;font-weight:600;color:var(--lime)}
+.c-card-link{
+  font-family:var(--m);font-size:11px;font-weight:600;
+  color:var(--t3);transition:color .2s;
+}
+.c-card:hover .c-card-link{color:var(--lime)}
+
+/* Featured card — spans 2 columns */
+.c-card.feat{grid-column:span 2}
+.c-card.feat .c-card-visual{height:240px}
+.c-card.feat .c-card-visual img{width:120px;height:120px}
+.c-card.feat .c-card-name{font-size:22px}
+
+/* Badge */
+.c-badge{
+  position:absolute;top:14px;right:14px;z-index:3;
+  font-family:var(--m);font-size:9px;font-weight:600;
+  padding:4px 12px;border-radius:var(--pill);
+  background:var(--lime);color:#fff;
+}
+
+/* ── HOW IT WORKS ── */
+.timeline{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:12px;margin-top:48px;
+}
+.tl-step{
+  background:var(--s1);border:1px solid var(--border);border-radius:var(--rl);
+  padding:28px 24px;position:relative;
+  transition:all .3s var(--ease);
+}
+.tl-step:hover{border-color:var(--bh);transform:translateY(-3px)}
+.tl-step:first-child{
+  border-color:rgba(234,58,59,0.12);
+  background:linear-gradient(180deg,rgba(234,58,59,0.04),transparent);
+}
+.tl-num{
+  font-family:var(--d);font-size:32px;font-weight:900;
+  color:var(--t4);letter-spacing:-0.04em;margin-bottom:14px;
+  line-height:1;
+}
+.tl-step:first-child .tl-num{color:var(--lime)}
+.tl-step:nth-child(2) .tl-num{color:var(--t3)}
+.tl-dot{display:none}
+.tl-title{font-family:var(--d);font-size:15px;font-weight:700;color:var(--w);margin-bottom:8px}
+.tl-desc{font-size:13px;color:var(--t2);line-height:1.6}
+.tl-note{
+  font-family:var(--m);font-size:10px;color:var(--lime);
+  margin-top:10px;padding:4px 12px;border-radius:var(--pill);
+  background:var(--lime10);display:inline-block;
+}
+
+/* ── USP ── */
+.usp-grid{
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  gap:10px;
+}
+.usp{
+  background:var(--s1);border:1px solid var(--border);border-radius:var(--rl);
+  padding:32px;transition:all .3s var(--ease);
+  position:relative;overflow:hidden;
+}
+.usp:hover{border-color:var(--bh);transform:translateY(-3px)}
+.usp.big{grid-column:span 7;padding:40px}
+.usp.sm{grid-column:span 5}
+.usp.accent{
+  background:linear-gradient(165deg,rgba(234,58,59,0.06),var(--s1) 60%);
+  border-color:rgba(234,58,59,0.1);
+}
+.usp.accent::after{
+  content:'';position:absolute;top:-40px;right:-40px;
+  width:200px;height:200px;
+  background:radial-gradient(circle,rgba(234,58,59,0.06),transparent 60%);
+  pointer-events:none;
+}
+.usp-ico{
+  width:44px;height:44px;margin-bottom:20px;
+  border-radius:12px;display:flex;align-items:center;justify-content:center;
+}
+.usp-ico svg{width:28px;height:28px}
+.usp.big .usp-ico{width:52px;height:52px;border-radius:14px}
+.usp.big .usp-ico svg{width:32px;height:32px}
+.usp-ico.lime-bg{background:var(--lime10)}
+.usp-ico.mint-bg{background:var(--mint10)}
+
+/* USP icon animations */
+@keyframes usp-bolt{0%,100%{transform:translateY(0);opacity:1}50%{transform:translateY(-2px);opacity:.7}}
+@keyframes usp-shield{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+@keyframes usp-coin-spin{0%{transform:rotateY(0deg)}100%{transform:rotateY(360deg)}}
+@keyframes usp-refund{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-15deg)}}
+.usp-anim-bolt{animation:usp-bolt 2s ease-in-out infinite}
+.usp-anim-shield{animation:usp-shield 3s ease-in-out infinite}
+.usp-anim-coin{animation:usp-coin-spin 4s linear infinite}
+.usp-anim-refund{animation:usp-refund 2.5s ease-in-out infinite}
+.usp:hover .usp-anim-bolt{animation-duration:1s}
+.usp:hover .usp-anim-shield{animation-duration:1.5s}
+.usp:hover .usp-anim-coin{animation-duration:1.5s}
+.usp:hover .usp-anim-refund{animation-duration:1s}
+.usp-t{font-family:var(--d);font-size:17px;font-weight:700;letter-spacing:-0.02em;color:var(--w);margin-bottom:8px}
+.usp.big .usp-t{font-size:22px}
+.usp-d{font-size:14px;color:var(--t2);line-height:1.7;max-width:400px}
+.usp.big .usp-d{max-width:460px}
+
+/* ── REVIEWS PREVIEW ── */
+.rating-agg{
+  display:flex;align-items:center;gap:28px;
+  margin-bottom:28px;
+  padding:20px 28px;
+  background:var(--s2);border:1px solid var(--border);border-radius:var(--rm);
+  width:fit-content;
+}
+.rating-num{
+  font-family:var(--d);font-size:44px;font-weight:900;letter-spacing:-0.04em;
+  color:var(--w);line-height:1;
+}
+.rating-right{display:flex;flex-direction:column;gap:4px}
+.rating-stars{color:var(--lime);font-size:16px;letter-spacing:3px}
+.rating-label{font-size:13px;color:var(--t1)}
+.rating-sub{font-family:var(--m);font-size:10px;color:var(--t3);margin-top:1px}
+
+.reviews-row{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px;scrollbar-width:none}
+.reviews-row::-webkit-scrollbar{display:none}
+.rev-card{
+  flex:0 0 340px;
+  background:var(--s2);border:1px solid var(--border);border-radius:var(--rl);
+  padding:28px;position:relative;
+  transition:all .3s var(--ease);
+}
+.rev-card:hover{transform:translateY(-3px);border-color:var(--bh)}
+.rev-stars{color:var(--lime);font-size:14px;letter-spacing:2px;margin-bottom:12px}
+.rev-text{font-size:14px;color:var(--t2);line-height:1.7;margin-bottom:16px}
+.rev-author{font-family:var(--m);font-size:11px;font-weight:600;color:var(--t3)}
+.rev-author span{color:var(--t1)}
+
+/* ── FAQ ACCORDION ── */
+.faq-list{display:flex;flex-direction:column;gap:0}
+.faq-item{
+  padding:0;border-bottom:1px solid var(--border);
+  cursor:pointer;
+}
+.faq-item:first-child{border-top:1px solid var(--border)}
+.faq-item-head{
+  display:flex;justify-content:space-between;align-items:center;
+  gap:24px;padding:20px 0;
+  transition:color .2s;
+}
+.faq-item:hover .faq-q,.faq-item.open .faq-q{color:var(--w)}
+.faq-q{font-family:var(--d);font-size:14px;font-weight:600;color:var(--t1);flex:1}
+.faq-plus{
+  font-family:var(--m);font-size:20px;line-height:1;color:var(--t4);
+  flex-shrink:0;transition:transform .3s var(--ease),color .2s;
+  width:20px;text-align:center;
+}
+.faq-item.open .faq-plus{transform:rotate(45deg);color:var(--lime)}
+.faq-ans{
+  font-size:14px;color:var(--t2);line-height:1.7;
+  max-height:0;overflow:hidden;
+  transition:max-height .35s var(--ease),padding .35s var(--ease);
+  padding-bottom:0;
+}
+.faq-ans.open{max-height:200px;padding-bottom:20px}
+
+/* ── ABOUT + CONTACT STRIP ── */
+.about-strip{
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;
+}
+.about-card{
+  background:var(--s1);border:1px solid var(--border);border-radius:var(--rl);
+  padding:36px;transition:border-color .2s;
+}
+.about-card:hover{border-color:var(--bh)}
+.about-card-label{font-family:var(--m);font-size:10px;font-weight:600;color:var(--t4);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px}
+.about-card-title{font-family:var(--d);font-size:18px;font-weight:700;color:var(--w);margin-bottom:8px;letter-spacing:-0.02em}
+.about-card-desc{font-size:14px;color:var(--t2);line-height:1.7;margin-bottom:16px;max-width:380px}
+.about-card .btn{font-size:11px;padding:8px 18px}
+.about-story{
+  font-size:13px;color:var(--t3);line-height:1.6;
+  padding:12px 16px;border-left:2px solid rgba(234,58,59,0.2);
+  margin-bottom:16px;
+}
+.about-story em{color:var(--lime);font-style:normal}
+
+/* ── PAYMENTS ── */
+.pay{border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.pay-inner{
+  max-width:var(--max);margin:0 auto;padding:24px 48px;
+  display:flex;align-items:center;justify-content:center;gap:36px;flex-wrap:wrap;
+}
+.pay-i{display:flex;align-items:center;height:32px}
+.pay-i img{height:28px;width:auto;opacity:.4;transition:opacity .2s;filter:brightness(0) invert(1)}
+.pay-i:hover img{opacity:.7}
+
+/* ── CTA ── */
+.cta-wrap{position:relative}
+.cta-glow{
+  position:absolute;inset:-40px;
+  background:
+    radial-gradient(ellipse at 30% 50%,rgba(68,102,255,0.06),transparent 50%),
+    radial-gradient(ellipse at 70% 50%,rgba(234,58,59,0.08),transparent 50%);
+  pointer-events:none;border-radius:40px;
+  filter:blur(40px);
+}
+.cta-box{
+  background:linear-gradient(135deg,#0d1208,var(--s1) 40%,#0a0e14);
+  border:1px solid rgba(234,58,59,0.1);border-radius:var(--rl);
+  padding:64px 72px;
+  display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;
+  position:relative;overflow:hidden;
+}
+.cta-box::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 0% 100%,rgba(68,102,255,0.06),transparent 40%),
+    radial-gradient(ellipse at 100% 0%,rgba(234,58,59,0.05),transparent 40%);
+  pointer-events:none;
+}
+.cta-box::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent 5%,rgba(234,58,59,0.4) 40%,rgba(234,58,59,0.4) 60%,transparent 95%);
+}
+.cta-t{font-family:var(--d);font-size:clamp(24px,3vw,34px);font-weight:900;letter-spacing:-0.03em;color:var(--w);margin-bottom:10px}
+.cta-d{font-size:16px;color:var(--t2);margin-bottom:14px;line-height:1.6}
+.cta-note{
+  font-family:var(--m);font-size:11px;color:var(--t3);
+  display:flex;align-items:center;gap:8px;
+}
+.cta-note-dot{width:2px;height:2px;border-radius:50%;background:var(--t4)}
+.cta-right{display:flex;flex-direction:column;align-items:flex-end;gap:10px;min-width:200px}
+.cta-box .btn{padding:14px 32px;font-size:13px}
+.cta-urgency{
+  font-family:var(--m);font-size:10px;color:var(--t3);text-align:right;
+}
+.cta-urgency strong{color:var(--lime)}
+
+/* ── FOOTER ── */
+.footer{border-top:1px solid var(--border);padding:56px 0;background:#050505}
+.footer-grid{
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:40px;margin-bottom:40px;
+}
+.footer-brand{margin-bottom:12px}
+.footer-brand img{height:32px;width:auto}
+.footer-about{font-size:13px;color:var(--t3);line-height:1.6;max-width:260px;margin-bottom:16px}
+.footer-col-t{
+  font-family:var(--m);font-size:10px;font-weight:600;
+  color:var(--t4);text-transform:uppercase;letter-spacing:0.1em;
+  margin-bottom:14px;
+}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:8px}
+.footer-links a{font-size:13px;color:var(--t3);transition:color .2s}
+.footer-links a:hover{color:var(--w)}
+.footer-tg{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--m);font-size:11px;font-weight:600;color:var(--lime);
+  padding:8px 16px;border-radius:var(--pill);
+  border:1px solid rgba(234,58,59,0.2);
+  transition:all .2s;
+}
+.footer-tg:hover{background:var(--lime10)}
+.footer-bot{
+  display:flex;justify-content:space-between;align-items:center;
+  padding-top:24px;border-top:1px solid var(--border);
+  font-family:var(--m);font-size:10px;color:var(--t4);
+}
+
+/* ── SCROLL REVEAL ── */
+/* TEMP: disabled for Figma capture */
+.reveal{opacity:1;transform:none;transition:none}
+.reveal.visible{opacity:1;transform:none}
+.reveal-d1{transition-delay:.1s}
+.reveal-d2{transition-delay:.2s}
+.reveal-d3{transition-delay:.3s}
+
+/* ── PRODUCT HERO ── */
+.product-hero{padding:120px 0 40px}
+.breadcrumb{font-family:var(--m);font-size:11px;color:var(--t3);margin-bottom:24px}
+.breadcrumb a{color:var(--t3);transition:color .2s}
+.breadcrumb a:hover{color:var(--w)}
+.product-header{display:flex;align-items:center;gap:20px;margin-bottom:16px}
+.product-ico{width:80px;height:80px;border-radius:20px;overflow:hidden;flex-shrink:0}
+.product-ico img{width:100%;height:100%;object-fit:cover}
+.product-title{font-family:var(--d);font-size:clamp(24px,3vw,36px);font-weight:900;letter-spacing:-0.03em;color:var(--w)}
+.product-desc{font-size:16px;color:var(--t2);line-height:1.7;max-width:600px;margin-bottom:16px}
+.product-badges{display:flex;gap:8px;flex-wrap:wrap}
+.product-badge{
+  font-family:var(--m);font-size:10px;font-weight:600;
+  padding:4px 14px;border-radius:var(--pill);
+}
+.product-badge.hot{background:var(--lime);color:#fff}
+.product-badge.ghost{border:1px solid var(--border);color:var(--t2)}
+
+/* ── CATEGORY TABS ── */
+.cat-tabs{display:flex;gap:8px;margin-top:24px;flex-wrap:wrap}
+.cat-tab{
+  background:var(--s1);border:1.5px solid var(--border);border-radius:14px;
+  padding:12px 20px;cursor:pointer;transition:all .2s;
+  min-width:140px;
+}
+.cat-tab:hover{border-color:var(--bh)}
+.cat-tab.active{border-color:var(--lime);background:linear-gradient(165deg,rgba(234,58,59,0.06),var(--s1))}
+.cat-tab-title{font-family:var(--d);font-size:13px;font-weight:700;color:var(--w)}
+.cat-tab-sub{font-size:11px;color:var(--t3);margin-top:2px}
+
+/* Delivery badge */
+.delivery-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  margin-top:16px;padding:8px 16px;border-radius:var(--pill);
+  background:var(--s2);border:1px solid var(--border);
+  font-family:var(--m);font-size:12px;color:var(--t2);
+}
+
+/* Promo banners */
+.promo-banners{margin-top:32px}
+.promo-title{font-family:var(--d);font-size:20px;font-weight:900;color:var(--w);margin-bottom:16px}
+.promo-grid{display:flex;gap:12px}
+.promo-card{
+  flex:1;min-width:200px;height:160px;border-radius:16px;overflow:hidden;
+  background:linear-gradient(135deg,#1a1a2e,#2d1b4e);
+  position:relative;cursor:pointer;transition:transform .3s;
+}
+.promo-card:hover{transform:translateY(-3px)}
+.promo-img{
+  width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+  font-family:var(--d);font-size:64px;font-weight:900;color:rgba(255,255,255,0.15);
+}
+.promo-date{
+  position:absolute;bottom:10px;left:10px;
+  font-family:var(--m);font-size:11px;font-weight:600;
+  padding:4px 10px;border-radius:8px;
+  background:var(--lime);color:#fff;
+}
+
+/* ── PACKAGE SELECTOR ── */
+.packages{padding:40px 0 0}
+.package-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
+  margin-bottom:24px;
+}
+.pkg{
+  background:var(--s1);border:2px solid var(--border);border-radius:16px;
+  padding:14px 16px;cursor:pointer;transition:all .2s var(--ease);
+  position:relative;
+}
+.pkg:hover{border-color:var(--bh)}
+.pkg.selected{
+  border-color:var(--lime);
+  box-shadow:0 0 20px rgba(234,58,59,0.15);
+  background:linear-gradient(165deg,rgba(234,58,59,0.06),var(--s1));
+}
+.pkg-badge{
+  position:absolute;top:-8px;right:12px;
+  font-family:var(--m);font-size:9px;font-weight:600;
+  padding:3px 10px;border-radius:var(--pill);
+  background:var(--lime);color:#fff;
+}
+.pkg-visual{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.pkg-visual img{border-radius:8px}
+.pkg-qty{font-family:var(--d);font-size:20px;font-weight:900;color:var(--w)}
+.pkg-name{font-family:var(--d);font-size:13px;font-weight:700;color:var(--w);margin-bottom:4px}
+.pkg-price{font-family:var(--m);font-size:16px;font-weight:700;color:var(--lime)}
+.pkg-discount{font-size:11px;color:#fff;background:var(--lime);padding:2px 6px;border-radius:6px;margin-left:4px}
+.pkg-unit{font-family:var(--m);font-size:10px;color:var(--t3);margin-top:2px}
+
+/* Purchase form below packages */
+.purchase-form{
+  display:flex;gap:12px;align-items:flex-end;
+  max-width:700px;margin:0 auto;
+}
+.purchase-id{flex:1}
+.purchase-id-wrap{
+  display:flex;align-items:center;gap:8px;
+  background:var(--s2);border:1px solid var(--border);border-radius:12px;
+  padding:12px 16px;transition:border-color .2s;
+}
+.purchase-id-wrap:focus-within{border-color:rgba(255,255,255,0.15)}
+.purchase-id-wrap input{
+  flex:1;background:none;border:none;outline:none;
+  color:var(--w);font-family:var(--b);font-size:15px;
+}
+.purchase-id-wrap input::placeholder{color:var(--t4)}
+.id-help{
+  width:28px;height:28px;border-radius:50%;
+  background:var(--s3);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:13px;color:var(--t3);
+  transition:all .2s;flex-shrink:0;
+}
+.id-help:hover{color:var(--w);border-color:var(--bh)}
+.purchase-id label{display:block;font-family:var(--m);font-size:10px;color:var(--t3);margin-bottom:6px}
+.purchase-btn{
+  font-family:var(--d);font-size:15px;font-weight:700;
+  padding:16px 40px;border-radius:14px;border:none;
+  background:linear-gradient(135deg,#EA3A3B,#D32F2F);color:#fff;
+  cursor:pointer;transition:all .25s var(--ease);
+  white-space:nowrap;
+}
+.purchase-btn:hover{transform:translateY(-2px);filter:brightness(1.1);box-shadow:0 8px 24px rgba(234,58,59,0.3)}
+.purchase-trust{
+  text-align:center;margin-top:16px;
+  font-family:var(--m);font-size:11px;color:var(--t3);
+}
+
+/* ── ID GUIDE ── */
+.id-guide{padding:0}
+.id-guide-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
+  margin-top:32px;
+}
+.id-step{
+  background:var(--s1);border:1px solid var(--border);border-radius:var(--rl);
+  padding:20px;text-align:center;
+}
+.id-step-img{
+  width:100%;height:180px;border-radius:12px;
+  background:var(--s2);margin-bottom:16px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--d);font-size:48px;font-weight:900;color:var(--t4);
+}
+.id-step-title{font-family:var(--d);font-size:13px;font-weight:700;color:var(--w);margin-bottom:4px}
+.id-step-desc{font-size:12px;color:var(--t2);line-height:1.5}
+.id-warning{
+  margin-top:20px;padding:14px 20px;border-radius:12px;
+  background:rgba(234,58,59,0.06);border:1px solid rgba(234,58,59,0.12);
+  font-size:13px;color:var(--t1);
+  display:flex;align-items:center;gap:10px;
+}
+.id-warning em{color:var(--lime);font-style:normal;font-weight:600}
+
+/* ── WHY SAFE (equal width) ── */
+.safe-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:12px;
+}
+.safe-card{
+  background:var(--s1);border:1px solid var(--border);border-radius:var(--rl);
+  padding:32px;transition:all .3s var(--ease);
+}
+.safe-card:hover{border-color:var(--bh);transform:translateY(-3px)}
+.safe-ico{
+  width:44px;height:44px;margin-bottom:20px;
+  border-radius:12px;display:flex;align-items:center;justify-content:center;
+  background:var(--lime10);
+}
+.safe-ico svg{width:28px;height:28px}
+.safe-t{font-family:var(--d);font-size:17px;font-weight:700;letter-spacing:-0.02em;color:var(--w);margin-bottom:8px}
+.safe-d{font-size:14px;color:var(--t2);line-height:1.7}
+
+/* ── BURGER MENU ── */
+.burger{display:none;width:36px;height:36px;border:none;background:none;cursor:pointer;padding:6px;flex-shrink:0}
+.burger span{display:block;width:24px;height:2px;background:var(--w);margin:5px 0;transition:all .3s;border-radius:2px}
+.burger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.burger.active span:nth-child(2){opacity:0}
+.burger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.mobile-menu{
+  display:none;position:fixed;inset:0;top:64px;z-index:99;
+  background:rgba(7,7,7,0.95);backdrop-filter:blur(20px);
+  padding:32px 24px;flex-direction:column;gap:8px;
+}
+.mobile-menu.open{display:flex}
+.mobile-menu a{
+  font-family:var(--b);font-size:16px;font-weight:500;
+  color:var(--t1);padding:14px 0;border-bottom:1px solid var(--border);
+  transition:color .2s;
+}
+.mobile-menu a:hover{color:var(--w)}
+
+/* ── RESPONSIVE ── */
+/* ── TABLET ── */
+@media(max-width:900px){
+  .burger{display:block}
+  .nav-links{display:none}
+  .nav-r .btn{display:none}
+  .hero{min-height:auto;padding:90px 0 40px}
+  .hero-grid{max-width:100%;text-align:center}
+  .hero h1{font-size:clamp(28px,5vw,40px)}
+  .hero-desc{font-size:16px}
+  .hero-pills{gap:8px}
+  .hero-pill{font-size:12px;padding:6px 14px}
+  .qp-bar{flex-wrap:wrap}
+  .qp-service{min-width:auto;width:100%}
+  .qp-pay{width:100%}
+  .games-grid{gap:10px}
+  .game-ico{width:56px;height:56px;border-radius:14px}
+  .game-name{font-size:9px}
+  .sec{padding:80px 0}
+  .sec-head{flex-direction:column;align-items:flex-start;gap:12px}
+  .catalog-grid{grid-template-columns:1fr 1fr;gap:10px}
+  .c-card.feat{grid-column:span 2}
+  .c-card-visual{height:130px}
+  .c-card.feat .c-card-visual{height:160px}
+  .c-card-info{padding:16px 18px 20px}
+  .c-card-name{font-size:15px}
+  .c-card.feat .c-card-name{font-size:18px}
+  .timeline{grid-template-columns:1fr 1fr;gap:10px}
+  .tl-step{padding:22px 20px}
+  .tl-num{font-size:24px}
+  .usp-grid{grid-template-columns:1fr}
+  .usp.big,.usp.sm{grid-column:span 1}
+  .cta-box{grid-template-columns:1fr;text-align:center;padding:40px 24px}
+  .cta-right{align-items:center}
+  .about-strip{grid-template-columns:1fr}
+  .rev-card{flex:0 0 280px;padding:22px}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:24px}
+  .stats-inner{flex-wrap:wrap;padding:0 20px}
+  .stat{min-width:50%;padding:28px 0}
+  .pay-inner{padding:20px;gap:20px}
+  .pay-i img{height:22px}
+  .rating-agg{flex-wrap:wrap;gap:14px;padding:16px 20px}
+  .rating-num{font-size:36px}
+  .package-grid{grid-template-columns:1fr 1fr}
+  .purchase-form{flex-direction:column}
+  .id-guide-grid{grid-template-columns:1fr}
+  .product-hero{padding:90px 0 40px}
+  .product-header{flex-direction:column;text-align:center;align-items:center}
+  .safe-grid{grid-template-columns:1fr}
+}
+
+/* ── MOBILE ── */
+@media(max-width:500px){
+  .container{padding:0 16px}
+  .nav{height:56px}
+  .logo img{height:32px}
+  .nav-search{padding:6px 12px}
+  .nav-search input{font-size:12px}
+  .mobile-menu{top:56px}
+  .hero{padding:80px 0 40px}
+  .hero h1{font-size:26px;letter-spacing:-0.03em}
+  .hero h1 br{display:none}
+  .hero-desc{font-size:14px;margin-bottom:16px}
+  .hero-pills{gap:6px}
+  .hero-pill{font-size:11px;padding:5px 12px}
+  .nav-r .btn-ghost{display:none}
+  .qp-bar{flex-direction:column;gap:10px;padding:14px}
+  .qp-service{min-width:auto;width:100%}
+  .qp-input{width:100%}
+  .qp-amount{width:100%;min-width:auto}
+  .qp-pay{width:100%;text-align:center}
+  .games-section{margin-top:24px}
+  .game-item{flex:0 0 56px}
+  .game-ico{width:48px;height:48px;border-radius:12px}
+  .game-name{font-size:9px;max-width:52px}
+  .games-header-left h3{font-size:14px}
+  .hero-guarantee{font-size:10px}
+  .sec{padding:56px 0}
+  .sec-title{font-size:22px}
+  .sec-label{font-size:10px}
+  .catalog-grid{grid-template-columns:1fr;gap:10px}
+  .c-card.feat{grid-column:span 1}
+  .c-card-visual{height:120px}
+  .c-card.feat .c-card-visual{height:140px}
+  .c-card-visual img{width:60px;height:60px}
+  .c-card.feat .c-card-visual img{width:80px;height:80px}
+  .timeline{grid-template-columns:1fr;gap:8px}
+  .tl-step{padding:20px 18px}
+  .tl-num{font-size:22px;margin-bottom:10px}
+  .tl-title{font-size:14px}
+  .usp{padding:24px}
+  .usp-t{font-size:15px}
+  .usp.big .usp-t{font-size:17px}
+  .usp-d{font-size:13px}
+  .stat-v{font-size:24px}
+  .stats-inner{flex-direction:column;padding:0 16px}
+  .stat{padding:20px 0}
+  .stat+.stat::before{display:none}
+  .faq-q{font-size:14px}
+  .faq-ans{font-size:13px}
+  .cta-box{padding:32px 20px}
+  .cta-t{font-size:22px}
+  .cta-d{font-size:14px}
+  .cta-box .btn{padding:12px 24px;font-size:12px}
+  .about-card{padding:20px}
+  .about-card-title{font-size:16px}
+  .about-card-desc{font-size:13px}
+  .footer-grid{grid-template-columns:1fr;gap:20px}
+  .pay-inner{gap:14px}
+  .pay-i img{height:20px}
+  .rating-num{font-size:32px}
+  .rev-card{flex:0 0 85vw;padding:20px}
+  .rev-text{font-size:13px}
+  /* Standoff2-specific mobile */
+  .cat-tabs{flex-direction:column;gap:6px}
+  .cat-tab{min-width:auto;width:100%}
+  .delivery-badge{font-size:11px}
+  .promo-grid{flex-direction:column}
+  .package-grid{grid-template-columns:1fr 1fr}
+  .pkg{padding:10px 12px}
+  .pkg-ico{font-size:22px;margin-bottom:4px}
+  .pkg-name{font-size:11px}
+  .pkg-price{font-size:14px}
+  .product-hero{padding:80px 0 32px}
+  .product-ico{width:64px;height:64px}
+  .product-title{font-size:24px}
+  .product-desc{font-size:14px}
+  .purchase-btn{width:100%;padding:14px}
+  .safe-grid{grid-template-columns:1fr}
+  .market-price{flex-direction:column}
+  .gold-cards{grid-template-columns:repeat(2,1fr)}
+}
+
+/* ── METHOD PANELS ── */
+.method-panel{display:none}
+.method-panel.active{display:block}
+
+/* Market — price comparison */
+.market-price{display:flex;gap:12px;margin-bottom:20px}
+.market-price-col{
+  flex:1;background:var(--s1);border:1px solid var(--border);border-radius:14px;
+  padding:18px 22px;
+}
+.market-price-label{font-family:var(--m);font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px}
+.market-price-value{font-family:var(--d);font-size:26px;font-weight:900;color:var(--w);letter-spacing:-0.03em}
+.market-price-badge{
+  display:inline-block;margin-top:8px;
+  font-family:var(--m);font-size:9px;font-weight:700;
+  padding:3px 10px;border-radius:var(--pill);
+  background:var(--lime);color:#fff;
+}
+.market-price-get .market-price-value{color:#7AE8A0}
+.market-arrow{
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  width:36px;color:var(--t4);align-self:center;
+}
+
+/* Market — instruction */
+.market-instr{
+  background:var(--s1);border:1px solid var(--border);border-radius:14px;
+  padding:22px;
+}
+.market-instr-head{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.market-instr-icon{
+  width:34px;height:34px;border-radius:10px;flex-shrink:0;
+  background:rgba(234,58,59,0.08);border:1px solid rgba(234,58,59,0.15);
+  display:flex;align-items:center;justify-content:center;
+}
+.market-instr-icon svg{width:18px;height:18px;color:var(--lime)}
+.market-instr-title{font-family:var(--d);font-size:13px;font-weight:700;color:var(--w)}
+.market-instr-sub{font-size:11px;color:var(--lime);margin-top:2px}
+.market-steps{display:flex;flex-direction:column;gap:10px}
+.market-step{display:flex;align-items:flex-start;gap:12px}
+.market-step-num{
+  width:22px;height:22px;border-radius:50%;flex-shrink:0;
+  background:var(--s3);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--m);font-size:10px;font-weight:700;color:var(--t2);
+  margin-top:2px;
+}
+.market-step-text{font-size:13px;color:var(--t1);line-height:1.5}
+.market-step-text em{color:var(--lime);font-style:normal;font-weight:600}
+.screenshot-upload{
+  margin-top:16px;border:2px dashed rgba(255,255,255,0.07);border-radius:12px;
+  padding:28px;text-align:center;cursor:pointer;
+  transition:border-color .2s,background .2s;
+}
+.screenshot-upload:hover{border-color:rgba(234,58,59,0.35);background:rgba(234,58,59,0.04)}
+.screenshot-upload-ico{font-size:28px;margin-bottom:8px}
+.screenshot-upload-text{font-family:var(--m);font-size:11px;color:var(--t3)}
+.screenshot-upload-text strong{color:var(--lime);display:block;font-size:12px;margin-bottom:4px}
+
+/* Pay button (market method) */
+.market-pay{
+  margin-top:20px;width:100%;
+  font-family:var(--d);font-size:15px;font-weight:700;
+  padding:16px;border-radius:14px;border:none;
+  background:linear-gradient(135deg,#EA3A3B,#D32F2F);color:#fff;
+  cursor:pointer;transition:all .25s var(--ease);
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.market-pay:hover{transform:translateY(-2px);filter:brightness(1.1);box-shadow:0 8px 24px rgba(234,58,59,0.3)}
+
+/* Denomination cards (По UID) */
+.gold-cards{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
+  margin-bottom:24px;
+}
+.gold-card{
+  background:linear-gradient(160deg,#1C1400,#0E0E0E);
+  border:2px solid rgba(255,185,0,0.12);border-radius:16px;
+  padding:18px 12px 14px;cursor:pointer;transition:all .2s var(--ease);
+  position:relative;overflow:hidden;text-align:center;
+}
+.gold-card:hover{border-color:rgba(255,185,0,0.3);transform:translateY(-2px)}
+.gold-card.selected{
+  border-color:rgba(255,185,0,0.55);
+  box-shadow:0 0 20px rgba(255,185,0,0.1);
+}
+.gold-card-badge{
+  position:absolute;top:-1px;left:50%;transform:translateX(-50%);
+  font-family:var(--m);font-size:8px;font-weight:700;white-space:nowrap;
+  padding:3px 10px;border-radius:0 0 8px 8px;
+  background:var(--lime);color:#fff;
+}
+.gold-card-visual{
+  width:72px;height:72px;border-radius:12px;margin:0 auto 10px;
+  background:radial-gradient(ellipse at 50% 70%,#3A2800 0%,#120E00 100%);
+  display:flex;align-items:center;justify-content:center;font-size:32px;
+  border:1px solid rgba(255,185,0,0.1);
+  box-shadow:0 0 20px rgba(255,185,0,0.08) inset;
+}
+.gold-card-amount{font-family:var(--d);font-size:16px;font-weight:900;color:#FFB900;letter-spacing:-0.02em}
+.gold-card-price{font-family:var(--m);font-size:13px;font-weight:700;color:var(--lime);margin-top:4px}
+.gold-card-old{font-family:var(--m);font-size:10px;color:var(--t4);text-decoration:line-through;margin-top:2px}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav class="nav">
+  <div class="container">
+    <a href="/" class="logo"><img src="logo-red.svg" alt="DonateBoom" height="44"></a>
+    <div class="nav-search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="text" placeholder="Поиск игр и&nbsp;приложений...">
+    </div>
+    <ul class="nav-links">
+      <li><a href="/guarantees">Гарантии</a></li>
+      <li><a href="/reviews">Отзывы</a></li>
+      <li><a href="/faq">FAQ</a></li>
+    </ul>
+    <div class="nav-r">
+      <a href="/profile" class="btn btn-ghost">Личный кабинет</a>
+      <button class="burger" onclick="document.querySelector('.mobile-menu').classList.toggle('open');this.classList.toggle('active')">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu">
+  <a href="/">Главная</a>
+  <a href="/services">Каталог</a>
+  <a href="/guarantees">Гарантии</a>
+  <a href="/reviews">Отзывы</a>
+  <a href="/faq">FAQ</a>
+  <a href="/profile">Личный кабинет</a>
+</div>
+
+
+<!-- ═══════════ PRODUCT HERO ═══════════ -->
+<section class="product-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">Главная</a> / Standoff 2</div>
+    <div class="product-header">
+      <div class="product-ico"><img src="assets/logos/standoff2-icon.png" alt="Standoff 2" width="80" height="80"></div>
+      <h1 class="product-title">Standoff 2&nbsp;&mdash; пополнение Gold</h1>
+    </div>
+    <p class="product-desc">Gold, Gold Pass, кейсы. Зачисление через внутриигровой маркетплейс за&nbsp;5–15 минут. Без пароля, без риска&nbsp;бана.</p>
+    <div class="product-badges">
+      <span class="product-badge hot">Хит</span>
+      <span class="product-badge ghost">Без пароля</span>
+      <span class="product-badge ghost">Гарантия возврата</span>
+    </div>
+
+    <!-- Category tabs -->
+    <div class="cat-tabs">
+      <div class="cat-tab active" data-method="market">
+        <div class="cat-tab-title">Голда через рынок</div>
+        <div class="cat-tab-sub">Дешевле</div>
+      </div>
+      <div class="cat-tab" data-method="uid">
+        <div class="cat-tab-title">По UID</div>
+        <div class="cat-tab-sub">Голда, пропуски и&nbsp;акции</div>
+      </div>
+      <div class="cat-tab" data-method="boost">
+        <div class="cat-tab-title">Бусты</div>
+      </div>
+    </div>
+    <div class="delivery-badge">⏱ Доставка: 10-15 минут</div>
+
+    <!-- Promo banners -->
+    <div class="promo-banners">
+      <h3 class="promo-title">Акции</h3>
+      <div class="promo-grid">
+        <div class="promo-card">
+          <div class="promo-img">x1</div>
+          <div class="promo-date">До 29 марта</div>
+        </div>
+        <div class="promo-card">
+          <div class="promo-img">x3</div>
+          <div class="promo-date">До 29 марта</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════ PURCHASE PANELS ═══════════ -->
+<section class="packages" id="packages">
+  <div class="container">
+
+    <!-- ── PANEL: Через рынок (default) ── -->
+    <div class="method-panel active" data-method="market">
+      <div class="market-price">
+        <div class="market-price-col">
+          <div class="market-price-label">Ты платишь</div>
+          <div class="market-price-value" id="mkt-pay">120 ₽</div>
+          <span class="market-price-badge">ЛУЧШАЯ ЦЕНА</span>
+        </div>
+        <div class="market-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+        <div class="market-price-col market-price-get">
+          <div class="market-price-label">Ты получаешь</div>
+          <div class="market-price-value" id="mkt-get">100 G</div>
+        </div>
+      </div>
+
+      <div class="market-instr">
+        <div class="market-instr-head">
+          <div class="market-instr-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1" ry="1"/><path d="m9 12 2 2 4-4"/></svg>
+          </div>
+          <div>
+            <div class="market-instr-title">ИНСТРУКЦИЯ</div>
+            <div class="market-instr-sub">Как купить через маркет!</div>
+          </div>
+        </div>
+        <div class="market-steps">
+          <div class="market-step">
+            <div class="market-step-num">1</div>
+            <div class="market-step-text">Купите скин <em id="skin-name">MAC10 «Shogun Stripes»</em> на маркете Steam</div>
+          </div>
+          <div class="market-step">
+            <div class="market-step-num">2</div>
+            <div class="market-step-text">Выставьте его за <em id="skin-price">125,63 G</em></div>
+          </div>
+          <div class="market-step">
+            <div class="market-step-num">3</div>
+            <div class="market-step-text">В игре откройте раздел <em>«Только мои запросы»</em></div>
+          </div>
+          <div class="market-step">
+            <div class="market-step-num">4</div>
+            <div class="market-step-text">Загрузите сюда скриншот лога — и&nbsp;голда придёт</div>
+          </div>
+        </div>
+        <div class="screenshot-upload" id="screenshot-zone">
+          <div class="screenshot-upload-ico">📎</div>
+          <div class="screenshot-upload-text">
+            <strong>Загрузить скриншот</strong>
+            PNG или JPG · до 5 МБ
+          </div>
+          <input type="file" accept="image/*" style="display:none" id="screenshot-input">
+        </div>
+      </div>
+
+      <button class="market-pay" id="market-pay-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        Купить сразу · <span id="market-btn-price">120 ₽</span>
+      </button>
+      <div class="purchase-trust">Если не&nbsp;зачислится в&nbsp;течение 24 часов&nbsp;&mdash; вернём деньги</div>
+    </div>
+
+    <!-- ── PANEL: По UID ── -->
+    <div class="method-panel" data-method="uid">
+      <div class="gold-cards">
+        <div class="gold-card selected" data-price="120">
+          <div class="gold-card-visual">🪙</div>
+          <div class="gold-card-amount">G 100</div>
+          <div class="gold-card-price">120 ₽</div>
+        </div>
+        <div class="gold-card" data-price="570">
+          <div class="gold-card-badge">Популярное</div>
+          <div class="gold-card-visual">🪙</div>
+          <div class="gold-card-amount">G 500</div>
+          <div class="gold-card-price">570 ₽</div>
+          <div class="gold-card-old">600 ₽</div>
+        </div>
+        <div class="gold-card" data-price="1080">
+          <div class="gold-card-badge">Выгодно −10%</div>
+          <div class="gold-card-visual">🪙</div>
+          <div class="gold-card-amount">G 1000</div>
+          <div class="gold-card-price">1 080 ₽</div>
+          <div class="gold-card-old">1 200 ₽</div>
+        </div>
+        <div class="gold-card" data-price="2500">
+          <div class="gold-card-visual">🪙</div>
+          <div class="gold-card-amount">G 2500</div>
+          <div class="gold-card-price">2 500 ₽</div>
+        </div>
+        <div class="gold-card" data-price="399">
+          <div class="gold-card-visual">🎫</div>
+          <div class="gold-card-amount">Gold Pass</div>
+          <div class="gold-card-price">399 ₽</div>
+        </div>
+        <div class="gold-card" data-price="4990">
+          <div class="gold-card-visual">⭐</div>
+          <div class="gold-card-amount">GP 75 ур</div>
+          <div class="gold-card-price">4 990 ₽</div>
+        </div>
+      </div>
+
+      <div class="purchase-form">
+        <div class="purchase-id">
+          <label>Player ID</label>
+          <div class="purchase-id-wrap">
+            <input type="text" placeholder="Введите Player ID" id="uid-input">
+            <div class="id-help" title="Как найти Player ID?">?</div>
+          </div>
+        </div>
+        <button class="purchase-btn" id="uid-pay-btn">Оплатить 120 ₽</button>
+      </div>
+      <div class="purchase-trust">Если не&nbsp;зачислится в&nbsp;течение 24 часов&nbsp;&mdash; вернём деньги</div>
+    </div>
+
+    <!-- ── PANEL: Бусты ── -->
+    <div class="method-panel" data-method="boost">
+      <div style="padding:40px;text-align:center;background:var(--s1);border:1px solid var(--border);border-radius:16px">
+        <div style="font-size:40px;margin-bottom:16px">🚀</div>
+        <div style="font-family:var(--d);font-size:18px;font-weight:700;color:var(--w);margin-bottom:8px">Бусты скоро появятся</div>
+        <div style="font-size:13px;color:var(--t3)">Следите за обновлениями</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════ HOW TO FIND PLAYER ID ═══════════ -->
+<section class="sec" id="id-guide">
+  <div class="container">
+    <div class="sec-head">
+      <div>
+        <div class="sec-label">Инструкция</div>
+        <h2 class="sec-title">Как найти Player ID</h2>
+      </div>
+    </div>
+    <div class="id-guide-grid">
+      <div class="id-step">
+        <div class="id-step-img">1</div>
+        <div class="id-step-title">Шаг 1</div>
+        <div class="id-step-desc">Откройте Standoff 2 и&nbsp;перейдите в&nbsp;профиль</div>
+      </div>
+      <div class="id-step">
+        <div class="id-step-img">2</div>
+        <div class="id-step-title">Шаг 2</div>
+        <div class="id-step-desc">Нажмите на&nbsp;аватар в&nbsp;левом верхнем&nbsp;углу</div>
+      </div>
+      <div class="id-step">
+        <div class="id-step-img">3</div>
+        <div class="id-step-title">Шаг 3</div>
+        <div class="id-step-desc">Скопируйте ID под никнеймом (только&nbsp;цифры)</div>
+      </div>
+    </div>
+    <div class="id-warning">
+      <em>!</em> Player ID&nbsp;&mdash; это только цифры (например, 123456789). Это НЕ&nbsp;ваш никнейм.
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════ HOW IT WORKS ═══════════ -->
+<section class="sec sec-alt" id="how">
+  <div class="container">
+    <div class="sec-head">
+      <div>
+        <div class="sec-label">Процесс</div>
+        <h2 class="sec-title">Как это работает</h2>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="tl-step">
+        <div class="tl-num">01</div>
+        <div class="tl-title">Выбери пакет Gold</div>
+        <div class="tl-desc">Выбери количество Gold или Gold&nbsp;Pass</div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-num">02</div>
+        <div class="tl-title">Введи Player ID</div>
+        <div class="tl-desc">Скопируй из&nbsp;профиля. Пароль не&nbsp;нужен</div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-num">03</div>
+        <div class="tl-title">Оплати</div>
+        <div class="tl-desc">Карта, СБП, ЮMoney. Без скрытых&nbsp;наценок</div>
+        <div class="tl-note">Комиссий нет</div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-num">04</div>
+        <div class="tl-title">Получи Gold</div>
+        <div class="tl-desc">Среднее время 5–15 минут. Гарантия&nbsp;возврата</div>
+        <div class="tl-note">Гарантия возврата</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════ WHY SAFE ═══════════ -->
+<section class="sec" id="why-safe">
+  <div class="container">
+    <div class="sec-head">
+      <div>
+        <div class="sec-label">Безопасность</div>
+        <h2 class="sec-title">Почему это безопасно</h2>
+      </div>
+    </div>
+    <div class="safe-grid">
+      <div class="safe-card">
+        <div class="safe-ico">
+          <svg viewBox="0 0 32 32" fill="none">
+            <path d="M16 3L5 8v7c0 7.1 4.7 13.7 11 16 6.3-2.3 11-8.9 11-16V8L16 3z" stroke="var(--lime)" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="M16 3L5 8v7c0 7.1 4.7 13.7 11 16 6.3-2.3 11-8.9 11-16V8L16 3z" fill="var(--lime)" opacity=".1"/>
+            <path d="M11 16l3 3 7-7" stroke="var(--lime)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="safe-t">Не забанят</div>
+        <div class="safe-d">Пополнение через официальный маркетплейс внутри игры. Это тот&nbsp;же способ, который предусмотрен&nbsp;разработчиками.</div>
+      </div>
+      <div class="safe-card">
+        <div class="safe-ico">
+          <svg viewBox="0 0 32 32" fill="none">
+            <rect x="6" y="14" width="20" height="14" rx="3" stroke="var(--lime)" stroke-width="1.8"/>
+            <path d="M10 14V10a6 6 0 0 1 12 0v4" stroke="var(--lime)" stroke-width="1.8" stroke-linecap="round"/>
+            <circle cx="16" cy="21" r="2" fill="var(--lime)" opacity=".4"/>
+          </svg>
+        </div>
+        <div class="safe-t">Без пароля</div>
+        <div class="safe-d">Нужен только Player ID из&nbsp;профиля. Мы не&nbsp;просим логин, пароль или доступ к&nbsp;аккаунту.</div>
+      </div>
+      <div class="safe-card">
+        <div class="safe-ico">
+          <svg viewBox="0 0 32 32" fill="none">
+            <path d="M6 16a10 10 0 1 1 3.3 7.5" stroke="var(--lime)" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M6 24v-5h5" stroke="var(--lime)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="16" cy="16" r="2.5" fill="var(--lime)" opacity=".25"/>
+          </svg>
+        </div>
+        <div class="safe-t">Гарантия</div>
+        <div class="safe-d">Не&nbsp;дошла валюта&nbsp;&mdash; вернём деньги или повторим доставку. Все заказы&nbsp;фиксируем.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════ REVIEWS ═══════════ -->
+<section class="sec sec-light" id="reviews">
+  <div class="container">
+    <div class="sec-head">
+      <div>
+        <div class="sec-label">Отзывы</div>
+        <h2 class="sec-title">Что говорят игроки</h2>
+      </div>
+      <a href="/reviews" class="btn btn-ghost">Все отзывы →</a>
+    </div>
+    <div class="reviews-row">
+      <div class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <div class="rev-text">Закинул голду, пришло минут за&nbsp;7. Инструкция&nbsp;понятная.</div>
+        <div class="rev-author"><span>Артём К.</span> · Standoff 2</div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <div class="rev-text">Пополнял Gold Pass, всё дошло. Цены ниже чем в&nbsp;игре.</div>
+        <div class="rev-author"><span>Максим Р.</span> · Standoff 2</div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <div class="rev-text">Первый раз заказывал, волновался. Поддержка ответила быстро, Gold пришёл за&nbsp;10&nbsp;мин.</div>
+        <div class="rev-author"><span>Кирилл А.</span> · Standoff 2</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════ FAQ ═══════════ -->
+<section class="sec" id="faq">
+  <div class="container">
+    <div class="sec-head">
+      <div>
+        <div class="sec-label">Частые вопросы</div>
+        <h2 class="sec-title">FAQ</h2>
+      </div>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-item-head">
+          <div class="faq-q">Могут ли забанить за&nbsp;покупку Gold?</div>
+          <div class="faq-plus">+</div>
+        </div>
+        <div class="faq-ans">Нет. Мы пополняем через официальный маркетплейс внутри игры&nbsp;&mdash; это легальный&nbsp;способ.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-item-head">
+          <div class="faq-q">Как быстро придёт Gold?</div>
+          <div class="faq-plus">+</div>
+        </div>
+        <div class="faq-ans">В&nbsp;среднем 5–15 минут. В&nbsp;часы пиковой нагрузки&nbsp;&mdash; до&nbsp;30&nbsp;минут.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-item-head">
+          <div class="faq-q">Где найти Player ID?</div>
+          <div class="faq-plus">+</div>
+        </div>
+        <div class="faq-ans">Откройте Standoff 2, нажмите на&nbsp;аватар&nbsp;&rarr; ID отображается под никнеймом. Это только&nbsp;цифры.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-item-head">
+          <div class="faq-q">Что если ввёл неправильный ID?</div>
+          <div class="faq-plus">+</div>
+        </div>
+        <div class="faq-ans">Напиши в&nbsp;поддержку в&nbsp;Telegram&nbsp;&mdash; разберёмся в&nbsp;течение часа. Если Gold ушёл не&nbsp;тому игроку, вернём&nbsp;деньги.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-item-head">
+          <div class="faq-q">Какие способы оплаты?</div>
+          <div class="faq-plus">+</div>
+        </div>
+        <div class="faq-ans">Банковская карта (Visa, Mastercard, МИР), СБП, ЮMoney.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-item-head">
+          <div class="faq-q">Работает в&nbsp;моём регионе?</div>
+          <div class="faq-plus">+</div>
+        </div>
+        <div class="faq-ans">Да, сервис работает в&nbsp;России и&nbsp;странах&nbsp;СНГ.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════ CTA ═══════════ -->
+<section class="sec">
+  <div class="container">
+    <div class="cta-wrap">
+      <div class="cta-glow"></div>
+      <div class="cta-box">
+        <div>
+          <div class="cta-t">Пополни Standoff 2 прямо сейчас</div>
+          <div class="cta-d">Gold на&nbsp;аккаунте через 5–15 минут после&nbsp;оплаты</div>
+          <div class="cta-note">
+            <span>Гарантия возврата</span>
+            <span class="cta-note-dot"></span>
+            <span>Без пароля</span>
+            <span class="cta-note-dot"></span>
+            <span>5–15 минут</span>
+          </div>
+        </div>
+        <div class="cta-right">
+          <a href="#packages" class="btn btn-lime" data-scroll-to="packages">Выбрать пакет</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand"><img src="logo-red.svg" alt="DonateBoom" height="32"></div>
+        <p class="footer-about">Сервис пополнения игровых валют. Продаём напрямую, без&nbsp;посредников.</p>
+        <a href="#" class="footer-tg">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--lime)"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-2.04 9.613c-.15.675-.546.84-1.107.523l-3.065-2.258-1.48 1.423c-.163.163-.3.3-.616.3l.22-3.12 5.673-5.123c.247-.22-.054-.342-.383-.122L7.044 14.44l-3.015-.942c-.656-.205-.668-.656.137-.97l11.784-4.544c.547-.197 1.026.133.612.264z"/></svg>
+          Telegram-канал
+        </a>
+      </div>
+      <div>
+        <div class="footer-col-t">Каталог</div>
+        <ul class="footer-links">
+          <li><a href="/service/standoff2">Standoff 2</a></li>
+          <li><a href="/service/playstation">PlayStation</a></li>
+          <li><a href="/service/tiktok">TikTok</a></li>
+          <li><a href="/service/appstore">App Store</a></li>
+          <li><a href="/services">Все услуги</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-t">Покупателям</div>
+        <ul class="footer-links">
+          <li><a href="/how-it-works">Как это работает</a></li>
+          <li><a href="/guarantees">Гарантии и&nbsp;безопасность</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/reviews">Отзывы</a></li>
+          <li><a href="/about">О сервисе</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-t">Связь</div>
+        <ul class="footer-links">
+          <li><a href="/contacts">Контакты</a></li>
+          <li><a href="#">Telegram</a></li>
+          <li><a href="#">ВКонтакте</a></li>
+          <li><a href="#">support@donateboom.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bot">
+      <span>&copy; 2026 DonateBoom</span>
+      <span><a href="/legal/oferta">Оферта</a> &middot; <a href="/legal/privacy">Конфиденциальность</a> &middot; <a href="/legal/rules">Правила сервиса</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── METHOD TAB SWITCHING ── */
+const catTabs = document.querySelectorAll('.cat-tab[data-method]');
+const methodPanels = document.querySelectorAll('.method-panel[data-method]');
+catTabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    catTabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    methodPanels.forEach(p => p.classList.remove('active'));
+    const panel = document.querySelector(`.method-panel[data-method="${tab.dataset.method}"]`);
+    if (panel) panel.classList.add('active');
+  });
+});
+
+/* ── GOLD CARDS (По UID) ── */
+const goldCards = document.querySelectorAll('.gold-card');
+const uidPayBtn = document.getElementById('uid-pay-btn');
+goldCards.forEach(card => {
+  card.addEventListener('click', () => {
+    goldCards.forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+    if (uidPayBtn) uidPayBtn.textContent = 'Оплатить ' + card.dataset.price + ' ₽';
+  });
+});
+
+/* ── SCREENSHOT UPLOAD ── */
+const screenshotZone = document.getElementById('screenshot-zone');
+const screenshotInput = document.getElementById('screenshot-input');
+if (screenshotZone && screenshotInput) {
+  screenshotZone.addEventListener('click', () => screenshotInput.click());
+  screenshotInput.addEventListener('change', () => {
+    const file = screenshotInput.files[0];
+    if (file) {
+      screenshotZone.querySelector('.screenshot-upload-text').innerHTML =
+        '<strong style="color:#7AE8A0">✓ ' + file.name + '</strong>Файл загружен';
+      screenshotZone.style.borderColor = 'rgba(122,232,160,0.5)';
+      screenshotZone.style.background = 'rgba(122,232,160,0.04)';
+    }
+  });
+}
+
+/* ── ID HELP SCROLL ── */
+const idHelp = document.querySelector('.id-help');
+if (idHelp) {
+  idHelp.addEventListener('click', () => {
+    document.getElementById('id-guide')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}
+
+/* ── CTA SCROLL TO PACKAGES ── */
+document.querySelectorAll('[data-scroll-to]').forEach(el => {
+  el.addEventListener('click', e => {
+    e.preventDefault();
+    document.getElementById(el.dataset.scrollTo)?.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+/* ── FAQ ACCORDION ── */
+document.querySelectorAll('.faq-item').forEach(item => {
+  item.addEventListener('click', () => {
+    const ans = item.querySelector('.faq-ans');
+    const isOpen = item.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.faq-item').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.faq-ans').classList.remove('open');
+    });
+    // Toggle clicked
+    if (!isOpen) {
+      item.classList.add('open');
+      ans.classList.add('open');
+    }
+  });
+});
+
+/* ── SCROLL REVEAL ── */
+const revealEls = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      revealObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+revealEls.forEach(el => revealObserver.observe(el));
+</script>
+
+</body>
+</html>

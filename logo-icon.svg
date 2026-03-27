@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" width="44" height="44" fill="none">
+  <!--
+    DonateBoom — icon / favicon / avatar (44×44)
+    Same symbol, centered, on rounded dark square
+  -->
+
+  <!-- Background square -->
+  <rect width="44" height="44" rx="10" fill="#070707"/>
+
+  <!-- Bar 1 (top, narrow) — centered horizontally -->
+  <polygon points="14,3 23,3 27,20 18,20" fill="#B9F23E"/>
+
+  <!-- Bar 2 (bottom, wider, offset left) -->
+  <polygon points="8,25 19,25 23,41 12,41" fill="#B9F23E"/>
+</svg>

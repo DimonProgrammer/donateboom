@@ -3,11 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DonateBoom — Пополнение Standoff 2, PlayStation, TikTok и 50+ игр</title>
-<meta name="description" content="Моментальное пополнение игровой валюты. Standoff 2, PlayStation, TikTok, App Store и другие сервисы. Без комиссии, без пароля, гарантия возврата.">
+<title>DonateBoom — Пополнение игр и сервисов без посредников | Standoff 2, PS Store, Steam</title>
+<meta name="description" content="Пополнение игровых аккаунтов напрямую — Standoff 2, PS Store, Steam, TikTok и другие сервисы. Без регистрации, без пароля, зачисление за 5–15 минут. Гарантия возврата.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800;900&family=Rubik:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 
@@ -29,12 +30,12 @@
   --mint:#7AE8A0;
   --mint10:rgba(122,232,160,0.08);
 
-  --w:#F0F0F0;
-  --t1:#D0D0D0;
-  --t2:#888;
-  --t3:#555;
-  --t4:#333;
-  --t5:#222;
+  --w:#F5F5F7;
+  --t1:#E0E0E0;
+  --t2:#A0A0A0;
+  --t3:#6E6E73;
+  --t4:#3A3A3A;
+  --t5:#252525;
 
   --d:'Unbounded',sans-serif;
   --b:'Rubik',sans-serif;
@@ -46,7 +47,26 @@
 }
 
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--t1);font-family:var(--b);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{background:var(--bg);color:var(--t1);font-family:var(--b);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;position:relative}
+
+/* ── BG GRID ── */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px);
+  background-size:72px 72px;
+  mask-image:radial-gradient(ellipse 80% 70% at 50% 40%, black 20%, transparent 70%);
+  -webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 40%, black 20%, transparent 70%);
+}
+body>*{position:relative;z-index:1}
+/* Noise overlay */
+body::after{
+  content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity:0.03;mix-blend-mode:overlay;
+  background-size:200px 200px;
+}
 a{text-decoration:none;color:inherit}
 img{display:block;max-width:100%}
 
@@ -57,23 +77,38 @@ img{display:block;max-width:100%}
 /* ── NAV ── */
 .nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
-  height:60px;
+  height:64px;
   display:flex;align-items:center;
-  background:rgba(7,7,7,0.8);
+  background:rgba(7,7,7,0.85);
   backdrop-filter:blur(24px) saturate(1.4);
   border-bottom:1px solid var(--border);
 }
-.nav .container{display:flex;align-items:center;justify-content:space-between;width:100%}
-.logo{font-family:var(--d);font-weight:800;font-size:17px;letter-spacing:-0.04em;color:var(--w)}
-.logo em{font-style:normal;color:var(--lime)}
-.nav-links{display:flex;gap:4px;list-style:none}
+.nav .container{display:flex;align-items:center;gap:20px;width:100%}
+.logo{display:flex;align-items:center;flex-shrink:0}
+.logo img{height:44px;width:auto}
+/* Search in nav — fills available space */
+.nav-search{
+  flex:1;
+  display:flex;align-items:center;gap:10px;
+  background:var(--s2);border:1px solid var(--border);border-radius:12px;
+  padding:9px 16px;transition:border-color .2s;
+}
+.nav-search:focus-within{border-color:rgba(255,255,255,0.15)}
+.nav-search svg{width:18px;height:18px;color:var(--t3);flex-shrink:0}
+.nav-search input{
+  flex:1;background:none;border:none;outline:none;
+  color:var(--w);font-family:var(--b);font-size:14px;
+}
+.nav-search input::placeholder{color:var(--t3)}
+/* Key nav links */
+.nav-links{display:flex;gap:2px;list-style:none;flex-shrink:0}
 .nav-links a{
-  display:block;padding:6px 14px;border-radius:var(--pill);
+  display:block;padding:7px 14px;border-radius:var(--pill);
   font-size:13px;font-weight:500;color:var(--t2);
-  transition:color .2s,background .2s;
+  transition:color .2s,background .2s;white-space:nowrap;
 }
 .nav-links a:hover{color:var(--w);background:var(--s2)}
-.nav-r{display:flex;gap:8px;align-items:center}
+.nav-r{display:flex;gap:8px;align-items:center;flex-shrink:0}
 
 /* ── BUTTONS ── */
 .btn{
@@ -101,93 +136,213 @@ img{display:block;max-width:100%}
 }
 .hero::before{
   content:'';position:absolute;
-  top:-120px;right:-200px;
-  width:700px;height:700px;
-  background:radial-gradient(circle,var(--lime-glow),transparent 60%);
+  top:40%;left:50%;transform:translate(-50%,-50%);
+  width:800px;height:600px;
+  background:
+    radial-gradient(ellipse at 30% 50%,rgba(88,100,255,0.08),transparent 50%),
+    radial-gradient(ellipse at 70% 40%,rgba(185,242,62,0.06),transparent 50%),
+    radial-gradient(ellipse at 50% 60%,rgba(255,100,50,0.04),transparent 50%);
   pointer-events:none;
+  filter:blur(60px);
 }
 .hero-grid{
-  display:grid;
-  grid-template-columns:1fr 400px;
-  gap:48px;
-  align-items:end;
+  text-align:center;
+  max-width:900px;
+  margin:0 auto;
 }
-.hero-tag{
-  font-family:var(--m);font-size:11px;font-weight:600;
-  color:var(--t3);letter-spacing:0.06em;
-  margin-bottom:20px;
-  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+.hero-pills{
+  display:flex;gap:10px;justify-content:center;flex-wrap:wrap;
+  margin-bottom:0;
 }
-.hero-tag-dot{width:3px;height:3px;border-radius:50%;background:var(--t4)}
+.hero-pill{
+  font-family:var(--b);font-size:13px;font-weight:500;
+  color:var(--t1);
+  padding:8px 20px;border-radius:var(--pill);
+  border:1px solid var(--border);
+  background:rgba(255,255,255,0.03);
+}
 .hero h1{
-  font-family:var(--d);font-size:clamp(34px,5.2vw,60px);
-  font-weight:900;letter-spacing:-0.045em;line-height:1.02;
+  font-family:var(--d);font-size:clamp(32px,4.5vw,54px);
+  font-weight:900;letter-spacing:-0.045em;line-height:1.05;
   color:var(--w);margin-bottom:24px;
 }
 .hero h1 em{font-style:normal;color:var(--lime)}
 .hero-desc{
-  font-size:16px;color:var(--t2);line-height:1.7;
-  max-width:460px;margin-bottom:32px;
+  font-size:18px;color:var(--t2);line-height:1.7;
+  max-width:560px;margin:0 auto 32px;
 }
-.hero-btns{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
-.hero-btns .btn{padding:13px 28px;font-size:13px}
-.hero-trust{
-  font-family:var(--m);font-size:11px;color:var(--t3);letter-spacing:0.01em;
-  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
-}
-.hero-trust-dot{width:2px;height:2px;border-radius:50%;background:var(--t4)}
+/* (hero-btns moved to hero-cta-center below showcase) */
 
-/* Hero cards */
-.hero-cards{display:flex;flex-direction:column;gap:8px}
-.h-card{
-  background:var(--s1);border:1px solid var(--border);border-radius:var(--rm);
-  padding:16px 20px;
-  display:flex;align-items:center;gap:14px;
-  transition:all .25s var(--ease);cursor:pointer;
+/* (search bar moved into nav) */
+
+/* ── QUICK PURCHASE WIDGET (single togglable) ── */
+.quick-purchases{
+  margin-top:40px;width:100%;max-width:900px;
+  margin-left:auto;margin-right:auto;
 }
-.h-card:hover{border-color:var(--bh);transform:translateX(4px)}
-.h-card-ico{
-  width:42px;height:42px;border-radius:11px;
-  background:var(--s2);display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;overflow:hidden;
+.qp-tabs{display:flex;gap:0;margin-bottom:0;justify-content:center}
+.qp-tab{
+  font-family:var(--b);font-size:13px;font-weight:600;
+  padding:10px 20px;
+  background:var(--s2);color:var(--t3);
+  cursor:pointer;border:1px solid var(--border);border-bottom:none;
+  transition:all .2s;
+  display:flex;align-items:center;gap:8px;
 }
-.h-card-ico img{width:28px;height:28px;object-fit:contain}
-.h-card-ico svg{width:22px;height:22px}
-.h-card-info{flex:1;min-width:0}
-.h-card-name{font-family:var(--d);font-size:13px;font-weight:600;color:var(--w)}
-.h-card-sub{font-size:11px;color:var(--t3);margin-top:1px}
-.h-card-price{font-family:var(--m);font-size:12px;font-weight:600;color:var(--lime);white-space:nowrap}
-.h-card-arr{color:var(--t4);font-size:16px;transition:color .2s}
-.h-card:hover .h-card-arr{color:var(--lime)}
+.qp-tab:first-child{border-radius:14px 0 0 0}
+.qp-tab:last-child{border-radius:0 14px 0 0}
+.qp-tab.active{border-bottom-color:transparent}
+.qp-tab.active{background:var(--s1);color:var(--w);border-bottom-color:var(--s1)}
+.qp-tab:hover:not(.active){color:var(--t1)}
+.qp-tab img{width:18px;height:18px;border-radius:4px}
+.qp-bar{
+  display:flex;align-items:center;gap:12px;
+  background:var(--s1);border:1px solid var(--border);
+  border-radius:14px;padding:14px 16px;
+}
+.qp-bar[hidden]{display:none}
+.qp-service{
+  display:flex;align-items:center;gap:12px;
+  min-width:200px;flex-shrink:0;
+}
+.qp-ico{width:44px;height:44px;border-radius:12px;overflow:hidden;flex-shrink:0}
+.qp-ico img{width:100%;height:100%;object-fit:cover}
+.qp-info{display:flex;flex-direction:column}
+.qp-name{font-family:var(--d);font-size:15px;font-weight:700;color:var(--w)}
+.qp-meta{font-size:11px;color:var(--t3)}
+.qp-meta em{color:var(--lime);font-style:normal;font-weight:600}
+.qp-meta a{color:var(--lime);font-size:11px}
+.qp-input{
+  flex:1;min-width:0;
+  background:var(--s2);border:1px solid var(--border);border-radius:12px;
+  padding:10px 16px;display:flex;flex-direction:column;gap:2px;
+  transition:border-color .2s;
+}
+.qp-input:focus-within{border-color:rgba(255,255,255,0.15)}
+.qp-input-label{font-size:10px;color:var(--t3);font-family:var(--m)}
+.qp-input input{
+  background:none;border:none;outline:none;
+  color:var(--w);font-family:var(--b);font-size:14px;font-weight:500;width:100%;
+}
+.qp-input input::placeholder{color:var(--t4)}
+.qp-amount{min-width:130px;flex:0 0 auto}
+.qp-amount-row{display:flex;align-items:center;gap:6px}
+.qp-amount input{width:70px}
+.qp-pay{
+  font-family:var(--d);font-size:13px;font-weight:700;
+  padding:14px 24px;border-radius:12px;border:none;
+  cursor:pointer;white-space:nowrap;
+  transition:all .25s var(--ease);
+}
+.qp-pay:hover{transform:translateY(-1px);filter:brightness(1.1)}
+.qp-pay.orange{background:linear-gradient(135deg,#FFB74D,#F57C00);color:#111}
+.qp-pay.blue{background:linear-gradient(135deg,#4FC3F7,#0288D1);color:#fff}
+
+/* ── GAMES SCROLLER ── */
+.games-section{
+  margin-top:56px;width:100%;max-width:var(--max);
+  margin-left:auto;margin-right:auto;
+  position:relative;
+}
+.games-header{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0 48px;margin-bottom:20px;
+}
+.games-header h3{font-family:var(--d);font-size:20px;font-weight:800;color:var(--w);letter-spacing:-0.03em}
+.games-header-right{display:flex;align-items:center;gap:12px}
+.games-header a{font-family:var(--m);font-size:12px;color:var(--t3);transition:color .2s}
+.games-header a:hover{color:var(--w)}
+.games-arrows{display:flex;gap:6px}
+.games-arrow{
+  width:32px;height:32px;border-radius:50%;
+  background:var(--s2);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all .2s;color:var(--t2);flex-shrink:0;
+}
+.games-arrow:hover{background:var(--s3);border-color:var(--bh);color:var(--w)}
+.games-arrow svg{width:14px;height:14px}
+/* Scroll track */
+.games-track-wrap{
+  position:relative;
+  padding:0 48px;
+}
+.games-track-wrap::before,.games-track-wrap::after{
+  content:'';position:absolute;top:0;bottom:8px;width:60px;z-index:2;pointer-events:none;
+}
+.games-track-wrap::before{left:0;background:linear-gradient(to right,var(--bg) 20%,transparent)}
+.games-track-wrap::after{right:0;background:linear-gradient(to left,var(--bg) 20%,transparent)}
+.games-grid{
+  display:flex;gap:10px;
+  overflow-x:auto;scroll-snap-type:x mandatory;
+  padding-bottom:8px;
+  scrollbar-width:none;-ms-overflow-style:none;
+}
+.games-grid::-webkit-scrollbar{display:none}
+.game-item{
+  flex:0 0 auto;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  cursor:pointer;transition:transform .2s;position:relative;
+  scroll-snap-align:start;text-decoration:none;
+}
+.game-item:hover{transform:translateY(-3px)}
+.game-ico{
+  width:88px;height:88px;border-radius:22px;overflow:hidden;
+  background:var(--s2);border:1px solid var(--border);
+  transition:border-color .2s,box-shadow .2s;
+}
+.game-item:hover .game-ico{border-color:var(--bh);box-shadow:0 8px 24px rgba(0,0,0,0.4)}
+.game-ico img{width:100%;height:100%;object-fit:cover}
+.gi-pad img{padding:20px;object-fit:contain}
+.game-name{font-size:11px;color:var(--t2);text-align:center;max-width:88px;line-height:1.3;transition:color .2s}
+.game-item:hover .game-name{color:var(--w)}
+.gi-cover img{padding:0;object-fit:cover}
+.game-name{font-size:10px;color:var(--t2);text-align:center;max-width:72px;line-height:1.2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.game-badge{
+  position:absolute;top:-4px;left:50%;transform:translateX(-50%);
+  font-size:8px;font-weight:600;color:#fff;
+  background:#5865F2;padding:1px 6px;border-radius:6px;
+  white-space:nowrap;
+}
+
+/* CTA under widget */
+.hero-guarantee{
+  margin-top:16px;text-align:center;
+  font-family:var(--m);font-size:11px;color:var(--t3);
+}
 
 /* ── STATS BAR ── */
-.stats{border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.stats{
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  background:#0A0A0A;
+}
 .stats-inner{
   display:flex;
   max-width:var(--max);margin:0 auto;padding:0 48px;
 }
 .stat{
-  flex:1;text-align:center;padding:28px 0;
+  flex:1;text-align:center;padding:44px 0;
   position:relative;
 }
 .stat+.stat::before{
-  content:'';position:absolute;left:0;top:12px;bottom:12px;
+  content:'';position:absolute;left:0;top:16px;bottom:16px;
   width:1px;background:var(--border);
 }
-.stat-v{font-family:var(--m);font-size:24px;font-weight:700;color:var(--w)}
+.stat-v{font-family:var(--d);font-size:clamp(26px,3.2vw,40px);font-weight:900;letter-spacing:-0.04em;color:var(--w)}
 .stat-v span{color:var(--lime)}
-.stat-l{font-size:12px;color:var(--t3);margin-top:2px}
+.stat-l{font-size:12px;color:var(--t3);margin-top:4px}
 
 /* ── SECTION COMMON ── */
-.sec{padding:100px 0}
+.sec{padding:120px 0}
+.sec-alt{background:#0A0A0A}
+.sec-light{background:var(--s1)}
 .sec-label{
-  font-family:var(--m);font-size:10px;font-weight:600;
-  color:var(--t4);letter-spacing:0.1em;text-transform:uppercase;
-  margin-bottom:6px;
+  font-family:var(--m);font-size:11px;font-weight:600;
+  color:var(--lime);letter-spacing:0.1em;text-transform:uppercase;
+  margin-bottom:8px;
 }
 .sec-title{
-  font-family:var(--d);font-size:clamp(24px,3vw,36px);
-  font-weight:800;letter-spacing:-0.035em;color:var(--w);
+  font-family:var(--d);font-size:clamp(24px,2.8vw,34px);
+  font-weight:900;letter-spacing:-0.04em;color:var(--w);
 }
 .sec-head{
   display:flex;justify-content:space-between;align-items:flex-end;
@@ -219,87 +374,106 @@ img{display:block;max-width:100%}
 }
 .promo-bar-link:hover{background:var(--lime10)}
 
-/* ── BENTO CATALOG ── */
-.bento{
+/* ── CATALOG GRID ── */
+.catalog-grid{
   display:grid;
-  grid-template-columns:repeat(12,1fr);
-  grid-auto-rows:minmax(170px,auto);
-  gap:10px;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
 }
-.b-card{
+.c-card{
   background:var(--s1);border:1px solid var(--border);border-radius:var(--rl);
-  padding:28px;
-  display:flex;flex-direction:column;justify-content:flex-end;
-  position:relative;overflow:hidden;
-  cursor:pointer;transition:all .3s var(--ease);
+  padding:0;overflow:hidden;
+  cursor:pointer;transition:all .4s var(--ease);
+  display:flex;flex-direction:column;
+  position:relative;
 }
-.b-card:hover{border-color:var(--bh);transform:translateY(-3px)}
-.b-card:hover .b-arr{color:var(--lime)}
-.b-card.feat{
-  grid-column:span 5;grid-row:span 2;
-  background:linear-gradient(165deg,#0f1508,var(--s1));
-  border-color:rgba(185,242,62,0.08);
+.c-card:hover{
+  transform:translateY(-6px);
+  border-color:var(--bh);
+  box-shadow:0 20px 40px rgba(0,0,0,0.4);
 }
-.b-card.w7{grid-column:span 7}
-.b-card.w4{grid-column:span 4}
-.b-card.w3{grid-column:span 3}
-.b-badge{
-  position:absolute;top:14px;right:14px;
-  font-family:var(--m);font-size:9px;font-weight:600;
-  padding:3px 10px;border-radius:var(--pill);
-  background:var(--lime10);color:var(--lime);
-  border:1px solid rgba(185,242,62,0.1);
+/* Glassmorphism on hover */
+.c-card:hover{
+  background:rgba(14,14,14,0.7);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
 }
-.b-ico{width:48px;height:48px;margin-bottom:14px}
-.b-card.feat .b-ico{width:64px;height:64px;margin-bottom:20px}
-.b-ico svg{width:100%;height:100%}
-.b-ico img{width:100%;height:100%;object-fit:contain;border-radius:10px}
+.c-card:hover .c-card-glow{opacity:1}
 
-/* Animated icons */
-@keyframes ico-spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-@keyframes ico-pulse{0%,100%{transform:scale(1);opacity:.8}50%{transform:scale(1.15);opacity:1}}
-@keyframes ico-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
-.ico-ring{animation:ico-spin 8s linear infinite}
-.ico-pulse{animation:ico-pulse 2.5s ease-in-out infinite}
-.ico-float{animation:ico-float 3s ease-in-out infinite}
-.b-card:hover .ico-pulse{animation-duration:1.5s}
-.b-card:hover .ico-float{animation-duration:1.8s}
-.b-name{font-family:var(--d);font-size:15px;font-weight:700;color:var(--w);margin-bottom:3px}
-.b-card.feat .b-name{font-size:20px}
-.b-sub{font-size:12px;color:var(--t3);margin-bottom:10px}
-.b-bottom{display:flex;justify-content:space-between;align-items:center}
-.b-price{font-family:var(--m);font-size:12px;font-weight:600;color:var(--lime)}
-.b-card.feat .b-price{font-size:14px}
-.b-arr{font-size:16px;color:var(--t4);transition:color .2s}
+/* Card visual area */
+.c-card-visual{
+  height:180px;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.c-card-visual img{
+  width:80px;height:80px;object-fit:contain;
+  position:relative;z-index:2;
+  filter:drop-shadow(0 4px 20px rgba(0,0,0,0.5));
+  transition:transform .4s var(--ease);
+}
+.c-card:hover .c-card-visual img{transform:scale(1.1)}
+/* Per-game color atmosphere */
+.c-card-glow{
+  position:absolute;inset:0;opacity:0.5;
+  transition:opacity .4s;pointer-events:none;
+}
+.c-card:hover .c-card-glow{opacity:0.8}
+
+/* Card info */
+.c-card-info{padding:20px 24px 24px}
+.c-card-name{font-family:var(--d);font-size:17px;font-weight:700;color:var(--w);margin-bottom:4px;letter-spacing:-0.02em}
+.c-card-desc{font-size:13px;color:var(--t2);margin-bottom:14px;line-height:1.5}
+.c-card-bottom{display:flex;justify-content:space-between;align-items:center}
+.c-card-price{font-family:var(--m);font-size:13px;font-weight:600;color:var(--lime)}
+.c-card-link{
+  font-family:var(--m);font-size:11px;font-weight:600;
+  color:var(--t3);transition:color .2s;
+}
+.c-card:hover .c-card-link{color:var(--lime)}
+
+/* Featured card — spans 2 columns */
+.c-card.feat{grid-column:span 2}
+.c-card.feat .c-card-visual{height:240px}
+.c-card.feat .c-card-visual img{width:120px;height:120px}
+.c-card.feat .c-card-name{font-size:22px}
+
+/* Badge */
+.c-badge{
+  position:absolute;top:14px;right:14px;z-index:3;
+  font-family:var(--m);font-size:9px;font-weight:600;
+  padding:4px 12px;border-radius:var(--pill);
+  background:var(--lime);color:#111;
+}
 
 /* ── HOW IT WORKS ── */
 .timeline{
   display:grid;grid-template-columns:repeat(4,1fr);
-  gap:0;position:relative;margin-top:48px;
+  gap:12px;margin-top:48px;
 }
-.timeline::before{
-  content:'';position:absolute;top:22px;left:70px;right:70px;
-  height:1px;
-  background:linear-gradient(90deg,var(--lime),var(--lime) 40%,var(--t4) 100%);
-  opacity:.3;
+.tl-step{
+  background:var(--s1);border:1px solid var(--border);border-radius:var(--rl);
+  padding:28px 24px;position:relative;
+  transition:all .3s var(--ease);
 }
-.tl-step{text-align:center;position:relative;padding:0 16px}
-.tl-dot{
-  width:12px;height:12px;border-radius:50%;
-  background:var(--lime);margin:0 auto 20px;
-  position:relative;z-index:2;
-  box-shadow:0 0 0 4px var(--bg),0 0 0 5px rgba(185,242,62,0.3);
+.tl-step:hover{border-color:var(--bh);transform:translateY(-3px)}
+.tl-step:first-child{
+  border-color:rgba(185,242,62,0.12);
+  background:linear-gradient(180deg,rgba(185,242,62,0.04),transparent);
 }
-.tl-step:nth-child(3) .tl-dot,.tl-step:nth-child(4) .tl-dot{
-  background:var(--t3);
-  box-shadow:0 0 0 4px var(--bg),0 0 0 5px var(--t4);
+.tl-num{
+  font-family:var(--d);font-size:32px;font-weight:900;
+  color:var(--t4);letter-spacing:-0.04em;margin-bottom:14px;
+  line-height:1;
 }
-.tl-num{font-family:var(--m);font-size:10px;font-weight:700;color:var(--t4);margin-bottom:6px}
-.tl-title{font-family:var(--d);font-size:14px;font-weight:700;color:var(--w);margin-bottom:6px}
-.tl-desc{font-size:13px;color:var(--t3);line-height:1.5;max-width:190px;margin:0 auto}
+.tl-step:first-child .tl-num{color:var(--lime)}
+.tl-step:nth-child(2) .tl-num{color:var(--t3)}
+.tl-dot{display:none}
+.tl-title{font-family:var(--d);font-size:15px;font-weight:700;color:var(--w);margin-bottom:8px}
+.tl-desc{font-size:13px;color:var(--t2);line-height:1.6}
 .tl-note{
   font-family:var(--m);font-size:10px;color:var(--lime);
-  margin-top:6px;
+  margin-top:10px;padding:4px 12px;border-radius:var(--pill);
+  background:var(--lime10);display:inline-block;
 }
 
 /* ── USP ── */
@@ -310,11 +484,22 @@ img{display:block;max-width:100%}
 }
 .usp{
   background:var(--s1);border:1px solid var(--border);border-radius:var(--rl);
-  padding:32px;transition:border-color .2s;
+  padding:32px;transition:all .3s var(--ease);
+  position:relative;overflow:hidden;
 }
-.usp:hover{border-color:var(--bh)}
+.usp:hover{border-color:var(--bh);transform:translateY(-3px)}
 .usp.big{grid-column:span 7;padding:40px}
 .usp.sm{grid-column:span 5}
+.usp.accent{
+  background:linear-gradient(165deg,rgba(185,242,62,0.06),var(--s1) 60%);
+  border-color:rgba(185,242,62,0.1);
+}
+.usp.accent::after{
+  content:'';position:absolute;top:-40px;right:-40px;
+  width:200px;height:200px;
+  background:radial-gradient(circle,rgba(185,242,62,0.06),transparent 60%);
+  pointer-events:none;
+}
 .usp-ico{
   width:44px;height:44px;margin-bottom:20px;
   border-radius:12px;display:flex;align-items:center;justify-content:center;
@@ -348,7 +533,7 @@ img{display:block;max-width:100%}
   display:flex;align-items:center;gap:28px;
   margin-bottom:28px;
   padding:20px 28px;
-  background:var(--s1);border:1px solid var(--border);border-radius:var(--rm);
+  background:var(--s2);border:1px solid var(--border);border-radius:var(--rm);
   width:fit-content;
 }
 .rating-num{
@@ -364,9 +549,11 @@ img{display:block;max-width:100%}
 .reviews-row::-webkit-scrollbar{display:none}
 .rev-card{
   flex:0 0 340px;
-  background:var(--s1);border:1px solid var(--border);border-radius:var(--rl);
+  background:var(--s2);border:1px solid var(--border);border-radius:var(--rl);
   padding:28px;position:relative;
+  transition:all .3s var(--ease);
 }
+.rev-card:hover{transform:translateY(-3px);border-color:var(--bh)}
 .rev-stars{color:var(--lime);font-size:14px;letter-spacing:2px;margin-bottom:12px}
 .rev-text{font-size:14px;color:var(--t2);line-height:1.7;margin-bottom:16px}
 .rev-author{font-family:var(--m);font-size:11px;font-weight:600;color:var(--t3)}
@@ -426,35 +613,40 @@ img{display:block;max-width:100%}
   max-width:var(--max);margin:0 auto;padding:24px 48px;
   display:flex;align-items:center;justify-content:center;gap:36px;flex-wrap:wrap;
 }
-.pay-i{
-  font-family:var(--m);font-size:11px;font-weight:500;color:var(--t3);
-  display:flex;align-items:center;gap:8px;
-  height:24px;
-}
-.pay-i img{height:18px;width:auto;opacity:.5;transition:opacity .2s}
-.pay-i:hover img{opacity:.8}
-.pay-i.text-only::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--t4)}
+.pay-i{display:flex;align-items:center;height:32px}
+.pay-i img{height:28px;width:auto;opacity:.4;transition:opacity .2s;filter:brightness(0) invert(1)}
+.pay-i:hover img{opacity:.7}
 
 /* ── CTA ── */
 .cta-wrap{position:relative}
 .cta-glow{
-  position:absolute;inset:-20px;
-  background:radial-gradient(ellipse at 70% 50%,rgba(185,242,62,0.07),transparent 65%);
+  position:absolute;inset:-40px;
+  background:
+    radial-gradient(ellipse at 30% 50%,rgba(68,102,255,0.06),transparent 50%),
+    radial-gradient(ellipse at 70% 50%,rgba(185,242,62,0.08),transparent 50%);
   pointer-events:none;border-radius:40px;
-  filter:blur(20px);
+  filter:blur(40px);
 }
 .cta-box{
-  background:var(--s1);border:1px solid var(--border);border-radius:var(--rl);
-  padding:56px 64px;
+  background:linear-gradient(135deg,#0d1208,var(--s1) 40%,#0a0e14);
+  border:1px solid rgba(185,242,62,0.1);border-radius:var(--rl);
+  padding:64px 72px;
   display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;
   position:relative;overflow:hidden;
+}
+.cta-box::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 0% 100%,rgba(68,102,255,0.06),transparent 40%),
+    radial-gradient(ellipse at 100% 0%,rgba(185,242,62,0.05),transparent 40%);
+  pointer-events:none;
 }
 .cta-box::after{
   content:'';position:absolute;top:0;left:0;right:0;height:1px;
   background:linear-gradient(90deg,transparent 5%,rgba(185,242,62,0.4) 40%,rgba(185,242,62,0.4) 60%,transparent 95%);
 }
-.cta-t{font-family:var(--d);font-size:28px;font-weight:800;letter-spacing:-0.03em;color:var(--w);margin-bottom:8px}
-.cta-d{font-size:15px;color:var(--t2);margin-bottom:14px}
+.cta-t{font-family:var(--d);font-size:clamp(24px,3vw,34px);font-weight:900;letter-spacing:-0.03em;color:var(--w);margin-bottom:10px}
+.cta-d{font-size:16px;color:var(--t2);margin-bottom:14px;line-height:1.6}
 .cta-note{
   font-family:var(--m);font-size:11px;color:var(--t3);
   display:flex;align-items:center;gap:8px;
@@ -468,13 +660,13 @@ img{display:block;max-width:100%}
 .cta-urgency strong{color:var(--lime)}
 
 /* ── FOOTER ── */
-.footer{border-top:1px solid var(--border);padding:48px 0}
+.footer{border-top:1px solid var(--border);padding:56px 0;background:#050505}
 .footer-grid{
   display:grid;grid-template-columns:2fr 1fr 1fr 1fr;
   gap:40px;margin-bottom:40px;
 }
-.footer-brand{font-family:var(--d);font-weight:800;font-size:15px;color:var(--w);margin-bottom:8px}
-.footer-brand em{font-style:normal;color:var(--lime)}
+.footer-brand{margin-bottom:12px}
+.footer-brand img{height:32px;width:auto}
 .footer-about{font-size:13px;color:var(--t3);line-height:1.6;max-width:260px;margin-bottom:16px}
 .footer-col-t{
   font-family:var(--m);font-size:10px;font-weight:600;
@@ -499,46 +691,137 @@ img{display:block;max-width:100%}
 }
 
 /* ── SCROLL REVEAL ── */
-.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+/* TEMP: disabled for Figma capture */
+.reveal{opacity:1;transform:none;transition:none}
 .reveal.visible{opacity:1;transform:none}
 .reveal-d1{transition-delay:.1s}
 .reveal-d2{transition-delay:.2s}
 .reveal-d3{transition-delay:.3s}
 
+/* ── BURGER MENU ── */
+.burger{display:none;width:36px;height:36px;border:none;background:none;cursor:pointer;padding:6px;flex-shrink:0}
+.burger span{display:block;width:24px;height:2px;background:var(--w);margin:5px 0;transition:all .3s;border-radius:2px}
+.burger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.burger.active span:nth-child(2){opacity:0}
+.burger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.mobile-menu{
+  display:none;position:fixed;inset:0;top:64px;z-index:99;
+  background:rgba(7,7,7,0.95);backdrop-filter:blur(20px);
+  padding:32px 24px;flex-direction:column;gap:8px;
+}
+.mobile-menu.open{display:flex}
+.mobile-menu a{
+  font-family:var(--b);font-size:16px;font-weight:500;
+  color:var(--t1);padding:14px 0;border-bottom:1px solid var(--border);
+  transition:color .2s;
+}
+.mobile-menu a:hover{color:var(--w)}
+
 /* ── RESPONSIVE ── */
+/* ── TABLET ── */
 @media(max-width:900px){
-  .hero-grid{grid-template-columns:1fr;gap:32px}
-  .hero-cards{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-  .bento{grid-template-columns:repeat(6,1fr)}
-  .b-card.feat{grid-column:span 6;grid-row:span 1;min-height:200px}
-  .b-card.w7{grid-column:span 6}
-  .b-card.w4{grid-column:span 3}
-  .b-card.w3{grid-column:span 3}
-  .timeline{grid-template-columns:1fr 1fr;gap:28px}
-  .timeline::before{display:none}
+  .burger{display:block}
+  .nav-links{display:none}
+  .nav-r .btn{display:none}
+  .hero{min-height:auto;padding:100px 0 60px}
+  .hero-grid{max-width:100%;text-align:center}
+  .hero h1{font-size:clamp(28px,5vw,40px)}
+  .hero-desc{font-size:16px}
+  .hero-pills{gap:8px}
+  .hero-pill{font-size:12px;padding:6px 14px}
+  .nav-links{display:none}
+  .qp-bar{flex-wrap:wrap}
+  .qp-service{min-width:160px}
+  .qp-pay{width:100%}
+  .games-grid{gap:8px}
+  .games-header{padding:0 20px}
+  .games-track-wrap{padding:0 20px}
+  .game-ico{width:72px;height:72px;border-radius:18px}
+  .game-name{font-size:10px;max-width:72px}
+  .sec{padding:64px 0}
+  .sec-head{flex-direction:column;align-items:flex-start;gap:12px}
+  .catalog-grid{grid-template-columns:1fr 1fr;gap:10px}
+  .c-card.feat{grid-column:span 2}
+  .c-card-visual{height:130px}
+  .c-card.feat .c-card-visual{height:160px}
+  .c-card-info{padding:16px 18px 20px}
+  .c-card-name{font-size:15px}
+  .c-card.feat .c-card-name{font-size:18px}
+  .timeline{grid-template-columns:1fr 1fr;gap:10px}
+  .tl-step{padding:22px 20px}
+  .tl-num{font-size:24px}
   .usp-grid{grid-template-columns:1fr}
   .usp.big,.usp.sm{grid-column:span 1}
-  .cta-box{grid-template-columns:1fr;text-align:center;padding:40px 32px}
+  .cta-box{grid-template-columns:1fr;text-align:center;padding:40px 24px}
   .cta-right{align-items:center}
-  .cta-urgency{text-align:center}
   .about-strip{grid-template-columns:1fr}
-  .rev-card{flex:0 0 280px}
-  .footer-grid{grid-template-columns:1fr 1fr}
+  .rev-card{flex:0 0 280px;padding:22px}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:24px}
   .nav-links{display:none}
   .stats-inner{flex-wrap:wrap;padding:0 20px}
-  .stat{min-width:50%}
-  .pay-inner{padding:20px;gap:16px}
-  .sec{padding:64px 0}
-  .rating-agg{flex-wrap:wrap;gap:16px}
+  .stat{min-width:50%;padding:28px 0}
+  .pay-inner{padding:20px;gap:20px}
+  .pay-i img{height:22px}
+  .rating-agg{flex-wrap:wrap;gap:14px;padding:16px 20px}
+  .rating-num{font-size:36px}
 }
+
+/* ── MOBILE ── */
 @media(max-width:500px){
-  .hero-cards{grid-template-columns:1fr}
-  .bento{grid-template-columns:1fr}
-  .b-card.feat,.b-card.w7,.b-card.w4,.b-card.w3{grid-column:span 1}
-  .timeline{grid-template-columns:1fr}
-  .footer-grid{grid-template-columns:1fr}
-  .stats-inner{flex-direction:column}
+  .hero{padding:80px 0 40px}
+  .hero h1{font-size:24px;letter-spacing:-0.03em}
+  .hero h1 br{display:none}
+  .hero-desc{font-size:14px;margin-bottom:16px}
+  .hero-pills{gap:6px}
+  .hero-pill{font-size:11px;padding:5px 12px}
+  .nav-r .btn-ghost{display:none}
+  .nav-search input{font-size:13px}
+  .qp-bar{flex-direction:column;gap:10px;padding:14px}
+  .qp-service{min-width:auto;width:100%}
+  .qp-input{width:100%}
+  .qp-amount{width:100%;min-width:auto}
+  .qp-pay{width:100%;text-align:center}
+  .games-section{margin-top:32px}
+  .game-ico{width:64px;height:64px;border-radius:16px}
+  .game-name{font-size:10px;max-width:64px}
+  .games-arrows{display:none}
+  .hero-guarantee{font-size:10px}
+  .sec{padding:48px 0}
+  .sec-title{font-size:22px}
+  .sec-label{font-size:10px}
+  .catalog-grid{grid-template-columns:1fr;gap:10px}
+  .c-card.feat{grid-column:span 1}
+  .c-card-visual{height:120px}
+  .c-card.feat .c-card-visual{height:140px}
+  .c-card-visual img{width:60px;height:60px}
+  .c-card.feat .c-card-visual img{width:80px;height:80px}
+  .timeline{grid-template-columns:1fr;gap:8px}
+  .tl-step{padding:20px 18px}
+  .tl-num{font-size:22px;margin-bottom:10px}
+  .tl-title{font-size:14px}
+  .usp{padding:24px}
+  .usp-t{font-size:15px}
+  .usp.big .usp-t{font-size:17px}
+  .usp-d{font-size:13px}
+  .stat-v{font-size:28px}
+  .stats-inner{flex-direction:column;padding:0 20px}
+  .stat{padding:20px 0}
   .stat+.stat::before{display:none}
+  .faq-q{font-size:13px}
+  .faq-ans{font-size:13px}
+  .cta-box{padding:32px 20px}
+  .cta-t{font-size:22px}
+  .cta-d{font-size:14px}
+  .cta-box .btn{padding:12px 24px;font-size:12px}
+  .about-card{padding:24px}
+  .about-card-title{font-size:16px}
+  .about-card-desc{font-size:13px}
+  .footer-grid{grid-template-columns:1fr;gap:28px}
+  .pay-inner{gap:14px}
+  .pay-i img{height:20px}
+  .rating-num{font-size:32px}
+  .rev-card{flex:0 0 260px;padding:20px}
+  .rev-text{font-size:13px}
 }
 </style>
 </head>
@@ -547,86 +830,171 @@ img{display:block;max-width:100%}
 <!-- ═══════════ NAV ═══════════ -->
 <nav class="nav">
   <div class="container">
-    <a href="#" class="logo">donate<em>boom</em></a>
+    <a href="#" class="logo"><img src="logo.svg" alt="DonateBoom" height="44"></a>
+    <div class="nav-search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="text" placeholder="Поиск игр и приложений...">
+    </div>
     <ul class="nav-links">
-      <li><a href="/services">Каталог</a></li>
-      <li><a href="/how-it-works">Как это работает</a></li>
       <li><a href="/guarantees">Гарантии</a></li>
       <li><a href="/reviews">Отзывы</a></li>
       <li><a href="/faq">FAQ</a></li>
     </ul>
     <div class="nav-r">
       <a href="/profile" class="btn btn-ghost">Личный кабинет</a>
-      <a href="/services" class="btn btn-lime">Каталог</a>
+      <button class="burger" onclick="document.querySelector('.mobile-menu').classList.toggle('open');this.classList.toggle('active')">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </div>
 </nav>
+<div class="mobile-menu">
+  <a href="/">Главная</a>
+  <a href="/services">Каталог</a>
+  <a href="/guarantees">Гарантии</a>
+  <a href="/reviews">Отзывы</a>
+  <a href="/faq">FAQ</a>
+  <a href="/profile">Личный кабинет</a>
+</div>
+
 
 <!-- ═══════════ HERO ═══════════ -->
 <section class="hero">
   <div class="container">
     <div class="hero-grid">
       <div>
-        <div class="hero-tag">
-          <span>Без регистрации</span>
-          <span class="hero-tag-dot"></span>
-          <span>Без пароля</span>
-          <span class="hero-tag-dot"></span>
-          <span>Гарантия возврата</span>
+        <h1>Пополнение игр и сервисов<br>без посредников</h1>
+        <p class="hero-desc">Моментальное зачисление игровой валюты.<br>Без регистрации, без пароля, с гарантией возврата.</p>
+        <div class="hero-pills">
+          <span class="hero-pill">Без регистрации</span>
+          <span class="hero-pill">Без пароля</span>
+          <span class="hero-pill">Гарантия возврата</span>
         </div>
-        <h1>Пополни Standoff&nbsp;2,<br>PS Store и ещё <em>50+&nbsp;игр</em></h1>
-        <p class="hero-desc">Валюта уже на наших аккаунтах — платишь и получаешь через 5&nbsp;минут. Не маркетплейс: продаём напрямую, без скрытых комиссий.</p>
-        <div class="hero-btns">
-          <a href="/services" class="btn btn-lime">Выбрать игру →</a>
-          <a href="/how-it-works" class="btn btn-ghost">Как это работает</a>
-        </div>
-        <div class="hero-trust">
-          <span>Деньги вернём если не дошло</span>
-          <span class="hero-trust-dot"></span>
-          <span>Пароль не нужен</span>
-          <span class="hero-trust-dot"></span>
-          <span>Среднее время 5-15 мин</span>
-        </div>
-      </div>
-      <div class="hero-cards">
-        <a href="/service/standoff2" class="h-card">
-          <div class="h-card-ico"><img src="assets/logos/standoff2.png" alt="Standoff 2"></div>
-          <div class="h-card-info">
-            <div class="h-card-name">Standoff 2</div>
-            <div class="h-card-sub">Gold, кейсы, скины</div>
-          </div>
-          <div class="h-card-price">от 99 ₽</div>
-          <div class="h-card-arr">→</div>
-        </a>
-        <a href="/service/playstation" class="h-card">
-          <div class="h-card-ico"><img src="assets/logos/playstation.svg" alt="PlayStation"></div>
-          <div class="h-card-info">
-            <div class="h-card-name">PlayStation</div>
-            <div class="h-card-sub">PS Store, PS Plus</div>
-          </div>
-          <div class="h-card-price">от 299 ₽</div>
-          <div class="h-card-arr">→</div>
-        </a>
-        <a href="/service/tiktok" class="h-card">
-          <div class="h-card-ico"><img src="assets/logos/tiktok.svg" alt="TikTok"></div>
-          <div class="h-card-info">
-            <div class="h-card-name">TikTok</div>
-            <div class="h-card-sub">Монеты TikTok</div>
-          </div>
-          <div class="h-card-price">от 149 ₽</div>
-          <div class="h-card-arr">→</div>
-        </a>
-        <a href="/service/appstore" class="h-card">
-          <div class="h-card-ico"><img src="assets/logos/apple.svg" alt="App Store"></div>
-          <div class="h-card-info">
-            <div class="h-card-name">App Store</div>
-            <div class="h-card-sub">Баланс Apple ID</div>
-          </div>
-          <div class="h-card-price">от 199 ₽</div>
-          <div class="h-card-arr">→</div>
-        </a>
       </div>
     </div>
+
+    <!-- Games horizontal scroller -->
+    <div class="games-section">
+      <div class="games-header">
+        <h3>Популярные игры и сервисы</h3>
+        <div class="games-header-right">
+          <a href="/services">Все сервисы ›</a>
+          <div class="games-arrows">
+            <button class="games-arrow" id="games-prev" aria-label="Назад">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
+            </button>
+            <button class="games-arrow" id="games-next" aria-label="Вперёд">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="games-track-wrap">
+        <div class="games-grid" id="games-grid">
+          <a href="/service/standoff2" class="game-item">
+            <div class="game-ico gi-cover"><img src="assets/logos/standoff2-icon.png" alt="Standoff 2"></div>
+            <div class="game-name">Standoff 2</div>
+          </a>
+          <a href="/service/steam" class="game-item">
+            <div class="game-ico gi-pad" style="background:#1B2838"><img src="assets/logos/steam.svg" alt="Steam"></div>
+            <div class="game-name">Steam</div>
+          </a>
+          <a href="/service/playstation" class="game-item">
+            <div class="game-ico gi-pad" style="background:#003087"><img src="assets/logos/playstation.svg" alt="PlayStation"></div>
+            <div class="game-name">PlayStation</div>
+          </a>
+          <a href="/service/tiktok" class="game-item">
+            <div class="game-ico gi-pad" style="background:#111"><img src="assets/logos/tiktok.svg" alt="TikTok"></div>
+            <div class="game-name">TikTok</div>
+          </a>
+          <a href="/service/appstore" class="game-item">
+            <div class="game-ico gi-pad" style="background:#111"><img src="assets/logos/apple.svg" alt="App Store"></div>
+            <div class="game-name">App Store</div>
+          </a>
+          <a href="#" class="game-item">
+            <div class="game-ico gi-cover"><img src="assets/logos/brawlstars.png" alt="Brawl Stars"></div>
+            <div class="game-name">Brawl Stars</div>
+          </a>
+          <a href="#" class="game-item">
+            <div class="game-ico gi-pad" style="background:#1a1a2e"><img src="assets/logos/pubg.svg" alt="PUBG"></div>
+            <div class="game-name">PUBG</div>
+          </a>
+          <a href="#" class="game-item">
+            <div class="game-ico gi-pad" style="background:#111"><img src="assets/logos/valorant.svg" alt="Valorant"></div>
+            <div class="game-name">Valorant</div>
+          </a>
+          <a href="#" class="game-item">
+            <div class="game-ico gi-pad" style="background:#1B2838"><img src="assets/logos/counterstrike2.svg" alt="CS2"></div>
+            <div class="game-name">CS2</div>
+          </a>
+          <a href="#" class="game-item">
+            <div class="game-badge">Новое</div>
+            <div class="game-ico gi-pad" style="background:#2AABEE"><img src="assets/logos/telegram.svg" alt="Telegram Stars"></div>
+            <div class="game-name">Telegram Stars</div>
+          </a>
+          <a href="#" class="game-item">
+            <div class="game-ico gi-pad" style="background:#E31837"><img src="assets/logos/youtube.svg" alt="YouTube"></div>
+            <div class="game-name">YouTube</div>
+          </a>
+          <a href="#" class="game-item">
+            <div class="game-ico gi-cover"><img src="assets/logos/minecraft.png" alt="Minecraft"></div>
+            <div class="game-name">Minecraft</div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick purchase widget (togglable) -->
+    <div class="quick-purchases">
+      <div class="qp-tabs">
+        <div class="qp-tab active" data-qp="stars"><img src="assets/logos/telegram-stars.svg" alt=""> Купить звёзды</div>
+        <div class="qp-tab" data-qp="steam"><img src="assets/logos/steam.svg" alt="" style="filter:brightness(0) invert(1)"> Пополнить Steam</div>
+      </div>
+
+      <div class="qp-bar" id="qp-stars">
+        <div class="qp-service">
+          <div class="qp-ico"><img src="assets/logos/telegram-stars.svg" alt="Telegram Stars"></div>
+          <div class="qp-info">
+            <div class="qp-name">Купить звёзды</div>
+            <div class="qp-meta">1 звезда = <em>1,5 ₽</em></div>
+          </div>
+        </div>
+        <div class="qp-input" style="flex:1.5">
+          <div class="qp-input-label">Имя пользователя</div>
+          <input type="text" placeholder="@username">
+        </div>
+        <div class="qp-input qp-amount">
+          <div class="qp-input-label">Количество</div>
+          <div class="qp-amount-row">
+            <input type="number" value="100" min="1">
+            <span style="color:#FFB74D;font-size:14px">⭐</span>
+          </div>
+        </div>
+        <button class="qp-pay orange">Оплатить 150 ₽</button>
+      </div>
+
+      <div class="qp-bar" id="qp-steam" hidden>
+        <div class="qp-service">
+          <div class="qp-ico" style="background:#1B2838;padding:8px"><img src="assets/logos/steam.svg" alt="Steam" style="filter:brightness(0) invert(1)"></div>
+          <div class="qp-info">
+            <div class="qp-name">Пополнить Steam <span style="background:var(--lime);color:#111;font-size:10px;padding:2px 8px;border-radius:20px;font-family:var(--m);margin-left:4px">5%</span></div>
+            <div class="qp-meta"><a href="#">Ввести промокод ›</a></div>
+          </div>
+        </div>
+        <div class="qp-input" style="flex:1.5">
+          <div class="qp-input-label">Логин Steam</div>
+          <input type="text" placeholder="Логин Steam">
+        </div>
+        <div class="qp-input qp-amount">
+          <div class="qp-input-label">Сумма</div>
+          <div class="qp-amount-row">
+            <input type="text" value="1 000 ₽">
+          </div>
+        </div>
+        <button class="qp-pay blue">Оплатить 1 050 ₽</button>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -647,97 +1015,14 @@ img{display:block;max-width:100%}
     </div>
     <div class="stat">
       <div class="stat-v"><span>100%</span></div>
-      <div class="stat-l">возврат если не дошло</div>
+      <div class="stat-l">возврат, если не дошло</div>
     </div>
   </div>
 </div>
 
-<!-- ═══════════ CATALOG ═══════════ -->
-<section class="sec" id="catalog">
-  <div class="container">
-    <div class="sec-head">
-      <div>
-        <div class="sec-label">Каталог</div>
-        <h2 class="sec-title">Услуги</h2>
-      </div>
-      <a href="/services" class="btn btn-ghost">Все услуги →</a>
-    </div>
-
-    <!-- Promo bar -->
-    <div class="promo-bar">
-      <div class="promo-bar-left">
-        <div class="promo-bar-icon">
-          <svg viewBox="0 0 16 16" fill="none">
-            <path d="M2 12L7 5.5l3 3.5 2.5-4L14 9" stroke="var(--lime)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div class="promo-bar-text">Подписчики нашего Telegram получают <strong>скидку −5%</strong> на все заказы</div>
-      </div>
-      <a href="#" class="promo-bar-link">Подписаться →</a>
-    </div>
-
-    <div class="bento">
-      <div class="b-card feat">
-        <div class="b-badge">Хит</div>
-        <div class="b-ico"><img src="assets/logos/standoff2.png" alt="Standoff 2"></div>
-        <div class="b-name">Standoff 2</div>
-        <div class="b-sub">Gold, Gold Pass, кейсы и скины</div>
-        <div class="b-bottom">
-          <div class="b-price">от 99 ₽</div>
-          <div class="b-arr">→</div>
-        </div>
-      </div>
-      <div class="b-card w7">
-        <div class="b-ico"><img src="assets/logos/playstation.svg" alt="PlayStation"></div>
-        <div class="b-name">PlayStation</div>
-        <div class="b-sub">Пополнение PS Store, подписки PS Plus</div>
-        <div class="b-bottom">
-          <div class="b-price">от 299 ₽</div>
-          <div class="b-arr">→</div>
-        </div>
-      </div>
-      <div class="b-card w4">
-        <div class="b-ico"><img src="assets/logos/tiktok.svg" alt="TikTok"></div>
-        <div class="b-name">TikTok</div>
-        <div class="b-sub">Покупка монет TikTok</div>
-        <div class="b-bottom">
-          <div class="b-price">от 149 ₽</div>
-          <div class="b-arr">→</div>
-        </div>
-      </div>
-      <div class="b-card w4">
-        <div class="b-ico"><img src="assets/logos/apple.svg" alt="App Store"></div>
-        <div class="b-name">App Store</div>
-        <div class="b-sub">Баланс Apple ID</div>
-        <div class="b-bottom">
-          <div class="b-price">от 199 ₽</div>
-          <div class="b-arr">→</div>
-        </div>
-      </div>
-      <div class="b-card w4">
-        <div class="b-ico"><img src="assets/logos/brawlstars.png" alt="Brawl Stars"></div>
-        <div class="b-name">Мобильные игры</div>
-        <div class="b-sub">Brawl Stars, Clash Royale, PUBG Mobile</div>
-        <div class="b-bottom">
-          <div class="b-price">от 99 ₽</div>
-          <div class="b-arr">→</div>
-        </div>
-      </div>
-      <div class="b-card w4">
-        <div class="b-ico"><img src="assets/logos/steam.svg" alt="Steam"></div>
-        <div class="b-name">ПК-игры</div>
-        <div class="b-sub">Steam, CS2, Valorant, Dota 2</div>
-        <div class="b-bottom">
-          <div class="b-price">от 149 ₽</div>
-          <div class="b-arr">→</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ═══════════ HOW IT WORKS ═══════════ -->
-<section class="sec" id="how">
+<section class="sec sec-alt" id="how">
   <div class="container">
     <div class="sec-head">
       <div>
@@ -763,14 +1048,14 @@ img{display:block;max-width:100%}
         <div class="tl-dot"></div>
         <div class="tl-num">03</div>
         <div class="tl-title">Оплати</div>
-        <div class="tl-desc">Карта, СБП, ЮMoney или крипта. Цена = цена</div>
+        <div class="tl-desc">Карта, СБП, ЮMoney или крипта. Без скрытых наценок</div>
         <div class="tl-note">Комиссий нет</div>
       </div>
       <div class="tl-step">
         <div class="tl-dot"></div>
         <div class="tl-num">04</div>
         <div class="tl-title">Получи валюту</div>
-        <div class="tl-desc">Среднее время 5-15 минут. Видео-инструкция прилагается</div>
+        <div class="tl-desc">Среднее время 5–15 минут. К каждому заказу — видеоинструкция</div>
         <div class="tl-note">Гарантия возврата</div>
       </div>
     </div>
@@ -788,7 +1073,7 @@ img{display:block;max-width:100%}
       <a href="/guarantees" class="btn btn-ghost">Гарантии →</a>
     </div>
     <div class="usp-grid">
-      <div class="usp big">
+      <div class="usp big accent">
         <div class="usp-ico lime-bg">
           <svg viewBox="0 0 32 32" fill="none" class="usp-anim-bolt">
             <path d="M18 4L8 18h6l-2 10 10-14h-6l2-10z" stroke="var(--lime)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -819,9 +1104,9 @@ img{display:block;max-width:100%}
           </svg>
         </div>
         <div class="usp-t">Деньги вернём</div>
-        <div class="usp-d">Не дошла валюта — проверим и вернём деньги или повторим доставку. Каждый заказ под контролем.</div>
+        <div class="usp-d">Не дошла валюта — проверим и вернём деньги или повторим доставку. Все заказы фиксируем с номером и чеком.</div>
       </div>
-      <div class="usp big">
+      <div class="usp big accent">
         <div class="usp-ico mint-bg">
           <svg viewBox="0 0 32 32" fill="none" class="usp-anim-coin" style="perspective:100px">
             <circle cx="16" cy="16" r="11" stroke="var(--mint)" stroke-width="1.8"/>
@@ -838,7 +1123,7 @@ img{display:block;max-width:100%}
 </section>
 
 <!-- ═══════════ REVIEWS PREVIEW ═══════════ -->
-<section class="sec" id="reviews">
+<section class="sec sec-light" id="reviews">
   <div class="container">
     <div class="sec-head">
       <div>
@@ -853,7 +1138,7 @@ img{display:block;max-width:100%}
       <div class="rating-right">
         <div class="rating-stars">★★★★★</div>
         <div class="rating-label">2 400+ выполненных заказов</div>
-        <div class="rating-sub">Отзывы покупателей · Обновлено сегодня</div>
+        <div class="rating-sub">Отзывы покупателей</div>
       </div>
     </div>
 
@@ -898,7 +1183,7 @@ img{display:block;max-width:100%}
           <div class="faq-q">Могут ли забанить за покупку валюты?</div>
           <div class="faq-plus">+</div>
         </div>
-        <div class="faq-ans">Нет. Мы пополняем через официальные механики игр — через маркетплейс внутри игры. Это тот же способ, которым разработчики хотят, чтобы вы покупали валюту. Пароль от аккаунта не нужен.</div>
+        <div class="faq-ans">Нет. Мы пополняем через официальные механики игр — через внутриигровой маркетплейс. Это тот же способ, который предусмотрен разработчиками. Пароль от аккаунта не нужен.</div>
       </div>
       <div class="faq-item">
         <div class="faq-item-head">
@@ -912,14 +1197,14 @@ img{display:block;max-width:100%}
           <div class="faq-q">Нужен ли пароль от аккаунта?</div>
           <div class="faq-plus">+</div>
         </div>
-        <div class="faq-ans">Нет, никогда. Для зачисления нужен только Player ID — его видно в профиле игры. Если кто-то просит пароль от вашего аккаунта "для пополнения" — это мошенники, не мы.</div>
+        <div class="faq-ans">Нет, никогда. Для зачисления нужен только Player ID — он виден в профиле игры. Если кто-то просит пароль от аккаунта «для пополнения» — это мошенники.</div>
       </div>
       <div class="faq-item">
         <div class="faq-item-head">
           <div class="faq-q">Что делать, если валюта не пришла?</div>
           <div class="faq-plus">+</div>
         </div>
-        <div class="faq-ans">Напишите в поддержку в Telegram — разберёмся в течение часа. Если валюта не зачислена по нашей вине — вернём деньги полностью или повторим доставку. Каждый заказ фиксируем.</div>
+        <div class="faq-ans">Напиши в поддержку в Telegram — разберёмся в течение часа. Если валюта не зачислена по нашей вине — вернём деньги полностью или повторим доставку.</div>
       </div>
     </div>
   </div>
@@ -933,7 +1218,7 @@ img{display:block;max-width:100%}
         <div class="about-card-label">О сервисе</div>
         <div class="about-card-title">Как это устроено</div>
         <div class="about-story">
-          Большинство сервисов работают как биржи — принимают ваш заказ и ищут, у кого купить валюту. Мы закупаем сами и держим запас заранее. Поэтому <em>быстрее</em> и немного <em>дешевле.</em>
+          Большинство сервисов работают как биржи — принимают заказ и ищут, у кого купить валюту. Мы закупаем сами и держим запас заранее. Поэтому <em>быстрее</em> и немного <em>дешевле.</em>
         </div>
         <div class="about-card-desc">DonateBoom — сервис прямого пополнения. Работаем с Standoff 2, PlayStation, TikTok, App Store и другими платформами.</div>
         <a href="/about" class="btn btn-ghost">Подробнее →</a>
@@ -941,7 +1226,7 @@ img{display:block;max-width:100%}
       <div class="about-card">
         <div class="about-card-label">Поддержка</div>
         <div class="about-card-title">Есть вопрос?</div>
-        <div class="about-card-desc">Отвечаем 24/7 в Telegram. Среднее время ответа — меньше 5 минут. Объясняем по шагам: как найти Player ID, как пройти оплату, что делать если что-то пошло не так.</div>
+        <div class="about-card-desc">Отвечаем 24/7 в Telegram. Среднее время ответа — меньше 5 минут. Объясним по шагам: как найти Player ID, как пройти оплату, что делать, если что-то пошло не так.</div>
         <a href="/contacts" class="btn btn-ghost">Контакты →</a>
       </div>
     </div>
@@ -951,12 +1236,11 @@ img{display:block;max-width:100%}
 <!-- ═══════════ PAYMENTS ═══════════ -->
 <div class="pay">
   <div class="pay-inner">
-    <div class="pay-i"><img src="assets/logos/visa.svg" alt="Visa" style="height:14px"> Visa</div>
-    <div class="pay-i"><img src="assets/logos/mastercard.svg" alt="Mastercard" style="height:20px"> Mastercard</div>
-    <div class="pay-i"><img src="assets/logos/mir.svg" alt="МИР" style="height:16px"> МИР</div>
-    <div class="pay-i"><img src="assets/logos/sbp-white.svg" alt="СБП" style="height:20px"> СБП</div>
-    <div class="pay-i"><img src="assets/logos/yoomoney.svg" alt="ЮMoney" style="height:16px"> ЮMoney</div>
-    <div class="pay-i text-only">Криптовалюта</div>
+    <div class="pay-i"><img src="assets/logos/visa.svg" alt="Visa"></div>
+    <div class="pay-i"><img src="assets/logos/mastercard.svg" alt="Mastercard"></div>
+    <div class="pay-i"><img src="assets/logos/mir.svg" alt="МИР"></div>
+    <div class="pay-i"><img src="assets/logos/sbp-white.svg" alt="СБП"></div>
+    <div class="pay-i"><img src="assets/logos/yoomoney.svg" alt="ЮMoney"></div>
   </div>
 </div>
 
@@ -979,7 +1263,6 @@ img{display:block;max-width:100%}
         </div>
         <div class="cta-right">
           <a href="/services" class="btn btn-lime">Перейти в каталог</a>
-          <div class="cta-urgency">Подписчики Telegram получают <strong>−5%</strong></div>
         </div>
       </div>
     </div>
@@ -991,7 +1274,7 @@ img{display:block;max-width:100%}
   <div class="container">
     <div class="footer-grid">
       <div>
-        <div class="footer-brand">donate<em>boom</em></div>
+        <div class="footer-brand"><img src="logo.svg" alt="DonateBoom" height="32"></div>
         <p class="footer-about">Сервис пополнения игровых валют. Продаём напрямую, без посредников.</p>
         <a href="#" class="footer-tg">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--lime)"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-2.04 9.613c-.15.675-.546.84-1.107.523l-3.065-2.258-1.48 1.423c-.163.163-.3.3-.616.3l.22-3.12 5.673-5.123c.247-.22-.054-.342-.383-.122L7.044 14.44l-3.015-.942c-.656-.205-.668-.656.137-.97l11.784-4.544c.547-.197 1.026.133.612.264z"/></svg>
@@ -1036,6 +1319,27 @@ img{display:block;max-width:100%}
 </footer>
 
 <script>
+/* ── GAMES SCROLLER ARROWS ── */
+(function(){
+  const grid = document.getElementById('games-grid');
+  const prev = document.getElementById('games-prev');
+  const next = document.getElementById('games-next');
+  if (!grid || !prev || !next) return;
+  const STEP = 98 * 3; // ~3 items per click
+  prev.addEventListener('click', () => grid.scrollBy({ left: -STEP, behavior: 'smooth' }));
+  next.addEventListener('click', () => grid.scrollBy({ left: STEP, behavior: 'smooth' }));
+})();
+
+/* ── QP TABS ── */
+document.querySelectorAll('.qp-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.qp-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.qp-bar').forEach(b => b.hidden = true);
+    tab.classList.add('active');
+    document.getElementById('qp-' + tab.dataset.qp).hidden = false;
+  });
+});
+
 /* ── ANIMATED COUNTERS ── */
 function animateCount(el) {
   const to = parseInt(el.dataset.to, 10);
