@@ -277,8 +277,8 @@ img{display:block;max-width:100%}
 .games-track-wrap::before,.games-track-wrap::after{
   content:'';position:absolute;top:0;bottom:8px;width:60px;z-index:2;pointer-events:none;
 }
-.games-track-wrap::before{left:0;background:linear-gradient(to right,var(--bg) 20%,transparent)}
-.games-track-wrap::after{right:0;background:linear-gradient(to left,var(--bg) 20%,transparent)}
+.games-track-wrap::before{left:0;background:linear-gradient(to right,var(--bg) 0%,transparent 60%)}
+.games-track-wrap::after{right:0;background:linear-gradient(to left,var(--bg) 0%,transparent 60%)}
 .games-grid{
   display:flex;gap:10px;
   overflow-x:auto;scroll-snap-type:x mandatory;
@@ -310,6 +310,7 @@ img{display:block;max-width:100%}
   background:#5865F2;padding:1px 6px;border-radius:6px;
   white-space:nowrap;
 }
+.games-after-btn{display:none}
 
 /* CTA under widget */
 .hero-guarantee{
@@ -531,7 +532,7 @@ img{display:block;max-width:100%}
 .usp:hover .usp-anim-coin{animation-duration:1.5s}
 .usp:hover .usp-anim-refund{animation-duration:1s}
 .usp-t{font-family:var(--d);font-size:17px;font-weight:700;letter-spacing:-0.02em;color:var(--w);margin-bottom:8px}
-.usp.big .usp-t{font-size:22px}
+.usp.big .usp-t{font-size:17px}
 .usp-d{font-size:14px;color:var(--t2);line-height:1.7;max-width:400px}
 .usp.big .usp-d{max-width:460px}
 
@@ -757,10 +758,11 @@ img{display:block;max-width:100%}
   .timeline{grid-template-columns:1fr 1fr;gap:10px}
   .tl-step{padding:22px 20px}
   .tl-num{font-size:24px}
-  .usp-grid{grid-template-columns:1fr 1fr;gap:8px}
+  .usp-grid{grid-template-columns:1fr;gap:8px}
   .usp.big,.usp.sm{grid-column:span 1}
   .usp.big{padding:20px}
   .usp{padding:20px}
+  .usp.big .usp-t,.usp-t{font-size:15px}
   .cta-box{grid-template-columns:1fr;text-align:center;padding:40px 24px}
   .cta-right{align-items:center}
   .about-strip{grid-template-columns:1fr}
@@ -798,10 +800,16 @@ img{display:block;max-width:100%}
   .game-ico{width:64px;height:64px;border-radius:16px}
   .game-name{font-size:10px;max-width:64px}
   .games-arrows{display:none}
+  .games-header{flex-direction:column;align-items:center;text-align:center;gap:0;padding:0 16px}
+  .games-header h3{font-size:18px}
+  .games-header-right{display:none}
+  .games-track-wrap{padding:0}
+  .games-track-wrap::before,.games-track-wrap::after{width:24px}
+  .games-after-btn{display:flex;justify-content:center;margin-top:16px}
   .usp{padding:14px}
   .usp.big{padding:14px}
   .usp-t{font-size:13px}
-  .usp.big .usp-t{font-size:14px}
+  .usp.big .usp-t{font-size:13px}
   .usp-d{font-size:12px;line-height:1.5}
   .hero-guarantee{font-size:10px}
   .sec{padding:56px 0}
@@ -822,9 +830,9 @@ img{display:block;max-width:100%}
   .usp.big .usp-t{font-size:17px}
   .usp-d{font-size:13px}
   .stat-v{font-size:24px}
-  .stats-inner{flex-direction:column;padding:0 16px}
-  .stat{padding:20px 0}
-  .stat+.stat::before{display:none}
+  .stats-inner{flex-wrap:wrap;padding:0 16px}
+  .stat{min-width:50%;padding:20px 0}
+  .stat:nth-child(3)::before,.stat:nth-child(1)::before{display:none}
   .faq-q{font-size:14px}
   .faq-ans{font-size:13px}
   .cta-box{padding:32px 20px}
@@ -881,7 +889,7 @@ img{display:block;max-width:100%}
   <div class="container">
     <div class="hero-grid">
       <div>
-        <h1>Пополнение игр<br>и&nbsp;сервисов <span class="h1-highlight">без&nbsp;посредников</span></h1>
+        <h1>Пополнение игр<br> и&nbsp;сервисов <span class="h1-highlight">без&nbsp;посредников</span></h1>
         <p class="hero-desc">Моментальное зачисление игровой валюты.<br>Без регистрации, без пароля, с&nbsp;гарантией возврата.</p>
         <div class="hero-pills">
           <span class="hero-pill">Без регистрации</span>
@@ -950,15 +958,10 @@ img{display:block;max-width:100%}
             <div class="game-ico gi-pad" style="background:#2AABEE"><img src="assets/logos/telegram.svg" alt="Telegram Stars"></div>
             <div class="game-name">Telegram Stars</div>
           </a>
-          <a href="#" class="game-item">
-            <div class="game-ico gi-pad" style="background:#E31837"><img src="assets/logos/youtube.svg" alt="YouTube"></div>
-            <div class="game-name">YouTube</div>
-          </a>
-          <a href="#" class="game-item">
-            <div class="game-ico gi-cover"><img src="assets/logos/minecraft.png" alt="Minecraft"></div>
-            <div class="game-name">Minecraft</div>
-          </a>
         </div>
+      </div>
+      <div class="games-after-btn">
+        <a href="/services" class="btn btn-ghost" style="font-size:12px;padding:8px 20px">Все сервисы →</a>
       </div>
     </div>
 
