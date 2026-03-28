@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Золото Standoff 2 — купить дёшево и без бана | DonateBoom</title>
+  <meta name="description" content="Купить золото Standoff 2 дёшево. Произвольная сумма или фиксированные пакеты. Зачисление от 3 минут, без бана, без данных аккаунта.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Rubik:wght@300;400;500;600;700;800;900&family=Unbounded:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Rubik', 'system-ui', 'sans-serif'], display: ['Unbounded', 'system-ui', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] },
+          colors: {
+            accent: '#EA3A3B',
+            page:   '#070707',
+            card:   '#0E0E0E',
+            card2:  '#1A1A1A',
+            's':    '#6E6E73',
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    :root {
+      --bg: #070707;
+      --s1: #0E0E0E;
+      --s2: #141414;
+      --s3: #1A1A1A;
+      --s4: #222;
+      --border: rgba(255,255,255,0.06);
+      --bh: rgba(255,255,255,0.1);
+      --b-active: rgba(234,58,59,0.25);
+      --lime: #EA3A3B;
+      --lime-soft: #FF6B6B;
+      --lime10: rgba(234,58,59,0.08);
+      --lime15: rgba(234,58,59,0.13);
+      --lime-glow: rgba(234,58,59,0.05);
+      --mint: #7AE8A0;
+      --mint10: rgba(122,232,160,0.08);
+      --w: #F5F5F7;
+      --t1: #E0E0E0;
+      --t2: #A0A0A0;
+      --t3: #6E6E73;
+      --t4: #3A3A3A;
+      --t5: #252525;
+      --d: 'Unbounded', sans-serif;
+      --b: 'Rubik', sans-serif;
+      --m: 'JetBrains Mono', monospace;
+      --rl: 20px;
+      --rm: 14px;
+      --rs: 10px;
+      --pill: 100px;
+      --max: 1280px;
+      --ease: cubic-bezier(.4,0,.2,1);
+    }
+    *,*::before,*::after { margin:0;padding:0;box-sizing:border-box; }
+    a { text-decoration:none;color:inherit; }
+    body { background: var(--bg); color: var(--w); font-family: var(--b); font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden; }
+    .container{max-width:var(--max);margin:0 auto;padding:0 48px}
+    .btn{
+      font-family:var(--m);font-weight:600;font-size:12px;
+      padding:9px 20px;border-radius:var(--pill);
+      border:none;cursor:pointer;transition:all .2s var(--ease);
+      display:inline-flex;align-items:center;gap:6px;
+    }
+    .btn-lime{
+      background:var(--lime);color:#fff;
+      box-shadow:0 0 20px rgba(234,58,59,0.22),0 0 40px rgba(234,58,59,0.08);
+    }
+
+    /* ── NAV ─────────────────────────────────────────────────── */
+    .nav{
+      position:fixed;top:0;left:0;right:0;z-index:100;
+      height:64px;
+      display:flex;align-items:center;
+      background:rgba(7,7,7,0.85);
+      backdrop-filter:blur(24px) saturate(1.4);
+      -webkit-backdrop-filter:blur(24px) saturate(1.4);
+      border-bottom:1px solid var(--border);
+    }
+    .nav .container{display:flex;align-items:center;gap:20px;width:100%;max-width:var(--max);margin:0 auto;padding:0 24px}
+    .logo{display:flex;align-items:center;flex-shrink:0}
+    .logo img{height:44px;width:auto}
+    .nav-search{
+      flex:1;
+      display:flex;align-items:center;gap:10px;
+      background:var(--s2);border:1px solid var(--border);border-radius:12px;
+      padding:9px 16px;transition:border-color .2s;
+    }
+    .nav-search:focus-within{border-color:rgba(255,255,255,0.15)}
+    .nav-search svg{width:18px;height:18px;color:var(--t3);flex-shrink:0}
+    .nav-search input{
+      flex:1;background:none;border:none;outline:none;
+      color:var(--w);font-family:var(--b);font-size:14px;
+    }
+    .nav-search input::placeholder{color:var(--t3)}
+    .nav-links{display:flex;gap:2px;list-style:none;flex-shrink:0}
+    .nav-links a{
+      display:block;padding:7px 14px;border-radius:var(--pill);
+      font-size:13px;font-weight:500;color:var(--t2);
+      transition:color .2s,background .2s;white-space:nowrap;
+    }
+    .nav-links a:hover{color:var(--w);background:var(--s2)}
+    .nav-r{display:flex;gap:8px;align-items:center;flex-shrink:0}
+    .burger{display:none;width:36px;height:36px;border:none;background:none;cursor:pointer;padding:6px;flex-shrink:0}
+    .burger span{display:block;width:24px;height:2px;background:var(--w);margin:5px 0;transition:all .3s;border-radius:2px}
+    .burger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+    .burger.active span:nth-child(2){opacity:0}
+    .burger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+    .mobile-menu{
+      display:none;position:fixed;inset:0;top:64px;z-index:99;
+      background:rgba(7,7,7,0.95);backdrop-filter:blur(20px);
+      padding:32px 24px;flex-direction:column;gap:8px;
+    }
+    .mobile-menu.open{display:flex}
+    .mobile-menu a{
+      font-family:var(--b);font-size:16px;font-weight:500;
+      color:var(--t1);padding:14px 0;border-bottom:1px solid var(--border);
+      transition:color .2s;text-decoration:none;
+    }
+    .mobile-menu a:hover{color:var(--w)}
+
+    /* ── GAME HERO ───────────────────────────────────────────── */
+    .game-hero {
+      background:
+        linear-gradient(180deg, rgba(7,7,7,0) 60%, var(--bg) 100%),
+        radial-gradient(ellipse 80% 60% at 30% 40%, rgba(234,58,59,0.12) 0%, transparent 70%),
+        linear-gradient(135deg, rgba(180,55,15,0.18) 0%, rgba(7,7,7,0.97) 50%, rgba(20,50,10,0.08) 100%),
+        var(--bg);
+    }
+
+    /* ── METHOD TABS ─────────────────────────────────────────── */
+    .method-tab {
+      background: transparent;
+      border: 1.5px solid var(--bh);
+      border-radius: var(--pill);
+      color: var(--t3);
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 10px 20px;
+      transition: all 0.2s var(--ease);
+      font-family: var(--b);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .method-tab.active {
+      background: var(--lime);
+      border-color: var(--lime);
+      color: #FFFFFF;
+    }
+    .method-cheap-tag {
+      background: rgba(0,0,0,0.18);
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 6px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── AMOUNT INPUT BLOCK ─────────────────────────────────── */
+    .amount-block {
+      background: var(--s1);
+      border: 1.5px solid var(--border);
+      border-radius: var(--rl);
+      padding: 24px;
+    }
+    .amount-input-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      background: var(--bg);
+      border: 1.5px solid var(--bh);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .amount-input-wrap:focus-within { border-color: var(--lime); }
+    .amount-input {
+      flex: 1;
+      background: none;
+      border: none;
+      outline: none;
+      color: var(--w);
+      font-family: var(--d);
+      font-weight: 800;
+      font-size: 28px;
+      padding: 16px 0 16px 20px;
+      letter-spacing: -0.02em;
+      -moz-appearance: textfield;
+    }
+    .amount-input::-webkit-outer-spin-button,
+    .amount-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    .amount-currency {
+      font-family: var(--d);
+      font-weight: 700;
+      font-size: 22px;
+      color: var(--t3);
+      padding-right: 20px;
+      flex-shrink: 0;
+    }
+
+    /* ── RANGE SLIDER ───────────────────────────────────────── */
+    .amount-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: linear-gradient(to right, var(--lime) 0%, var(--lime) var(--fill, 25%), var(--s3) var(--fill, 25%), var(--s3) 100%);
+      outline: none;
+      cursor: pointer;
+      margin: 20px 0;
+    }
+    .amount-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: var(--w);
+      border: 3px solid var(--lime);
+      box-shadow: 0 2px 8px rgba(234,58,59,0.35);
+      cursor: pointer;
+      transition: transform 0.15s;
+    }
+    .amount-slider::-webkit-slider-thumb:hover { transform: scale(1.15); }
+    .amount-slider::-moz-range-thumb {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: var(--w);
+      border: 3px solid var(--lime);
+      box-shadow: 0 2px 8px rgba(234,58,59,0.35);
+      cursor: pointer;
+    }
+
+    /* ── GOLD RESULT ────────────────────────────────────────── */
+    .gold-result {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--lime-glow);
+      border: 1px solid rgba(234,58,59,0.16);
+      border-radius: 12px;
+      padding: 14px 18px;
+    }
+    .gold-result-label { color: var(--t2); font-size: 14px; }
+    .gold-result-value {
+      font-family: var(--d);
+      font-weight: 800;
+      font-size: 22px;
+      color: var(--lime);
+      letter-spacing: -0.02em;
+    }
+
+    /* ── PRESET CHIPS ───────────────────────────────────────── */
+    .preset-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .preset-chip {
+      background: var(--s1);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 16px;
+      color: var(--t2);
+      font-family: var(--b);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s var(--ease);
+      flex: 1;
+      min-width: 120px;
+      text-align: center;
+    }
+    .preset-chip:hover {
+      border-color: var(--bh);
+      color: var(--w);
+      transform: translateY(-2px);
+    }
+    .preset-chip.active {
+      border-color: var(--lime);
+      color: var(--w);
+      background: var(--lime10);
+      box-shadow: 0 0 0 1px var(--lime), 0 4px 16px rgba(234,58,59,0.1);
+    }
+    .preset-chip .chip-gold {
+      font-weight: 800;
+      color: var(--w);
+      display: block;
+      margin-bottom: 2px;
+    }
+    .preset-chip .chip-price {
+      font-size: 12px;
+      color: var(--t3);
+    }
+    .preset-chip.active .chip-price { color: var(--lime); }
+
+    /* ── COMMISSION NOTE ────────────────────────────────────── */
+    .commission-note {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 12px 14px;
+      background: var(--mint10);
+      border: 1px solid rgba(122,232,160,0.18);
+      border-radius: 10px;
+      color: var(--mint);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .commission-note svg { flex-shrink: 0; margin-top: 2px; }
+
+    /* ── STICKY ORDER PANEL ──────────────────────────────────── */
+    .order-panel {
+      background: var(--s1);
+      border: 1.5px solid rgba(255,255,255,0.08);
+      border-radius: var(--rl);
+      position: sticky;
+      top: 88px;
+    }
+
+    /* ── INPUT ───────────────────────────────────────────────── */
+    .uid-input {
+      background: var(--bg);
+      border: 1.5px solid var(--bh);
+      border-radius: 12px;
+      color: var(--w);
+      font-family: var(--b);
+      font-size: 15px;
+      padding: 14px 16px;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s var(--ease);
+    }
+    .uid-input:focus { border-color: var(--lime); }
+    .uid-input::placeholder { color: var(--t4); }
+
+    /* ── BUY BUTTON ──────────────────────────────────────────── */
+    .btn-buy {
+      background: var(--lime);
+      color: #FFFFFF;
+      border-radius: var(--pill);
+      font-weight: 700;
+      font-size: 16px;
+      padding: 16px 24px;
+      width: 100%;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s var(--ease);
+      font-family: var(--b);
+      box-shadow: 0 4px 20px var(--b-active);
+    }
+    .btn-buy:hover {
+      background: var(--lime-soft);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 28px rgba(234,58,59,0.35);
+    }
+    .btn-buy:active { transform: translateY(0); }
+
+    /* ── MARKET INSTRUCTION ──────────────────────────────────── */
+    .market-instruction {
+      background: var(--lime-glow);
+      border: 1px solid rgba(234,58,59,0.16);
+      border-radius: 12px;
+      padding: 14px;
+      font-size: 13px;
+      color: var(--lime);
+      line-height: 1.5;
+    }
+    .market-instruction span { color: var(--t3); }
+
+    /* ── STEP NUMBER ─────────────────────────────────────────── */
+    .step-num {
+      width: 40px; height: 40px;
+      background: var(--lime10);
+      border: 1.5px solid rgba(234,58,59,0.22);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--lime);
+      font-weight: 800;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    /* ── TRUST CARD ──────────────────────────────────────────── */
+    .trust-card {
+      background: var(--s1);
+      border: 1.5px solid var(--border);
+      border-radius: var(--rl);
+      padding: 24px;
+    }
+
+    /* ── REVIEW CARD ─────────────────────────────────────────── */
+    .review-card {
+      background: var(--s1);
+      border: 1.5px solid var(--border);
+      border-radius: var(--rl);
+      padding: 20px;
+      min-width: 260px;
+      flex-shrink: 0;
+    }
+
+    /* ── INFO TABS (Instruction / FAQ) ──────────────────────── */
+    .info-tabs {
+      display: flex;
+      gap: 0;
+      background: var(--s1);
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1.5px solid var(--border);
+    }
+    .info-tab {
+      flex: 1;
+      background: none;
+      border: none;
+      padding: 16px 24px;
+      font-family: var(--b);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--t3);
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+    }
+    .info-tab.active {
+      background: var(--s3);
+      color: var(--w);
+    }
+    .info-tab:hover:not(.active) { color: var(--t2); }
+
+    /* ── FAQ ─────────────────────────────────────────────────── */
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-btn {
+      background: none; border: none;
+      color: var(--w); cursor: pointer;
+      font-family: var(--b); font-size: 16px; font-weight: 600;
+      padding: 20px 0; text-align: left; width: 100%;
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    }
+    .faq-answer {
+      color: var(--t3); font-size: 15px; line-height: 1.6;
+      padding-bottom: 20px; display: none;
+    }
+    .faq-answer.open { display: block; }
+    .faq-icon { transition: transform 0.2s var(--ease); flex-shrink: 0; }
+    .faq-icon.rotated { transform: rotate(45deg); }
+
+    /* ── GAME CARD ───────────────────────────────────────────── */
+    .game-card {
+      background: var(--s1);
+      border: 1.5px solid var(--border);
+      border-radius: var(--rm);
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.2s var(--ease);
+      flex-shrink: 0;
+      width: 140px;
+    }
+    .game-card:hover { border-color: var(--b-active); transform: translateY(-2px); }
+
+    /* ── PAYMENT ICON ────────────────────────────────────────── */
+    .pay-icon {
+      background: var(--s3);
+      border-radius: 7px;
+      padding: 4px 9px;
+      font-size: 12px;
+      color: var(--t3);
+      font-weight: 500;
+    }
+
+    /* ── SECTION LABEL ───────────────────────────────────────── */
+    .section-label {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--lime);
+    }
+
+    /* ── MOBILE STICKY ───────────────────────────────────────── */
+    .mobile-sticky {
+      display: none;
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: rgba(7,7,7,0.96);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 12px 16px;
+      z-index: 50;
+    }
+
+    /* ── BOTTOM SHEET ────────────────────────────────────────── */
+    .bs-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.75); z-index: 60;
+      backdrop-filter: blur(4px);
+    }
+    .bottom-sheet {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: var(--s1);
+      border-radius: 24px 24px 0 0;
+      padding: 24px; max-height: 80vh; overflow-y: auto;
+    }
+    .bs-handle {
+      width: 40px; height: 4px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 2px; margin: 0 auto 20px;
+    }
+
+    /* ── FLOATING CHAT WIDGET ───────────────────────────────── */
+    .chat-fab {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 55;
+    }
+    .chat-fab-btn {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: var(--lime);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(234,58,59,0.4);
+      transition: all 0.25s var(--ease);
+      position: relative;
+      z-index: 2;
+    }
+    .chat-fab-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 28px rgba(234,58,59,0.5);
+    }
+    .chat-fab-btn svg { transition: transform 0.25s var(--ease); }
+    .chat-fab.open .chat-fab-btn svg { transform: rotate(45deg); }
+
+    .chat-fab-menu {
+      position: absolute;
+      bottom: 68px;
+      right: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(10px) scale(0.95);
+      transition: all 0.25s var(--ease);
+    }
+    .chat-fab.open .chat-fab-menu {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0) scale(1);
+    }
+    .chat-fab-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--s1);
+      border: 1.5px solid var(--border);
+      border-radius: var(--pill);
+      padding: 10px 18px 10px 12px;
+      color: var(--w);
+      font-size: 14px;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: all 0.2s var(--ease);
+      text-decoration: none;
+    }
+    .chat-fab-link:hover {
+      border-color: var(--bh);
+      transform: translateX(-4px);
+      background: var(--s2);
+    }
+    .chat-fab-link .fab-icon {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .fab-tg { background: #229ED9; }
+    .fab-vk { background: #0077FF; }
+
+    /* ── SCROLL FADE ─────────────────────────────────────────── */
+    .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.5s var(--ease), transform 0.5s var(--ease); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── HEADINGS ─────────────────────────────────────────────── */
+    h1, h2, h3 { font-family: var(--d); }
+
+    @media (max-width: 768px) {
+      .order-panel { display: none; }
+      .mobile-sticky { display: block; }
+      .burger{display:block}
+      .nav-links{display:none}
+      .nav-r .btn{display:none}
+      .nav{height:56px}
+      .logo img{height:32px}
+      .nav-search{padding:6px 12px}
+      .nav-search input{font-size:12px}
+      .mobile-menu{top:56px}
+      .chat-fab { bottom: 80px; }
+      .preset-chip { min-width: 0; flex: 1 1 45%; }
+      .amount-input { font-size: 22px; padding: 12px 0 12px 16px; }
+      .amount-currency { font-size: 18px; padding-right: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav class="nav">
+  <div class="container">
+    <a href="/" class="logo" style="display:flex;align-items:center;gap:8px;text-decoration:none;">
+      <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:var(--lime);"><svg width="16" height="16" viewBox="0 0 18 18" fill="none"><path d="M10 2L4 10H9L8 16L14 8H9L10 2Z" fill="#FFFFFF"/></svg></div>
+      <span style="font-weight:800;font-size:18px;font-family:var(--d);letter-spacing:-0.02em;"><span style="color:var(--w);">donate</span><span style="color:var(--lime);">BOOM</span></span>
+    </a>
+    <div class="nav-search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="text" placeholder="Поиск игр и&nbsp;приложений...">
+    </div>
+    <ul class="nav-links">
+      <li><a href="/guarantees">Гарантии</a></li>
+      <li><a href="/reviews">Отзывы</a></li>
+      <li><a href="/faq">FAQ</a></li>
+    </ul>
+    <div class="nav-r">
+      <a href="/profile" class="btn btn-lime">Личный кабинет</a>
+      <button class="burger" onclick="document.querySelector('.mobile-menu').classList.toggle('open');this.classList.toggle('active')">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu">
+  <a href="/">Главная</a>
+  <a href="/services">Каталог</a>
+  <a href="/guarantees">Гарантии</a>
+  <a href="/reviews">Отзывы</a>
+  <a href="/faq">FAQ</a>
+  <a href="/profile">Личный кабинет</a>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+  GAME HERO
+══════════════════════════════════════════════════════════════ -->
+<section class="game-hero pt-28 pb-10">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+
+    <nav class="flex items-center gap-2 mb-8" style="color:var(--t3); font-size:13px;">
+      <a href="#" class="hover:text-white transition-colors">Главная</a>
+      <span>/</span>
+      <a href="#" class="hover:text-white transition-colors">Игровая валюта</a>
+      <span>/</span>
+      <span style="color:var(--w);">Standoff 2</span>
+    </nav>
+
+    <div class="flex flex-col md:flex-row md:items-end gap-8">
+      <div class="flex-1">
+        <h1 class="font-black mb-4" style="font-size:clamp(2rem,5vw,3.5rem);letter-spacing:-0.03em;line-height:1.1;">
+          Золото<br>
+          <span style="color:var(--lime);">Standoff 2</span>
+        </h1>
+
+        <p class="mb-6 max-w-md" style="color:var(--t2);font-size:17px;line-height:1.6;">
+          Через рынок или по&nbsp;UID —
+          зачисление от&nbsp;3&nbsp;минут, без риска бана.
+        </p>
+
+        <div class="flex flex-wrap gap-3">
+          <div class="flex items-center gap-2 px-4 py-2 rounded-full" style="background:var(--s1);border:1.5px solid var(--border);">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M7 1.5L8.3 5H12L9 7.5L10.2 11L7 9L3.8 11L5 7.5L2 5H5.7L7 1.5Z" fill="var(--lime)"/>
+            </svg>
+            <span style="font-size:13px;font-weight:600;">4.9 · 20 000+ покупок</span>
+          </div>
+          <div class="flex items-center gap-2 px-4 py-2 rounded-full" style="background:var(--mint10);border:1.5px solid rgba(122,232,160,0.18);">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M7 1.5L2.5 3.5V7C2.5 10 4.5 12.5 7 13.5C9.5 12.5 11.5 10 11.5 7V3.5L7 1.5Z" stroke="var(--mint)" stroke-width="1.3" fill="none"/>
+              <path d="M4.5 7L6.3 8.8L9.5 5.5" stroke="var(--mint)" stroke-width="1.3" stroke-linecap="round"/>
+            </svg>
+            <span style="font-size:13px;font-weight:600;color:var(--mint);">Без бана</span>
+          </div>
+          <div class="flex items-center gap-2 px-4 py-2 rounded-full" style="background:var(--s1);border:1.5px solid var(--border);">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <circle cx="7" cy="7" r="5.5" stroke="var(--lime)" stroke-width="1.3"/>
+              <path d="M7 4.5V7.5L8.5 9" stroke="var(--lime)" stroke-width="1.3" stroke-linecap="round"/>
+            </svg>
+            <span style="font-size:13px;font-weight:600;">от 3 минут</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Game art -->
+      <div class="hidden md:flex items-end gap-3">
+        <div class="overflow-hidden" style="width:180px;height:180px;border-radius:var(--rl);border:1.5px solid rgba(255,255,255,0.08);">
+          <img src="img/standoff-2.png" alt="Standoff 2" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+  MAIN ORDER BLOCK
+══════════════════════════════════════════════════════════════ -->
+<section id="order" class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+  <div class="flex gap-8 items-start">
+
+    <!-- ═══ LEFT COLUMN ═══ -->
+    <div class="flex-1 min-w-0">
+
+      <!-- Method tabs -->
+      <div class="flex items-center gap-3 mb-6 flex-wrap">
+        <button class="method-tab active" data-method="market" onclick="switchMethod('market')">
+          Через рынок
+          <span class="method-cheap-tag">Дешевле</span>
+        </button>
+        <button class="method-tab" data-method="uid" onclick="switchMethod('uid')">
+          Пополнение по UID
+        </button>
+      </div>
+
+      <!-- ═══════════════════════════════════════════
+        MARKET METHOD CONTENT
+      ═══════════════════════════════════════════ -->
+      <div id="content-market">
+
+        <!-- Method hint -->
+        <div class="mb-6 px-4 py-3 rounded-xl text-sm" style="background:var(--s1);border:1.5px solid var(--border);color:var(--t3);line-height:1.6;">
+          <span style="color:var(--w);font-weight:600;">Через рынок:</span> выставьте любой скин по нужной цене → наш бот купит его → золото зачислится. Логин и пароль не нужны.
+        </div>
+
+        <!-- Amount input -->
+        <div class="amount-block mb-5">
+          <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--t3);margin-bottom:12px;">Сумма пополнения</div>
+
+          <div class="amount-input-wrap mb-1">
+            <input type="number" class="amount-input" id="market-amount" value="500" min="50" max="50000" step="50" oninput="updateMarket()">
+            <span class="amount-currency">₽</span>
+          </div>
+
+          <input type="range" class="amount-slider" id="market-slider" min="50" max="10000" value="500" step="50" oninput="document.getElementById('market-amount').value=this.value;updateMarket()">
+
+          <div class="gold-result">
+            <span class="gold-result-label">Вы получите</span>
+            <span class="gold-result-value" id="market-gold">750 Gold</span>
+          </div>
+        </div>
+
+        <!-- Commission note -->
+        <div class="commission-note">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1.5L2.5 3.5V7.5C2.5 11 5 14 8 15C11 14 13.5 11 13.5 7.5V3.5L8 1.5Z" stroke="var(--mint)" stroke-width="1.3" fill="none"/><path d="M5.5 8L7 9.5L10.5 6" stroke="var(--mint)" stroke-width="1.3" stroke-linecap="round"/></svg>
+          <span>Игровую комиссию мы берём на себя. Скин нужно будет выставить за <strong style="color:var(--lime);" id="commission-skin-price">938 Gold</strong></span>
+        </div>
+
+      </div>
+
+
+      <!-- ═══════════════════════════════════════════
+        UID METHOD CONTENT
+      ═══════════════════════════════════════════ -->
+      <div id="content-uid" style="display:none;">
+
+        <!-- Method hint -->
+        <div class="mb-6 px-4 py-3 rounded-xl text-sm" style="background:var(--s1);border:1.5px solid var(--border);color:var(--t3);line-height:1.6;">
+          <span style="color:var(--w);font-weight:600;">По UID:</span> введите Player ID → оплатите → золото придёт напрямую на аккаунт. Быстро и без скинов.
+        </div>
+
+        <!-- Quick preset chips -->
+        <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--t3);margin-bottom:10px;">Быстрый выбор</div>
+        <div class="preset-chips mb-5">
+          <button class="preset-chip" data-rub="177" data-gold="100" onclick="selectPreset(this)">
+            <span class="chip-gold">100 Gold</span>
+            <span class="chip-price">177 ₽</span>
+          </button>
+          <button class="preset-chip" data-rub="723" data-gold="500" onclick="selectPreset(this)">
+            <span class="chip-gold">500 Gold</span>
+            <span class="chip-price">723 ₽ <span style="text-decoration:line-through;opacity:0.5;margin-left:2px;">850 ₽</span></span>
+          </button>
+          <button class="preset-chip active" data-rub="1268" data-gold="1000" onclick="selectPreset(this)">
+            <span class="chip-gold">1 000 Gold</span>
+            <span class="chip-price">1 268 ₽ <span style="text-decoration:line-through;opacity:0.5;margin-left:2px;">1 585 ₽</span></span>
+          </button>
+          <button class="preset-chip" data-rub="2728" data-gold="3000" onclick="selectPreset(this)">
+            <span class="chip-gold">3 000 Gold</span>
+            <span class="chip-price">2 728 ₽ <span style="text-decoration:line-through;opacity:0.5;margin-left:2px;">3 410 ₽</span></span>
+          </button>
+        </div>
+
+        <!-- Or custom amount -->
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+          <div style="flex:1;height:1px;background:var(--border);"></div>
+          <span style="font-size:12px;color:var(--t3);font-weight:600;">или введите свою сумму</span>
+          <div style="flex:1;height:1px;background:var(--border);"></div>
+        </div>
+
+        <div class="amount-block">
+          <div class="amount-input-wrap mb-1">
+            <input type="number" class="amount-input" id="uid-amount" value="1268" min="50" max="50000" step="50" oninput="updateUid(true)">
+            <span class="amount-currency">₽</span>
+          </div>
+
+          <input type="range" class="amount-slider" id="uid-slider" min="50" max="10000" value="1268" step="50" oninput="document.getElementById('uid-amount').value=this.value;updateUid(true)">
+
+          <div class="gold-result">
+            <span class="gold-result-label">Вы получите</span>
+            <span class="gold-result-value" id="uid-gold">1 000 Gold</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div><!-- /LEFT COLUMN -->
+
+
+    <!-- ═══ RIGHT COLUMN: Sticky order panel ═══ -->
+    <div class="order-panel p-6 w-80 xl:w-96 flex-shrink-0">
+
+      <!-- Product name -->
+      <div class="mb-5">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--t3);margin-bottom:10px;">Ваш заказ</div>
+        <div class="flex items-center gap-3">
+          <div style="font-size:28px;">💰</div>
+          <div>
+            <div style="font-weight:700;font-size:15px;color:var(--w);" id="panel-name">Золото Standoff 2</div>
+            <div style="font-size:12px;color:var(--t3);" id="panel-method">Через рынок</div>
+          </div>
+        </div>
+      </div>
+
+      <hr style="border-color:var(--border);margin-bottom:20px;">
+
+      <!-- Market instruction (only for market method) -->
+      <div id="panel-market-inst" class="market-instruction mb-4">
+        <div style="font-weight:700;margin-bottom:4px;">Скин выставляется по цене:</div>
+        <div style="font-size:22px;font-weight:800;color:var(--lime);letter-spacing:-0.02em;margin-bottom:4px;" id="panel-skin-price">625 Gold</div>
+        <span>Выставьте любой предмет &mdash; бот купит автоматически.</span>
+      </div>
+
+      <!-- Player ID -->
+      <div class="mb-4">
+        <label style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--t3);display:block;margin-bottom:8px;">Player ID</label>
+        <input type="text" class="uid-input" placeholder="Например: 8291847362" inputmode="numeric">
+        <button style="font-size:12px;color:var(--lime);margin-top:8px;display:flex;align-items:center;gap:5px;background:none;border:none;cursor:pointer;font-family:var(--b);" onclick="showUidHelp()">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="var(--lime)" stroke-width="1.3"/><text x="7" y="11" font-size="10" font-weight="800" fill="var(--lime)" text-anchor="middle" font-family="var(--b)">?</text></svg>
+          Как найти Player ID?
+        </button>
+      </div>
+
+      <!-- Total -->
+      <div class="mb-4 px-4 py-3 rounded-xl" style="background:var(--bg);">
+        <div class="flex items-center justify-between">
+          <span style="color:var(--t3);font-size:14px;">Итого</span>
+          <div class="text-right">
+            <div style="color:var(--w);font-weight:800;font-size:22px;letter-spacing:-0.02em;" id="panel-total">500 ₽</div>
+            <div style="font-size:13px;color:var(--lime);" id="panel-gold-info">750 Gold</div>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn-buy mb-4">
+        К оплате — <span id="btn-price">500 ₽</span>
+      </button>
+
+      <div class="flex flex-wrap justify-center gap-2 mb-4">
+        <span class="pay-icon">Карта</span>
+        <span class="pay-icon">СБП</span>
+        <span class="pay-icon">SberPay</span>
+        <span class="pay-icon">Крипта</span>
+      </div>
+
+      <p style="font-size:11px;color:var(--t3);text-align:center;line-height:1.6;">
+        🔒 Безопасная оплата · Без данных аккаунта<br>
+        Поддержка 24/7 в Telegram
+      </p>
+
+    </div><!-- /RIGHT COLUMN -->
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+  INSTRUCTION / FAQ — TABBED SECTION
+══════════════════════════════════════════════════════════════ -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 py-10 fade-up" style="border-top:1px solid var(--border);">
+
+  <div class="info-tabs mb-8">
+    <button class="info-tab active" onclick="switchInfoTab('instruction')">Инструкция</button>
+    <button class="info-tab" onclick="switchInfoTab('faq')">Вопросы и ответы</button>
+  </div>
+
+  <!-- INSTRUCTION TAB -->
+  <div id="tab-instruction">
+    <h2 class="font-black mb-8" style="font-size:clamp(1.4rem,3vw,2rem);letter-spacing:-0.03em;">Как пополнить аккаунт Standoff 2 <span id="inst-method-label">через рынок</span>?</h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div class="trust-card">
+        <div class="step-num mb-4">1</div>
+        <h3 class="font-700 mb-2" style="color:var(--w);">Укажите количество Gold и оплатите</h3>
+        <p style="color:var(--t3);font-size:14px;line-height:1.6;">Вы получите ровно указанное количество — игровую комиссию мы берём на себя.</p>
+      </div>
+      <div class="trust-card">
+        <div class="step-num mb-4">2</div>
+        <h3 class="font-700 mb-2" style="color:var(--w);">Перейдите в статус заказа</h3>
+        <p style="color:var(--t3);font-size:14px;line-height:1.6;">Выставьте недорогой скин с паттерном на торговой площадке по завышенной цене. После этого прикрепите скриншот размещённого лота на сайте.</p>
+      </div>
+      <div class="trust-card">
+        <div class="step-num mb-4">3</div>
+        <h3 class="font-700 mb-2" style="color:var(--w);">Ожидайте выполнения заказа</h3>
+        <p style="color:var(--t3);font-size:14px;line-height:1.6;">Мы найдём ваш скин на рынке и выкупим его.<br><strong style="color:var(--w);">Важно:</strong> не снимайте предмет с продажи до завершения заказа.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:20px;display:flex;align-items:center;gap:8px;color:var(--t3);font-size:13px;">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="var(--t3)" stroke-width="1.2"/><path d="M7 4.5V7.5L8.5 9" stroke="var(--t3)" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Среднее время зачисления — от 3 минут
+    </div>
+  </div>
+
+  <!-- FAQ TAB -->
+  <div id="tab-faq" style="display:none;">
+    <h2 class="font-black mb-6" style="font-size:clamp(1.4rem,3vw,2rem);letter-spacing:-0.03em;">Частые вопросы</h2>
+
+    <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(this)">Зачем нужно золото в Standoff 2?<svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4V16M4 10H16" stroke="var(--lime)" stroke-width="1.5" stroke-linecap="round"/></svg></button><div class="faq-answer">Золото — основная валюта Standoff 2. На него покупают скины, кейсы, Gold Pass и золотые билеты для участия в ивентах.</div></div>
+    <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(this)">Могут ли забанить за покупку золота?<svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4V16M4 10H16" stroke="var(--lime)" stroke-width="1.5" stroke-linecap="round"/></svg></button><div class="faq-answer">Нет. Мы не запрашиваем логин и пароль. Метод через рынок работает через официальный маркет игры — никаких нарушений правил.</div></div>
+    <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(this)">Как найти Player ID в Standoff 2?<svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4V16M4 10H16" stroke="var(--lime)" stroke-width="1.5" stroke-linecap="round"/></svg></button><div class="faq-answer">Откройте игру → нажмите на аватар (левый верхний угол) → Профиль. Ваш Player ID — цифровой номер под никнеймом. Пример: 8291847362.</div></div>
+    <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(this)">Как быстро придёт золото?<svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4V16M4 10H16" stroke="var(--lime)" stroke-width="1.5" stroke-linecap="round"/></svg></button><div class="faq-answer">Среднее время — от 3 минут. В пиковые часы может занять больше. Если прошло больше 30 минут — напишите в поддержку.</div></div>
+    <div class="faq-item" style="border-bottom:none;"><button class="faq-btn" onclick="toggleFaq(this)">Что делать, если золото не пришло?<svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4V16M4 10H16" stroke="var(--lime)" stroke-width="1.5" stroke-linecap="round"/></svg></button><div class="faq-answer">Напишите в Telegram с номером заказа. Разберёмся и вернём деньги или повторно зачислим золото. Поддержка работает 24/7.</div></div>
+  </div>
+
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+  TRUST
+══════════════════════════════════════════════════════════════ -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 py-12 fade-up">
+  <div class="section-label mb-3">Почему мы</div>
+  <h2 class="font-black mb-8" style="font-size:clamp(1.6rem,3vw,2.2rem);letter-spacing:-0.03em;">Не маркетплейс, а магазин</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="trust-card">
+      <div class="mb-4" style="width:40px;height:40px;border-radius:var(--rs);background:var(--lime10);display:flex;align-items:center;justify-content:center;">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L4 4.5V9C4 13 6.7 16.5 10 17.5C13.3 16.5 16 13 16 9V4.5L10 2Z" stroke="var(--lime)" stroke-width="1.5" fill="none"/><path d="M7 10L9 12L13 8" stroke="var(--lime)" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <h3 class="font-700 mb-2" style="color:var(--w);">Без бана</h3>
+      <p style="color:var(--t3);font-size:14px;line-height:1.6;">Не требуем логин и пароль — аккаунт в полной безопасности</p>
+    </div>
+    <div class="trust-card">
+      <div class="mb-4" style="width:40px;height:40px;border-radius:var(--rs);background:var(--lime10);display:flex;align-items:center;justify-content:center;">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7.5" stroke="var(--lime)" stroke-width="1.5"/><path d="M10 6V10.5L12.5 12" stroke="var(--lime)" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <h3 class="font-700 mb-2" style="color:var(--w);">Быстро</h3>
+      <p style="color:var(--t3);font-size:14px;line-height:1.6;">Зачисление от 3 минут. Работаем 24/7</p>
+    </div>
+    <div class="trust-card">
+      <div class="mb-4" style="width:40px;height:40px;border-radius:var(--rs);background:var(--lime10);display:flex;align-items:center;justify-content:center;">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 8C3 7 3.8 6 5 6H15C16.2 6 17 7 17 8V9H3V8Z" stroke="var(--lime)" stroke-width="1.5" fill="none"/><path d="M3 9H17V14C17 15.2 16.2 16 15 16H5C3.8 16 3 15.2 3 14V9Z" stroke="var(--lime)" stroke-width="1.5" fill="none"/><rect x="6" y="12" width="5" height="2" rx="1" fill="var(--lime)"/></svg>
+      </div>
+      <h3 class="font-700 mb-2" style="color:var(--w);">Дешевле</h3>
+      <p style="color:var(--t3);font-size:14px;line-height:1.6;">Без посредников — скидки до 20% против цены в игре</p>
+    </div>
+    <div class="trust-card">
+      <div class="mb-4" style="width:40px;height:40px;border-radius:var(--rs);background:var(--lime10);display:flex;align-items:center;justify-content:center;">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 3C6.7 3 4 5.7 4 9C4 10.8 4.8 12.5 6 13.7V16L9 14.5C9.3 14.5 9.6 14.6 10 14.6C13.3 14.6 16 11.9 16 8.6C16 5.3 13.3 3 10 3Z" stroke="var(--lime)" stroke-width="1.5" fill="none"/></svg>
+      </div>
+      <h3 class="font-700 mb-2" style="color:var(--w);">Поддержка 24/7</h3>
+      <p style="color:var(--t3);font-size:14px;line-height:1.6;">Telegram-бот и живой оператор — ответим в любое время</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+  REVIEWS
+══════════════════════════════════════════════════════════════ -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 pb-14 fade-up">
+  <div class="flex items-end justify-between mb-8">
+    <div>
+      <div class="section-label mb-3">Отзывы</div>
+      <div class="flex items-center gap-4">
+        <div class="font-black" style="font-size:3rem;letter-spacing:-0.03em;color:var(--w);">4.9</div>
+        <div>
+          <div style="color:var(--lime);font-size:18px;margin-bottom:4px;">★★★★★</div>
+          <div style="color:var(--t3);font-size:13px;">20 712 покупателей</div>
+        </div>
+      </div>
+    </div>
+    <button style="color:var(--t3);font-size:13px;background:none;border:none;cursor:pointer;font-family:var(--b);" class="hover:text-white transition-colors hidden sm:block">Все отзывы →</button>
+  </div>
+  <div class="flex gap-4 overflow-x-auto pb-4" style="scrollbar-width:none;">
+    <div class="review-card"><div class="flex justify-between mb-3"><div style="font-weight:600;font-size:14px;">Алексей К.</div><div style="color:var(--lime);font-size:12px;">★★★★★</div></div><p style="color:var(--t3);font-size:14px;line-height:1.6;margin-bottom:10px;">Купил 1000 золота, пришло за 8 минут. Без вопросов, буду брать ещё.</p><div style="font-size:11px;color:var(--t3);opacity:0.5;">2 дня назад</div></div>
+    <div class="review-card"><div class="flex justify-between mb-3"><div style="font-weight:600;font-size:14px;">Максим Р.</div><div style="color:var(--lime);font-size:12px;">★★★★★</div></div><p style="color:var(--t3);font-size:14px;line-height:1.6;margin-bottom:10px;">Дешевле чем в игре на 20%. Делаю заказы раз в неделю уже 4 месяца.</p><div style="font-size:11px;color:var(--t3);opacity:0.5;">5 дней назад</div></div>
+    <div class="review-card"><div class="flex justify-between mb-3"><div style="font-weight:600;font-size:14px;">Дарья В.</div><div style="color:var(--lime);font-size:12px;">★★★★★</div></div><p style="color:var(--t3);font-size:14px;line-height:1.6;margin-bottom:10px;">Поддержка ответила за 2 минуты. Очень приятный сервис.</p><div style="font-size:11px;color:var(--t3);opacity:0.5;">1 нед. назад</div></div>
+    <div class="review-card"><div class="flex justify-between mb-3"><div style="font-weight:600;font-size:14px;">Никита Л.</div><div style="color:var(--lime);font-size:12px;">★★★★☆</div></div><p style="color:var(--t3);font-size:14px;line-height:1.6;margin-bottom:10px;">Разобрался не сразу, но поддержка помогла с Player ID. Зачтено.</p><div style="font-size:11px;color:var(--t3);opacity:0.5;">2 нед. назад</div></div>
+    <div class="review-card"><div class="flex justify-between mb-3"><div style="font-weight:600;font-size:14px;">Артём С.</div><div style="color:var(--lime);font-size:12px;">★★★★★</div></div><p style="color:var(--t3);font-size:14px;line-height:1.6;margin-bottom:10px;">Беру Gold Pass каждый месяц. Никогда задержек больше 15 минут.</p><div style="font-size:11px;color:var(--t3);opacity:0.5;">3 нед. назад</div></div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+  CTA + RELATED
+══════════════════════════════════════════════════════════════ -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 pb-14 fade-up">
+  <div class="p-8 md:p-12 flex flex-col sm:flex-row items-center justify-between gap-6 mb-14" style="background:linear-gradient(135deg,var(--s1),var(--s3));border:1.5px solid var(--lime15);border-radius:var(--rl);">
+    <div>
+      <h2 class="font-black mb-2" style="font-size:clamp(1.4rem,3vw,2rem);letter-spacing:-0.03em;color:var(--w);">Готов пополнить?</h2>
+      <p style="color:var(--t3);">Выбери пакет и получи золото от 3 минут</p>
+    </div>
+    <a href="#order" class="btn-buy" style="width:auto;padding:14px 32px;white-space:nowrap;">Выбрать пакет ↑</a>
+  </div>
+
+  <div class="section-label mb-4">Другие игры и сервисы</div>
+  <div class="flex gap-4 overflow-x-auto pb-4" style="scrollbar-width:none;">
+    <a href="#" class="game-card text-center" style="text-decoration:none;"><div class="flex items-center justify-center" style="height:80px;background:linear-gradient(135deg,#1a1a2e,#0d0d1a);overflow:hidden;"><img src="img/pubg-mobile.png" alt="PUBG Mobile" style="width:52px;height:52px;border-radius:12px;object-fit:cover;"></div><div style="padding:10px 12px;"><div style="font-size:12px;font-weight:700;color:var(--w);margin-bottom:2px;">PUBG Mobile</div><div style="font-size:11px;color:var(--lime);">от 89 ₽</div></div></a>
+    <a href="#" class="game-card text-center" style="text-decoration:none;"><div class="flex items-center justify-center" style="height:80px;background:linear-gradient(135deg,#1e3a1e,#0d2b0d);overflow:hidden;"><img src="img/brawl-stars.png" alt="Brawl Stars" style="width:52px;height:52px;border-radius:12px;object-fit:cover;"></div><div style="padding:10px 12px;"><div style="font-size:12px;font-weight:700;color:var(--w);margin-bottom:2px;">Brawl Stars</div><div style="font-size:11px;color:var(--lime);">от 65 ₽</div></div></a>
+    <a href="#" class="game-card text-center" style="text-decoration:none;"><div class="flex items-center justify-center" style="height:80px;background:linear-gradient(135deg,#1a0d2e,#12082a);overflow:hidden;"><img src="img/clash-royale.png" alt="Clash Royale" style="width:52px;height:52px;border-radius:12px;object-fit:cover;"></div><div style="padding:10px 12px;"><div style="font-size:12px;font-weight:700;color:var(--w);margin-bottom:2px;">Clash Royale</div><div style="font-size:11px;color:var(--lime);">от 119 ₽</div></div></a>
+    <a href="#" class="game-card text-center" style="text-decoration:none;"><div class="flex items-center justify-center" style="height:80px;background:linear-gradient(135deg,#1a1500,#2a2000);overflow:hidden;"><img src="img/genshin-impact.png" alt="Genshin Impact" style="width:52px;height:52px;border-radius:12px;object-fit:cover;"></div><div style="padding:10px 12px;"><div style="font-size:12px;font-weight:700;color:var(--w);margin-bottom:2px;">Genshin Impact</div><div style="font-size:11px;color:var(--lime);">от 99 ₽</div></div></a>
+    <a href="#" class="game-card text-center" style="text-decoration:none;"><div class="flex items-center justify-center" style="height:80px;background:linear-gradient(135deg,#001a2e,#000e1a);overflow:hidden;"><img src="img/roblox.png" alt="Roblox" style="width:52px;height:52px;border-radius:12px;object-fit:cover;"></div><div style="padding:10px 12px;"><div style="font-size:12px;font-weight:700;color:var(--w);margin-bottom:2px;">Roblox</div><div style="font-size:11px;color:var(--lime);">от 75 ₽</div></div></a>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+  FOOTER
+══════════════════════════════════════════════════════════════ -->
+<footer style="border-top:1px solid var(--border);margin-top:16px;">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-10">
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex items-center gap-2 mb-4">
+          <div class="w-7 h-7 rounded-lg flex items-center justify-center" style="background:var(--lime);"><svg width="14" height="14" viewBox="0 0 18 18" fill="none"><path d="M10 2L4 10H9L8 16L14 8H9L10 2Z" fill="#FFFFFF"/></svg></div>
+          <span style="font-weight:700;font-size:14px;"><span style="color:var(--w);">donate</span><span style="color:var(--lime);">BOOM</span></span>
+        </div>
+        <p style="color:var(--t3);font-size:13px;line-height:1.7;margin-bottom:16px;">Пополнение игровых аккаунтов без посредников</p>
+        <div class="flex gap-3">
+          <a href="#" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">TG</a>
+          <a href="#" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">VK</a>
+        </div>
+      </div>
+      <div><div style="font-size:11px;font-weight:700;color:var(--w);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:16px;">Игры</div><div class="flex flex-col gap-2"><a href="/donateboom/standoff-2" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">Standoff 2</a><a href="#" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">PUBG Mobile</a><a href="#" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">Brawl Stars</a><a href="#" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">Все игры</a></div></div>
+      <div><div style="font-size:11px;font-weight:700;color:var(--w);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:16px;">Сервисы</div><div class="flex flex-col gap-2"><a href="#" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">PlayStation</a><a href="#" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">App Store</a><a href="#" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">Steam</a><a href="#" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">TikTok</a></div></div>
+      <div><div style="font-size:11px;font-weight:700;color:var(--w);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:16px;">Компания</div><div class="flex flex-col gap-2"><a href="#" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">О нас</a><a href="#" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">Поддержка</a><a href="#" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">Отзывы</a><a href="#" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">Политика конфиденциальности</a></div></div>
+    </div>
+    <div style="border-top:1px solid var(--border);padding-top:24px;"></div>
+  </div>
+</footer>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+  MOBILE STICKY CTA
+══════════════════════════════════════════════════════════════ -->
+<div class="mobile-sticky">
+  <div class="flex items-center gap-3">
+    <div class="flex-1 min-w-0">
+      <div style="font-size:12px;color:var(--t3);margin-bottom:2px;" id="mob-gold">750 Gold</div>
+      <div style="font-size:18px;font-weight:800;color:var(--lime);letter-spacing:-0.02em;" id="mob-price">500 ₽</div>
+    </div>
+    <button class="btn-buy" style="width:auto;padding:12px 24px;font-size:15px;" onclick="openBS()">К оплате →</button>
+  </div>
+</div>
+
+<!-- Bottom sheet -->
+<div class="bs-overlay" id="bs-overlay" onclick="closeBS()">
+  <div class="bottom-sheet" onclick="event.stopPropagation()">
+    <div class="bs-handle"></div>
+    <div class="flex items-center gap-3 mb-5">
+      <div style="font-size:26px;">💰</div>
+      <div><div style="font-weight:700;color:var(--w);">Золото Standoff 2</div><div style="color:var(--lime);font-weight:800;font-size:18px;" id="bs-price">500 ₽</div></div>
+    </div>
+    <div id="bs-market-hint" class="market-instruction mb-4"><div style="font-weight:700;margin-bottom:4px;">Скин выставляется по цене:</div><div style="font-size:18px;font-weight:800;color:var(--lime);" id="bs-skin-price">625 Gold</div><span>Бот купит автоматически.</span></div>
+    <label style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--t3);display:block;margin-bottom:8px;">Player ID</label>
+    <input type="text" class="uid-input mb-4" placeholder="Например: 8291847362" inputmode="numeric">
+    <button class="btn-buy mb-3">К оплате — <span id="bs-btn-price">500 ₽</span></button>
+    <div class="flex justify-center gap-2"><span class="pay-icon">Карта</span><span class="pay-icon">СБП</span><span class="pay-icon">Крипта</span></div>
+  </div>
+</div>
+
+<!-- UID help modal -->
+<div id="uid-help" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.82);z-index:70;backdrop-filter:blur(4px);" onclick="this.style.display='none'">
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--s1);border:1.5px solid var(--bh);border-radius:var(--rl);padding:28px;max-width:370px;width:90%;" onclick="event.stopPropagation()">
+    <h3 class="font-black mb-4" style="letter-spacing:-0.02em;font-size:1.2rem;">Как найти Player ID</h3>
+    <ol style="color:var(--t3);font-size:14px;line-height:1.8;padding-left:20px;margin-bottom:20px;">
+      <li>Откройте Standoff 2</li>
+      <li>Нажмите на аватар (левый верхний угол)</li>
+      <li>Раздел «Профиль»</li>
+      <li>Скопируйте цифровой ID под ником</li>
+    </ol>
+    <div style="background:var(--bg);border-radius:12px;padding:16px;text-align:center;margin-bottom:20px;">
+      <div style="color:var(--t3);font-size:11px;margin-bottom:4px;">Пример</div>
+      <div style="color:var(--lime);font-weight:800;font-size:22px;letter-spacing:0.04em;">8 291 847 362</div>
+    </div>
+    <button class="btn-buy" onclick="document.getElementById('uid-help').style.display='none'">Понятно</button>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+  FLOATING CHAT WIDGET
+══════════════════════════════════════════════════════════════ -->
+<div class="chat-fab" id="chat-fab">
+  <div class="chat-fab-menu">
+    <a href="https://t.me/donateboom" target="_blank" class="chat-fab-link">
+      <div class="fab-icon fab-tg">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+      </div>
+      Telegram
+    </a>
+    <a href="https://vk.me/donateboom" target="_blank" class="chat-fab-link">
+      <div class="fab-icon fab-vk">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.391 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.864-.525-2.05-1.727-1.033-1-1.49-1.135-1.744-1.135-.356 0-.458.102-.458.593v1.575c0 .424-.135.678-1.253.678-1.846 0-3.896-1.118-5.335-3.202C4.624 10.857 4 8.57 4 8.096c0-.254.102-.491.593-.491h1.744c.44 0 .61.203.78.678.847 2.455 2.27 4.607 2.86 4.607.22 0 .322-.102.322-.66V9.72c-.068-1.186-.695-1.287-.695-1.71 0-.203.17-.407.44-.407h2.744c.373 0 .508.203.508.643v3.473c0 .372.17.508.271.508.22 0 .407-.136.813-.542 1.253-1.406 2.15-3.574 2.15-3.574.119-.254.305-.491.745-.491h1.744c.525 0 .644.27.525.643-.22 1.017-2.354 4.031-2.354 4.031-.186.305-.254.44 0 .78.186.254.796.779 1.203 1.253.745.847 1.32 1.558 1.473 2.05.17.49-.085.744-.576.744z"/></svg>
+      </div>
+      VK Мессенджер
+    </a>
+  </div>
+  <button class="chat-fab-btn" onclick="document.getElementById('chat-fab').classList.toggle('open')">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+    </svg>
+  </button>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+  JS
+══════════════════════════════════════════════════════════════ -->
+<script>
+  // ── Rates ──
+  const MARKET_RATE = 1.5;   // 1₽ = 1.5 gold (market method)
+  const UID_RATE    = 0.565;  // 1₽ = ~0.565 gold (UID base rate)
+
+  let method = 'market';
+
+  // ── Slider fill ──
+  function updateSliderFill(slider) {
+    const min = parseFloat(slider.min);
+    const max = parseFloat(slider.max);
+    const val = parseFloat(slider.value);
+    const pct = ((val - min) / (max - min)) * 100;
+    slider.style.setProperty('--fill', pct + '%');
+  }
+
+  // ── Market method ──
+  function updateMarket() {
+    const amountEl = document.getElementById('market-amount');
+    const slider   = document.getElementById('market-slider');
+    let rub = parseInt(amountEl.value) || 50;
+    if (rub < 50) rub = 50;
+    if (rub > 50000) rub = 50000;
+
+    slider.value = Math.min(rub, 10000);
+    updateSliderFill(slider);
+
+    const gold = Math.floor(rub * MARKET_RATE);
+    const skinPrice = Math.ceil(gold * 1.25);
+    document.getElementById('market-gold').textContent = gold.toLocaleString('ru') + ' Gold';
+    document.getElementById('commission-skin-price').textContent = skinPrice.toLocaleString('ru') + ' Gold';
+
+    if (method === 'market') updatePanel(rub, gold, skinPrice);
+  }
+
+  // ── UID method ──
+  function updateUid(fromInput) {
+    const amountEl = document.getElementById('uid-amount');
+    const slider   = document.getElementById('uid-slider');
+    let rub = parseInt(amountEl.value) || 50;
+    if (rub < 50) rub = 50;
+    if (rub > 50000) rub = 50000;
+
+    slider.value = Math.min(rub, 10000);
+    updateSliderFill(slider);
+
+    const gold = Math.floor(rub * UID_RATE);
+    document.getElementById('uid-gold').textContent = gold.toLocaleString('ru') + ' Gold';
+
+    // Deselect preset chips if user typed custom
+    if (fromInput) {
+      document.querySelectorAll('.preset-chip').forEach(c => c.classList.remove('active'));
+    }
+
+    if (method === 'uid') updatePanel(rub, gold, 0);
+  }
+
+  // ── Preset chip select ──
+  function selectPreset(el) {
+    document.querySelectorAll('.preset-chip').forEach(c => c.classList.remove('active'));
+    el.classList.add('active');
+    const rub  = parseInt(el.dataset.rub);
+    const gold = parseInt(el.dataset.gold);
+    document.getElementById('uid-amount').value = rub;
+    document.getElementById('uid-slider').value = Math.min(rub, 10000);
+    updateSliderFill(document.getElementById('uid-slider'));
+    document.getElementById('uid-gold').textContent = gold.toLocaleString('ru') + ' Gold';
+    updatePanel(rub, gold, 0);
+  }
+
+  // ── Switch method ──
+  function switchMethod(m) {
+    method = m;
+    document.querySelectorAll('.method-tab').forEach(t => t.classList.toggle('active', t.dataset.method === m));
+    document.getElementById('content-market').style.display = m === 'market' ? 'block' : 'none';
+    document.getElementById('content-uid').style.display    = m === 'uid'    ? 'block' : 'none';
+    document.getElementById('panel-market-inst').style.display = m === 'market' ? 'block' : 'none';
+    document.getElementById('bs-market-hint').style.display    = m === 'market' ? 'block' : 'none';
+    document.getElementById('panel-method').textContent = m === 'market' ? 'Через рынок' : 'По UID';
+    document.getElementById('inst-method-label').textContent = m === 'market' ? 'через рынок' : 'по UID';
+
+    if (m === 'market') updateMarket();
+    else updateUid(false);
+  }
+
+  // ── Update right panel ──
+  function updatePanel(rub, gold, skinPrice) {
+    const rubStr  = rub.toLocaleString('ru') + ' ₽';
+    const goldStr = gold.toLocaleString('ru') + ' Gold';
+
+    // Desktop panel
+    document.getElementById('panel-total').textContent    = rubStr;
+    document.getElementById('panel-gold-info').textContent = goldStr;
+    document.getElementById('btn-price').textContent       = rubStr;
+    if (skinPrice > 0) {
+      document.getElementById('panel-skin-price').textContent = skinPrice.toLocaleString('ru') + ' Gold';
+    }
+
+    // Mobile
+    document.getElementById('mob-gold').textContent  = goldStr;
+    document.getElementById('mob-price').textContent  = rubStr;
+    document.getElementById('bs-price').textContent   = rubStr;
+    document.getElementById('bs-btn-price').textContent = rubStr;
+    if (skinPrice > 0) {
+      document.getElementById('bs-skin-price').textContent = skinPrice.toLocaleString('ru') + ' Gold';
+    }
+  }
+
+  // ── Info tabs ──
+  function switchInfoTab(tab) {
+    document.querySelectorAll('.info-tab').forEach((t, i) => {
+      t.classList.toggle('active', (tab === 'instruction' && i === 0) || (tab === 'faq' && i === 1));
+    });
+    document.getElementById('tab-instruction').style.display = tab === 'instruction' ? 'block' : 'none';
+    document.getElementById('tab-faq').style.display         = tab === 'faq'         ? 'block' : 'none';
+  }
+
+  // ── FAQ accordion ──
+  function toggleFaq(btn) {
+    const ans  = btn.nextElementSibling;
+    const icon = btn.querySelector('.faq-icon');
+    const open = ans.classList.contains('open');
+    document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('open'));
+    document.querySelectorAll('.faq-icon').forEach(i => i.classList.remove('rotated'));
+    if (!open) { ans.classList.add('open'); icon.classList.add('rotated'); }
+  }
+
+  // ── Mobile bottom sheet ──
+  function openBS()  { document.getElementById('bs-overlay').style.display='block'; document.body.style.overflow='hidden'; }
+  function closeBS() { document.getElementById('bs-overlay').style.display='none';  document.body.style.overflow=''; }
+  function showUidHelp() { document.getElementById('uid-help').style.display='block'; }
+
+  // ── Close chat widget when clicking outside ──
+  document.addEventListener('click', function(e) {
+    const fab = document.getElementById('chat-fab');
+    if (fab.classList.contains('open') && !fab.contains(e.target)) {
+      fab.classList.remove('open');
+    }
+  });
+
+  // ── Scroll fade ──
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+  // ── Init ──
+  updateSliderFill(document.getElementById('market-slider'));
+  updateSliderFill(document.getElementById('uid-slider'));
+  updateMarket();
+</script>
+
+</body>
+</html>
