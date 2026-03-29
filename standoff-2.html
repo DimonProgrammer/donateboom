@@ -76,7 +76,7 @@
       box-shadow:0 0 20px rgba(234,58,59,0.22),0 0 40px rgba(234,58,59,0.08);
     }
 
-    /* ── NAV ─────────────────────────────────────────────────── */
+    /* -- NAV -------------------------------------------------------- */
     .nav{
       position:fixed;top:0;left:0;right:0;z-index:100;
       height:64px;
@@ -128,7 +128,7 @@
     }
     .mobile-menu a:hover{color:var(--w)}
 
-    /* ── GAME HERO ───────────────────────────────────────────── */
+    /* -- GAME HERO -------------------------------------------------- */
     .game-hero {
       background:
         linear-gradient(180deg, rgba(7,7,7,0) 60%, var(--bg) 100%),
@@ -137,7 +137,7 @@
         var(--bg);
     }
 
-    /* ── METHOD TABS ─────────────────────────────────────────── */
+    /* -- METHOD TABS ------------------------------------------------ */
     .method-tab {
       background: transparent;
       border: 1.5px solid var(--bh);
@@ -167,7 +167,7 @@
       letter-spacing: 0.04em;
     }
 
-    /* ── AMOUNT INPUT BLOCK ─────────────────────────────────── */
+    /* -- AMOUNT INPUT BLOCK ----------------------------------------- */
     .amount-block {
       background: var(--s1);
       border: 1.5px solid var(--border);
@@ -209,7 +209,7 @@
       flex-shrink: 0;
     }
 
-    /* ── RANGE SLIDER ───────────────────────────────────────── */
+    /* -- RANGE SLIDER ----------------------------------------------- */
     .amount-slider {
       -webkit-appearance: none;
       appearance: none;
@@ -241,7 +241,7 @@
       cursor: pointer;
     }
 
-    /* ── GOLD RESULT ────────────────────────────────────────── */
+    /* -- GOLD RESULT ------------------------------------------------ */
     .gold-result {
       display: flex;
       align-items: center;
@@ -260,22 +260,21 @@
       letter-spacing: -0.02em;
     }
 
-    /* ── PRESET CHIPS ───────────────────────────────────────── */
-    .preset-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    /* -- PRESET CHIPS ----------------------------------------------- */
+    .preset-chips { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
     .preset-chip {
       background: var(--s1);
       border: 1.5px solid var(--border);
       border-radius: 12px;
-      padding: 12px 16px;
+      padding: 12px 10px;
       color: var(--t2);
       font-family: var(--b);
       font-size: 14px;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.2s var(--ease);
-      flex: 1;
-      min-width: 120px;
       text-align: center;
+      position: relative;
     }
     .preset-chip:hover {
       border-color: var(--bh);
@@ -299,8 +298,21 @@
       color: var(--t3);
     }
     .preset-chip.active .chip-price { color: var(--lime); }
+    .chip-old { text-decoration: line-through; opacity: 0.5; margin-left: 2px; }
+    .chip-discount {
+      position: absolute;
+      top: -8px;
+      right: -4px;
+      background: var(--lime);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 6px;
+      line-height: 1.3;
+    }
 
-    /* ── COMMISSION NOTE ────────────────────────────────────── */
+    /* -- COMMISSION NOTE -------------------------------------------- */
     .commission-note {
       display: flex;
       align-items: flex-start;
@@ -315,7 +327,67 @@
     }
     .commission-note svg { flex-shrink: 0; margin-top: 2px; }
 
-    /* ── STICKY ORDER PANEL ──────────────────────────────────── */
+    /* -- PRODUCT CARD (UID method) ---------------------------------- */
+    .product-card {
+      background: var(--s1);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.2s var(--ease);
+      position: relative;
+    }
+    .product-card:hover {
+      border-color: var(--bh);
+      transform: translateY(-2px);
+    }
+    .product-card.active {
+      border-color: var(--lime);
+      background: var(--lime10);
+      box-shadow: 0 0 0 1px var(--lime), 0 4px 16px rgba(234,58,59,0.1);
+    }
+    .product-card-img {
+      height: 100px;
+      background: linear-gradient(135deg, var(--s2), var(--s3));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+    }
+    .product-card-body {
+      padding: 12px 14px;
+    }
+    .product-card-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--w);
+      margin-bottom: 4px;
+    }
+    .product-card-price {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--lime);
+    }
+    .product-card-old {
+      font-size: 12px;
+      color: var(--t3);
+      text-decoration: line-through;
+      margin-left: 6px;
+      font-weight: 500;
+    }
+    .product-card-discount {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: var(--lime);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 3px 7px;
+      border-radius: 6px;
+    }
+
+    /* -- STICKY ORDER PANEL ----------------------------------------- */
     .order-panel {
       background: var(--s1);
       border: 1.5px solid rgba(255,255,255,0.08);
@@ -324,7 +396,7 @@
       top: 88px;
     }
 
-    /* ── INPUT ───────────────────────────────────────────────── */
+    /* -- INPUT ------------------------------------------------------ */
     .uid-input {
       background: var(--bg);
       border: 1.5px solid var(--bh);
@@ -340,7 +412,7 @@
     .uid-input:focus { border-color: var(--lime); }
     .uid-input::placeholder { color: var(--t4); }
 
-    /* ── BUY BUTTON ──────────────────────────────────────────── */
+    /* -- BUY BUTTON ------------------------------------------------- */
     .btn-buy {
       background: var(--lime);
       color: #FFFFFF;
@@ -362,7 +434,7 @@
     }
     .btn-buy:active { transform: translateY(0); }
 
-    /* ── MARKET INSTRUCTION ──────────────────────────────────── */
+    /* -- MARKET INSTRUCTION ----------------------------------------- */
     .market-instruction {
       background: var(--lime-glow);
       border: 1px solid rgba(234,58,59,0.16);
@@ -374,7 +446,7 @@
     }
     .market-instruction span { color: var(--t3); }
 
-    /* ── STEP NUMBER ─────────────────────────────────────────── */
+    /* -- STEP NUMBER ------------------------------------------------ */
     .step-num {
       width: 40px; height: 40px;
       background: var(--lime10);
@@ -387,7 +459,7 @@
       flex-shrink: 0;
     }
 
-    /* ── TRUST CARD ──────────────────────────────────────────── */
+    /* -- TRUST CARD ------------------------------------------------- */
     .trust-card {
       background: var(--s1);
       border: 1.5px solid var(--border);
@@ -395,7 +467,7 @@
       padding: 24px;
     }
 
-    /* ── REVIEW CARD ─────────────────────────────────────────── */
+    /* -- REVIEW CARD ------------------------------------------------ */
     .review-card {
       background: var(--s1);
       border: 1.5px solid var(--border);
@@ -405,7 +477,7 @@
       flex-shrink: 0;
     }
 
-    /* ── INFO TABS (Instruction / FAQ) ──────────────────────── */
+    /* -- INFO TABS (Instruction / FAQ) ------------------------------ */
     .info-tabs {
       display: flex;
       gap: 0;
@@ -433,7 +505,7 @@
     }
     .info-tab:hover:not(.active) { color: var(--t2); }
 
-    /* ── FAQ ─────────────────────────────────────────────────── */
+    /* -- FAQ -------------------------------------------------------- */
     .faq-item { border-bottom: 1px solid var(--border); }
     .faq-btn {
       background: none; border: none;
@@ -450,7 +522,7 @@
     .faq-icon { transition: transform 0.2s var(--ease); flex-shrink: 0; }
     .faq-icon.rotated { transform: rotate(45deg); }
 
-    /* ── GAME CARD ───────────────────────────────────────────── */
+    /* -- GAME CARD -------------------------------------------------- */
     .game-card {
       background: var(--s1);
       border: 1.5px solid var(--border);
@@ -463,8 +535,8 @@
     }
     .game-card:hover { border-color: var(--b-active); transform: translateY(-2px); }
 
-    /* ── PAYMENT ICON ────────────────────────────────────────── */
-    .pay-icon {
+    /* -- PAYMENT LABEL ---------------------------------------------- */
+    .pay-label {
       background: var(--s3);
       border-radius: 7px;
       padding: 4px 9px;
@@ -473,14 +545,101 @@
       font-weight: 500;
     }
 
-    /* ── SECTION LABEL ───────────────────────────────────────── */
+    /* -- SECTION LABEL ---------------------------------------------- */
     .section-label {
       font-size: 11px; font-weight: 700;
       letter-spacing: 0.1em; text-transform: uppercase;
       color: var(--lime);
     }
 
-    /* ── MOBILE STICKY ───────────────────────────────────────── */
+    /* -- INSTRUCTION MODAL ------------------------------------------ */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.82);
+      z-index: 80;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-overlay.open {
+      display: flex;
+    }
+    .instruction-modal {
+      background: var(--s1);
+      border: 1.5px solid var(--bh);
+      border-radius: var(--rl);
+      padding: 32px;
+      max-width: 520px;
+      width: 92%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+    }
+    .instruction-modal .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: var(--s3);
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      color: var(--t2);
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .instruction-modal .modal-close:hover {
+      background: var(--s4);
+      color: var(--w);
+    }
+    .modal-step {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .modal-step-num {
+      width: 32px;
+      height: 32px;
+      background: var(--lime);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 800;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .modal-step-text {
+      color: var(--t2);
+      font-size: 14px;
+      line-height: 1.6;
+      padding-top: 4px;
+    }
+    .modal-step-text strong { color: var(--w); }
+
+    /* -- SCREENSHOT UPLOAD ------------------------------------------- */
+    .screenshot-upload {
+      border: 2px dashed var(--bh);
+      border-radius: 14px;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .screenshot-upload:hover {
+      border-color: var(--lime);
+      background: var(--lime-glow);
+    }
+
+    /* -- MOBILE STICKY ---------------------------------------------- */
     .mobile-sticky {
       display: none;
       position: fixed; bottom: 0; left: 0; right: 0;
@@ -491,7 +650,7 @@
       z-index: 50;
     }
 
-    /* ── BOTTOM SHEET ────────────────────────────────────────── */
+    /* -- BOTTOM SHEET ----------------------------------------------- */
     .bs-overlay {
       display: none; position: fixed; inset: 0;
       background: rgba(0,0,0,0.75); z-index: 60;
@@ -509,7 +668,7 @@
       border-radius: 2px; margin: 0 auto 20px;
     }
 
-    /* ── FLOATING CHAT WIDGET ───────────────────────────────── */
+    /* -- FLOATING CHAT WIDGET --------------------------------------- */
     .chat-fab {
       position: fixed;
       bottom: 24px;
@@ -585,15 +744,27 @@
     .fab-tg { background: #229ED9; }
     .fab-vk { background: #0077FF; }
 
-    /* ── SCROLL FADE ─────────────────────────────────────────── */
+    /* -- SCROLL FADE ------------------------------------------------ */
     .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.5s var(--ease), transform 0.5s var(--ease); }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
 
-    /* ── HEADINGS ─────────────────────────────────────────────── */
+    /* -- HEADINGS --------------------------------------------------- */
     h1, h2, h3 { font-family: var(--d); }
 
+    /* -- DUAL INPUT ROW --------------------------------------------- */
+    .dual-input-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    @media (max-width: 1024px) {
+      .order-panel-col { display: none; }
+      .mobile-sticky { display: block; }
+    }
+
     @media (max-width: 768px) {
-      .order-panel { display: none; }
+      .order-panel-col { display: none; }
       .mobile-sticky { display: block; }
       .burger{display:block}
       .nav-links{display:none}
@@ -604,15 +775,22 @@
       .nav-search input{font-size:12px}
       .mobile-menu{top:56px}
       .chat-fab { bottom: 80px; }
-      .preset-chip { min-width: 0; flex: 1 1 45%; }
+      .preset-chips { grid-template-columns: repeat(2, 1fr); }
+      .dual-input-row { grid-template-columns: 1fr; }
       .amount-input { font-size: 22px; padding: 12px 0 12px 16px; }
       .amount-currency { font-size: 18px; padding-right: 16px; }
+      .product-cards-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    }
+
+    @media (max-width: 480px) {
+      .preset-chips { grid-template-columns: repeat(2, 1fr); }
+      .product-cards-grid { grid-template-columns: 1fr !important; }
     }
   </style>
 </head>
 <body>
 
-<!-- ═══════════ NAV ═══════════ -->
+<!-- NAV -->
 <nav class="nav">
   <div class="container">
     <a href="/" class="logo"><img src="logo-red.svg" alt="DonateBoom" height="44"></a>
@@ -635,7 +813,7 @@
 </nav>
 <div class="mobile-menu">
   <a href="/">Главная</a>
-  <a href="/services">Каталог</a>
+  <a href="catalog.html">Каталог</a>
   <a href="/guarantees">Гарантии</a>
   <a href="/reviews">Отзывы</a>
   <a href="/faq">FAQ</a>
@@ -643,12 +821,13 @@
 </div>
 
 
-<!-- ══════════════════════════════════════════════════════════════
+<!-- ================================================================
   GAME HERO
-══════════════════════════════════════════════════════════════ -->
+================================================================= -->
 <section class="game-hero pt-28 pb-10">
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
 
+    <!-- Breadcrumbs -->
     <nav class="flex items-center gap-2 mb-8" style="color:var(--t3); font-size:13px;">
       <a href="#" class="hover:text-white transition-colors">Главная</a>
       <span>/</span>
@@ -665,7 +844,7 @@
         </h1>
 
         <p class="mb-6 max-w-md" style="color:var(--t2);font-size:17px;line-height:1.6;">
-          Через рынок или по&nbsp;UID —
+          Через рынок или по&nbsp;UID &mdash;
           зачисление от&nbsp;3&nbsp;минут, без риска бана.
         </p>
 
@@ -693,25 +872,24 @@
         </div>
       </div>
 
-      <!-- Game art -->
+      <!-- Game icon -->
       <div class="hidden md:flex items-end gap-3">
         <div class="overflow-hidden" style="width:180px;height:180px;border-radius:var(--rl);border:1.5px solid rgba(255,255,255,0.08);">
           <img src="img/standoff-2.png" alt="Standoff 2" style="width:100%;height:100%;object-fit:cover;">
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
 
-<!-- ══════════════════════════════════════════════════════════════
+<!-- ================================================================
   MAIN ORDER BLOCK
-══════════════════════════════════════════════════════════════ -->
+================================================================= -->
 <section id="order" class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
   <div class="flex gap-8 items-start">
 
-    <!-- ═══ LEFT COLUMN ═══ -->
+    <!-- === LEFT COLUMN === -->
     <div class="flex-1 min-w-0">
 
       <!-- Method tabs -->
@@ -725,26 +903,38 @@
         </button>
       </div>
 
-      <!-- ═══════════════════════════════════════════
+      <!-- =========================================
         MARKET METHOD CONTENT
-      ═══════════════════════════════════════════ -->
+      ========================================= -->
       <div id="content-market">
 
         <!-- Method hint -->
         <div class="mb-6 px-4 py-3 rounded-xl text-sm" style="background:var(--s1);border:1.5px solid var(--border);color:var(--t3);line-height:1.6;">
-          <span style="color:var(--w);font-weight:600;">Через рынок:</span> выставьте любой скин по нужной цене → наш бот купит его → золото зачислится. Логин и пароль не нужны.
+          <span style="color:var(--w);font-weight:600;">Через рынок:</span> выставьте любой скин по нужной цене &mdash; наш бот купит его &mdash; золото зачислится. Логин и пароль не нужны.
         </div>
 
-        <!-- Amount input -->
+        <!-- Dual inputs: Gold + Rubles -->
         <div class="amount-block mb-5">
-          <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--t3);margin-bottom:12px;">Сумма пополнения</div>
-
-          <div class="amount-input-wrap mb-1">
-            <input type="number" class="amount-input" id="market-amount" value="500" min="50" max="50000" step="50" oninput="updateMarket()">
-            <span class="amount-currency">₽</span>
+          <div class="dual-input-row mb-4">
+            <!-- Gold amount -->
+            <div>
+              <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--t3);margin-bottom:10px;">Количество голды</div>
+              <div class="amount-input-wrap">
+                <input type="number" class="amount-input" id="market-gold-input" value="750" min="75" max="75000" step="10" oninput="updateMarketFromGold()">
+                <span class="amount-currency" style="font-size:14px;color:var(--lime);font-family:var(--b);font-weight:700;">Gold</span>
+              </div>
+            </div>
+            <!-- Ruble amount -->
+            <div>
+              <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--t3);margin-bottom:10px;">Сумма пополнения</div>
+              <div class="amount-input-wrap">
+                <input type="number" class="amount-input" id="market-amount" value="500" min="50" max="50000" step="50" oninput="updateMarketFromRub()">
+                <span class="amount-currency">&#8381;</span>
+              </div>
+            </div>
           </div>
 
-          <input type="range" class="amount-slider" id="market-slider" min="50" max="10000" value="500" step="50" oninput="document.getElementById('market-amount').value=this.value;updateMarket()">
+          <input type="range" class="amount-slider" id="market-slider" min="50" max="10000" value="500" step="50" oninput="document.getElementById('market-amount').value=this.value;updateMarketFromRub()">
 
           <div class="gold-result">
             <span class="gold-result-label">Вы получите</span>
@@ -753,63 +943,143 @@
         </div>
 
         <!-- Commission note -->
-        <div class="commission-note">
+        <div class="commission-note mb-6">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1.5L2.5 3.5V7.5C2.5 11 5 14 8 15C11 14 13.5 11 13.5 7.5V3.5L8 1.5Z" stroke="var(--mint)" stroke-width="1.3" fill="none"/><path d="M5.5 8L7 9.5L10.5 6" stroke="var(--mint)" stroke-width="1.3" stroke-linecap="round"/></svg>
           <span>Игровую комиссию мы берём на себя. Скин нужно будет выставить за <strong style="color:var(--lime);" id="commission-skin-price">938 Gold</strong></span>
+        </div>
+
+        <!-- Quick preset chips (Market) -->
+        <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--t3);margin-bottom:10px;">Быстрый выбор</div>
+        <div class="preset-chips" id="market-presets">
+          <button class="preset-chip" data-rub="177" data-gold="100" onclick="selectMarketPreset(this)">
+            <span class="chip-gold">100 Gold</span>
+            <span class="chip-price">177 &#8381;</span>
+          </button>
+          <button class="preset-chip" data-rub="400" data-gold="300" onclick="selectMarketPreset(this)">
+            <span class="chip-gold">300 Gold</span>
+            <span class="chip-price">400 &#8381; <span class="chip-old">600 &#8381;</span></span>
+          </button>
+          <button class="preset-chip active" data-rub="723" data-gold="500" onclick="selectMarketPreset(this)">
+            <span class="chip-gold">500 Gold</span>
+            <span class="chip-price">723 &#8381;</span>
+          </button>
+          <button class="preset-chip" data-rub="723" data-gold="700" onclick="selectMarketPreset(this)">
+            <span class="chip-gold">700 Gold</span>
+            <span class="chip-price">723 &#8381;</span>
+          </button>
+          <button class="preset-chip" data-rub="1268" data-gold="1000" onclick="selectMarketPreset(this)">
+            <span class="chip-gold">1 000 Gold</span>
+            <span class="chip-price">1 268 &#8381; <span class="chip-old">1 585 &#8381;</span></span>
+            <span class="chip-discount">-20%</span>
+          </button>
+          <button class="preset-chip" data-rub="1600" data-gold="1500" onclick="selectMarketPreset(this)">
+            <span class="chip-gold">1 500 Gold</span>
+            <span class="chip-price">1 600 &#8381;</span>
+          </button>
+          <button class="preset-chip" data-rub="2000" data-gold="2000" onclick="selectMarketPreset(this)">
+            <span class="chip-gold">2 000 Gold</span>
+            <span class="chip-price">2 000 &#8381;</span>
+          </button>
+          <button class="preset-chip" data-rub="2728" data-gold="3000" onclick="selectMarketPreset(this)">
+            <span class="chip-gold">3 000 Gold</span>
+            <span class="chip-price">2 728 &#8381; <span class="chip-old">3 410 &#8381;</span></span>
+            <span class="chip-discount">-20%</span>
+          </button>
         </div>
 
       </div>
 
 
-      <!-- ═══════════════════════════════════════════
+      <!-- =========================================
         UID METHOD CONTENT
-      ═══════════════════════════════════════════ -->
+      ========================================= -->
       <div id="content-uid" style="display:none;">
 
         <!-- Method hint -->
         <div class="mb-6 px-4 py-3 rounded-xl text-sm" style="background:var(--s1);border:1.5px solid var(--border);color:var(--t3);line-height:1.6;">
-          <span style="color:var(--w);font-weight:600;">По UID:</span> введите Player ID → оплатите → золото придёт напрямую на аккаунт. Быстро и без скинов.
+          <span style="color:var(--w);font-weight:600;">По UID:</span> введите Player ID &mdash; оплатите &mdash; золото придёт напрямую на аккаунт. Быстро и без скинов.
         </div>
 
-        <!-- Quick preset chips -->
-        <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--t3);margin-bottom:10px;">Быстрый выбор</div>
-        <div class="preset-chips mb-5">
-          <button class="preset-chip" data-rub="177" data-gold="100" onclick="selectPreset(this)">
-            <span class="chip-gold">100 Gold</span>
-            <span class="chip-price">177 ₽</span>
-          </button>
-          <button class="preset-chip" data-rub="723" data-gold="500" onclick="selectPreset(this)">
-            <span class="chip-gold">500 Gold</span>
-            <span class="chip-price">723 ₽ <span style="text-decoration:line-through;opacity:0.5;margin-left:2px;">850 ₽</span></span>
-          </button>
-          <button class="preset-chip active" data-rub="1268" data-gold="1000" onclick="selectPreset(this)">
-            <span class="chip-gold">1 000 Gold</span>
-            <span class="chip-price">1 268 ₽ <span style="text-decoration:line-through;opacity:0.5;margin-left:2px;">1 585 ₽</span></span>
-          </button>
-          <button class="preset-chip" data-rub="2728" data-gold="3000" onclick="selectPreset(this)">
-            <span class="chip-gold">3 000 Gold</span>
-            <span class="chip-price">2 728 ₽ <span style="text-decoration:line-through;opacity:0.5;margin-left:2px;">3 410 ₽</span></span>
-          </button>
+        <!-- Product cards: Gold -->
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+          <span style="font-size:20px;">🪙</span>
+          <span style="font-size:14px;font-weight:700;color:var(--w);">Золото Standoff 2</span>
         </div>
-
-        <!-- Or custom amount -->
-        <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
-          <div style="flex:1;height:1px;background:var(--border);"></div>
-          <span style="font-size:12px;color:var(--t3);font-weight:600;">или введите свою сумму</span>
-          <div style="flex:1;height:1px;background:var(--border);"></div>
-        </div>
-
-        <div class="amount-block">
-          <div class="amount-input-wrap mb-1">
-            <input type="number" class="amount-input" id="uid-amount" value="1268" min="50" max="50000" step="50" oninput="updateUid(true)">
-            <span class="amount-currency">₽</span>
+        <div class="grid gap-3 mb-8 product-cards-grid" style="grid-template-columns: repeat(4, 1fr);">
+          <div class="product-card" data-rub="177" data-gold="100" data-type="gold" onclick="selectUidCard(this)">
+            <div class="product-card-img">🪙</div>
+            <div class="product-card-body">
+              <div class="product-card-title">100 золота</div>
+              <div class="product-card-price">177 &#8381;</div>
+            </div>
           </div>
+          <div class="product-card" data-rub="723" data-gold="500" data-type="gold" onclick="selectUidCard(this)">
+            <div class="product-card-img">🪙</div>
+            <div class="product-card-body">
+              <div class="product-card-title">500 золота</div>
+              <div class="product-card-price">723 &#8381;<span class="product-card-old">850 &#8381;</span></div>
+            </div>
+            <div class="product-card-discount">-15%</div>
+          </div>
+          <div class="product-card active" data-rub="1268" data-gold="1000" data-type="gold" onclick="selectUidCard(this)">
+            <div class="product-card-img">🪙</div>
+            <div class="product-card-body">
+              <div class="product-card-title">1 000 золота</div>
+              <div class="product-card-price">1 268 &#8381;<span class="product-card-old">1 585 &#8381;</span></div>
+            </div>
+            <div class="product-card-discount">-20%</div>
+          </div>
+          <div class="product-card" data-rub="2728" data-gold="3000" data-type="gold" onclick="selectUidCard(this)">
+            <div class="product-card-img">🪙</div>
+            <div class="product-card-body">
+              <div class="product-card-title">3 000 золота</div>
+              <div class="product-card-price">2 728 &#8381;<span class="product-card-old">3 410 &#8381;</span></div>
+            </div>
+            <div class="product-card-discount">-20%</div>
+          </div>
+        </div>
 
-          <input type="range" class="amount-slider" id="uid-slider" min="50" max="10000" value="1268" step="50" oninput="document.getElementById('uid-amount').value=this.value;updateUid(true)">
+        <!-- Product cards: Passes & Tickets -->
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+          <span style="font-size:20px;">🎫</span>
+          <span style="font-size:14px;font-weight:700;color:var(--w);">Пропуска и Билеты</span>
+        </div>
+        <div class="grid gap-3 mb-8 product-cards-grid" style="grid-template-columns: repeat(4, 1fr);">
+          <div class="product-card" data-rub="184" data-gold="0" data-type="pass" data-label="Gold Pass" onclick="selectUidCard(this)">
+            <div class="product-card-img" style="background:linear-gradient(135deg,#2a1f00,#1a1400);">🏆</div>
+            <div class="product-card-body">
+              <div class="product-card-title">Gold Pass</div>
+              <div class="product-card-price">184 &#8381;</div>
+            </div>
+          </div>
+          <div class="product-card" data-rub="670" data-gold="0" data-type="tickets" data-label="500 Билетов" onclick="selectUidCard(this)">
+            <div class="product-card-img" style="background:linear-gradient(135deg,#001a2e,#000e1a);">🎟️</div>
+            <div class="product-card-body">
+              <div class="product-card-title">500 Билетов</div>
+              <div class="product-card-price">670 &#8381;</div>
+            </div>
+          </div>
+        </div>
 
-          <div class="gold-result">
-            <span class="gold-result-label">Вы получите</span>
-            <span class="gold-result-value" id="uid-gold">1 000 Gold</span>
+        <!-- Product cards: Special offers -->
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+          <span style="font-size:20px;">🎁</span>
+          <span style="font-size:14px;font-weight:700;color:var(--w);">Спецпредложения</span>
+        </div>
+        <div class="grid gap-3 mb-4 product-cards-grid" style="grid-template-columns: repeat(4, 1fr);">
+          <div class="product-card" data-rub="219" data-gold="0" data-type="case" data-label="Кейс Fable x1" onclick="selectUidCard(this)">
+            <div class="product-card-img" style="background:linear-gradient(135deg,#1a0d2e,#12082a);">📦</div>
+            <div class="product-card-body">
+              <div class="product-card-title">Кейс Fable &times;1</div>
+              <div class="product-card-price">219 &#8381;</div>
+            </div>
+          </div>
+          <div class="product-card" data-rub="619" data-gold="0" data-type="case" data-label="Fable Combo x3" onclick="selectUidCard(this)">
+            <div class="product-card-img" style="background:linear-gradient(135deg,#1a0d2e,#12082a);">📦📦📦</div>
+            <div class="product-card-body">
+              <div class="product-card-title">Fable Combo &times;3</div>
+              <div class="product-card-price">619 &#8381;</div>
+            </div>
           </div>
         </div>
 
@@ -818,76 +1088,138 @@
     </div><!-- /LEFT COLUMN -->
 
 
-    <!-- ═══ RIGHT COLUMN: Sticky order panel ═══ -->
-    <div class="order-panel p-6 w-80 xl:w-96 flex-shrink-0">
+    <!-- === RIGHT COLUMN: Sticky order panel === -->
+    <div class="order-panel-col w-80 xl:w-96 flex-shrink-0" style="display:block;">
+      <div class="order-panel p-6">
 
-      <!-- Product name -->
-      <div class="mb-5">
-        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--t3);margin-bottom:10px;">Ваш заказ</div>
-        <div class="flex items-center gap-3">
-          <div style="font-size:28px;">💰</div>
-          <div>
-            <div style="font-weight:700;font-size:15px;color:var(--w);" id="panel-name">Золото Standoff 2</div>
-            <div style="font-size:12px;color:var(--t3);" id="panel-method">Через рынок</div>
+        <!-- Product header -->
+        <div class="mb-5">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--t3);margin-bottom:10px;">Ваш заказ</div>
+          <div class="flex items-center gap-3">
+            <div style="font-size:28px;">🪙</div>
+            <div>
+              <div style="font-weight:700;font-size:15px;color:var(--w);" id="panel-name">Золото Standoff 2</div>
+              <div style="font-size:12px;color:var(--t3);" id="panel-method">Через рынок</div>
+            </div>
           </div>
         </div>
-      </div>
 
-      <hr style="border-color:var(--border);margin-bottom:20px;">
+        <hr style="border-color:var(--border);margin-bottom:20px;">
 
-      <!-- Market instruction (only for market method) -->
-      <div id="panel-market-inst" class="market-instruction mb-4">
-        <div style="font-weight:700;margin-bottom:4px;">Скин выставляется по цене:</div>
-        <div style="font-size:22px;font-weight:800;color:var(--lime);letter-spacing:-0.02em;margin-bottom:4px;" id="panel-skin-price">625 Gold</div>
-        <span>Выставьте любой предмет &mdash; бот купит автоматически.</span>
-      </div>
+        <!-- Market instruction (only for market method) -->
+        <div id="panel-market-inst" class="mb-4">
+          <div class="market-instruction mb-3">
+            <div style="font-weight:700;margin-bottom:4px;">Скин выставляется по цене:</div>
+            <div style="font-size:22px;font-weight:800;color:var(--lime);letter-spacing:-0.02em;margin-bottom:4px;" id="panel-skin-price">938 Gold</div>
+            <span>Выставьте SM1014 &laquo;Serpent&raquo; за <span style="color:var(--lime);" id="panel-skin-instruction-price">938</span> Gold</span>
+          </div>
 
-      <!-- Player ID -->
-      <div class="mb-4">
-        <label style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--t3);display:block;margin-bottom:8px;">Player ID</label>
-        <input type="text" class="uid-input" placeholder="Например: 8291847362" inputmode="numeric">
-        <button style="font-size:12px;color:var(--lime);margin-top:8px;display:flex;align-items:center;gap:5px;background:none;border:none;cursor:pointer;font-family:var(--b);" onclick="showUidHelp()">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="var(--lime)" stroke-width="1.3"/><text x="7" y="11" font-size="10" font-weight="800" fill="var(--lime)" text-anchor="middle" font-family="var(--b)">?</text></svg>
-          Как найти Player ID?
+          <!-- Screenshot upload -->
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--t3);margin-bottom:8px;">Скриншот запроса</div>
+          <div class="screenshot-upload mb-3" onclick="document.getElementById('screenshot-file').click()">
+            <input type="file" id="screenshot-file" accept="image/*" style="display:none;">
+            <div style="color:var(--lime);font-size:14px;font-weight:600;margin-bottom:4px;">Прикрепить скриншот</div>
+            <div style="color:var(--t4);font-size:12px;">или перетащите файл сюда</div>
+          </div>
+
+          <button style="font-size:13px;color:var(--lime);display:flex;align-items:center;gap:5px;background:none;border:none;cursor:pointer;font-family:var(--b);margin-bottom:16px;font-weight:600;" onclick="openInstructionModal()">
+            <span style="display:inline-flex;width:18px;height:18px;border-radius:50%;background:var(--lime);color:#fff;align-items:center;justify-content:center;font-size:11px;font-weight:800;">?</span>
+            Инструкция
+          </button>
+        </div>
+
+        <!-- UID: Player ID input (hidden for market) -->
+        <div id="panel-uid-section" class="mb-4" style="display:none;">
+          <label style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--t3);display:block;margin-bottom:8px;">Player ID</label>
+          <input type="text" class="uid-input" id="panel-uid-input" placeholder="Например: 8291847362" inputmode="numeric">
+          <button style="font-size:12px;color:var(--lime);margin-top:8px;display:flex;align-items:center;gap:5px;background:none;border:none;cursor:pointer;font-family:var(--b);" onclick="showUidHelp()">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="var(--lime)" stroke-width="1.3"/><text x="7" y="11" font-size="10" font-weight="800" fill="var(--lime)" text-anchor="middle" font-family="var(--b)">?</text></svg>
+            Как найти Player ID?
+          </button>
+        </div>
+
+        <!-- Total -->
+        <div class="mb-4 px-4 py-3 rounded-xl" style="background:var(--bg);">
+          <div class="flex items-center justify-between">
+            <span style="color:var(--t3);font-size:14px;">Итого</span>
+            <div class="text-right">
+              <div style="color:var(--w);font-weight:800;font-size:22px;letter-spacing:-0.02em;" id="panel-total">500 &#8381;</div>
+              <div style="font-size:13px;color:var(--lime);" id="panel-gold-info">750 Gold</div>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn-buy mb-4" id="panel-buy-btn">
+          К оплате &mdash; <span id="btn-price">500 &#8381;</span>
         </button>
-      </div>
 
-      <!-- Total -->
-      <div class="mb-4 px-4 py-3 rounded-xl" style="background:var(--bg);">
-        <div class="flex items-center justify-between">
-          <span style="color:var(--t3);font-size:14px;">Итого</span>
-          <div class="text-right">
-            <div style="color:var(--w);font-weight:800;font-size:22px;letter-spacing:-0.02em;" id="panel-total">500 ₽</div>
-            <div style="font-size:13px;color:var(--lime);" id="panel-gold-info">750 Gold</div>
-          </div>
+        <div class="flex flex-wrap justify-center gap-2 mb-4">
+          <span class="pay-label">Карта</span>
+          <span class="pay-label">СБП</span>
+          <span class="pay-label">SberPay</span>
+          <span class="pay-label">Крипта</span>
         </div>
+
+        <p style="font-size:11px;color:var(--t3);text-align:center;line-height:1.6;">
+          &#x1F512; Безопасная оплата &middot; Без данных аккаунта<br>
+          Поддержка 24/7 в Telegram
+        </p>
+
       </div>
-
-      <button class="btn-buy mb-4">
-        К оплате — <span id="btn-price">500 ₽</span>
-      </button>
-
-      <div class="flex flex-wrap justify-center gap-2 mb-4">
-        <span class="pay-icon">Карта</span>
-        <span class="pay-icon">СБП</span>
-        <span class="pay-icon">SberPay</span>
-        <span class="pay-icon">Крипта</span>
-      </div>
-
-      <p style="font-size:11px;color:var(--t3);text-align:center;line-height:1.6;">
-        🔒 Безопасная оплата · Без данных аккаунта<br>
-        Поддержка 24/7 в Telegram
-      </p>
-
     </div><!-- /RIGHT COLUMN -->
 
   </div>
 </section>
 
 
-<!-- ══════════════════════════════════════════════════════════════
-  INSTRUCTION / FAQ — TABBED SECTION
-══════════════════════════════════════════════════════════════ -->
+<!-- ================================================================
+  INSTRUCTION MODAL
+================================================================= -->
+<div class="modal-overlay" id="instruction-modal" onclick="closeInstructionModal()">
+  <div class="instruction-modal" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeInstructionModal()">&times;</button>
+
+    <h3 class="font-black mb-6" style="font-size:1.3rem;letter-spacing:-0.02em;">Инструкция</h3>
+
+    <div class="modal-step">
+      <div class="modal-step-num">1</div>
+      <div class="modal-step-text">
+        Зайдите на рынок и найдите <strong>SM1014 &laquo;Serpent&raquo;</strong>. Не StatTrack. Скин стоит ~20G.
+      </div>
+    </div>
+
+    <div class="modal-step">
+      <div class="modal-step-num">2</div>
+      <div class="modal-step-text">
+        Приобретите и выставите скин на рынок за <strong id="modal-skin-price">938 G</strong>. Комиссию рынка мы берём на себя. Вы получите <strong id="modal-gold-receive">750G</strong>.
+      </div>
+    </div>
+
+    <div class="modal-step">
+      <div class="modal-step-num">3</div>
+      <div class="modal-step-text">
+        После выставления нажмите <strong>&laquo;Только мои запросы&raquo;</strong>, сделайте скриншот и отправьте его боту.
+      </div>
+    </div>
+
+    <!-- Example screenshot placeholder -->
+    <div style="background:var(--bg);border-radius:14px;padding:24px;text-align:center;margin:20px 0;border:1.5px solid var(--border);">
+      <div style="color:var(--t4);font-size:13px;">Пример скриншота</div>
+      <div style="color:var(--t3);font-size:48px;margin:12px 0;">📸</div>
+    </div>
+
+    <div style="background:rgba(234,180,50,0.08);border:1px solid rgba(234,180,50,0.2);border-radius:10px;padding:12px 14px;margin-bottom:20px;font-size:13px;color:#E8C547;line-height:1.5;">
+      <strong>Важно:</strong> не отменяйте лот, не меняйте аватарку до зачисления голды.
+    </div>
+
+    <button class="btn-buy" onclick="closeInstructionModal()">Продолжить</button>
+  </div>
+</div>
+
+
+<!-- ================================================================
+  INSTRUCTION / FAQ --- TABBED SECTION
+================================================================= -->
 <section class="max-w-7xl mx-auto px-4 sm:px-6 py-10 fade-up" style="border-top:1px solid var(--border);">
 
   <div class="info-tabs mb-8">
@@ -899,27 +1231,46 @@
   <div id="tab-instruction">
     <h2 class="font-black mb-8" style="font-size:clamp(1.4rem,3vw,2rem);letter-spacing:-0.03em;">Как пополнить аккаунт Standoff 2 <span id="inst-method-label">через рынок</span>?</h2>
 
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-      <div class="trust-card">
-        <div class="step-num mb-4">1</div>
-        <h3 class="font-700 mb-2" style="color:var(--w);">Укажите количество Gold и оплатите</h3>
-        <p style="color:var(--t3);font-size:14px;line-height:1.6;">Вы получите ровно указанное количество — игровую комиссию мы берём на себя.</p>
+    <!-- Market instruction steps -->
+    <div id="inst-market-steps">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="trust-card">
+          <div class="step-num mb-4">1</div>
+          <h3 class="font-700 mb-2" style="color:var(--w);">Укажите количество Gold и оплатите</h3>
+          <p style="color:var(--t3);font-size:14px;line-height:1.6;">Вы получите ровно указанное количество &mdash; игровую комиссию мы берём на себя.</p>
+        </div>
+        <div class="trust-card">
+          <div class="step-num mb-4">2</div>
+          <h3 class="font-700 mb-2" style="color:var(--w);">Перейдите в статус заказа</h3>
+          <p style="color:var(--t3);font-size:14px;line-height:1.6;">Выставьте недорогой скин с паттерном на торговой площадке по завышенной цене. После этого прикрепите скриншот размещённого лота на сайте.</p>
+        </div>
+        <div class="trust-card">
+          <div class="step-num mb-4">3</div>
+          <h3 class="font-700 mb-2" style="color:var(--w);">Ожидайте выполнения заказа</h3>
+          <p style="color:var(--t3);font-size:14px;line-height:1.6;">Мы найдём ваш скин на рынке и выкупим его.<br><strong style="color:var(--w);">Важно:</strong> не снимайте предмет с продажи до завершения заказа.</p>
+        </div>
       </div>
-      <div class="trust-card">
-        <div class="step-num mb-4">2</div>
-        <h3 class="font-700 mb-2" style="color:var(--w);">Перейдите в статус заказа</h3>
-        <p style="color:var(--t3);font-size:14px;line-height:1.6;">Выставьте недорогой скин с паттерном на торговой площадке по завышенной цене. После этого прикрепите скриншот размещённого лота на сайте.</p>
-      </div>
-      <div class="trust-card">
-        <div class="step-num mb-4">3</div>
-        <h3 class="font-700 mb-2" style="color:var(--w);">Ожидайте выполнения заказа</h3>
-        <p style="color:var(--t3);font-size:14px;line-height:1.6;">Мы найдём ваш скин на рынке и выкупим его.<br><strong style="color:var(--w);">Важно:</strong> не снимайте предмет с продажи до завершения заказа.</p>
+    </div>
+
+    <!-- UID instruction steps (hidden by default) -->
+    <div id="inst-uid-steps" style="display:none;">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="trust-card">
+          <div class="step-num mb-4">1</div>
+          <h3 class="font-700 mb-2" style="color:var(--w);">Укажите количество Gold и оплатите</h3>
+          <p style="color:var(--t3);font-size:14px;line-height:1.6;">Выберите нужный товар, введите Player ID и оплатите удобным способом.</p>
+        </div>
+        <div class="trust-card">
+          <div class="step-num mb-4">2</div>
+          <h3 class="font-700 mb-2" style="color:var(--w);">Ожидайте выполнения заказа</h3>
+          <p style="color:var(--t3);font-size:14px;line-height:1.6;">Золото придёт напрямую на аккаунт.<br><strong style="color:var(--w);">Важно:</strong> не меняйте никнейм и аватарку до зачисления.</p>
+        </div>
       </div>
     </div>
 
     <div style="margin-top:20px;display:flex;align-items:center;gap:8px;color:var(--t3);font-size:13px;">
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="var(--t3)" stroke-width="1.2"/><path d="M7 4.5V7.5L8.5 9" stroke="var(--t3)" stroke-width="1.2" stroke-linecap="round"/></svg>
-      Среднее время зачисления — от 3 минут
+      Среднее время зачисления &mdash; от 3 минут
     </div>
   </div>
 
@@ -927,19 +1278,19 @@
   <div id="tab-faq" style="display:none;">
     <h2 class="font-black mb-6" style="font-size:clamp(1.4rem,3vw,2rem);letter-spacing:-0.03em;">Частые вопросы</h2>
 
-    <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(this)">Зачем нужно золото в Standoff 2?<svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4V16M4 10H16" stroke="var(--lime)" stroke-width="1.5" stroke-linecap="round"/></svg></button><div class="faq-answer">Золото — основная валюта Standoff 2. На него покупают скины, кейсы, Gold Pass и золотые билеты для участия в ивентах.</div></div>
-    <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(this)">Могут ли забанить за покупку золота?<svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4V16M4 10H16" stroke="var(--lime)" stroke-width="1.5" stroke-linecap="round"/></svg></button><div class="faq-answer">Нет. Мы не запрашиваем логин и пароль. Метод через рынок работает через официальный маркет игры — никаких нарушений правил.</div></div>
-    <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(this)">Как найти Player ID в Standoff 2?<svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4V16M4 10H16" stroke="var(--lime)" stroke-width="1.5" stroke-linecap="round"/></svg></button><div class="faq-answer">Откройте игру → нажмите на аватар (левый верхний угол) → Профиль. Ваш Player ID — цифровой номер под никнеймом. Пример: 8291847362.</div></div>
-    <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(this)">Как быстро придёт золото?<svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4V16M4 10H16" stroke="var(--lime)" stroke-width="1.5" stroke-linecap="round"/></svg></button><div class="faq-answer">Среднее время — от 3 минут. В пиковые часы может занять больше. Если прошло больше 30 минут — напишите в поддержку.</div></div>
+    <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(this)">Зачем нужно золото в Standoff 2?<svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4V16M4 10H16" stroke="var(--lime)" stroke-width="1.5" stroke-linecap="round"/></svg></button><div class="faq-answer">Золото &mdash; основная валюта Standoff 2. На него покупают скины, кейсы, Gold Pass и золотые билеты для участия в ивентах.</div></div>
+    <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(this)">Могут ли забанить за покупку золота?<svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4V16M4 10H16" stroke="var(--lime)" stroke-width="1.5" stroke-linecap="round"/></svg></button><div class="faq-answer">Нет. Мы не запрашиваем логин и пароль. Метод через рынок работает через официальный маркет игры &mdash; никаких нарушений правил.</div></div>
+    <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(this)">Как найти Player ID в Standoff 2?<svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4V16M4 10H16" stroke="var(--lime)" stroke-width="1.5" stroke-linecap="round"/></svg></button><div class="faq-answer">Откройте игру &rarr; нажмите на аватар (левый верхний угол) &rarr; Профиль. Ваш Player ID &mdash; цифровой номер под никнеймом. Пример: 8291847362.</div></div>
+    <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(this)">Как быстро придёт золото?<svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4V16M4 10H16" stroke="var(--lime)" stroke-width="1.5" stroke-linecap="round"/></svg></button><div class="faq-answer">Среднее время &mdash; от 3 минут. В пиковые часы может занять больше. Если прошло больше 30 минут &mdash; напишите в поддержку.</div></div>
     <div class="faq-item" style="border-bottom:none;"><button class="faq-btn" onclick="toggleFaq(this)">Что делать, если золото не пришло?<svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4V16M4 10H16" stroke="var(--lime)" stroke-width="1.5" stroke-linecap="round"/></svg></button><div class="faq-answer">Напишите в Telegram с номером заказа. Разберёмся и вернём деньги или повторно зачислим золото. Поддержка работает 24/7.</div></div>
   </div>
 
 </section>
 
 
-<!-- ══════════════════════════════════════════════════════════════
+<!-- ================================================================
   TRUST
-══════════════════════════════════════════════════════════════ -->
+================================================================= -->
 <section class="max-w-7xl mx-auto px-4 sm:px-6 py-12 fade-up">
   <div class="section-label mb-3">Почему мы</div>
   <h2 class="font-black mb-8" style="font-size:clamp(1.6rem,3vw,2.2rem);letter-spacing:-0.03em;">Не маркетплейс, а магазин</h2>
@@ -949,7 +1300,7 @@
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L4 4.5V9C4 13 6.7 16.5 10 17.5C13.3 16.5 16 13 16 9V4.5L10 2Z" stroke="var(--lime)" stroke-width="1.5" fill="none"/><path d="M7 10L9 12L13 8" stroke="var(--lime)" stroke-width="1.5" stroke-linecap="round"/></svg>
       </div>
       <h3 class="font-700 mb-2" style="color:var(--w);">Без бана</h3>
-      <p style="color:var(--t3);font-size:14px;line-height:1.6;">Не требуем логин и пароль — аккаунт в полной безопасности</p>
+      <p style="color:var(--t3);font-size:14px;line-height:1.6;">Не требуем логин и пароль &mdash; аккаунт в полной безопасности</p>
     </div>
     <div class="trust-card">
       <div class="mb-4" style="width:40px;height:40px;border-radius:var(--rs);background:var(--lime10);display:flex;align-items:center;justify-content:center;">
@@ -963,22 +1314,22 @@
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 8C3 7 3.8 6 5 6H15C16.2 6 17 7 17 8V9H3V8Z" stroke="var(--lime)" stroke-width="1.5" fill="none"/><path d="M3 9H17V14C17 15.2 16.2 16 15 16H5C3.8 16 3 15.2 3 14V9Z" stroke="var(--lime)" stroke-width="1.5" fill="none"/><rect x="6" y="12" width="5" height="2" rx="1" fill="var(--lime)"/></svg>
       </div>
       <h3 class="font-700 mb-2" style="color:var(--w);">Дешевле</h3>
-      <p style="color:var(--t3);font-size:14px;line-height:1.6;">Без посредников — скидки до 20% против цены в игре</p>
+      <p style="color:var(--t3);font-size:14px;line-height:1.6;">Без посредников &mdash; скидки до 20% против цены в игре</p>
     </div>
     <div class="trust-card">
       <div class="mb-4" style="width:40px;height:40px;border-radius:var(--rs);background:var(--lime10);display:flex;align-items:center;justify-content:center;">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 3C6.7 3 4 5.7 4 9C4 10.8 4.8 12.5 6 13.7V16L9 14.5C9.3 14.5 9.6 14.6 10 14.6C13.3 14.6 16 11.9 16 8.6C16 5.3 13.3 3 10 3Z" stroke="var(--lime)" stroke-width="1.5" fill="none"/></svg>
       </div>
       <h3 class="font-700 mb-2" style="color:var(--w);">Поддержка 24/7</h3>
-      <p style="color:var(--t3);font-size:14px;line-height:1.6;">Telegram-бот и живой оператор — ответим в любое время</p>
+      <p style="color:var(--t3);font-size:14px;line-height:1.6;">Telegram-бот и живой оператор &mdash; ответим в любое время</p>
     </div>
   </div>
 </section>
 
 
-<!-- ══════════════════════════════════════════════════════════════
+<!-- ================================================================
   REVIEWS
-══════════════════════════════════════════════════════════════ -->
+================================================================= -->
 <section class="max-w-7xl mx-auto px-4 sm:px-6 pb-14 fade-up">
   <div class="flex items-end justify-between mb-8">
     <div>
@@ -986,49 +1337,49 @@
       <div class="flex items-center gap-4">
         <div class="font-black" style="font-size:3rem;letter-spacing:-0.03em;color:var(--w);">4.9</div>
         <div>
-          <div style="color:var(--lime);font-size:18px;margin-bottom:4px;">★★★★★</div>
+          <div style="color:var(--lime);font-size:18px;margin-bottom:4px;">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
           <div style="color:var(--t3);font-size:13px;">20 712 покупателей</div>
         </div>
       </div>
     </div>
-    <button style="color:var(--t3);font-size:13px;background:none;border:none;cursor:pointer;font-family:var(--b);" class="hover:text-white transition-colors hidden sm:block">Все отзывы →</button>
+    <button style="color:var(--t3);font-size:13px;background:none;border:none;cursor:pointer;font-family:var(--b);" class="hover:text-white transition-colors hidden sm:block">Все отзывы &rarr;</button>
   </div>
   <div class="flex gap-4 overflow-x-auto pb-4" style="scrollbar-width:none;">
-    <div class="review-card"><div class="flex justify-between mb-3"><div style="font-weight:600;font-size:14px;">Алексей К.</div><div style="color:var(--lime);font-size:12px;">★★★★★</div></div><p style="color:var(--t3);font-size:14px;line-height:1.6;margin-bottom:10px;">Купил 1000 золота, пришло за 8 минут. Без вопросов, буду брать ещё.</p><div style="font-size:11px;color:var(--t3);opacity:0.5;">2 дня назад</div></div>
-    <div class="review-card"><div class="flex justify-between mb-3"><div style="font-weight:600;font-size:14px;">Максим Р.</div><div style="color:var(--lime);font-size:12px;">★★★★★</div></div><p style="color:var(--t3);font-size:14px;line-height:1.6;margin-bottom:10px;">Дешевле чем в игре на 20%. Делаю заказы раз в неделю уже 4 месяца.</p><div style="font-size:11px;color:var(--t3);opacity:0.5;">5 дней назад</div></div>
-    <div class="review-card"><div class="flex justify-between mb-3"><div style="font-weight:600;font-size:14px;">Дарья В.</div><div style="color:var(--lime);font-size:12px;">★★★★★</div></div><p style="color:var(--t3);font-size:14px;line-height:1.6;margin-bottom:10px;">Поддержка ответила за 2 минуты. Очень приятный сервис.</p><div style="font-size:11px;color:var(--t3);opacity:0.5;">1 нед. назад</div></div>
-    <div class="review-card"><div class="flex justify-between mb-3"><div style="font-weight:600;font-size:14px;">Никита Л.</div><div style="color:var(--lime);font-size:12px;">★★★★☆</div></div><p style="color:var(--t3);font-size:14px;line-height:1.6;margin-bottom:10px;">Разобрался не сразу, но поддержка помогла с Player ID. Зачтено.</p><div style="font-size:11px;color:var(--t3);opacity:0.5;">2 нед. назад</div></div>
-    <div class="review-card"><div class="flex justify-between mb-3"><div style="font-weight:600;font-size:14px;">Артём С.</div><div style="color:var(--lime);font-size:12px;">★★★★★</div></div><p style="color:var(--t3);font-size:14px;line-height:1.6;margin-bottom:10px;">Беру Gold Pass каждый месяц. Никогда задержек больше 15 минут.</p><div style="font-size:11px;color:var(--t3);opacity:0.5;">3 нед. назад</div></div>
+    <div class="review-card"><div class="flex justify-between mb-3"><div style="font-weight:600;font-size:14px;">Алексей К.</div><div style="color:var(--lime);font-size:12px;">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div><p style="color:var(--t3);font-size:14px;line-height:1.6;margin-bottom:10px;">Купил 1000 золота, пришло за 8 минут. Без вопросов, буду брать ещё.</p><div style="font-size:11px;color:var(--t3);opacity:0.5;">2 дня назад</div></div>
+    <div class="review-card"><div class="flex justify-between mb-3"><div style="font-weight:600;font-size:14px;">Максим Р.</div><div style="color:var(--lime);font-size:12px;">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div><p style="color:var(--t3);font-size:14px;line-height:1.6;margin-bottom:10px;">Дешевле чем в игре на 20%. Делаю заказы раз в неделю уже 4 месяца.</p><div style="font-size:11px;color:var(--t3);opacity:0.5;">5 дней назад</div></div>
+    <div class="review-card"><div class="flex justify-between mb-3"><div style="font-weight:600;font-size:14px;">Дарья В.</div><div style="color:var(--lime);font-size:12px;">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div><p style="color:var(--t3);font-size:14px;line-height:1.6;margin-bottom:10px;">Поддержка ответила за 2 минуты. Очень приятный сервис.</p><div style="font-size:11px;color:var(--t3);opacity:0.5;">1 нед. назад</div></div>
+    <div class="review-card"><div class="flex justify-between mb-3"><div style="font-weight:600;font-size:14px;">Никита Л.</div><div style="color:var(--lime);font-size:12px;">&#9733;&#9733;&#9733;&#9733;&#9734;</div></div><p style="color:var(--t3);font-size:14px;line-height:1.6;margin-bottom:10px;">Разобрался не сразу, но поддержка помогла с Player ID. Зачтено.</p><div style="font-size:11px;color:var(--t3);opacity:0.5;">2 нед. назад</div></div>
+    <div class="review-card"><div class="flex justify-between mb-3"><div style="font-weight:600;font-size:14px;">Артём С.</div><div style="color:var(--lime);font-size:12px;">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div><p style="color:var(--t3);font-size:14px;line-height:1.6;margin-bottom:10px;">Беру Gold Pass каждый месяц. Никогда задержек больше 15 минут.</p><div style="font-size:11px;color:var(--t3);opacity:0.5;">3 нед. назад</div></div>
   </div>
 </section>
 
 
-<!-- ══════════════════════════════════════════════════════════════
-  CTA + RELATED
-══════════════════════════════════════════════════════════════ -->
+<!-- ================================================================
+  CTA + RELATED GAMES
+================================================================= -->
 <section class="max-w-7xl mx-auto px-4 sm:px-6 pb-14 fade-up">
   <div class="p-8 md:p-12 flex flex-col sm:flex-row items-center justify-between gap-6 mb-14" style="background:linear-gradient(135deg,var(--s1),var(--s3));border:1.5px solid var(--lime15);border-radius:var(--rl);">
     <div>
       <h2 class="font-black mb-2" style="font-size:clamp(1.4rem,3vw,2rem);letter-spacing:-0.03em;color:var(--w);">Готов пополнить?</h2>
       <p style="color:var(--t3);">Выбери пакет и получи золото от 3 минут</p>
     </div>
-    <a href="#order" class="btn-buy" style="width:auto;padding:14px 32px;white-space:nowrap;">Выбрать пакет ↑</a>
+    <a href="#order" class="btn-buy" style="width:auto;padding:14px 32px;white-space:nowrap;">Выбрать пакет &#8593;</a>
   </div>
 
   <div class="section-label mb-4">Другие игры и сервисы</div>
   <div class="flex gap-4 overflow-x-auto pb-4" style="scrollbar-width:none;">
-    <a href="#" class="game-card text-center" style="text-decoration:none;"><div class="flex items-center justify-center" style="height:80px;background:linear-gradient(135deg,#1a1a2e,#0d0d1a);overflow:hidden;"><img src="img/pubg-mobile.png" alt="PUBG Mobile" style="width:52px;height:52px;border-radius:12px;object-fit:cover;"></div><div style="padding:10px 12px;"><div style="font-size:12px;font-weight:700;color:var(--w);margin-bottom:2px;">PUBG Mobile</div><div style="font-size:11px;color:var(--lime);">от 89 ₽</div></div></a>
-    <a href="#" class="game-card text-center" style="text-decoration:none;"><div class="flex items-center justify-center" style="height:80px;background:linear-gradient(135deg,#1e3a1e,#0d2b0d);overflow:hidden;"><img src="img/brawl-stars.png" alt="Brawl Stars" style="width:52px;height:52px;border-radius:12px;object-fit:cover;"></div><div style="padding:10px 12px;"><div style="font-size:12px;font-weight:700;color:var(--w);margin-bottom:2px;">Brawl Stars</div><div style="font-size:11px;color:var(--lime);">от 65 ₽</div></div></a>
-    <a href="#" class="game-card text-center" style="text-decoration:none;"><div class="flex items-center justify-center" style="height:80px;background:linear-gradient(135deg,#1a0d2e,#12082a);overflow:hidden;"><img src="img/clash-royale.png" alt="Clash Royale" style="width:52px;height:52px;border-radius:12px;object-fit:cover;"></div><div style="padding:10px 12px;"><div style="font-size:12px;font-weight:700;color:var(--w);margin-bottom:2px;">Clash Royale</div><div style="font-size:11px;color:var(--lime);">от 119 ₽</div></div></a>
-    <a href="#" class="game-card text-center" style="text-decoration:none;"><div class="flex items-center justify-center" style="height:80px;background:linear-gradient(135deg,#1a1500,#2a2000);overflow:hidden;"><img src="img/genshin-impact.png" alt="Genshin Impact" style="width:52px;height:52px;border-radius:12px;object-fit:cover;"></div><div style="padding:10px 12px;"><div style="font-size:12px;font-weight:700;color:var(--w);margin-bottom:2px;">Genshin Impact</div><div style="font-size:11px;color:var(--lime);">от 99 ₽</div></div></a>
-    <a href="#" class="game-card text-center" style="text-decoration:none;"><div class="flex items-center justify-center" style="height:80px;background:linear-gradient(135deg,#001a2e,#000e1a);overflow:hidden;"><img src="img/roblox.png" alt="Roblox" style="width:52px;height:52px;border-radius:12px;object-fit:cover;"></div><div style="padding:10px 12px;"><div style="font-size:12px;font-weight:700;color:var(--w);margin-bottom:2px;">Roblox</div><div style="font-size:11px;color:var(--lime);">от 75 ₽</div></div></a>
+    <a href="#" class="game-card text-center" style="text-decoration:none;"><div class="flex items-center justify-center" style="height:80px;background:linear-gradient(135deg,#1a1a2e,#0d0d1a);overflow:hidden;"><img src="img/pubg-mobile.png" alt="PUBG Mobile" style="width:52px;height:52px;border-radius:12px;object-fit:cover;"></div><div style="padding:10px 12px;"><div style="font-size:12px;font-weight:700;color:var(--w);margin-bottom:2px;">PUBG Mobile</div><div style="font-size:11px;color:var(--lime);">от 89 &#8381;</div></div></a>
+    <a href="#" class="game-card text-center" style="text-decoration:none;"><div class="flex items-center justify-center" style="height:80px;background:linear-gradient(135deg,#1e3a1e,#0d2b0d);overflow:hidden;"><img src="img/brawl-stars.png" alt="Brawl Stars" style="width:52px;height:52px;border-radius:12px;object-fit:cover;"></div><div style="padding:10px 12px;"><div style="font-size:12px;font-weight:700;color:var(--w);margin-bottom:2px;">Brawl Stars</div><div style="font-size:11px;color:var(--lime);">от 65 &#8381;</div></div></a>
+    <a href="#" class="game-card text-center" style="text-decoration:none;"><div class="flex items-center justify-center" style="height:80px;background:linear-gradient(135deg,#1a0d2e,#12082a);overflow:hidden;"><img src="img/clash-royale.png" alt="Clash Royale" style="width:52px;height:52px;border-radius:12px;object-fit:cover;"></div><div style="padding:10px 12px;"><div style="font-size:12px;font-weight:700;color:var(--w);margin-bottom:2px;">Clash Royale</div><div style="font-size:11px;color:var(--lime);">от 119 &#8381;</div></div></a>
+    <a href="#" class="game-card text-center" style="text-decoration:none;"><div class="flex items-center justify-center" style="height:80px;background:linear-gradient(135deg,#1a1500,#2a2000);overflow:hidden;"><img src="img/genshin-impact.png" alt="Genshin Impact" style="width:52px;height:52px;border-radius:12px;object-fit:cover;"></div><div style="padding:10px 12px;"><div style="font-size:12px;font-weight:700;color:var(--w);margin-bottom:2px;">Genshin Impact</div><div style="font-size:11px;color:var(--lime);">от 99 &#8381;</div></div></a>
+    <a href="#" class="game-card text-center" style="text-decoration:none;"><div class="flex items-center justify-center" style="height:80px;background:linear-gradient(135deg,#001a2e,#000e1a);overflow:hidden;"><img src="img/roblox.png" alt="Roblox" style="width:52px;height:52px;border-radius:12px;object-fit:cover;"></div><div style="padding:10px 12px;"><div style="font-size:12px;font-weight:700;color:var(--w);margin-bottom:2px;">Roblox</div><div style="font-size:11px;color:var(--lime);">от 75 &#8381;</div></div></a>
   </div>
 </section>
 
 
-<!-- ══════════════════════════════════════════════════════════════
+<!-- ================================================================
   FOOTER
-══════════════════════════════════════════════════════════════ -->
+================================================================= -->
 <footer style="border-top:1px solid var(--border);margin-top:16px;">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
     <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-10">
@@ -1042,7 +1393,7 @@
           <a href="#" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">VK</a>
         </div>
       </div>
-      <div><div style="font-size:11px;font-weight:700;color:var(--w);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:16px;">Игры</div><div class="flex flex-col gap-2"><a href="/donateboom/standoff-2" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">Standoff 2</a><a href="#" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">PUBG Mobile</a><a href="#" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">Brawl Stars</a><a href="#" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">Все игры</a></div></div>
+      <div><div style="font-size:11px;font-weight:700;color:var(--w);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:16px;">Игры</div><div class="flex flex-col gap-2"><a href="standoff-2.html" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">Standoff 2</a><a href="#" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">PUBG Mobile</a><a href="#" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">Brawl Stars</a><a href="catalog.html" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">Все игры</a></div></div>
       <div><div style="font-size:11px;font-weight:700;color:var(--w);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:16px;">Сервисы</div><div class="flex flex-col gap-2"><a href="#" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">PlayStation</a><a href="#" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">App Store</a><a href="#" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">Steam</a><a href="#" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">TikTok</a></div></div>
       <div><div style="font-size:11px;font-weight:700;color:var(--w);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:16px;">Компания</div><div class="flex flex-col gap-2"><a href="#" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">О нас</a><a href="#" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">Поддержка</a><a href="#" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">Отзывы</a><a href="#" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">Политика конфиденциальности</a></div></div>
     </div>
@@ -1051,16 +1402,16 @@
 </footer>
 
 
-<!-- ══════════════════════════════════════════════════════════════
+<!-- ================================================================
   MOBILE STICKY CTA
-══════════════════════════════════════════════════════════════ -->
+================================================================= -->
 <div class="mobile-sticky">
   <div class="flex items-center gap-3">
     <div class="flex-1 min-w-0">
       <div style="font-size:12px;color:var(--t3);margin-bottom:2px;" id="mob-gold">750 Gold</div>
-      <div style="font-size:18px;font-weight:800;color:var(--lime);letter-spacing:-0.02em;" id="mob-price">500 ₽</div>
+      <div style="font-size:18px;font-weight:800;color:var(--lime);letter-spacing:-0.02em;" id="mob-price">500 &#8381;</div>
     </div>
-    <button class="btn-buy" style="width:auto;padding:12px 24px;font-size:15px;" onclick="openBS()">К оплате →</button>
+    <button class="btn-buy" style="width:auto;padding:12px 24px;font-size:15px;" onclick="openBS()">К оплате &rarr;</button>
   </div>
 </div>
 
@@ -1069,14 +1420,16 @@
   <div class="bottom-sheet" onclick="event.stopPropagation()">
     <div class="bs-handle"></div>
     <div class="flex items-center gap-3 mb-5">
-      <div style="font-size:26px;">💰</div>
-      <div><div style="font-weight:700;color:var(--w);">Золото Standoff 2</div><div style="color:var(--lime);font-weight:800;font-size:18px;" id="bs-price">500 ₽</div></div>
+      <div style="font-size:26px;">🪙</div>
+      <div><div style="font-weight:700;color:var(--w);" id="bs-name">Золото Standoff 2</div><div style="color:var(--lime);font-weight:800;font-size:18px;" id="bs-price">500 &#8381;</div></div>
     </div>
-    <div id="bs-market-hint" class="market-instruction mb-4"><div style="font-weight:700;margin-bottom:4px;">Скин выставляется по цене:</div><div style="font-size:18px;font-weight:800;color:var(--lime);" id="bs-skin-price">625 Gold</div><span>Бот купит автоматически.</span></div>
-    <label style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--t3);display:block;margin-bottom:8px;">Player ID</label>
-    <input type="text" class="uid-input mb-4" placeholder="Например: 8291847362" inputmode="numeric">
-    <button class="btn-buy mb-3">К оплате — <span id="bs-btn-price">500 ₽</span></button>
-    <div class="flex justify-center gap-2"><span class="pay-icon">Карта</span><span class="pay-icon">СБП</span><span class="pay-icon">Крипта</span></div>
+    <div id="bs-market-hint" class="market-instruction mb-4"><div style="font-weight:700;margin-bottom:4px;">Скин выставляется по цене:</div><div style="font-size:18px;font-weight:800;color:var(--lime);" id="bs-skin-price">938 Gold</div><span>Бот купит автоматически.</span></div>
+    <div id="bs-uid-section">
+      <label style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--t3);display:block;margin-bottom:8px;">Player ID</label>
+      <input type="text" class="uid-input mb-4" placeholder="Например: 8291847362" inputmode="numeric">
+    </div>
+    <button class="btn-buy mb-3">К оплате &mdash; <span id="bs-btn-price">500 &#8381;</span></button>
+    <div class="flex justify-center gap-2"><span class="pay-label">Карта</span><span class="pay-label">СБП</span><span class="pay-label">SberPay</span><span class="pay-label">Крипта</span></div>
   </div>
 </div>
 
@@ -1087,7 +1440,7 @@
     <ol style="color:var(--t3);font-size:14px;line-height:1.8;padding-left:20px;margin-bottom:20px;">
       <li>Откройте Standoff 2</li>
       <li>Нажмите на аватар (левый верхний угол)</li>
-      <li>Раздел «Профиль»</li>
+      <li>Раздел &laquo;Профиль&raquo;</li>
       <li>Скопируйте цифровой ID под ником</li>
     </ol>
     <div style="background:var(--bg);border-radius:12px;padding:16px;text-align:center;margin-bottom:20px;">
@@ -1099,9 +1452,9 @@
 </div>
 
 
-<!-- ══════════════════════════════════════════════════════════════
+<!-- ================================================================
   FLOATING CHAT WIDGET
-══════════════════════════════════════════════════════════════ -->
+================================================================= -->
 <div class="chat-fab" id="chat-fab">
   <div class="chat-fab-menu">
     <a href="https://t.me/donateboom" target="_blank" class="chat-fab-link">
@@ -1125,17 +1478,21 @@
 </div>
 
 
-<!-- ══════════════════════════════════════════════════════════════
+<!-- ================================================================
   JS
-══════════════════════════════════════════════════════════════ -->
+================================================================= -->
 <script>
-  // ── Rates ──
-  const MARKET_RATE = 1.5;   // 1₽ = 1.5 gold (market method)
-  const UID_RATE    = 0.565;  // 1₽ = ~0.565 gold (UID base rate)
+  // -- Rates --
+  const MARKET_RATE = 1.5;   // 1 RUB = 1.5 gold (market method)
+  const UID_RATE    = 0.565;  // 1 RUB = ~0.565 gold (UID base rate)
+  const SKIN_MARKUP = 1.25;   // skin price = gold * 1.25
 
   let method = 'market';
+  let uidSelectedRub = 1268;
+  let uidSelectedGold = 1000;
+  let uidSelectedLabel = 'Золото Standoff 2';
 
-  // ── Slider fill ──
+  // -- Slider fill --
   function updateSliderFill(slider) {
     const min = parseFloat(slider.min);
     const max = parseFloat(slider.max);
@@ -1144,99 +1501,156 @@
     slider.style.setProperty('--fill', pct + '%');
   }
 
-  // ── Market method ──
-  function updateMarket() {
-    const amountEl = document.getElementById('market-amount');
-    const slider   = document.getElementById('market-slider');
-    let rub = parseInt(amountEl.value) || 50;
-    if (rub < 50) rub = 50;
-    if (rub > 50000) rub = 50000;
+  // -- Market: update from RUBLE input --
+  function updateMarketFromRub() {
+    const rubEl   = document.getElementById('market-amount');
+    const goldEl  = document.getElementById('market-gold-input');
+    const slider  = document.getElementById('market-slider');
+    let rub = parseInt(rubEl.value) || 50;
+    if (rub < 50)    rub = 50;
+    if (rub > 50000)  rub = 50000;
+
+    const gold = Math.floor(rub * MARKET_RATE);
+    goldEl.value = gold;
 
     slider.value = Math.min(rub, 10000);
     updateSliderFill(slider);
 
-    const gold = Math.floor(rub * MARKET_RATE);
-    const skinPrice = Math.ceil(gold * 1.25);
+    const skinPrice = Math.ceil(gold * SKIN_MARKUP);
+    document.getElementById('market-gold').textContent = gold.toLocaleString('ru') + ' Gold';
+    document.getElementById('commission-skin-price').textContent = skinPrice.toLocaleString('ru') + ' Gold';
+
+    // Deselect market presets
+    document.querySelectorAll('#market-presets .preset-chip').forEach(c => c.classList.remove('active'));
+
+    if (method === 'market') updatePanel(rub, gold, skinPrice);
+  }
+
+  // -- Market: update from GOLD input --
+  function updateMarketFromGold() {
+    const goldEl  = document.getElementById('market-gold-input');
+    const rubEl   = document.getElementById('market-amount');
+    const slider  = document.getElementById('market-slider');
+    let gold = parseInt(goldEl.value) || 75;
+    if (gold < 75)     gold = 75;
+    if (gold > 75000)  gold = 75000;
+
+    const rub = Math.ceil(gold / MARKET_RATE);
+    rubEl.value = rub;
+
+    slider.value = Math.min(rub, 10000);
+    updateSliderFill(slider);
+
+    const skinPrice = Math.ceil(gold * SKIN_MARKUP);
+    document.getElementById('market-gold').textContent = gold.toLocaleString('ru') + ' Gold';
+    document.getElementById('commission-skin-price').textContent = skinPrice.toLocaleString('ru') + ' Gold';
+
+    // Deselect market presets
+    document.querySelectorAll('#market-presets .preset-chip').forEach(c => c.classList.remove('active'));
+
+    if (method === 'market') updatePanel(rub, gold, skinPrice);
+  }
+
+  // -- Market preset chip select --
+  function selectMarketPreset(el) {
+    document.querySelectorAll('#market-presets .preset-chip').forEach(c => c.classList.remove('active'));
+    el.classList.add('active');
+    const rub  = parseInt(el.dataset.rub);
+    const gold = parseInt(el.dataset.gold);
+
+    document.getElementById('market-amount').value = rub;
+    document.getElementById('market-gold-input').value = gold;
+    document.getElementById('market-slider').value = Math.min(rub, 10000);
+    updateSliderFill(document.getElementById('market-slider'));
+
+    const skinPrice = Math.ceil(gold * SKIN_MARKUP);
     document.getElementById('market-gold').textContent = gold.toLocaleString('ru') + ' Gold';
     document.getElementById('commission-skin-price').textContent = skinPrice.toLocaleString('ru') + ' Gold';
 
     if (method === 'market') updatePanel(rub, gold, skinPrice);
   }
 
-  // ── UID method ──
-  function updateUid(fromInput) {
-    const amountEl = document.getElementById('uid-amount');
-    const slider   = document.getElementById('uid-slider');
-    let rub = parseInt(amountEl.value) || 50;
-    if (rub < 50) rub = 50;
-    if (rub > 50000) rub = 50000;
-
-    slider.value = Math.min(rub, 10000);
-    updateSliderFill(slider);
-
-    const gold = Math.floor(rub * UID_RATE);
-    document.getElementById('uid-gold').textContent = gold.toLocaleString('ru') + ' Gold';
-
-    // Deselect preset chips if user typed custom
-    if (fromInput) {
-      document.querySelectorAll('.preset-chip').forEach(c => c.classList.remove('active'));
-    }
-
-    if (method === 'uid') updatePanel(rub, gold, 0);
-  }
-
-  // ── Preset chip select ──
-  function selectPreset(el) {
-    document.querySelectorAll('.preset-chip').forEach(c => c.classList.remove('active'));
+  // -- UID card select --
+  function selectUidCard(el) {
+    document.querySelectorAll('.product-card').forEach(c => c.classList.remove('active'));
     el.classList.add('active');
-    const rub  = parseInt(el.dataset.rub);
-    const gold = parseInt(el.dataset.gold);
-    document.getElementById('uid-amount').value = rub;
-    document.getElementById('uid-slider').value = Math.min(rub, 10000);
-    updateSliderFill(document.getElementById('uid-slider'));
-    document.getElementById('uid-gold').textContent = gold.toLocaleString('ru') + ' Gold';
-    updatePanel(rub, gold, 0);
+
+    uidSelectedRub   = parseInt(el.dataset.rub);
+    uidSelectedGold  = parseInt(el.dataset.gold) || 0;
+    uidSelectedLabel = el.dataset.label || 'Золото Standoff 2';
+
+    const goldInfo = uidSelectedGold > 0
+      ? uidSelectedGold.toLocaleString('ru') + ' Gold'
+      : uidSelectedLabel;
+
+    if (method === 'uid') {
+      updatePanel(uidSelectedRub, uidSelectedGold, 0);
+      document.getElementById('panel-name').textContent = uidSelectedGold > 0 ? 'Золото Standoff 2' : uidSelectedLabel;
+    }
   }
 
-  // ── Switch method ──
+  // -- Switch method --
   function switchMethod(m) {
     method = m;
     document.querySelectorAll('.method-tab').forEach(t => t.classList.toggle('active', t.dataset.method === m));
-    document.getElementById('content-market').style.display = m === 'market' ? 'block' : 'none';
-    document.getElementById('content-uid').style.display    = m === 'uid'    ? 'block' : 'none';
-    document.getElementById('panel-market-inst').style.display = m === 'market' ? 'block' : 'none';
-    document.getElementById('bs-market-hint').style.display    = m === 'market' ? 'block' : 'none';
-    document.getElementById('panel-method').textContent = m === 'market' ? 'Через рынок' : 'По UID';
-    document.getElementById('inst-method-label').textContent = m === 'market' ? 'через рынок' : 'по UID';
+    document.getElementById('content-market').style.display      = m === 'market' ? 'block' : 'none';
+    document.getElementById('content-uid').style.display          = m === 'uid'    ? 'block' : 'none';
+    document.getElementById('panel-market-inst').style.display    = m === 'market' ? 'block' : 'none';
+    document.getElementById('panel-uid-section').style.display    = m === 'uid'    ? 'block' : 'none';
+    document.getElementById('bs-market-hint').style.display       = m === 'market' ? 'block' : 'none';
+    document.getElementById('bs-uid-section').style.display       = m === 'uid'    ? 'block' : 'none';
+    document.getElementById('panel-method').textContent            = m === 'market' ? 'Через рынок' : 'По UID';
+    document.getElementById('inst-method-label').textContent       = m === 'market' ? 'через рынок' : 'по UID';
+    document.getElementById('inst-market-steps').style.display     = m === 'market' ? 'block' : 'none';
+    document.getElementById('inst-uid-steps').style.display        = m === 'uid'    ? 'block' : 'none';
 
-    if (m === 'market') updateMarket();
-    else updateUid(false);
+    if (m === 'market') {
+      document.getElementById('panel-name').textContent = 'Золото Standoff 2';
+      updateMarketFromRub();
+    } else {
+      document.getElementById('panel-name').textContent = uidSelectedGold > 0 ? 'Золото Standoff 2' : uidSelectedLabel;
+      updatePanel(uidSelectedRub, uidSelectedGold, 0);
+    }
   }
 
-  // ── Update right panel ──
+  // -- Update right panel + mobile --
   function updatePanel(rub, gold, skinPrice) {
-    const rubStr  = rub.toLocaleString('ru') + ' ₽';
-    const goldStr = gold.toLocaleString('ru') + ' Gold';
+    const rubStr  = rub.toLocaleString('ru') + ' \u20BD';
+    const goldStr = gold > 0 ? gold.toLocaleString('ru') + ' Gold' : uidSelectedLabel;
 
     // Desktop panel
-    document.getElementById('panel-total').textContent    = rubStr;
-    document.getElementById('panel-gold-info').textContent = goldStr;
-    document.getElementById('btn-price').textContent       = rubStr;
+    document.getElementById('panel-total').textContent     = rubStr;
+    document.getElementById('panel-gold-info').textContent  = goldStr;
+    document.getElementById('btn-price').textContent        = rubStr;
     if (skinPrice > 0) {
       document.getElementById('panel-skin-price').textContent = skinPrice.toLocaleString('ru') + ' Gold';
+      document.getElementById('panel-skin-instruction-price').textContent = skinPrice.toLocaleString('ru');
+      // Update modal too
+      document.getElementById('modal-skin-price').textContent = skinPrice.toLocaleString('ru') + ' G';
+      document.getElementById('modal-gold-receive').textContent = (gold > 0 ? gold.toLocaleString('ru') : '0') + 'G';
     }
 
     // Mobile
-    document.getElementById('mob-gold').textContent  = goldStr;
-    document.getElementById('mob-price').textContent  = rubStr;
-    document.getElementById('bs-price').textContent   = rubStr;
-    document.getElementById('bs-btn-price').textContent = rubStr;
+    document.getElementById('mob-gold').textContent     = goldStr;
+    document.getElementById('mob-price').textContent     = rubStr;
+    document.getElementById('bs-price').textContent      = rubStr;
+    document.getElementById('bs-btn-price').textContent  = rubStr;
     if (skinPrice > 0) {
       document.getElementById('bs-skin-price').textContent = skinPrice.toLocaleString('ru') + ' Gold';
     }
   }
 
-  // ── Info tabs ──
+  // -- Instruction modal --
+  function openInstructionModal() {
+    document.getElementById('instruction-modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeInstructionModal() {
+    document.getElementById('instruction-modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // -- Info tabs --
   function switchInfoTab(tab) {
     document.querySelectorAll('.info-tab').forEach((t, i) => {
       t.classList.toggle('active', (tab === 'instruction' && i === 0) || (tab === 'faq' && i === 1));
@@ -1245,7 +1659,7 @@
     document.getElementById('tab-faq').style.display         = tab === 'faq'         ? 'block' : 'none';
   }
 
-  // ── FAQ accordion ──
+  // -- FAQ accordion --
   function toggleFaq(btn) {
     const ans  = btn.nextElementSibling;
     const icon = btn.querySelector('.faq-icon');
@@ -1255,12 +1669,12 @@
     if (!open) { ans.classList.add('open'); icon.classList.add('rotated'); }
   }
 
-  // ── Mobile bottom sheet ──
+  // -- Mobile bottom sheet --
   function openBS()  { document.getElementById('bs-overlay').style.display='block'; document.body.style.overflow='hidden'; }
   function closeBS() { document.getElementById('bs-overlay').style.display='none';  document.body.style.overflow=''; }
   function showUidHelp() { document.getElementById('uid-help').style.display='block'; }
 
-  // ── Close chat widget when clicking outside ──
+  // -- Close chat widget when clicking outside --
   document.addEventListener('click', function(e) {
     const fab = document.getElementById('chat-fab');
     if (fab.classList.contains('open') && !fab.contains(e.target)) {
@@ -1268,16 +1682,24 @@
     }
   });
 
-  // ── Scroll fade ──
+  // -- Escape key closes modals --
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closeInstructionModal();
+      closeBS();
+      document.getElementById('uid-help').style.display = 'none';
+    }
+  });
+
+  // -- Scroll fade --
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
   }, { threshold: 0.08 });
   document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
 
-  // ── Init ──
+  // -- Init --
   updateSliderFill(document.getElementById('market-slider'));
-  updateSliderFill(document.getElementById('uid-slider'));
-  updateMarket();
+  updateMarketFromRub();
 </script>
 
 </body>
