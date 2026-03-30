@@ -2,6 +2,8 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+
 <meta name="description" content="Оформление и оплата заказа — Standoff 2, Steam, Brawl Stars. Быстрое зачисление, несколько способов оплаты.">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Оформление заказа | DonateBoom</title>
@@ -177,6 +179,17 @@ body{background:var(--bg);color:var(--w);font-family:var(--b);font-size:15px;lin
 }
 </style>
 <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+<!-- Яндекс.Метрика — вставьте реальный счётчик от клиента
+<script type="text/javascript">
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+   ym(XXXXXXXX, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/XXXXXXXX" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+-->
 </head>
 <body>
 
@@ -300,14 +313,14 @@ body{background:var(--bg);color:var(--w);font-family:var(--b);font-size:15px;lin
     <!-- Email — общий для обоих методов -->
     <div class="form-group">
       <label class="form-label">Email <span>*</span></label>
-      <input class="form-input" type="email" placeholder="Пришлём уведомление о выполнении">
+      <input class="form-input" id="emailInput" type="email" placeholder="Пришлём уведомление о выполнении">
     </div>
 
     <!-- ─── БЛОК UID ─────────────────────────────── -->
     <div id="block-uid" style="display:none;">
       <div class="form-group">
         <label class="form-label">Player ID <span>*</span></label>
-        <input class="form-input" type="text" placeholder="Например: 8291847362" inputmode="numeric">
+        <input class="form-input" id="playerIdInput" type="text" placeholder="Например: 8291847362" inputmode="numeric">
         <div class="form-hint"><a href="about.html#faq">Где найти Player ID?</a> — откройте игру → Настройки → Профиль</div>
       </div>
     </div>
@@ -362,7 +375,7 @@ body{background:var(--bg);color:var(--w);font-family:var(--b);font-size:15px;lin
       <span class="total-val">1&nbsp;268&nbsp;₽</span>
     </div>
 
-    <button class="btn-full" id="btn-to-pay" onclick="goToStep(3)">Перейти к оплате</button>
+    <button class="btn-full" id="btn-to-pay" onclick="validateAndContinue()">Перейти к оплате</button>
   </div>
 
   <!-- ═══════════════════════════════════
@@ -417,7 +430,7 @@ body{background:var(--bg);color:var(--w);font-family:var(--b);font-size:15px;lin
       <label for="agree">Согласен с <a href="legal.html#oferta">публичной офертой</a> и <a href="legal.html#privacy">политикой конфиденциальности</a></label>
     </div>
 
-    <button class="btn-full" onclick="goToStep(4)">Оплатить 1&nbsp;268&nbsp;₽</button>
+    <button class="btn-full" id="btn-pay" onclick="submitPayment(this)">Оплатить 1&nbsp;268&nbsp;₽</button>
   </div>
 
   <!-- ═══════════════════════════════════
@@ -522,6 +535,40 @@ function applyPromo() {
   btn.textContent = 'Применён!';
   btn.style.color = 'var(--mint)';
   btn.disabled = true;
+}
+
+/* ── VALIDATION ───────────────────────── */
+function validateAndContinue() {
+  var email = document.getElementById('emailInput');
+  var pid   = document.getElementById('playerIdInput');
+  var emailVal = email ? email.value.trim() : '';
+  var pidVal   = pid   ? pid.value.trim()   : '';
+
+  if (!emailVal || !emailVal.includes('@')) {
+    email.focus();
+    email.style.borderColor = 'var(--lime)';
+    setTimeout(function(){ email.style.borderColor = ''; }, 2000);
+    return;
+  }
+  if (currentMethod === 'uid' && !pidVal) {
+    pid.focus();
+    pid.style.borderColor = 'var(--lime)';
+    setTimeout(function(){ pid.style.borderColor = ''; }, 2000);
+    return;
+  }
+  goToStep(3);
+}
+
+/* ── PAYMENT SUBMIT ───────────────────── */
+function submitPayment(btn) {
+  var agree = document.getElementById('agree');
+  if (agree && !agree.checked) {
+    agree.focus();
+    return;
+  }
+  btn.disabled = true;
+  btn.textContent = 'Обрабатываем оплату…';
+  setTimeout(function(){ goToStep(4); }, 1500);
 }
 </script>
 <script>

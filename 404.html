@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — Страница не найдена | DonateBoom</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800;900&family=Rubik:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#070707;--s1:#0E0E0E;--s2:#141414;--s3:#1A1A1A;--s4:#222;
+  --border:rgba(255,255,255,0.06);--bh:rgba(255,255,255,0.1);--b-active:rgba(234,58,59,0.25);
+  --lime:#EA3A3B;--lime-soft:#FF6B6B;--lime10:rgba(234,58,59,0.08);--lime15:rgba(234,58,59,0.13);--lime-glow:rgba(234,58,59,0.05);
+  --mint:#7AE8A0;--mint10:rgba(122,232,160,0.08);
+  --w:#F5F5F7;--t1:#E0E0E0;--t2:#A0A0A0;--t3:#6E6E73;--t4:#3A3A3A;--t5:#252525;
+  --d:'Unbounded',sans-serif;--b:'Rubik',sans-serif;--m:'JetBrains Mono',monospace;
+  --rl:20px;--rm:14px;--rs:10px;--pill:100px;--max:1280px;
+  --ease:cubic-bezier(.4,0,.2,1);
+  --sp-xs:4px;--sp-sm:8px;--sp-md:16px;--sp-lg:24px;--sp-xl:32px;--sp-2xl:48px;--sp-3xl:64px;
+  --tg:#229ED9;--vk:#0077FF;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--t1);font-family:var(--b);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;position:relative;min-height:100vh;display:flex;flex-direction:column}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,0.028) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.028) 1px,transparent 1px);background-size:72px 72px;mask-image:radial-gradient(ellipse 80% 70% at 50% 40%,black 20%,transparent 70%);-webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 40%,black 20%,transparent 70%)}
+body>*{position:relative;z-index:1}
+body::after{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");opacity:0.03;mix-blend-mode:overlay;background-size:200px 200px}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+
+.container{max-width:var(--max);margin:0 auto;padding:0 48px}
+@media(max-width:800px){.container{padding:0 20px}}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;height:64px;display:flex;align-items:center;background:rgba(7,7,7,0.85);backdrop-filter:blur(24px) saturate(1.4);-webkit-backdrop-filter:blur(24px) saturate(1.4);border-bottom:1px solid var(--border)}
+.nav .container{display:flex;align-items:center;gap:6px;width:100%;max-width:var(--max);margin:0 auto;padding:0 24px}
+.logo{display:flex;align-items:center;flex-shrink:0;margin-right:20px}
+.logo img{height:44px;width:auto}
+.nav-spacer{flex:1;min-width:8px}
+.nav-links{display:flex;gap:2px;list-style:none;flex-shrink:0}
+.nav-links a{display:block;padding:7px 14px;border-radius:var(--pill);font-size:13px;font-weight:500;color:var(--t2);transition:color .2s,background .2s;white-space:nowrap}
+.nav-links a:hover{color:var(--w);background:var(--s2)}
+.nav-r{display:flex;gap:8px;align-items:center;flex-shrink:0;margin-left:4px}
+.btn-nav{display:inline-flex;align-items:center;padding:8px 18px;border-radius:var(--pill);background:var(--lime);color:#fff;font-family:var(--b);font-size:13px;font-weight:600;border:none;cursor:pointer;transition:background .2s;white-space:nowrap}
+.btn-nav:hover{background:#d63434}
+.burger{display:none;width:36px;height:36px;border:none;background:none;cursor:pointer;padding:6px;flex-shrink:0}
+.burger span{display:block;width:24px;height:2px;background:var(--w);margin:5px 0;transition:all .3s;border-radius:2px}
+.burger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.burger.active span:nth-child(2){opacity:0}
+.burger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.mobile-menu{display:none;position:fixed;inset:0;top:64px;z-index:99;background:rgba(7,7,7,0.97);backdrop-filter:blur(20px);padding:32px 24px;flex-direction:column;gap:8px}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-family:var(--b);font-size:16px;font-weight:500;color:var(--t1);padding:14px 0;border-bottom:1px solid var(--border);transition:color .2s}
+.mobile-menu a:hover{color:var(--w)}
+
+/* BUTTONS */
+.btn{font-family:var(--m);font-weight:600;font-size:12px;padding:8px 20px;border-radius:var(--pill);border:none;cursor:pointer;transition:all .2s var(--ease);display:inline-flex;align-items:center;gap:6px}
+.btn-lime{background:var(--lime);color:#fff;box-shadow:0 0 20px rgba(234,58,59,0.22),0 0 40px rgba(234,58,59,0.08)}
+.btn-lime:hover{background:#d63434;transform:translateY(-1px);box-shadow:0 0 30px rgba(234,58,59,0.4),0 0 60px rgba(234,58,59,0.14)}
+.btn-ghost{background:none;color:var(--t2);border:1px solid var(--border)}
+.btn-ghost:hover{border-color:var(--bh);color:var(--w)}
+
+/* 404 SECTION */
+.not-found{flex:1;display:flex;align-items:center;justify-content:center;padding:140px 0 80px;text-align:center}
+.nf-inner{max-width:600px;margin:0 auto}
+.nf-code{
+  font-family:var(--d);font-size:clamp(80px,15vw,160px);font-weight:900;
+  letter-spacing:-0.05em;line-height:1;color:transparent;
+  background:linear-gradient(135deg,var(--lime) 0%,rgba(234,58,59,0.3) 100%);
+  -webkit-background-clip:text;background-clip:text;
+  margin-bottom:24px;
+  text-shadow:none;
+  filter:drop-shadow(0 0 40px rgba(234,58,59,0.3));
+}
+.nf-title{font-family:var(--d);font-size:clamp(18px,3vw,28px);font-weight:700;color:var(--w);margin-bottom:16px;letter-spacing:-0.03em}
+.nf-desc{font-size:15px;color:var(--t2);line-height:1.7;margin-bottom:40px;max-width:420px;margin-left:auto;margin-right:auto}
+.nf-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+/* FOOTER */
+.footer{margin-top:auto;border-top:1px solid var(--border);padding:48px 0 32px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px;margin-bottom:32px}
+.footer-brand{margin-bottom:12px}
+.footer-brand img{height:32px}
+.footer-about{font-size:13px;color:var(--t3);line-height:1.6;margin-bottom:16px;max-width:240px}
+.footer-tg{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;color:var(--t2);background:var(--s2);border:1px solid var(--border);border-radius:var(--pill);padding:7px 14px;transition:border-color .2s,color .2s}
+.footer-tg:hover{border-color:var(--lime);color:var(--lime)}
+.footer-col-t{font-family:var(--d);font-size:11px;font-weight:700;color:var(--t3);letter-spacing:.05em;text-transform:uppercase;margin-bottom:14px}
+.footer-links{list-style:none}
+.footer-links li{margin-bottom:10px}
+.footer-links a{font-size:13px;color:var(--t2);transition:color .2s}
+.footer-links a:hover{color:var(--w)}
+.footer-bot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.footer-copy{font-size:12px;color:var(--t3)}
+.footer-legal{display:flex;gap:16px}
+.footer-legal a{font-size:12px;color:var(--t3);transition:color .2s}
+.footer-legal a:hover{color:var(--t2)}
+
+@media(max-width:800px){
+  .burger{display:block}
+  .nav-links,.nav-spacer{display:none}
+  .footer-grid{grid-template-columns:1fr;gap:20px}
+}
+</style>
+<!-- Яндекс.Метрика — вставьте реальный счётчик от клиента
+<script type="text/javascript">
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+   ym(XXXXXXXX, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/XXXXXXXX" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+-->
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="container">
+    <a href="index.html" class="logo"><img src="logo-red.svg" alt="DonateBoom" height="44"></a>
+    <div class="nav-spacer"></div>
+    <ul class="nav-links">
+      <li><a href="about.html">О сервисе</a></li>
+      <li><a href="reviews.html">Отзывы</a></li>
+    </ul>
+    <div class="nav-r">
+      <div style="position:relative;"><button id="authNavBtn" class="btn-nav">Личный кабинет</button></div>
+      <button class="burger" id="burgerBtn" onclick="toggleMobile()"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Главная</a>
+  <a href="catalog.html">Каталог</a>
+  <a href="about.html">О сервисе</a>
+  <a href="reviews.html">Отзывы</a>
+  <a href="profile.html" id="mobileProfileLink">Личный кабинет</a>
+</div>
+
+<!-- 404 -->
+<section class="not-found">
+  <div class="container">
+    <div class="nf-inner">
+      <div class="nf-code">404</div>
+      <h1 class="nf-title">Страница не найдена</h1>
+      <p class="nf-desc">Возможно, адрес изменился или страница была удалена. Попробуйте вернуться на главную.</p>
+      <div class="nf-actions">
+        <a href="index.html" class="btn btn-lime">На главную</a>
+        <a href="catalog.html" class="btn btn-ghost">Перейти в&nbsp;каталог</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand"><img src="logo-red.svg" alt="DonateBoom" height="32"></div>
+        <p class="footer-about">Сервис пополнения игровых валют. Продаём напрямую, без&nbsp;посредников.</p>
+        <a href="https://t.me/donateboom" class="footer-tg" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--lime)"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-2.04 9.613c-.15.675-.546.84-1.107.523l-3.065-2.258-1.48 1.423c-.163.163-.3.3-.616.3l.22-3.12 5.673-5.123c.247-.22-.054-.342-.383-.122L7.044 14.44l-3.015-.942c-.656-.205-.668-.656.137-.97l11.784-4.544c.547-.197 1.026.133.612.264z"/></svg>
+          Telegram-канал
+        </a>
+      </div>
+      <div>
+        <div class="footer-col-t">Каталог</div>
+        <ul class="footer-links">
+          <li><a href="standoff-2.html">Standoff 2</a></li>
+          <li><a href="catalog.html">PlayStation</a></li>
+          <li><a href="catalog.html">TikTok</a></li>
+          <li><a href="catalog.html">App Store</a></li>
+          <li><a href="catalog.html">Все услуги</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-t">Покупателям</div>
+        <ul class="footer-links">
+          <li><a href="about.html#how-it-works">Как это работает</a></li>
+          <li><a href="about.html#guarantees">Гарантии и&nbsp;безопасность</a></li>
+          <li><a href="about.html#faq">FAQ</a></li>
+          <li><a href="reviews.html">Отзывы</a></li>
+          <li><a href="about.html">О сервисе</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-t">Связь</div>
+        <ul class="footer-links">
+          <li><a href="about.html#contacts">Контакты</a></li>
+          <li><a href="https://t.me/donateboom" target="_blank" rel="noopener">Telegram</a></li>
+          <li><a href="https://vk.com/donateboom" target="_blank" rel="noopener">ВКонтакте</a></li>
+          <li><a href="mailto:support@donateboom.com">support@donateboom.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bot" style="border-top:1px solid var(--border);padding-top:24px;">
+      <span class="footer-copy">© 2024 DonateBoom. Все права защищены.</span>
+      <div class="footer-legal">
+        <a href="legal.html">Политика конфиденциальности</a>
+        <a href="legal.html">Оферта</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleMobile(){
+  document.getElementById('burgerBtn').classList.toggle('active');
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+</script>
+<script src="auth.js"></script>
+</body>
+</html>

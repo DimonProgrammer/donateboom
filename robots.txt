@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://donate-boom.vercel.app/sitemap.xml
