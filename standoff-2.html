@@ -76,58 +76,54 @@
       box-shadow:0 0 20px rgba(234,58,59,0.22),0 0 40px rgba(234,58,59,0.08);
     }
 
-    /* -- NAV -------------------------------------------------------- */
-    .nav{
-      position:fixed;top:0;left:0;right:0;z-index:100;
-      height:64px;
-      display:flex;align-items:center;
-      background:rgba(7,7,7,0.85);
-      backdrop-filter:blur(24px) saturate(1.4);
-      -webkit-backdrop-filter:blur(24px) saturate(1.4);
-      border-bottom:1px solid var(--border);
-    }
-    .nav .container{display:flex;align-items:center;gap:20px;width:100%;max-width:var(--max);margin:0 auto;padding:0 24px}
-    .logo{display:flex;align-items:center;flex-shrink:0}
+        /* -- NAV -------------------------------------------------------- */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:100;height:64px;display:flex;align-items:center;background:rgba(7,7,7,0.85);backdrop-filter:blur(24px) saturate(1.4);-webkit-backdrop-filter:blur(24px) saturate(1.4);border-bottom:1px solid var(--border)}
+    .nav .container{display:flex;align-items:center;gap:6px;width:100%;max-width:var(--max);margin:0 auto;padding:0 24px}
+    .logo{display:flex;align-items:center;flex-shrink:0;margin-right:4px}
     .logo img{height:44px;width:auto}
-    .nav-search{
-      flex:1;
-      display:flex;align-items:center;gap:10px;
-      background:var(--s2);border:1px solid var(--border);border-radius:12px;
-      padding:9px 16px;transition:border-color .2s;
-    }
-    .nav-search:focus-within{border-color:rgba(255,255,255,0.15)}
-    .nav-search svg{width:18px;height:18px;color:var(--t3);flex-shrink:0}
-    .nav-search input{
-      flex:1;background:none;border:none;outline:none;
-      color:var(--w);font-family:var(--b);font-size:14px;
-    }
-    .nav-search input::placeholder{color:var(--t3)}
+    .nav-cat{position:relative;flex-shrink:0}
+    .nav-cat-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:var(--pill);background:var(--lime);color:#fff;font-family:var(--b);font-size:13px;font-weight:600;border:none;cursor:pointer;transition:background .2s;letter-spacing:.01em}
+    .nav-cat-btn:hover{background:#d63434}
+    .nav-cat-btn svg{width:13px;height:13px;transition:transform .2s;flex-shrink:0}
+    .nav-cat.open .nav-cat-btn svg{transform:rotate(180deg)}
+    .nav-cat-drop{position:absolute;top:calc(100% + 12px);left:0;width:308px;background:var(--s1);border:1px solid var(--border);border-radius:var(--rl);padding:10px;opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .2s,transform .2s var(--ease);box-shadow:0 24px 64px rgba(0,0,0,0.6)}
+    .nav-cat.open .nav-cat-drop{opacity:1;transform:translateY(0);pointer-events:auto}
+    .cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-bottom:6px}
+    .cat-item{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;transition:background .15s;color:var(--t1);font-size:13px;font-weight:500}
+    .cat-item:hover{background:var(--s2);color:var(--w)}
+    .cat-ico{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;letter-spacing:.01em;flex-shrink:0;font-family:var(--m)}
+    .cat-all{display:flex;align-items:center;justify-content:space-between;padding:9px 10px;border-radius:10px;border-top:1px solid var(--border);margin-top:3px;padding-top:10px;color:var(--lime);font-size:13px;font-weight:600;transition:background .15s}
+    .cat-all:hover{background:var(--lime10)}
+    .cat-all svg{width:14px;height:14px}
+    .nav-sep{color:var(--t4);font-size:20px;padding:0 6px;user-select:none;flex-shrink:0}
+    .nav-srch{flex-shrink:0;display:flex;align-items:center}
+    .srch-icon-btn{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:none;border:none;cursor:pointer;color:var(--t2);transition:all .2s}
+    .srch-icon-btn:hover{color:var(--w);background:var(--s2)}
+    .srch-icon-btn svg{width:18px;height:18px}
+    .srch-field{display:flex;align-items:center;gap:8px;background:var(--s2);border:1px solid transparent;border-radius:12px;padding:7px 12px;max-width:0;overflow:hidden;opacity:0;transition:max-width .3s var(--ease),opacity .2s,border-color .2s}
+    .srch-field.open{max-width:260px;opacity:1;border-color:var(--border)}
+    .srch-field:focus-within{border-color:rgba(255,255,255,0.15)!important}
+    .srch-field svg{width:15px;height:15px;color:var(--t3);flex-shrink:0}
+    .srch-field input{background:none;border:none;outline:none;color:var(--w);font-family:var(--b);font-size:13px;width:170px}
+    .srch-field input::placeholder{color:var(--t3)}
+    .srch-close{background:none;border:none;cursor:pointer;color:var(--t3);font-size:18px;line-height:1;padding:0 0 0 4px;transition:color .15s;flex-shrink:0}
+    .srch-close:hover{color:var(--w)}
+    .nav-spacer{flex:1;min-width:8px}
     .nav-links{display:flex;gap:2px;list-style:none;flex-shrink:0}
-    .nav-links a{
-      display:block;padding:7px 14px;border-radius:var(--pill);
-      font-size:13px;font-weight:500;color:var(--t2);
-      transition:color .2s,background .2s;white-space:nowrap;
-    }
+    .nav-links a{display:block;padding:7px 14px;border-radius:var(--pill);font-size:13px;font-weight:500;color:var(--t2);transition:color .2s,background .2s;white-space:nowrap}
     .nav-links a:hover{color:var(--w);background:var(--s2)}
-    .nav-r{display:flex;gap:8px;align-items:center;flex-shrink:0}
+    .nav-r{display:flex;gap:8px;align-items:center;flex-shrink:0;margin-left:4px}
+    .btn-nav{display:inline-flex;align-items:center;gap:6px;padding:8px 18px;border-radius:var(--pill);background:var(--lime);color:#fff;font-family:var(--b);font-size:13px;font-weight:600;border:none;cursor:pointer;transition:background .2s;text-decoration:none;white-space:nowrap}
+    .btn-nav:hover{background:#d63434}
     .burger{display:none;width:36px;height:36px;border:none;background:none;cursor:pointer;padding:6px;flex-shrink:0}
     .burger span{display:block;width:24px;height:2px;background:var(--w);margin:5px 0;transition:all .3s;border-radius:2px}
     .burger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
     .burger.active span:nth-child(2){opacity:0}
     .burger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
-    .mobile-menu{
-      display:none;position:fixed;inset:0;top:64px;z-index:99;
-      background:rgba(7,7,7,0.95);backdrop-filter:blur(20px);
-      padding:32px 24px;flex-direction:column;gap:8px;
-    }
+    .mobile-menu{display:none;position:fixed;inset:0;top:64px;z-index:99;background:rgba(7,7,7,0.97);backdrop-filter:blur(20px);padding:32px 24px;flex-direction:column;gap:8px}
     .mobile-menu.open{display:flex}
-    .mobile-menu a{
-      font-family:var(--b);font-size:16px;font-weight:500;
-      color:var(--t1);padding:14px 0;border-bottom:1px solid var(--border);
-      transition:color .2s;text-decoration:none;
-    }
+    .mobile-menu a{font-family:var(--b);font-size:16px;font-weight:500;color:var(--t1);padding:14px 0;border-bottom:1px solid var(--border);transition:color .2s;text-decoration:none}
     .mobile-menu a:hover{color:var(--w)}
-
     /* -- GAME HERO -------------------------------------------------- */
     .game-hero {
       background:
@@ -745,7 +741,7 @@
     .fab-vk { background: #0077FF; }
 
     /* -- SCROLL FADE ------------------------------------------------ */
-    .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.5s var(--ease), transform 0.5s var(--ease); }
+    .fade-up { opacity: 1; transform: translateY(0); transition: opacity 0.5s var(--ease), transform 0.5s var(--ease); }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
 
     /* -- HEADINGS --------------------------------------------------- */
@@ -766,13 +762,8 @@
     @media (max-width: 768px) {
       .order-panel-col { display: none; }
       .mobile-sticky { display: block; }
-      .burger{display:block}
-      .nav-links{display:none}
-      .nav-r .btn{display:none}
       .nav{height:56px}
       .logo img{height:32px}
-      .nav-search{padding:6px 12px}
-      .nav-search input{font-size:12px}
       .mobile-menu{top:56px}
       .chat-fab { bottom: 80px; }
       .preset-chips { grid-template-columns: repeat(2, 1fr); }
@@ -787,37 +778,51 @@
       .product-cards-grid { grid-template-columns: 1fr !important; }
     }
   </style>
+<script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
 </head>
 <body>
 
 <!-- NAV -->
 <nav class="nav">
   <div class="container">
-    <a href="/" class="logo"><img src="logo-red.svg" alt="DonateBoom" height="44"></a>
-    <div class="nav-search">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-      <input type="text" placeholder="Поиск игр и&nbsp;приложений...">
+    <a href="index.html" class="logo"><img src="logo-red.svg" alt="DonateBoom" height="44"></a>
+    <div class="nav-cat" id="navCat">
+      <button class="nav-cat-btn" onclick="toggleCat(event)">Каталог<svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2.5"><path d="m4 6 4 4 4-4"/></svg></button>
+      <div class="nav-cat-drop">
+        <div class="cat-grid">
+          <a href="standoff-2.html" class="cat-item"><div class="cat-ico" style="background:#3a0a0a;color:#FF8080">S2</div>Standoff 2</a>
+          <a href="catalog.html" class="cat-item"><div class="cat-ico" style="background:#0f1e30;color:#7ab4e8">ST</div>Steam</a>
+          <a href="catalog.html" class="cat-item"><div class="cat-ico" style="background:#2a1800;color:#ffc542">PB</div>PUBG Mobile</a>
+          <a href="catalog.html" class="cat-item"><div class="cat-ico" style="background:#0e1d2e;color:#6fb8ff">BS</div>Brawl Stars</a>
+          <a href="catalog.html" class="cat-item"><div class="cat-ico" style="background:#111;color:#ddd">TK</div>TikTok</a>
+          <a href="catalog.html" class="cat-item"><div class="cat-ico" style="background:#0a1f0a;color:#4ade80">RB</div>Roblox</a>
+          <a href="catalog.html" class="cat-item"><div class="cat-ico" style="background:#15092a;color:#a78bfa">FF</div>Free Fire</a>
+          <a href="catalog.html" class="cat-item"><div class="cat-ico" style="background:#181818;color:#aaa">PS</div>PlayStation</a>
+        </div>
+        <a href="catalog.html" class="cat-all">Все игры и сервисы<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 4 4 4-4 4"/></svg></a>
+      </div>
     </div>
+    <span class="nav-sep">·</span>
+    <div class="nav-srch">
+      <button class="srch-icon-btn" id="srchBtn" onclick="openSrch()" title="Поиск"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></button>
+      <div class="srch-field" id="srchField"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><input type="text" placeholder="Поиск игр и приложений..." id="srchInput"><button class="srch-close" onclick="closeSrch()">×</button></div>
+    </div>
+    <div class="nav-spacer"></div>
     <ul class="nav-links">
-      <li><a href="catalog.html">Каталог</a></li>
-      <li><a href="about.html#guarantees">Гарантии</a></li>
+      <li><a href="about.html">О сервисе</a></li>
       <li><a href="reviews.html">Отзывы</a></li>
-      <li><a href="about.html#faq">FAQ</a></li>
     </ul>
     <div class="nav-r">
-      <a href="profile.html" class="btn btn-lime">Личный кабинет</a>
-      <button class="burger" onclick="document.querySelector('.mobile-menu').classList.toggle('open');this.classList.toggle('active')">
-        <span></span><span></span><span></span>
-      </button>
+      <a href="profile.html" class="btn-nav">Личный кабинет</a>
+      <button class="burger" id="burgerBtn" onclick="toggleMobile()"><span></span><span></span><span></span></button>
     </div>
   </div>
 </nav>
-<div class="mobile-menu">
-  <a href="/">Главная</a>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Главная</a>
   <a href="catalog.html">Каталог</a>
-  <a href="about.html#guarantees">Гарантии</a>
+  <a href="about.html">О сервисе</a>
   <a href="reviews.html">Отзывы</a>
-  <a href="about.html#faq">FAQ</a>
   <a href="profile.html">Личный кабинет</a>
 </div>
 
@@ -1703,5 +1708,15 @@
   updateMarketFromRub();
 </script>
 
+
+// Nav: catalog dropdown
+function toggleCat(e){e.stopPropagation();document.getElementById('navCat').classList.toggle('open');closeSrch()}
+document.addEventListener('click',function(e){if(document.getElementById('navCat')&&!document.getElementById('navCat').contains(e.target))document.getElementById('navCat').classList.remove('open')});
+// Nav: search expand
+function openSrch(){document.getElementById('srchField').classList.add('open');document.getElementById('srchBtn').style.display='none';document.getElementById('navCat').classList.remove('open');setTimeout(()=>document.getElementById('srchInput').focus(),320)}
+function closeSrch(){var f=document.getElementById('srchField');var b=document.getElementById('srchBtn');if(f)f.classList.remove('open');if(b)b.style.display='';var i=document.getElementById('srchInput');if(i)i.value=''}
+// Nav: mobile
+function toggleMobile(){document.getElementById('mobileMenu').classList.toggle('open');document.getElementById('burgerBtn').classList.toggle('active')}
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeSrch();document.getElementById('navCat').classList.remove('open')}});
 </body>
 </html>
