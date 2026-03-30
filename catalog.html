@@ -255,27 +255,32 @@
       box-shadow: 0 12px 32px rgba(0,0,0,0.4);
     }
     .catalog-card-img {
-      height: 180px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      aspect-ratio: 3/4;
       overflow: hidden;
       position: relative;
     }
     .catalog-card-img img {
-      width: 80px;
-      height: 80px;
-      border-radius: 16px;
+      width: 100%;
+      height: 100%;
+      border-radius: 0;
       object-fit: cover;
       transition: transform 0.3s var(--ease);
     }
     .catalog-card:hover .catalog-card-img img {
-      transform: scale(1.08);
+      transform: scale(1.05);
     }
-    .catalog-card-img.has-cover img {
-      width: 100%;
-      height: 100%;
-      border-radius: 0;
+    .catalog-card-img.icon-mode {
+      aspect-ratio: unset;
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .catalog-card-img.icon-mode img {
+      width: 72px;
+      height: 72px;
+      border-radius: 14px;
+      object-fit: contain;
     }
     .catalog-card-body {
       padding: 16px 18px;
@@ -431,15 +436,15 @@
       .nav{height:56px}
       .logo img{height:32px}
       .mobile-menu{top:56px}
-      .catalog-grid { grid-template-columns: repeat(2, 1fr); }
-      .catalog-card-img { height: 140px; }
-      .catalog-card-img img { width: 60px; height: 60px; }
+      .catalog-grid { grid-template-columns: repeat(3, 1fr); }
+      .catalog-card-img.icon-mode { height: 110px; }
+      .catalog-card-img.icon-mode img { width: 52px; height: 52px; }
       .filter-row { flex-direction: column; }
       .catalog-search { min-width: 100%; }
     }
     @media (max-width: 480px) {
       .catalog-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-      .catalog-card-img { height: 120px; }
+      .catalog-card-img.icon-mode { height: 100px; }
       .catalog-card-body { padding: 12px 14px; }
       .catalog-card-name { font-size: 13px; }
     }
@@ -477,7 +482,7 @@
       <li><a href="reviews.html">Отзывы</a></li>
     </ul>
     <div class="nav-r">
-      <a href="profile.html" class="btn-nav">Личный кабинет</a>
+      <div style="position:relative;"><button id="authNavBtn" class="btn-nav">Личный кабинет</button></div>
       <button class="burger" id="burgerBtn" onclick="toggleMobile()"><span></span><span></span><span></span></button>
     </div>
   </div>
@@ -487,7 +492,7 @@
   <a href="catalog.html">Каталог</a>
   <a href="about.html">О сервисе</a>
   <a href="reviews.html">Отзывы</a>
-  <a href="profile.html">Личный кабинет</a>
+  <a href="profile.html" id="mobileProfileLink">Личный кабинет</a>
 </div>
 
 
@@ -541,9 +546,9 @@
 
     <!-- 1. Standoff 2 -->
     <a href="standoff-2.html" class="catalog-card" data-category="mobile" data-name="Standoff 2">
-      <div class="catalog-card-img" style="background:linear-gradient(135deg,#2a1008,#1a0a04);">
+      <div class="catalog-card-img">
         <span class="catalog-badge hit">&#128293; ХИТ</span>
-        <img src="img/standoff-2.png" alt="Standoff 2" style="width:80px;height:80px;border-radius:16px;">
+        <img src="assets/covers/standoff2.webp" alt="Standoff 2">
       </div>
       <div class="catalog-card-body">
         <div class="catalog-card-name">Standoff 2</div>
@@ -553,9 +558,9 @@
 
     <!-- 2. Steam -->
     <a href="#" class="catalog-card" data-category="service" data-name="Steam">
-      <div class="catalog-card-img" style="background:linear-gradient(135deg,#1B2838,#0e1a28);">
+      <div class="catalog-card-img icon-mode" style="background:linear-gradient(135deg,#1B2838,#0e1a28);">
         <span class="catalog-badge discount">-10%</span>
-        <img src="assets/logos/steam.svg" alt="Steam" style="width:64px;height:64px;border-radius:0;">
+        <img src="assets/logos/steam.svg" alt="Steam">
       </div>
       <div class="catalog-card-body">
         <div class="catalog-card-name">Steam</div>
@@ -565,9 +570,9 @@
 
     <!-- 3. Brawl Stars -->
     <a href="#" class="catalog-card" data-category="mobile" data-name="Brawl Stars">
-      <div class="catalog-card-img" style="background:linear-gradient(135deg,#1e3a1e,#0d2b0d);">
+      <div class="catalog-card-img">
         <span class="catalog-badge hit">&#128293; ХИТ</span>
-        <img src="img/brawl-stars.png" alt="Brawl Stars" style="width:80px;height:80px;border-radius:16px;">
+        <img src="assets/covers/brawl.webp" alt="Brawl Stars">
       </div>
       <div class="catalog-card-body">
         <div class="catalog-card-name">Brawl Stars</div>
@@ -577,9 +582,9 @@
 
     <!-- 4. Clash Royale -->
     <a href="#" class="catalog-card" data-category="mobile" data-name="Clash Royale">
-      <div class="catalog-card-img" style="background:linear-gradient(135deg,#1a0d2e,#12082a);">
+      <div class="catalog-card-img">
         <span class="catalog-badge hit">&#128293; ХИТ</span>
-        <img src="img/clash-royale.png" alt="Clash Royale" style="width:80px;height:80px;border-radius:16px;">
+        <img src="assets/covers/clashroyale.webp" alt="Clash Royale">
       </div>
       <div class="catalog-card-body">
         <div class="catalog-card-name">Clash Royale</div>
@@ -589,8 +594,8 @@
 
     <!-- 5. Telegram Premium -->
     <a href="#" class="catalog-card" data-category="service" data-name="Telegram Premium">
-      <div class="catalog-card-img" style="background:linear-gradient(135deg,#2AABEE,#1a8fd0);">
-        <img src="assets/logos/telegram.svg" alt="Telegram Premium" style="width:64px;height:64px;border-radius:0;">
+      <div class="catalog-card-img icon-mode" style="background:linear-gradient(135deg,#2AABEE,#1a8fd0);">
+        <img src="assets/logos/telegram.svg" alt="Telegram Premium">
       </div>
       <div class="catalog-card-body">
         <div class="catalog-card-name">Telegram Premium</div>
@@ -600,9 +605,9 @@
 
     <!-- 6. Clash of Clans -->
     <a href="#" class="catalog-card" data-category="mobile" data-name="Clash of Clans">
-      <div class="catalog-card-img" style="background:linear-gradient(135deg,#2b3a1e,#1a2810);">
+      <div class="catalog-card-img">
         <span class="catalog-badge hit">&#128293; ХИТ</span>
-        <img src="assets/logos/clashroyale.png" alt="Clash of Clans" style="width:80px;height:80px;border-radius:16px;">
+        <img src="assets/covers/clashofclans.webp" alt="Clash of Clans">
       </div>
       <div class="catalog-card-body">
         <div class="catalog-card-name">Clash of Clans</div>
@@ -612,9 +617,9 @@
 
     <!-- 7. PUBG Mobile -->
     <a href="#" class="catalog-card" data-category="mobile" data-name="PUBG Mobile">
-      <div class="catalog-card-img" style="background:linear-gradient(135deg,#1a1a2e,#0d0d1a);">
+      <div class="catalog-card-img">
         <span class="catalog-badge hit">&#128293; ХИТ</span>
-        <img src="img/pubg-mobile.png" alt="PUBG Mobile" style="width:80px;height:80px;border-radius:16px;">
+        <img src="assets/covers/pubg.webp" alt="PUBG Mobile">
       </div>
       <div class="catalog-card-body">
         <div class="catalog-card-name">PUBG Mobile</div>
@@ -624,12 +629,36 @@
 
     <!-- 8. Free Fire -->
     <a href="#" class="catalog-card" data-category="mobile" data-name="Free Fire">
-      <div class="catalog-card-img" style="background:linear-gradient(135deg,#1a1500,#2a2000);">
+      <div class="catalog-card-img">
         <span class="catalog-badge hit">&#128293; ХИТ</span>
-        <img src="assets/logos/fortnite.svg" alt="Free Fire" style="width:64px;height:64px;border-radius:0;">
+        <img src="assets/covers/freefire.webp" alt="Free Fire">
       </div>
       <div class="catalog-card-body">
         <div class="catalog-card-name">Free Fire</div>
+        <div class="catalog-card-category">Мобильные</div>
+      </div>
+    </a>
+
+
+    <!-- 9. Roblox -->
+    <a href="#" class="catalog-card" data-category="mobile" data-name="Roblox">
+      <div class="catalog-card-img">
+        <span class="catalog-badge hit">&#128293; ХИТ</span>
+        <img src="assets/covers/roblox.webp" alt="Roblox">
+      </div>
+      <div class="catalog-card-body">
+        <div class="catalog-card-name">Roblox</div>
+        <div class="catalog-card-category">Мобильные</div>
+      </div>
+    </a>
+
+    <!-- 10. Genshin Impact -->
+    <a href="#" class="catalog-card" data-category="mobile" data-name="Genshin Impact">
+      <div class="catalog-card-img">
+        <img src="assets/covers/genshin.webp" alt="Genshin Impact">
+      </div>
+      <div class="catalog-card-body">
+        <div class="catalog-card-name">Genshin Impact</div>
         <div class="catalog-card-category">Мобильные</div>
       </div>
     </a>
@@ -859,5 +888,6 @@ document.addEventListener('click',function(e){if(_navCat&&!_navCat.contains(e.ta
 function toggleMobile(){document.getElementById('mobileMenu').classList.toggle('open');document.getElementById('burgerBtn').classList.toggle('active')}
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&_navCat)_navCat.classList.remove('open')});
 </script>
+<script src="auth.js"></script>
 </body>
 </html>

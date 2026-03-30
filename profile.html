@@ -64,7 +64,7 @@ body{background:var(--bg);color:var(--w);font-family:var(--b);font-size:15px;lin
     .mobile-menu a{font-family:var(--b);font-size:16px;font-weight:500;color:var(--t1);padding:14px 0;border-bottom:1px solid var(--border);transition:color .2s;text-decoration:none}
     .mobile-menu a:hover{color:var(--w)}
     /* DASHBOARD */
-.dash{display:flex;gap:0;min-height:calc(100vh - 64px);padding-top:64px}
+.dash{display:flex;gap:0;min-height:calc(100vh - 64px);padding-top:64px;max-width:1280px;margin:0 auto;width:100%}
 .sidebar{width:280px;flex-shrink:0;background:var(--s1);border-right:1px solid var(--border);padding:32px 20px;position:sticky;top:64px;height:calc(100vh - 64px);overflow-y:auto}
 .sidebar-avatar{width:56px;height:56px;border-radius:50%;background:var(--lime);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:20px;color:#fff;margin-bottom:12px}
 .sidebar-name{font-weight:700;font-size:16px;color:var(--w);margin-bottom:4px}
@@ -93,12 +93,21 @@ body{background:var(--bg);color:var(--w);font-family:var(--b);font-size:15px;lin
 .order-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
 .order-price{font-weight:800;font-size:18px;color:var(--lime);font-family:var(--d)}
 .order-date{font-size:12px;color:var(--t3)}
-.status{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:var(--pill);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.04em}
-.status-processing{background:rgba(255,180,0,0.12);color:#FFB400}
-.status-awaiting{background:var(--lime10);color:var(--lime)}
-.status-pending{background:rgba(234,58,59,0.12);color:var(--lime)}
-.status-completed{background:rgba(122,232,160,0.12);color:var(--mint)}
-.status-cancelled{background:rgba(255,255,255,0.06);color:var(--t3)}
+.status{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:var(--pill);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.04em}
+/* pending — жёлтый */
+.status-pending{background:rgba(245,158,11,0.14);color:#F59E0B}
+/* processing — синий */
+.status-processing{background:rgba(59,130,246,0.14);color:#3B82F6}
+/* sending — синий (UID метод) */
+.status-sending{background:rgba(59,130,246,0.14);color:#3B82F6}
+/* completed — зелёный */
+.status-completed{background:rgba(16,185,129,0.14);color:#10B981}
+/* failed — красный */
+.status-failed{background:rgba(234,58,59,0.14);color:#EA3A3B}
+/* cancelled — серый */
+.status-cancelled{background:rgba(255,255,255,0.07);color:var(--t3)}
+/* refunded — фиолетовый */
+.status-refunded{background:rgba(139,92,246,0.14);color:#8B5CF6}
 
 /* FORM */
 .form-group{margin-bottom:20px}
@@ -196,7 +205,7 @@ body{background:var(--bg);color:var(--w);font-family:var(--b);font-size:15px;lin
       <li><a href="reviews.html">Отзывы</a></li>
     </ul>
     <div class="nav-r">
-      <a href="profile.html" class="btn-nav">Личный кабинет</a>
+      <div style="position:relative;"><button id="authNavBtn" class="btn-nav">Личный кабинет</button></div>
       <button class="burger" id="burgerBtn" onclick="toggleMobile()"><span></span><span></span><span></span></button>
     </div>
   </div>
@@ -206,7 +215,7 @@ body{background:var(--bg);color:var(--w);font-family:var(--b);font-size:15px;lin
   <a href="catalog.html">Каталог</a>
   <a href="about.html">О сервисе</a>
   <a href="reviews.html">Отзывы</a>
-  <a href="profile.html">Личный кабинет</a>
+  <a href="profile.html" id="mobileProfileLink">Личный кабинет</a>
 </div>
 
 <!-- DASHBOARD -->
@@ -260,7 +269,7 @@ body{background:var(--bg);color:var(--w);font-family:var(--b);font-size:15px;lin
       <div class="sub-tabs">
         <button class="sub-tab active" onclick="switchOrderSub('active',this)">Активные <span class="count">(3)</span></button>
         <button class="sub-tab" onclick="switchOrderSub('done',this)">Завершённые <span class="count">(8)</span></button>
-        <button class="sub-tab" onclick="switchOrderSub('cancelled',this)">Отменённые <span class="count">(0)</span></button>
+        <button class="sub-tab" onclick="switchOrderSub('cancelled',this)">Отменённые <span class="count">(3)</span></button>
       </div>
 
       <!-- Active orders -->
@@ -269,7 +278,7 @@ body{background:var(--bg);color:var(--w);font-family:var(--b);font-size:15px;lin
           <div class="order-num">#14892</div>
           <div class="order-title">1 000 Gold &middot; Standoff 2</div>
           <div class="order-method">Через рынок</div>
-          <div style="margin-bottom:12px;"><span class="status status-processing">В обработке</span></div>
+          <div style="margin-bottom:12px;"><span class="status status-processing">⚙ В обработке</span></div>
           <div class="order-footer">
             <div class="order-price">1 268 &#8381;</div>
             <div class="order-date">29 марта 2026, 21:15</div>
@@ -279,8 +288,8 @@ body{background:var(--bg);color:var(--w);font-family:var(--b);font-size:15px;lin
         <div class="order-card">
           <div class="order-num">#14887</div>
           <div class="order-title">500 Gold &middot; Standoff 2</div>
-          <div class="order-method">Через рынок</div>
-          <div style="margin-bottom:12px;"><span class="status status-awaiting">Ожидает скриншот</span></div>
+          <div class="order-method">По UID</div>
+          <div style="margin-bottom:12px;"><span class="status status-sending">&#128640; Отправляем</span></div>
           <div class="order-footer">
             <div class="order-price">723 &#8381;</div>
             <div class="order-date">29 марта 2026, 19:30</div>
@@ -291,7 +300,7 @@ body{background:var(--bg);color:var(--w);font-family:var(--b);font-size:15px;lin
           <div class="order-num">#14901</div>
           <div class="order-title">Пополнение Steam &middot; 500&#8381;</div>
           <div class="order-method">По коду</div>
-          <div style="margin-bottom:12px;"><span class="status status-pending">Ожидает оплаты</span></div>
+          <div style="margin-bottom:12px;"><span class="status status-pending">&#9203; Ожидает оплаты</span></div>
           <div class="order-footer">
             <div class="order-price">500 &#8381;</div>
             <div class="order-date">30 марта 2026, 01:00</div>
@@ -305,7 +314,7 @@ body{background:var(--bg);color:var(--w);font-family:var(--b);font-size:15px;lin
           <div class="order-num">#14850</div>
           <div class="order-title">3 000 Gold &middot; Standoff 2</div>
           <div class="order-method">Через рынок</div>
-          <div style="margin-bottom:12px;"><span class="status status-completed">Выполнен</span></div>
+          <div style="margin-bottom:12px;"><span class="status status-completed">✓ Выполнен</span></div>
           <div class="order-footer">
             <div class="order-price">2 728 &#8381;</div>
             <div class="order-date">25 марта 2026</div>
@@ -315,7 +324,7 @@ body{background:var(--bg);color:var(--w);font-family:var(--b);font-size:15px;lin
           <div class="order-num">#14801</div>
           <div class="order-title">Gold Pass &middot; Standoff 2</div>
           <div class="order-method">По UID</div>
-          <div style="margin-bottom:12px;"><span class="status status-completed">Выполнен</span></div>
+          <div style="margin-bottom:12px;"><span class="status status-completed">✓ Выполнен</span></div>
           <div class="order-footer">
             <div class="order-price">184 &#8381;</div>
             <div class="order-date">20 марта 2026</div>
@@ -325,7 +334,7 @@ body{background:var(--bg);color:var(--w);font-family:var(--b);font-size:15px;lin
           <div class="order-num">#14756</div>
           <div class="order-title">Пополнение Steam &middot; 1 000&#8381;</div>
           <div class="order-method">По коду</div>
-          <div style="margin-bottom:12px;"><span class="status status-completed">Выполнен</span></div>
+          <div style="margin-bottom:12px;"><span class="status status-completed">✓ Выполнен</span></div>
           <div class="order-footer">
             <div class="order-price">1 000 &#8381;</div>
             <div class="order-date">15 марта 2026</div>
@@ -335,9 +344,35 @@ body{background:var(--bg);color:var(--w);font-family:var(--b);font-size:15px;lin
 
       <!-- Cancelled -->
       <div id="orders-cancelled" style="display:none;">
-        <div class="empty-state">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
-          <p>У вас нет отменённых заказов</p>
+        <div class="order-card">
+          <div class="order-num">#14712</div>
+          <div class="order-title">1 000 Gold &middot; Standoff 2</div>
+          <div class="order-method">Через рынок</div>
+          <div style="margin-bottom:12px;"><span class="status status-cancelled">✗ Отменён</span></div>
+          <div class="order-footer">
+            <div class="order-price">1 268 &#8381;</div>
+            <div class="order-date">10 марта 2026</div>
+          </div>
+        </div>
+        <div class="order-card">
+          <div class="order-num">#14698</div>
+          <div class="order-title">500 Gold &middot; Standoff 2</div>
+          <div class="order-method">Через рынок</div>
+          <div style="margin-bottom:12px;"><span class="status status-failed">✕ Ошибка — поддержка</span></div>
+          <div class="order-footer">
+            <div class="order-price">723 &#8381;</div>
+            <div class="order-date">8 марта 2026</div>
+          </div>
+        </div>
+        <div class="order-card">
+          <div class="order-num">#14650</div>
+          <div class="order-title">3 000 Gold &middot; Standoff 2</div>
+          <div class="order-method">По UID</div>
+          <div style="margin-bottom:12px;"><span class="status status-refunded">↩ Возврат</span></div>
+          <div class="order-footer">
+            <div class="order-price">2 728 &#8381;</div>
+            <div class="order-date">1 марта 2026</div>
+          </div>
         </div>
       </div>
     </div>
@@ -362,35 +397,35 @@ body{background:var(--bg);color:var(--w);font-family:var(--b);font-size:15px;lin
               <td style="padding:12px 16px;font-family:var(--m);color:var(--t3);">#14892</td>
               <td style="padding:12px 16px;color:var(--w);">1 000 Gold Standoff 2</td>
               <td style="padding:12px 16px;text-align:right;font-weight:700;color:var(--w);">1 268 &#8381;</td>
-              <td style="padding:12px 16px;text-align:right;"><span class="status status-processing">В обработке</span></td>
+              <td style="padding:12px 16px;text-align:right;"><span class="status status-processing">⚙ В обработке</span></td>
             </tr>
             <tr style="border-bottom:1px solid var(--border);">
               <td style="padding:12px 16px;color:var(--t2);">25.03.2026</td>
               <td style="padding:12px 16px;font-family:var(--m);color:var(--t3);">#14850</td>
               <td style="padding:12px 16px;color:var(--w);">3 000 Gold Standoff 2</td>
               <td style="padding:12px 16px;text-align:right;font-weight:700;color:var(--w);">2 728 &#8381;</td>
-              <td style="padding:12px 16px;text-align:right;"><span class="status status-completed">Выполнен</span></td>
+              <td style="padding:12px 16px;text-align:right;"><span class="status status-completed">✓ Выполнен</span></td>
             </tr>
             <tr style="border-bottom:1px solid var(--border);">
               <td style="padding:12px 16px;color:var(--t2);">20.03.2026</td>
               <td style="padding:12px 16px;font-family:var(--m);color:var(--t3);">#14801</td>
               <td style="padding:12px 16px;color:var(--w);">Gold Pass Standoff 2</td>
               <td style="padding:12px 16px;text-align:right;font-weight:700;color:var(--w);">184 &#8381;</td>
-              <td style="padding:12px 16px;text-align:right;"><span class="status status-completed">Выполнен</span></td>
+              <td style="padding:12px 16px;text-align:right;"><span class="status status-completed">✓ Выполнен</span></td>
             </tr>
             <tr style="border-bottom:1px solid var(--border);">
               <td style="padding:12px 16px;color:var(--t2);">15.03.2026</td>
               <td style="padding:12px 16px;font-family:var(--m);color:var(--t3);">#14756</td>
               <td style="padding:12px 16px;color:var(--w);">Steam 1 000&#8381;</td>
               <td style="padding:12px 16px;text-align:right;font-weight:700;color:var(--w);">1 000 &#8381;</td>
-              <td style="padding:12px 16px;text-align:right;"><span class="status status-completed">Выполнен</span></td>
+              <td style="padding:12px 16px;text-align:right;"><span class="status status-completed">✓ Выполнен</span></td>
             </tr>
             <tr>
               <td style="padding:12px 16px;color:var(--t2);">10.03.2026</td>
               <td style="padding:12px 16px;font-family:var(--m);color:var(--t3);">#14700</td>
               <td style="padding:12px 16px;color:var(--w);">500 Gold Standoff 2</td>
               <td style="padding:12px 16px;text-align:right;font-weight:700;color:var(--w);">723 &#8381;</td>
-              <td style="padding:12px 16px;text-align:right;"><span class="status status-completed">Выполнен</span></td>
+              <td style="padding:12px 16px;text-align:right;"><span class="status status-completed">✓ Выполнен</span></td>
             </tr>
           </tbody>
         </table>
@@ -482,14 +517,14 @@ body{background:var(--bg);color:var(--w);font-family:var(--b);font-size:15px;lin
           <div class="ticket-title">Проблема с заказом #14856</div>
           <div class="ticket-meta">2 дня назад</div>
         </div>
-        <span class="status status-completed">Решено</span>
+        <span class="status status-completed">✓ Решено</span>
       </div>
       <div class="ticket-card">
         <div>
           <div class="ticket-title">Вопрос по возврату</div>
           <div class="ticket-meta">5 дней назад</div>
         </div>
-        <span class="status status-processing">В работе</span>
+        <span class="status status-processing">⚙ В работе</span>
       </div>
     </div>
 
@@ -590,5 +625,6 @@ document.addEventListener('click',function(e){if(_navCat&&!_navCat.contains(e.ta
 function toggleMobile(){document.getElementById('mobileMenu').classList.toggle('open');document.getElementById('burgerBtn').classList.toggle('active')}
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&_navCat)_navCat.classList.remove('open')});
 </script>
+<script src="auth.js"></script>
 </body>
 </html>

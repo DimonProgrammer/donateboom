@@ -118,7 +118,7 @@ body{background:var(--bg);color:var(--w);font-family:var(--b);font-size:15px;lin
       <li><a href="reviews.html">Отзывы</a></li>
     </ul>
     <div class="nav-r">
-      <a href="profile.html" class="btn-nav">Личный кабинет</a>
+      <div style="position:relative;"><button id="authNavBtn" class="btn-nav">Личный кабинет</button></div>
       <button class="burger" id="burgerBtn" onclick="toggleMobile()"><span></span><span></span><span></span></button>
     </div>
   </div>
@@ -128,7 +128,7 @@ body{background:var(--bg);color:var(--w);font-family:var(--b);font-size:15px;lin
   <a href="catalog.html">Каталог</a>
   <a href="about.html">О сервисе</a>
   <a href="reviews.html">Отзывы</a>
-  <a href="profile.html">Личный кабинет</a>
+  <a href="profile.html" id="mobileProfileLink">Личный кабинет</a>
 </div>
 
 <div class="legal">
@@ -257,5 +257,6 @@ document.addEventListener('click',function(e){if(_navCat&&!_navCat.contains(e.ta
 function toggleMobile(){document.getElementById('mobileMenu').classList.toggle('open');document.getElementById('burgerBtn').classList.toggle('active')}
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&_navCat)_navCat.classList.remove('open')});
 </script>
+<script src="auth.js"></script>
 </body>
 </html>
