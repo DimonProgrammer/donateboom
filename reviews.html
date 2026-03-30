@@ -331,15 +331,23 @@
     .star-muted { color: var(--t4); }
 
     @media (max-width: 768px) {
+      .nav-links,.nav-srch,.nav-spacer{display:none}
+      .burger{display:flex}
+      .nav-cat-drop{width:calc(100vw - 32px)}
+      .srch-field{width:100%}
       .nav{height:56px}
       .logo img{height:32px}
       .mobile-menu{top:56px}
       .chat-fab { bottom: 24px; }
+      .container{padding:0 16px}
       .reviews-grid { grid-template-columns: 1fr !important; }
       .hero-rating-layout { flex-direction: column !important; gap: 32px !important; }
       .rating-big-num { font-size: 64px !important; }
       .filter-tabs-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px; }
       .filter-tabs-wrap::-webkit-scrollbar { display: none; }
+    }
+    @media (max-width: 480px) {
+      .rating-big-num { font-size: 48px !important; }
     }
   </style>
 <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>

@@ -172,10 +172,23 @@ body{background:var(--bg);color:var(--w);font-family:var(--b);font-size:15px;lin
 .back-link svg{width:16px;height:16px}
 
 @media(max-width:768px){
-  .nav-links{display:none}
+  .nav-links,.nav-srch,.nav-spacer{display:none}
+  .burger{display:flex}
+  .nav-cat-drop{width:calc(100vw - 32px)}
+  .srch-field{width:100%}
+  .nav{height:56px}
+  .logo img{height:32px}
+  .mobile-menu{top:56px}
   .checkout{padding:80px 16px 48px}
   .step-label{font-size:10px}
   .steps{padding:0 8px}
+}
+@media(max-width:480px){
+  .checkout{padding:72px 16px 40px}
+  .steps{gap:0;padding:0 4px}
+  .step-label{font-size:9px}
+  .step-dot{width:28px;height:28px;font-size:12px}
+  .step-line{min-width:16px}
 }
 </style>
 <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>

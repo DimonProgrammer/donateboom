@@ -170,8 +170,10 @@ body{background:var(--bg);color:var(--w);font-family:var(--b);font-size:15px;lin
 
 /* RESPONSIVE */
 @media(max-width:768px){
-  .nav-links,.nav-r .btn{display:none}
-  .burger{display:block}
+  .nav-links,.nav-r .btn,.nav-srch,.nav-spacer{display:none}
+  .burger{display:flex}
+  .nav-cat-drop{width:calc(100vw - 32px)}
+  .srch-field{width:100%}
   .nav{height:56px}
   .logo img{height:32px}
   .container{padding:0 20px}
@@ -180,6 +182,10 @@ body{background:var(--bg);color:var(--w);font-family:var(--b);font-size:15px;lin
   .mobile-tabs::-webkit-scrollbar{display:none}
   .dash{flex-direction:column;padding-top:56px}
   .dash-content{padding:0 20px 32px}
+  .mobile-menu{top:56px}
+}
+@media(max-width:480px){
+  .dash-content{padding:0 16px 24px}
 }
 @media(min-width:769px){.mobile-tabs{display:none !important}}
 </style>

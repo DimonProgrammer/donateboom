@@ -70,10 +70,14 @@ body{background:var(--bg);color:var(--w);font-family:var(--b);font-size:15px;lin
 .mobile-menu a:hover{color:var(--w)}
 
 @media(max-width:768px){
-  .burger{display:block}
-  .nav-links,.nav-sep,.srch-icon-btn,.srch-field{display:none!important}
+  .burger{display:flex}
+  .nav-links,.nav-sep,.srch-icon-btn,.srch-field,.nav-srch,.nav-spacer{display:none!important}
   .nav-r .btn-nav{display:none}
   .nav-cat-drop{width:calc(100vw - 32px)}
+  .srch-field{width:100%}
+  .nav{height:56px}
+  .logo img{height:32px}
+  .mobile-menu{top:56px}
 }
 
 .legal{max-width:800px;margin:0 auto;padding:96px 24px 60px}
@@ -93,8 +97,12 @@ body{background:var(--bg);color:var(--w);font-family:var(--b);font-size:15px;lin
 .legal-content li{margin-bottom:4px}
 
 @media(max-width:768px){
-  .nav-links{display:none}
   .legal{padding:80px 16px 40px}
+}
+@media(max-width:480px){
+  .legal{padding:72px 16px 32px}
+  .legal-tabs{overflow-x:auto;scrollbar-width:none;flex-wrap:nowrap;-webkit-overflow-scrolling:touch}
+  .legal-tabs::-webkit-scrollbar{display:none}
 }
 </style>
 <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>

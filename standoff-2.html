@@ -760,12 +760,12 @@
     }
 
     @media (max-width: 1024px) {
-      .order-panel-col { display: none; }
+      .order-panel-col { display: none !important; }
       .mobile-sticky { display: block; }
     }
 
     @media (max-width: 768px) {
-      .order-panel-col { display: none; }
+      .order-panel-col { display: none !important; }
       .mobile-sticky { display: block; }
       .nav{height:56px}
       .logo img{height:32px}
@@ -776,11 +776,22 @@
       .amount-input { font-size: 22px; padding: 12px 0 12px 16px; }
       .amount-currency { font-size: 18px; padding-right: 16px; }
       .product-cards-grid { grid-template-columns: repeat(2, 1fr) !important; }
+      .nav-links, .nav-srch, .nav-spacer { display: none; }
+      .burger { display: flex; }
+      .nav-cat-drop { width: calc(100vw - 32px); left: -60px; }
+      .srch-field { width: 100%; }
     }
 
     @media (max-width: 480px) {
       .preset-chips { grid-template-columns: repeat(2, 1fr); }
       .product-cards-grid { grid-template-columns: 1fr !important; }
+      .nav .container { padding: 0 16px; }
+      .game-hero { padding-top: 72px; padding-bottom: 24px; }
+      .game-hero h1 { font-size: clamp(1.5rem, 7vw, 2.5rem); }
+      .game-hero p { font-size: 14px; }
+      .nav-cat-drop { left: -16px; }
+      .section-title { font-size: clamp(1.2rem, 5vw, 1.8rem); }
+      .container, .max-w-7xl { padding-left: 16px !important; padding-right: 16px !important; }
     }
   </style>
 <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
@@ -1109,7 +1120,7 @@
 
 
     <!-- === RIGHT COLUMN: Sticky order panel === -->
-    <div class="order-panel-col w-80 xl:w-96 flex-shrink-0" style="display:block;">
+    <div class="order-panel-col w-80 xl:w-96 flex-shrink-0">
       <div class="order-panel p-6">
 
         <!-- Product header -->

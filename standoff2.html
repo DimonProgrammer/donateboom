@@ -865,8 +865,10 @@ img{display:block;max-width:100%}
 /* ── RESPONSIVE ── */
 /* ── TABLET ── */
 @media(max-width:900px){
-  .burger{display:block}
-  .nav-links{display:none}
+  .nav-links,.nav-srch,.nav-spacer{display:none}
+  .burger{display:flex}
+  .nav-cat-drop{width:calc(100vw - 32px)}
+  .srch-field{width:100%}
   .nav-r .btn{display:none}
   .hero{min-height:auto;padding:90px 0 40px}
   .hero-grid{max-width:100%;text-align:center}
