@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Отзывы покупателей — DonateBoom</title>
+  <meta name="description" content="Реальные отзывы покупателей DonateBoom. Рейтинг 4.9 из 5 на основе 20 712 покупателей. Standoff 2, Steam, PUBG Mobile, Brawl Stars.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Rubik:wght@300;400;500;600;700;800;900&family=Unbounded:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Rubik', 'system-ui', 'sans-serif'], display: ['Unbounded', 'system-ui', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] },
+          colors: {
+            accent: '#EA3A3B',
+            page:   '#070707',
+            card:   '#0E0E0E',
+            card2:  '#1A1A1A',
+            's':    '#6E6E73',
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    :root {
+      --bg: #070707;
+      --s1: #0E0E0E;
+      --s2: #141414;
+      --s3: #1A1A1A;
+      --s4: #222;
+      --border: rgba(255,255,255,0.06);
+      --bh: rgba(255,255,255,0.1);
+      --b-active: rgba(234,58,59,0.25);
+      --lime: #EA3A3B;
+      --lime-soft: #FF6B6B;
+      --lime10: rgba(234,58,59,0.08);
+      --lime15: rgba(234,58,59,0.13);
+      --lime-glow: rgba(234,58,59,0.05);
+      --mint: #7AE8A0;
+      --mint10: rgba(122,232,160,0.08);
+      --w: #F5F5F7;
+      --t1: #E0E0E0;
+      --t2: #A0A0A0;
+      --t3: #6E6E73;
+      --t4: #3A3A3A;
+      --t5: #252525;
+      --d: 'Unbounded', sans-serif;
+      --b: 'Rubik', sans-serif;
+      --m: 'JetBrains Mono', monospace;
+      --rl: 20px;
+      --rm: 14px;
+      --rs: 10px;
+      --pill: 100px;
+      --max: 1280px;
+      --ease: cubic-bezier(.4,0,.2,1);
+    }
+    *,*::before,*::after { margin:0;padding:0;box-sizing:border-box; }
+    a { text-decoration:none;color:inherit; }
+    body { background: var(--bg); color: var(--w); font-family: var(--b); font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden; }
+    .container{max-width:var(--max);margin:0 auto;padding:0 48px}
+    .btn{
+      font-family:var(--m);font-weight:600;font-size:12px;
+      padding:9px 20px;border-radius:var(--pill);
+      border:none;cursor:pointer;transition:all .2s var(--ease);
+      display:inline-flex;align-items:center;gap:6px;
+    }
+    .btn-lime{
+      background:var(--lime);color:#fff;
+      box-shadow:0 0 20px rgba(234,58,59,0.22),0 0 40px rgba(234,58,59,0.08);
+    }
+
+    /* -- NAV -------------------------------------------------------- */
+    .nav{
+      position:fixed;top:0;left:0;right:0;z-index:100;
+      height:64px;
+      display:flex;align-items:center;
+      background:rgba(7,7,7,0.85);
+      backdrop-filter:blur(24px) saturate(1.4);
+      -webkit-backdrop-filter:blur(24px) saturate(1.4);
+      border-bottom:1px solid var(--border);
+    }
+    .nav .container{display:flex;align-items:center;gap:20px;width:100%;max-width:var(--max);margin:0 auto;padding:0 24px}
+    .logo{display:flex;align-items:center;flex-shrink:0}
+    .logo img{height:44px;width:auto}
+    .nav-search{
+      flex:1;
+      display:flex;align-items:center;gap:10px;
+      background:var(--s2);border:1px solid var(--border);border-radius:12px;
+      padding:9px 16px;transition:border-color .2s;
+    }
+    .nav-search:focus-within{border-color:rgba(255,255,255,0.15)}
+    .nav-search svg{width:18px;height:18px;color:var(--t3);flex-shrink:0}
+    .nav-search input{
+      flex:1;background:none;border:none;outline:none;
+      color:var(--w);font-family:var(--b);font-size:14px;
+    }
+    .nav-search input::placeholder{color:var(--t3)}
+    .nav-links{display:flex;gap:2px;list-style:none;flex-shrink:0}
+    .nav-links a{
+      display:block;padding:7px 14px;border-radius:var(--pill);
+      font-size:13px;font-weight:500;color:var(--t2);
+      transition:color .2s,background .2s;white-space:nowrap;
+    }
+    .nav-links a:hover{color:var(--w);background:var(--s2)}
+    .nav-links a.active-link{color:var(--w);background:var(--s2)}
+    .nav-r{display:flex;gap:8px;align-items:center;flex-shrink:0}
+    .burger{display:none;width:36px;height:36px;border:none;background:none;cursor:pointer;padding:6px;flex-shrink:0}
+    .burger span{display:block;width:24px;height:2px;background:var(--w);margin:5px 0;transition:all .3s;border-radius:2px}
+    .burger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+    .burger.active span:nth-child(2){opacity:0}
+    .burger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+    .mobile-menu{
+      display:none;position:fixed;inset:0;top:64px;z-index:99;
+      background:rgba(7,7,7,0.95);backdrop-filter:blur(20px);
+      padding:32px 24px;flex-direction:column;gap:8px;
+    }
+    .mobile-menu.open{display:flex}
+    .mobile-menu a{
+      font-family:var(--b);font-size:16px;font-weight:500;
+      color:var(--t1);padding:14px 0;border-bottom:1px solid var(--border);
+      transition:color .2s;text-decoration:none;
+    }
+    .mobile-menu a:hover{color:var(--w)}
+
+    /* -- SECTION LABEL ---------------------------------------------- */
+    .section-label {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--lime);
+    }
+
+    /* -- REVIEW CARD ------------------------------------------------ */
+    .review-card {
+      background: var(--s1);
+      border: 1.5px solid var(--border);
+      border-radius: var(--rl);
+      padding: 24px;
+      transition: all 0.2s var(--ease);
+    }
+    .review-card:hover {
+      border-color: var(--bh);
+      transform: translateY(-2px);
+    }
+
+    /* -- GAME BADGE ------------------------------------------------- */
+    .game-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 10px;
+      border-radius: var(--pill);
+      font-size: 11px;
+      font-weight: 600;
+      background: var(--s3);
+      color: var(--t2);
+      border: 1px solid var(--border);
+    }
+
+    /* -- FILTER TABS ------------------------------------------------ */
+    .filter-tab {
+      background: transparent;
+      border: 1.5px solid var(--bh);
+      border-radius: var(--pill);
+      color: var(--t3);
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 10px 20px;
+      transition: all 0.2s var(--ease);
+      font-family: var(--b);
+    }
+    .filter-tab:hover {
+      color: var(--t1);
+      border-color: rgba(255,255,255,0.18);
+    }
+    .filter-tab.active {
+      background: var(--lime);
+      border-color: var(--lime);
+      color: #FFFFFF;
+    }
+
+    /* -- RATING BAR ------------------------------------------------- */
+    .rating-bar-track {
+      flex: 1;
+      height: 8px;
+      background: var(--s3);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .rating-bar-fill {
+      height: 100%;
+      background: var(--lime);
+      border-radius: 4px;
+      transition: width 0.6s var(--ease);
+    }
+
+    /* -- BTN GHOST -------------------------------------------------- */
+    .btn-ghost {
+      background: transparent;
+      border: 1.5px solid var(--bh);
+      border-radius: var(--pill);
+      color: var(--t2);
+      cursor: pointer;
+      font-family: var(--b);
+      font-weight: 600;
+      font-size: 15px;
+      padding: 14px 32px;
+      transition: all 0.2s var(--ease);
+    }
+    .btn-ghost:hover {
+      border-color: var(--lime);
+      color: var(--w);
+      background: var(--lime10);
+    }
+
+    /* -- BTN BUY ---------------------------------------------------- */
+    .btn-buy {
+      background: var(--lime);
+      color: #FFFFFF;
+      border-radius: var(--pill);
+      font-weight: 700;
+      font-size: 16px;
+      padding: 16px 32px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s var(--ease);
+      font-family: var(--b);
+      box-shadow: 0 4px 20px var(--b-active);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-buy:hover {
+      background: var(--lime-soft);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 28px rgba(234,58,59,0.35);
+    }
+    .btn-buy:active { transform: translateY(0); }
+
+    /* -- FLOATING CHAT WIDGET --------------------------------------- */
+    .chat-fab {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 55;
+    }
+    .chat-fab-btn {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: var(--lime);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(234,58,59,0.4);
+      transition: all 0.25s var(--ease);
+      position: relative;
+      z-index: 2;
+    }
+    .chat-fab-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 28px rgba(234,58,59,0.5);
+    }
+    .chat-fab-btn svg { transition: transform 0.25s var(--ease); }
+    .chat-fab.open .chat-fab-btn svg { transform: rotate(45deg); }
+
+    .chat-fab-menu {
+      position: absolute;
+      bottom: 68px;
+      right: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(10px) scale(0.95);
+      transition: all 0.25s var(--ease);
+    }
+    .chat-fab.open .chat-fab-menu {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0) scale(1);
+    }
+    .chat-fab-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--s1);
+      border: 1.5px solid var(--border);
+      border-radius: var(--pill);
+      padding: 10px 18px 10px 12px;
+      color: var(--w);
+      font-size: 14px;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: all 0.2s var(--ease);
+      text-decoration: none;
+    }
+    .chat-fab-link:hover {
+      border-color: var(--bh);
+      transform: translateX(-4px);
+      background: var(--s2);
+    }
+    .chat-fab-link .fab-icon {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .fab-tg { background: #229ED9; }
+    .fab-vk { background: #0077FF; }
+
+    /* -- SCROLL FADE ------------------------------------------------ */
+    .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.5s var(--ease), transform 0.5s var(--ease); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* -- HEADINGS --------------------------------------------------- */
+    h1, h2, h3 { font-family: var(--d); }
+
+    /* -- STAR ------------------------------------------------------- */
+    .star-lime { color: var(--lime); }
+    .star-muted { color: var(--t4); }
+
+    @media (max-width: 768px) {
+      .burger{display:block}
+      .nav-links{display:none}
+      .nav-r .btn{display:none}
+      .nav{height:56px}
+      .logo img{height:32px}
+      .nav-search{padding:6px 12px}
+      .nav-search input{font-size:12px}
+      .mobile-menu{top:56px}
+      .chat-fab { bottom: 24px; }
+      .reviews-grid { grid-template-columns: 1fr !important; }
+      .hero-rating-layout { flex-direction: column !important; gap: 32px !important; }
+      .rating-big-num { font-size: 64px !important; }
+      .filter-tabs-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px; }
+      .filter-tabs-wrap::-webkit-scrollbar { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="container">
+    <a href="/" class="logo"><img src="logo-red.svg" alt="DonateBoom" height="44"></a>
+    <div class="nav-search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="text" placeholder="Поиск игр и&nbsp;приложений...">
+    </div>
+    <ul class="nav-links">
+      <li><a href="about.html#guarantees">Гарантии</a></li>
+      <li><a href="reviews.html" class="active-link">Отзывы</a></li>
+      <li><a href="about.html#faq">FAQ</a></li>
+    </ul>
+    <div class="nav-r">
+      <a href="profile.html" class="btn btn-lime">Личный кабинет</a>
+      <button class="burger" onclick="document.querySelector('.mobile-menu').classList.toggle('open');this.classList.toggle('active')">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu">
+  <a href="/">Главная</a>
+  <a href="catalog.html">Каталог</a>
+  <a href="about.html#guarantees">Гарантии</a>
+  <a href="reviews.html">Отзывы</a>
+  <a href="about.html#faq">FAQ</a>
+  <a href="profile.html">Личный кабинет</a>
+</div>
+
+
+<!-- ================================================================
+  HERO — RATING OVERVIEW
+================================================================= -->
+<section class="pt-28 pb-10">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+
+    <!-- Breadcrumbs -->
+    <nav class="flex items-center gap-2 mb-8 fade-up" style="color:var(--t3); font-size:13px;">
+      <a href="/" class="hover:text-white transition-colors">Главная</a>
+      <span>/</span>
+      <span style="color:var(--w);">Отзывы</span>
+    </nav>
+
+    <div class="mb-4 fade-up">
+      <span class="section-label">Отзывы покупателей</span>
+    </div>
+
+    <h2 class="font-black mb-10 fade-up" style="font-size:clamp(1.8rem,4vw,3rem);letter-spacing:-0.03em;line-height:1.1;">
+      Что говорят покупатели
+    </h2>
+
+    <!-- Rating overview -->
+    <div class="hero-rating-layout flex gap-12 items-start fade-up" style="flex-direction:row;">
+
+      <!-- Left: Big rating -->
+      <div class="flex flex-col items-center gap-3" style="min-width:160px;">
+        <div class="rating-big-num" style="font-family:var(--d);font-weight:900;font-size:80px;letter-spacing:-0.04em;line-height:1;color:var(--w);">4.9</div>
+        <div class="flex gap-1">
+          <svg width="22" height="22" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+          <svg width="22" height="22" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+          <svg width="22" height="22" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+          <svg width="22" height="22" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+          <svg width="22" height="22" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        </div>
+        <div style="color:var(--t3);font-size:14px;font-weight:500;">20 712 покупателей</div>
+      </div>
+
+      <!-- Right: Rating distribution -->
+      <div class="flex-1" style="max-width:420px;">
+        <div class="flex flex-col gap-3">
+          <!-- 5 stars -->
+          <div class="flex items-center gap-3">
+            <span style="font-size:14px;font-weight:600;color:var(--t2);min-width:32px;">5 &#9733;</span>
+            <div class="rating-bar-track">
+              <div class="rating-bar-fill" style="width:89%;"></div>
+            </div>
+            <span style="font-size:13px;font-weight:600;color:var(--t3);min-width:36px;text-align:right;">89%</span>
+          </div>
+          <!-- 4 stars -->
+          <div class="flex items-center gap-3">
+            <span style="font-size:14px;font-weight:600;color:var(--t2);min-width:32px;">4 &#9733;</span>
+            <div class="rating-bar-track">
+              <div class="rating-bar-fill" style="width:8%;"></div>
+            </div>
+            <span style="font-size:13px;font-weight:600;color:var(--t3);min-width:36px;text-align:right;">8%</span>
+          </div>
+          <!-- 3 stars -->
+          <div class="flex items-center gap-3">
+            <span style="font-size:14px;font-weight:600;color:var(--t2);min-width:32px;">3 &#9733;</span>
+            <div class="rating-bar-track">
+              <div class="rating-bar-fill" style="width:2%;"></div>
+            </div>
+            <span style="font-size:13px;font-weight:600;color:var(--t3);min-width:36px;text-align:right;">2%</span>
+          </div>
+          <!-- 2 stars -->
+          <div class="flex items-center gap-3">
+            <span style="font-size:14px;font-weight:600;color:var(--t2);min-width:32px;">2 &#9733;</span>
+            <div class="rating-bar-track">
+              <div class="rating-bar-fill" style="width:1%;"></div>
+            </div>
+            <span style="font-size:13px;font-weight:600;color:var(--t3);min-width:36px;text-align:right;">1%</span>
+          </div>
+          <!-- 1 star -->
+          <div class="flex items-center gap-3">
+            <span style="font-size:14px;font-weight:600;color:var(--t2);min-width:32px;">1 &#9733;</span>
+            <div class="rating-bar-track">
+              <div class="rating-bar-fill" style="width:0%;"></div>
+            </div>
+            <span style="font-size:13px;font-weight:600;color:var(--t3);min-width:36px;text-align:right;">0%</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ================================================================
+  FILTER TABS
+================================================================= -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 pb-6">
+  <div class="filter-tabs-wrap flex gap-2 flex-nowrap fade-up">
+    <button class="filter-tab active" data-game="all" onclick="filterReviews('all', this)">Все</button>
+    <button class="filter-tab" data-game="standoff2" onclick="filterReviews('standoff2', this)">Standoff 2</button>
+    <button class="filter-tab" data-game="steam" onclick="filterReviews('steam', this)">Steam</button>
+    <button class="filter-tab" data-game="pubg" onclick="filterReviews('pubg', this)">PUBG Mobile</button>
+    <button class="filter-tab" data-game="brawlstars" onclick="filterReviews('brawlstars', this)">Brawl Stars</button>
+    <button class="filter-tab" data-game="other" onclick="filterReviews('other', this)">Другие</button>
+  </div>
+</section>
+
+
+<!-- ================================================================
+  REVIEWS GRID
+================================================================= -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+  <div class="reviews-grid grid gap-5" style="grid-template-columns: 1fr 1fr;" id="reviews-grid">
+
+    <!-- Review 1 -->
+    <div class="review-card fade-up" data-game="standoff2">
+      <div class="flex items-center justify-between mb-3">
+        <div>
+          <span style="font-weight:700;font-size:15px;">Алексей К.</span>
+          <span style="color:var(--t3);font-size:13px;margin-left:8px;">2 дня назад</span>
+        </div>
+        <span class="game-badge">Standoff 2</span>
+      </div>
+      <div class="flex gap-1 mb-3">
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+      </div>
+      <p style="color:var(--t2);font-size:14px;line-height:1.6;">Купил 1000 золота, пришло за 8 минут. Без вопросов, буду брать ещё.</p>
+    </div>
+
+    <!-- Review 2 -->
+    <div class="review-card fade-up" data-game="standoff2">
+      <div class="flex items-center justify-between mb-3">
+        <div>
+          <span style="font-weight:700;font-size:15px;">Максим Р.</span>
+          <span style="color:var(--t3);font-size:13px;margin-left:8px;">5 дней назад</span>
+        </div>
+        <span class="game-badge">Standoff 2</span>
+      </div>
+      <div class="flex gap-1 mb-3">
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+      </div>
+      <p style="color:var(--t2);font-size:14px;line-height:1.6;">Дешевле чем в игре. Делаю заказы раз в неделю уже 4 месяца.</p>
+    </div>
+
+    <!-- Review 3 -->
+    <div class="review-card fade-up" data-game="steam">
+      <div class="flex items-center justify-between mb-3">
+        <div>
+          <span style="font-weight:700;font-size:15px;">Дарья В.</span>
+          <span style="color:var(--t3);font-size:13px;margin-left:8px;">1 нед. назад</span>
+        </div>
+        <span class="game-badge">Steam</span>
+      </div>
+      <div class="flex gap-1 mb-3">
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+      </div>
+      <p style="color:var(--t2);font-size:14px;line-height:1.6;">Поддержка ответила за 2 минуты. Пополнила кошелёк Steam без проблем.</p>
+    </div>
+
+    <!-- Review 4 -->
+    <div class="review-card fade-up" data-game="standoff2">
+      <div class="flex items-center justify-between mb-3">
+        <div>
+          <span style="font-weight:700;font-size:15px;">Никита Л.</span>
+          <span style="color:var(--t3);font-size:13px;margin-left:8px;">2 нед. назад</span>
+        </div>
+        <span class="game-badge">Standoff 2</span>
+      </div>
+      <div class="flex gap-1 mb-3">
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--t4)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+      </div>
+      <p style="color:var(--t2);font-size:14px;line-height:1.6;">Разобрался не сразу с методом через рынок, но поддержка помогла. Зачтено.</p>
+    </div>
+
+    <!-- Review 5 -->
+    <div class="review-card fade-up" data-game="standoff2">
+      <div class="flex items-center justify-between mb-3">
+        <div>
+          <span style="font-weight:700;font-size:15px;">Артём С.</span>
+          <span style="color:var(--t3);font-size:13px;margin-left:8px;">3 нед. назад</span>
+        </div>
+        <span class="game-badge">Standoff 2</span>
+      </div>
+      <div class="flex gap-1 mb-3">
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+      </div>
+      <p style="color:var(--t2);font-size:14px;line-height:1.6;">Беру Gold Pass каждый месяц. Никогда задержек не было.</p>
+    </div>
+
+    <!-- Review 6 -->
+    <div class="review-card fade-up" data-game="pubg">
+      <div class="flex items-center justify-between mb-3">
+        <div>
+          <span style="font-weight:700;font-size:15px;">Марина К.</span>
+          <span style="color:var(--t3);font-size:13px;margin-left:8px;">1 мес. назад</span>
+        </div>
+        <span class="game-badge">PUBG Mobile</span>
+      </div>
+      <div class="flex gap-1 mb-3">
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+      </div>
+      <p style="color:var(--t2);font-size:14px;line-height:1.6;">Пополнила UC за 5 минут. Цены реально ниже чем в игре.</p>
+    </div>
+
+    <!-- Review 7 — hidden by default -->
+    <div class="review-card fade-up review-hidden" data-game="brawlstars" style="display:none;">
+      <div class="flex items-center justify-between mb-3">
+        <div>
+          <span style="font-weight:700;font-size:15px;">Денис П.</span>
+          <span style="color:var(--t3);font-size:13px;margin-left:8px;">1 мес. назад</span>
+        </div>
+        <span class="game-badge">Brawl Stars</span>
+      </div>
+      <div class="flex gap-1 mb-3">
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+      </div>
+      <p style="color:var(--t2);font-size:14px;line-height:1.6;">Купил гемы для Brawl Stars. Всё чётко, пришло быстро.</p>
+    </div>
+
+    <!-- Review 8 — hidden by default -->
+    <div class="review-card fade-up review-hidden" data-game="steam" style="display:none;">
+      <div class="flex items-center justify-between mb-3">
+        <div>
+          <span style="font-weight:700;font-size:15px;">Олег М.</span>
+          <span style="color:var(--t3);font-size:13px;margin-left:8px;">1 мес. назад</span>
+        </div>
+        <span class="game-badge">Steam</span>
+      </div>
+      <div class="flex gap-1 mb-3">
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+      </div>
+      <p style="color:var(--t2);font-size:14px;line-height:1.6;">Пополнял Steam дважды. Оба раза — без задержек. Рекомендую.</p>
+    </div>
+
+    <!-- Review 9 — hidden by default -->
+    <div class="review-card fade-up review-hidden" data-game="standoff2" style="display:none;">
+      <div class="flex items-center justify-between mb-3">
+        <div>
+          <span style="font-weight:700;font-size:15px;">Анна Т.</span>
+          <span style="color:var(--t3);font-size:13px;margin-left:8px;">2 мес. назад</span>
+        </div>
+        <span class="game-badge">Standoff 2</span>
+      </div>
+      <div class="flex gap-1 mb-3">
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+      </div>
+      <p style="color:var(--t2);font-size:14px;line-height:1.6;">Первый раз покупала онлайн-валюту. Всё понятно и безопасно.</p>
+    </div>
+
+    <!-- Review 10 — hidden by default -->
+    <div class="review-card fade-up review-hidden" data-game="standoff2" style="display:none;">
+      <div class="flex items-center justify-between mb-3">
+        <div>
+          <span style="font-weight:700;font-size:15px;">Руслан Ш.</span>
+          <span style="color:var(--t3);font-size:13px;margin-left:8px;">2 мес. назад</span>
+        </div>
+        <span class="game-badge">Standoff 2</span>
+      </div>
+      <div class="flex gap-1 mb-3">
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--t4)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+      </div>
+      <p style="color:var(--t2);font-size:14px;line-height:1.6;">Золото пришло за 12 минут вместо обещанных 3-х. Но пришло, и цена хорошая.</p>
+    </div>
+
+    <!-- Review 11 — hidden by default -->
+    <div class="review-card fade-up review-hidden" data-game="pubg" style="display:none;">
+      <div class="flex items-center justify-between mb-3">
+        <div>
+          <span style="font-weight:700;font-size:15px;">Кирилл Н.</span>
+          <span style="color:var(--t3);font-size:13px;margin-left:8px;">3 мес. назад</span>
+        </div>
+        <span class="game-badge">PUBG Mobile</span>
+      </div>
+      <div class="flex gap-1 mb-3">
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+      </div>
+      <p style="color:var(--t2);font-size:14px;line-height:1.6;">Удобный сайт, быстрая оплата через СБП. Топ.</p>
+    </div>
+
+    <!-- Review 12 — hidden by default -->
+    <div class="review-card fade-up review-hidden" data-game="steam" style="display:none;">
+      <div class="flex items-center justify-between mb-3">
+        <div>
+          <span style="font-weight:700;font-size:15px;">Елена Б.</span>
+          <span style="color:var(--t3);font-size:13px;margin-left:8px;">3 мес. назад</span>
+        </div>
+        <span class="game-badge">Steam</span>
+      </div>
+      <div class="flex gap-1 mb-3">
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--lime)"><path d="M10 1.5L12.3 7H18L13.2 10.5L15 16L10 13L5 16L6.8 10.5L2 7H7.7L10 1.5Z"/></svg>
+      </div>
+      <p style="color:var(--t2);font-size:14px;line-height:1.6;">Подарила мужу пополнение Steam на день рождения. Всё прошло гладко!</p>
+    </div>
+
+  </div>
+
+  <!-- Show more button -->
+  <div class="flex justify-center mt-10 fade-up">
+    <button class="btn-ghost" id="show-more-btn" onclick="showMoreReviews()">Показать ещё</button>
+  </div>
+</section>
+
+
+<!-- ================================================================
+  CTA SECTION
+================================================================= -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 py-20 fade-up">
+  <div style="background:linear-gradient(135deg, var(--s1) 0%, rgba(234,58,59,0.06) 100%);border:1.5px solid var(--border);border-radius:var(--rl);padding:48px;text-align:center;">
+    <h2 class="font-black mb-4" style="font-size:clamp(1.4rem,3vw,2.2rem);letter-spacing:-0.03em;">
+      Присоединяйтесь к&nbsp;20&nbsp;000+ покупателей
+    </h2>
+    <p style="color:var(--t3);font-size:16px;margin-bottom:28px;max-width:480px;margin-left:auto;margin-right:auto;">
+      Быстрое пополнение по выгодным ценам. Гарантия зачисления или возврат.
+    </p>
+    <a href="catalog.html" class="btn-buy" style="display:inline-flex;">
+      Перейти в каталог
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </a>
+  </div>
+</section>
+
+
+<!-- ================================================================
+  FOOTER
+================================================================= -->
+<footer style="border-top:1px solid var(--border);margin-top:16px;">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-10">
+      <div class="col-span-2 md:col-span-1">
+        <div class="mb-4">
+          <img src="logo-red.svg" alt="DonateBoom" height="32">
+        </div>
+        <p style="color:var(--t3);font-size:13px;line-height:1.7;margin-bottom:16px;">Пополнение игровых аккаунтов без посредников</p>
+        <div class="flex gap-3">
+          <a href="#" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">TG</a>
+          <a href="#" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">VK</a>
+        </div>
+      </div>
+      <div><div style="font-size:11px;font-weight:700;color:var(--w);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:16px;">Игры</div><div class="flex flex-col gap-2"><a href="standoff-2.html" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">Standoff 2</a><a href="#" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">PUBG Mobile</a><a href="#" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">Brawl Stars</a><a href="catalog.html" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">Все игры</a></div></div>
+      <div><div style="font-size:11px;font-weight:700;color:var(--w);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:16px;">Сервисы</div><div class="flex flex-col gap-2"><a href="#" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">PlayStation</a><a href="#" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">App Store</a><a href="#" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">Steam</a><a href="#" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">TikTok</a></div></div>
+      <div><div style="font-size:11px;font-weight:700;color:var(--w);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:16px;">Компания</div><div class="flex flex-col gap-2"><a href="#" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">О нас</a><a href="#" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">Поддержка</a><a href="reviews.html" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">Отзывы</a><a href="#" style="color:var(--t3);font-size:13px;" class="hover:text-white transition-colors">Политика конфиденциальности</a></div></div>
+    </div>
+    <div style="border-top:1px solid var(--border);padding-top:24px;"></div>
+  </div>
+</footer>
+
+
+<!-- ================================================================
+  FLOATING CHAT WIDGET
+================================================================= -->
+<div class="chat-fab" id="chat-fab">
+  <div class="chat-fab-menu">
+    <a href="https://t.me/donateboom" target="_blank" class="chat-fab-link">
+      <div class="fab-icon fab-tg">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+      </div>
+      Telegram
+    </a>
+    <a href="https://vk.me/donateboom" target="_blank" class="chat-fab-link">
+      <div class="fab-icon fab-vk">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.391 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.864-.525-2.05-1.727-1.033-1-1.49-1.135-1.744-1.135-.356 0-.458.102-.458.593v1.575c0 .424-.135.678-1.253.678-1.846 0-3.896-1.118-5.335-3.202C4.624 10.857 4 8.57 4 8.096c0-.254.102-.491.593-.491h1.744c.44 0 .61.203.78.678.847 2.455 2.27 4.607 2.86 4.607.22 0 .322-.102.322-.66V9.72c-.068-1.186-.695-1.287-.695-1.71 0-.203.17-.407.44-.407h2.744c.373 0 .508.203.508.643v3.473c0 .372.17.508.271.508.22 0 .407-.136.813-.542 1.253-1.406 2.15-3.574 2.15-3.574.119-.254.305-.491.745-.491h1.744c.525 0 .644.27.525.643-.22 1.017-2.354 4.031-2.354 4.031-.186.305-.254.44 0 .78.186.254.796.779 1.203 1.253.745.847 1.32 1.558 1.473 2.05.17.49-.085.744-.576.744z"/></svg>
+      </div>
+      VK Мессенджер
+    </a>
+  </div>
+  <button class="chat-fab-btn" onclick="document.getElementById('chat-fab').classList.toggle('open')">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+    </svg>
+  </button>
+</div>
+
+
+<!-- ================================================================
+  JS
+================================================================= -->
+<script>
+  // -- Filter reviews by game --
+  function filterReviews(game, btn) {
+    // Update active tab
+    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+
+    const cards = document.querySelectorAll('.review-card');
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+      const cardGame = card.getAttribute('data-game');
+      const match = (game === 'all') || (cardGame === game);
+
+      if (match) {
+        card.style.display = '';
+        card.classList.remove('review-hidden');
+        visibleCount++;
+        // Re-trigger fade animation
+        card.classList.remove('visible');
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            card.classList.add('visible');
+          });
+        });
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    // Hide "show more" if filtering
+    const showMoreBtn = document.getElementById('show-more-btn');
+    if (game !== 'all') {
+      showMoreBtn.style.display = 'none';
+    } else {
+      // Check if there are still hidden cards
+      const hiddenCards = document.querySelectorAll('.review-card.review-hidden');
+      showMoreBtn.style.display = hiddenCards.length > 0 ? '' : 'none';
+    }
+  }
+
+  // -- Show more reviews --
+  let moreShown = false;
+  function showMoreReviews() {
+    const hiddenCards = document.querySelectorAll('.review-card.review-hidden');
+    hiddenCards.forEach((card, i) => {
+      card.style.display = '';
+      card.classList.remove('review-hidden');
+      // Stagger animation
+      setTimeout(() => {
+        card.classList.add('visible');
+      }, i * 80);
+    });
+    moreShown = true;
+    document.getElementById('show-more-btn').style.display = 'none';
+  }
+
+  // -- Burger menu --
+  // Already handled inline on the button
+
+  // -- Close chat FAB when clicking outside --
+  document.addEventListener('click', function(e) {
+    const fab = document.getElementById('chat-fab');
+    if (fab.classList.contains('open') && !fab.contains(e.target)) {
+      fab.classList.remove('open');
+    }
+  });
+
+  // -- Fade-up on scroll --
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

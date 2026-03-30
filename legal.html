@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Юридическая информация | DonateBoom</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Rubik:wght@300;400;500;600;700;800;900&family=Unbounded:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{fontFamily:{sans:['Rubik','system-ui','sans-serif'],display:['Unbounded','system-ui','sans-serif'],mono:['JetBrains Mono','monospace']},colors:{accent:'#EA3A3B',page:'#070707',card:'#0E0E0E',card2:'#1A1A1A','s':'#6E6E73'}}}}</script>
+<style>
+:root{--bg:#070707;--s1:#0E0E0E;--s2:#141414;--s3:#1A1A1A;--border:rgba(255,255,255,0.06);--bh:rgba(255,255,255,0.1);--lime:#EA3A3B;--lime10:rgba(234,58,59,0.08);--w:#F5F5F7;--t1:#E0E0E0;--t2:#A0A0A0;--t3:#6E6E73;--t4:#3A3A3A;--d:'Unbounded',sans-serif;--b:'Rubik',sans-serif;--m:'JetBrains Mono',monospace;--rl:20px;--rm:14px;--pill:100px;--max:1280px;--ease:cubic-bezier(.4,0,.2,1)}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+a{text-decoration:none;color:inherit}
+body{background:var(--bg);color:var(--w);font-family:var(--b);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;height:64px;display:flex;align-items:center;background:rgba(7,7,7,0.85);backdrop-filter:blur(24px) saturate(1.4);border-bottom:1px solid var(--border)}
+.nav .container{display:flex;align-items:center;gap:20px;width:100%;max-width:var(--max);margin:0 auto;padding:0 24px}
+.logo{display:flex;align-items:center;flex-shrink:0}
+.logo img{height:44px;width:auto}
+.nav-links{display:flex;gap:2px;list-style:none;flex-shrink:0;margin-left:auto}
+.nav-links a{display:block;padding:7px 14px;border-radius:var(--pill);font-size:13px;font-weight:500;color:var(--t2);transition:color .2s,background .2s}
+.nav-links a:hover{color:var(--w);background:var(--s2)}
+
+.legal{max-width:800px;margin:0 auto;padding:96px 24px 60px}
+.legal h1{font-family:var(--d);font-weight:900;font-size:clamp(1.6rem,4vw,2.2rem);letter-spacing:-0.03em;margin-bottom:8px}
+.legal-sub{color:var(--t3);font-size:14px;margin-bottom:32px}
+
+.legal-tabs{display:flex;gap:8px;margin-bottom:40px;overflow-x:auto;scrollbar-width:none}
+.legal-tabs::-webkit-scrollbar{display:none}
+.legal-tab{padding:10px 20px;border-radius:var(--pill);font-size:13px;font-weight:600;color:var(--t3);background:var(--s2);border:1px solid var(--border);cursor:pointer;transition:all .2s;font-family:var(--b);white-space:nowrap}
+.legal-tab.active{background:var(--lime);color:#fff;border-color:var(--lime)}
+
+.legal-content h2{font-family:var(--d);font-weight:800;font-size:1.3rem;letter-spacing:-0.02em;margin:32px 0 16px;padding-top:16px;border-top:1px solid var(--border)}
+.legal-content h2:first-child{margin-top:0;border-top:none;padding-top:0}
+.legal-content h3{font-weight:700;font-size:1rem;margin:24px 0 8px;color:var(--w)}
+.legal-content p{color:var(--t2);margin-bottom:12px;font-size:14px;line-height:1.8}
+.legal-content ul{color:var(--t2);font-size:14px;line-height:1.8;padding-left:20px;margin-bottom:12px}
+.legal-content li{margin-bottom:4px}
+
+@media(max-width:768px){
+  .nav-links{display:none}
+  .legal{padding:80px 16px 40px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container">
+    <a href="/" class="logo"><img src="logo-red.svg" alt="DonateBoom" height="44"></a>
+    <ul class="nav-links">
+      <li><a href="catalog.html">Каталог</a></li>
+      <li><a href="about.html">О сервисе</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="legal">
+  <h1>Юридическая информация</h1>
+  <p class="legal-sub">Действующая редакция от 30 марта 2026 года</p>
+
+  <div class="legal-tabs">
+    <button class="legal-tab active" onclick="switchLegal('oferta',this)">Публичная оферта</button>
+    <button class="legal-tab" onclick="switchLegal('privacy',this)">Политика конфиденциальности</button>
+    <button class="legal-tab" onclick="switchLegal('rules',this)">Правила сервиса</button>
+  </div>
+
+  <!-- OFERTA -->
+  <div class="legal-content" id="legal-oferta">
+    <h2 id="oferta">1. Общие положения</h2>
+    <p>Настоящий документ является публичной офертой сервиса DonateBoom (далее — Сервис) и определяет условия предоставления услуг по пополнению игровых аккаунтов и приобретению цифровых товаров.</p>
+    <p>Оформление заказа на сайте означает полное и безоговорочное принятие условий настоящей оферты.</p>
+
+    <h2>2. Предмет оферты</h2>
+    <p>Сервис оказывает услуги по пополнению игровой валюты, приобретению внутриигровых предметов и цифровых товаров для поддерживаемых игр и платформ.</p>
+    <p>Полный перечень доступных услуг размещён на странице <a href="catalog.html" style="color:var(--lime);">каталога</a>.</p>
+
+    <h2>3. Порядок оказания услуг</h2>
+    <ul>
+      <li>Покупатель выбирает товар и указывает необходимые данные (Player ID, email)</li>
+      <li>Покупатель оплачивает заказ доступным способом</li>
+      <li>Сервис выполняет заказ в установленные сроки</li>
+      <li>Покупатель получает уведомление о выполнении заказа</li>
+    </ul>
+
+    <h2>4. Сроки выполнения</h2>
+    <p>Среднее время выполнения заказа — от 3 минут. Максимальный срок — 24 часа. При превышении срока Покупатель вправе запросить возврат средств.</p>
+
+    <h2>5. Оплата</h2>
+    <p>Сервис принимает оплату банковскими картами (Visa, MasterCard, МИР), через Систему быстрых платежей (СБП), SberPay и криптовалюту. Все цены указаны в российских рублях и являются окончательными.</p>
+
+    <h2>6. Возврат средств</h2>
+    <p>Возврат денежных средств производится в следующих случаях:</p>
+    <ul>
+      <li>Заказ не выполнен в течение 24 часов — полный возврат</li>
+      <li>Заказ выполнен частично — возврат разницы</li>
+      <li>Техническая ошибка со стороны Сервиса — полный возврат</li>
+    </ul>
+    <p>Для оформления возврата необходимо обратиться в службу поддержки через Telegram.</p>
+
+    <h2>7. Ответственность сторон</h2>
+    <p>Сервис не несёт ответственности за блокировку аккаунта Покупателя со стороны издателя игры, если блокировка не связана с действиями Сервиса. Сервис гарантирует, что используемые методы пополнения не нарушают правил игровых платформ.</p>
+  </div>
+
+  <!-- PRIVACY -->
+  <div class="legal-content" id="legal-privacy" style="display:none;">
+    <h2 id="privacy">1. Сбор данных</h2>
+    <p>Сервис собирает следующие персональные данные:</p>
+    <ul>
+      <li>Email-адрес — для уведомлений о статусе заказа</li>
+      <li>Player ID / игровой идентификатор — для выполнения заказа</li>
+      <li>IP-адрес — для обеспечения безопасности</li>
+    </ul>
+    <p>Сервис не собирает и не запрашивает: логин и пароль от игровых аккаунтов, паспортные данные, данные банковских карт (обработка платежей осуществляется через сертифицированных платёжных провайдеров).</p>
+
+    <h2>2. Хранение данных</h2>
+    <p>Все данные хранятся на защищённых серверах с использованием шифрования. Доступ к данным имеют только авторизованные сотрудники Сервиса.</p>
+
+    <h2>3. Передача данных третьим лицам</h2>
+    <p>Сервис не передаёт персональные данные третьим лицам, за исключением случаев, предусмотренных законодательством.</p>
+
+    <h2>4. Cookies</h2>
+    <p>Сайт использует файлы cookies для обеспечения корректной работы и аналитики. Используя сайт, вы соглашаетесь с использованием cookies.</p>
+
+    <h2>5. Права пользователя</h2>
+    <p>Вы имеете право запросить удаление ваших персональных данных, обратившись в поддержку через Telegram или по email: support@donateboom.com.</p>
+  </div>
+
+  <!-- RULES -->
+  <div class="legal-content" id="legal-rules" style="display:none;">
+    <h2 id="rules">1. Общие правила</h2>
+    <p>Используя Сервис, вы обязуетесь соблюдать настоящие правила. Нарушение правил может привести к отказу в обслуживании без возврата средств.</p>
+
+    <h2>2. Условия использования</h2>
+    <ul>
+      <li>Сервис предназначен для лиц старше 14 лет</li>
+      <li>Вы гарантируете, что имеете право на использование указанного игрового аккаунта</li>
+      <li>Один аккаунт DonateBoom на одного пользователя</li>
+    </ul>
+
+    <h2>3. Запрещённые действия</h2>
+    <ul>
+      <li>Попытки обмана или мошенничества (фейковые скриншоты, chargeback)</li>
+      <li>Использование Сервиса для отмывания денежных средств</li>
+      <li>Массовые покупки с целью перепродажи</li>
+      <li>Попытки получить несанкционированный доступ к системам Сервиса</li>
+    </ul>
+
+    <h2>4. Ответственность</h2>
+    <p>При обнаружении запрещённых действий Сервис оставляет за собой право заблокировать аккаунт пользователя и отказать в возврате средств по текущим заказам.</p>
+
+    <h2>5. Изменение правил</h2>
+    <p>Сервис оставляет за собой право изменять настоящие правила. Актуальная версия всегда доступна на данной странице. Продолжение использования Сервиса после изменений означает согласие с новой редакцией.</p>
+  </div>
+</div>
+
+<script>
+function switchLegal(id, btn) {
+  ['oferta','privacy','rules'].forEach(s => {
+    document.getElementById('legal-' + s).style.display = s === id ? 'block' : 'none';
+  });
+  document.querySelectorAll('.legal-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// Handle hash navigation
+if (window.location.hash) {
+  const h = window.location.hash.replace('#','');
+  if (['oferta','privacy','rules'].includes(h)) {
+    switchLegal(h, document.querySelectorAll('.legal-tab')[['oferta','privacy','rules'].indexOf(h)]);
+  }
+}
+</script>
+</body>
+</html>

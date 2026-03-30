@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Личный кабинет | DonateBoom</title>
+<meta name="description" content="Личный кабинет DonateBoom — мои заказы, история, настройки профиля и поддержка.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Rubik:wght@300;400;500;600;700;800;900&family=Unbounded:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{fontFamily:{sans:['Rubik','system-ui','sans-serif'],display:['Unbounded','system-ui','sans-serif'],mono:['JetBrains Mono','monospace']},colors:{accent:'#EA3A3B',page:'#070707',card:'#0E0E0E',card2:'#1A1A1A','s':'#6E6E73'}}}}</script>
+<style>
+:root{--bg:#070707;--s1:#0E0E0E;--s2:#141414;--s3:#1A1A1A;--s4:#222;--border:rgba(255,255,255,0.06);--bh:rgba(255,255,255,0.1);--lime:#EA3A3B;--lime-soft:#FF6B6B;--lime10:rgba(234,58,59,0.08);--lime15:rgba(234,58,59,0.13);--mint:#7AE8A0;--w:#F5F5F7;--t1:#E0E0E0;--t2:#A0A0A0;--t3:#6E6E73;--t4:#3A3A3A;--d:'Unbounded',sans-serif;--b:'Rubik',sans-serif;--m:'JetBrains Mono',monospace;--rl:20px;--rm:14px;--rs:10px;--pill:100px;--max:1280px;--ease:cubic-bezier(.4,0,.2,1)}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+a{text-decoration:none;color:inherit}
+body{background:var(--bg);color:var(--w);font-family:var(--b);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.container{max-width:var(--max);margin:0 auto;padding:0 48px}
+.btn{font-family:var(--m);font-weight:600;font-size:12px;padding:9px 20px;border-radius:var(--pill);border:none;cursor:pointer;transition:all .2s var(--ease);display:inline-flex;align-items:center;gap:6px}
+.btn-lime{background:var(--lime);color:#fff;box-shadow:0 0 20px rgba(234,58,59,0.22)}
+.btn-ghost{background:none;color:var(--t2);border:1px solid var(--border);padding:9px 20px;border-radius:var(--pill);font-family:var(--m);font-weight:600;font-size:12px;cursor:pointer;transition:all .2s}
+.btn-ghost:hover{border-color:var(--bh);color:var(--w)}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;height:64px;display:flex;align-items:center;background:rgba(7,7,7,0.85);backdrop-filter:blur(24px) saturate(1.4);border-bottom:1px solid var(--border)}
+.nav .container{display:flex;align-items:center;gap:20px;width:100%;max-width:var(--max);margin:0 auto;padding:0 24px}
+.logo{display:flex;align-items:center;flex-shrink:0}
+.logo img{height:44px;width:auto}
+.nav-search{flex:1;display:flex;align-items:center;gap:10px;background:var(--s2);border:1px solid var(--border);border-radius:12px;padding:9px 16px}
+.nav-search svg{width:18px;height:18px;color:var(--t3);flex-shrink:0}
+.nav-search input{flex:1;background:none;border:none;outline:none;color:var(--w);font-family:var(--b);font-size:14px}
+.nav-search input::placeholder{color:var(--t3)}
+.nav-links{display:flex;gap:2px;list-style:none;flex-shrink:0}
+.nav-links a{display:block;padding:7px 14px;border-radius:var(--pill);font-size:13px;font-weight:500;color:var(--t2);transition:color .2s,background .2s;white-space:nowrap}
+.nav-links a:hover{color:var(--w);background:var(--s2)}
+.nav-r{display:flex;gap:8px;align-items:center;flex-shrink:0}
+.burger{display:none;width:36px;height:36px;border:none;background:none;cursor:pointer;padding:6px;flex-shrink:0}
+.burger span{display:block;width:24px;height:2px;background:var(--w);margin:5px 0;transition:all .3s;border-radius:2px}
+.mobile-menu{display:none;position:fixed;inset:0;top:64px;z-index:99;background:rgba(7,7,7,0.95);backdrop-filter:blur(20px);padding:32px 24px;flex-direction:column;gap:8px}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-size:16px;font-weight:500;color:var(--t1);padding:14px 0;border-bottom:1px solid var(--border)}
+
+/* DASHBOARD */
+.dash{display:flex;gap:0;min-height:calc(100vh - 64px);padding-top:64px}
+.sidebar{width:280px;flex-shrink:0;background:var(--s1);border-right:1px solid var(--border);padding:32px 20px;position:sticky;top:64px;height:calc(100vh - 64px);overflow-y:auto}
+.sidebar-avatar{width:56px;height:56px;border-radius:50%;background:var(--lime);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:20px;color:#fff;margin-bottom:12px}
+.sidebar-name{font-weight:700;font-size:16px;color:var(--w);margin-bottom:4px}
+.sidebar-email{font-size:13px;color:var(--t3);margin-bottom:24px}
+.sidebar-nav{display:flex;flex-direction:column;gap:4px}
+.sidebar-item{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:12px;font-size:14px;font-weight:500;color:var(--t2);cursor:pointer;transition:all .2s;border:none;background:none;width:100%;text-align:left;font-family:var(--b)}
+.sidebar-item:hover{background:var(--s2);color:var(--w)}
+.sidebar-item.active{background:var(--lime10);color:var(--w);border-left:3px solid var(--lime)}
+.sidebar-item svg{width:20px;height:20px;flex-shrink:0}
+.sidebar-logout{margin-top:auto;padding-top:24px;border-top:1px solid var(--border)}
+.dash-content{flex:1;padding:32px 40px;min-width:0}
+.dash-content h2{font-family:var(--d);font-weight:900;font-size:clamp(1.4rem,3vw,1.8rem);letter-spacing:-0.03em;margin-bottom:24px}
+
+/* SUB TABS */
+.sub-tabs{display:flex;gap:8px;margin-bottom:24px}
+.sub-tab{padding:8px 16px;border-radius:var(--pill);font-size:13px;font-weight:600;color:var(--t3);background:var(--s2);border:1px solid var(--border);cursor:pointer;transition:all .2s;font-family:var(--b)}
+.sub-tab.active{background:var(--lime);color:#fff;border-color:var(--lime)}
+.sub-tab .count{font-size:11px;opacity:0.7;margin-left:4px}
+
+/* ORDER CARD */
+.order-card{background:var(--s1);border:1px solid var(--border);border-radius:var(--rl);padding:20px;margin-bottom:12px;transition:border-color .2s}
+.order-card:hover{border-color:var(--bh)}
+.order-num{font-family:var(--m);font-size:13px;color:var(--t3);margin-bottom:8px}
+.order-title{font-weight:700;font-size:16px;color:var(--w);margin-bottom:4px}
+.order-method{font-size:13px;color:var(--t3);margin-bottom:12px}
+.order-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.order-price{font-weight:800;font-size:18px;color:var(--lime);font-family:var(--d)}
+.order-date{font-size:12px;color:var(--t3)}
+.status{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:var(--pill);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.04em}
+.status-processing{background:rgba(255,180,0,0.12);color:#FFB400}
+.status-awaiting{background:var(--lime10);color:var(--lime)}
+.status-pending{background:rgba(234,58,59,0.12);color:var(--lime)}
+.status-completed{background:rgba(122,232,160,0.12);color:var(--mint)}
+.status-cancelled{background:rgba(255,255,255,0.06);color:var(--t3)}
+
+/* FORM */
+.form-group{margin-bottom:20px}
+.form-label{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--t3);margin-bottom:8px}
+.form-input{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:12px;padding:12px 16px;color:var(--w);font-family:var(--b);font-size:14px;outline:none;transition:border-color .2s}
+.form-input:focus{border-color:var(--lime)}
+.form-textarea{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:12px;padding:12px 16px;color:var(--w);font-family:var(--b);font-size:14px;outline:none;resize:vertical;min-height:120px;transition:border-color .2s}
+.form-textarea:focus{border-color:var(--lime)}
+.form-select{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:12px;padding:12px 16px;color:var(--w);font-family:var(--b);font-size:14px;outline:none;-webkit-appearance:none;cursor:pointer}
+
+/* TOGGLE */
+.toggle{position:relative;width:44px;height:24px;background:var(--s3);border-radius:12px;cursor:pointer;transition:background .2s;flex-shrink:0}
+.toggle.on{background:var(--lime)}
+.toggle::after{content:'';position:absolute;top:3px;left:3px;width:18px;height:18px;background:#fff;border-radius:50%;transition:transform .2s}
+.toggle.on::after{transform:translateX(20px)}
+
+/* PROGRESS TRACKER */
+.progress-tracker{display:flex;align-items:center;gap:0;margin-bottom:24px}
+.progress-step{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--t3)}
+.progress-step.done{color:var(--mint)}
+.progress-step.current{color:var(--lime)}
+.progress-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;border:2px solid var(--border);color:var(--t3);flex-shrink:0}
+.progress-step.done .progress-dot{background:var(--mint);border-color:var(--mint);color:#000}
+.progress-step.current .progress-dot{background:var(--lime);border-color:var(--lime);color:#fff}
+.progress-line{flex:1;height:2px;background:var(--border);margin:0 8px;min-width:20px}
+.progress-line.done{background:var(--mint)}
+
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.82);z-index:200;backdrop-filter:blur(4px)}
+.modal-overlay.open{display:flex;align-items:center;justify-content:center}
+.modal-box{background:var(--s1);border:1.5px solid var(--bh);border-radius:var(--rl);padding:28px;max-width:560px;width:92%;max-height:85vh;overflow-y:auto}
+.modal-close{position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:50%;background:var(--s2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--t3);font-size:18px}
+
+/* CHAT LOG */
+.chat-log{display:flex;flex-direction:column;gap:8px;max-height:200px;overflow-y:auto;margin-bottom:16px;padding:16px;background:var(--bg);border-radius:12px}
+.chat-msg{padding:8px 12px;border-radius:12px;font-size:13px;max-width:80%}
+.chat-msg.bot{background:var(--s2);color:var(--t1);align-self:flex-start}
+.chat-msg.user{background:var(--lime10);color:var(--w);align-self:flex-end}
+
+/* EMPTY STATE */
+.empty-state{text-align:center;padding:60px 20px;color:var(--t3)}
+.empty-state svg{width:48px;height:48px;margin:0 auto 16px;opacity:0.3}
+.empty-state p{font-size:15px}
+
+/* TICKET */
+.ticket-card{background:var(--s1);border:1px solid var(--border);border-radius:var(--rm);padding:16px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between}
+.ticket-title{font-weight:600;font-size:14px;color:var(--w)}
+.ticket-meta{font-size:12px;color:var(--t3)}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .nav-links,.nav-r .btn{display:none}
+  .burger{display:block}
+  .nav{height:56px}
+  .logo img{height:32px}
+  .container{padding:0 20px}
+  .sidebar{display:none}
+  .mobile-tabs{display:flex !important;gap:4px;overflow-x:auto;padding:0 20px 16px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .mobile-tabs::-webkit-scrollbar{display:none}
+  .dash{flex-direction:column;padding-top:56px}
+  .dash-content{padding:0 20px 32px}
+}
+@media(min-width:769px){.mobile-tabs{display:none !important}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="container">
+    <a href="/" class="logo"><img src="logo-red.svg" alt="DonateBoom" height="44"></a>
+    <div class="nav-search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="text" placeholder="Поиск игр и приложений...">
+    </div>
+    <ul class="nav-links">
+      <li><a href="about.html#guarantees">Гарантии</a></li>
+      <li><a href="reviews.html">Отзывы</a></li>
+      <li><a href="about.html#faq">FAQ</a></li>
+    </ul>
+    <div class="nav-r">
+      <a href="profile.html" class="btn btn-lime" style="opacity:0.8;">Личный кабинет</a>
+      <button class="burger" onclick="document.querySelector('.mobile-menu').classList.toggle('open');this.classList.toggle('active')"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu">
+  <a href="/">Главная</a>
+  <a href="catalog.html">Каталог</a>
+  <a href="about.html#guarantees">Гарантии</a>
+  <a href="reviews.html">Отзывы</a>
+  <a href="about.html#faq">FAQ</a>
+  <a href="profile.html">Личный кабинет</a>
+</div>
+
+<!-- DASHBOARD -->
+<div class="dash">
+
+  <!-- SIDEBAR (desktop) -->
+  <aside class="sidebar">
+    <div class="sidebar-avatar">АК</div>
+    <div class="sidebar-name">Алексей К.</div>
+    <div class="sidebar-email">alexey@mail.ru</div>
+    <nav class="sidebar-nav">
+      <button class="sidebar-item active" onclick="switchTab('orders')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        Мои заказы
+      </button>
+      <button class="sidebar-item" onclick="switchTab('history')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        История
+      </button>
+      <button class="sidebar-item" onclick="switchTab('settings')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        Настройки
+      </button>
+      <button class="sidebar-item" onclick="switchTab('support')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        Поддержка
+      </button>
+    </nav>
+    <div class="sidebar-logout">
+      <button class="sidebar-item" style="color:var(--t3);font-size:13px;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Выйти
+      </button>
+    </div>
+  </aside>
+
+  <!-- MOBILE TABS -->
+  <div class="mobile-tabs" style="padding-top:16px;">
+    <button class="sub-tab active" onclick="switchTab('orders')">Заказы</button>
+    <button class="sub-tab" onclick="switchTab('history')">История</button>
+    <button class="sub-tab" onclick="switchTab('settings')">Настройки</button>
+    <button class="sub-tab" onclick="switchTab('support')">Поддержка</button>
+  </div>
+
+  <!-- CONTENT -->
+  <main class="dash-content">
+
+    <!-- ═══ ORDERS ═══ -->
+    <div id="tab-orders">
+      <h2>Мои заказы</h2>
+      <div class="sub-tabs">
+        <button class="sub-tab active" onclick="switchOrderSub('active',this)">Активные <span class="count">(3)</span></button>
+        <button class="sub-tab" onclick="switchOrderSub('done',this)">Завершённые <span class="count">(8)</span></button>
+        <button class="sub-tab" onclick="switchOrderSub('cancelled',this)">Отменённые <span class="count">(0)</span></button>
+      </div>
+
+      <!-- Active orders -->
+      <div id="orders-active">
+        <div class="order-card" onclick="openOrderDetail('14892')">
+          <div class="order-num">#14892</div>
+          <div class="order-title">1 000 Gold &middot; Standoff 2</div>
+          <div class="order-method">Через рынок</div>
+          <div style="margin-bottom:12px;"><span class="status status-processing">В обработке</span></div>
+          <div class="order-footer">
+            <div class="order-price">1 268 &#8381;</div>
+            <div class="order-date">29 марта 2026, 21:15</div>
+          </div>
+        </div>
+
+        <div class="order-card">
+          <div class="order-num">#14887</div>
+          <div class="order-title">500 Gold &middot; Standoff 2</div>
+          <div class="order-method">Через рынок</div>
+          <div style="margin-bottom:12px;"><span class="status status-awaiting">Ожидает скриншот</span></div>
+          <div class="order-footer">
+            <div class="order-price">723 &#8381;</div>
+            <div class="order-date">29 марта 2026, 19:30</div>
+          </div>
+        </div>
+
+        <div class="order-card">
+          <div class="order-num">#14901</div>
+          <div class="order-title">Пополнение Steam &middot; 500&#8381;</div>
+          <div class="order-method">По коду</div>
+          <div style="margin-bottom:12px;"><span class="status status-pending">Ожидает оплаты</span></div>
+          <div class="order-footer">
+            <div class="order-price">500 &#8381;</div>
+            <div class="order-date">30 марта 2026, 01:00</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Completed orders -->
+      <div id="orders-done" style="display:none;">
+        <div class="order-card">
+          <div class="order-num">#14850</div>
+          <div class="order-title">3 000 Gold &middot; Standoff 2</div>
+          <div class="order-method">Через рынок</div>
+          <div style="margin-bottom:12px;"><span class="status status-completed">Выполнен</span></div>
+          <div class="order-footer">
+            <div class="order-price">2 728 &#8381;</div>
+            <div class="order-date">25 марта 2026</div>
+          </div>
+        </div>
+        <div class="order-card">
+          <div class="order-num">#14801</div>
+          <div class="order-title">Gold Pass &middot; Standoff 2</div>
+          <div class="order-method">По UID</div>
+          <div style="margin-bottom:12px;"><span class="status status-completed">Выполнен</span></div>
+          <div class="order-footer">
+            <div class="order-price">184 &#8381;</div>
+            <div class="order-date">20 марта 2026</div>
+          </div>
+        </div>
+        <div class="order-card">
+          <div class="order-num">#14756</div>
+          <div class="order-title">Пополнение Steam &middot; 1 000&#8381;</div>
+          <div class="order-method">По коду</div>
+          <div style="margin-bottom:12px;"><span class="status status-completed">Выполнен</span></div>
+          <div class="order-footer">
+            <div class="order-price">1 000 &#8381;</div>
+            <div class="order-date">15 марта 2026</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cancelled -->
+      <div id="orders-cancelled" style="display:none;">
+        <div class="empty-state">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+          <p>У вас нет отменённых заказов</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ HISTORY ═══ -->
+    <div id="tab-history" style="display:none;">
+      <h2>История заказов</h2>
+      <div style="overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;font-size:14px;">
+          <thead>
+            <tr style="border-bottom:1px solid var(--border);">
+              <th style="text-align:left;padding:12px 16px;color:var(--t3);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;">Дата</th>
+              <th style="text-align:left;padding:12px 16px;color:var(--t3);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;">Заказ</th>
+              <th style="text-align:left;padding:12px 16px;color:var(--t3);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;">Товар</th>
+              <th style="text-align:right;padding:12px 16px;color:var(--t3);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;">Сумма</th>
+              <th style="text-align:right;padding:12px 16px;color:var(--t3);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;">Статус</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:12px 16px;color:var(--t2);">29.03.2026</td>
+              <td style="padding:12px 16px;font-family:var(--m);color:var(--t3);">#14892</td>
+              <td style="padding:12px 16px;color:var(--w);">1 000 Gold Standoff 2</td>
+              <td style="padding:12px 16px;text-align:right;font-weight:700;color:var(--w);">1 268 &#8381;</td>
+              <td style="padding:12px 16px;text-align:right;"><span class="status status-processing">В обработке</span></td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:12px 16px;color:var(--t2);">25.03.2026</td>
+              <td style="padding:12px 16px;font-family:var(--m);color:var(--t3);">#14850</td>
+              <td style="padding:12px 16px;color:var(--w);">3 000 Gold Standoff 2</td>
+              <td style="padding:12px 16px;text-align:right;font-weight:700;color:var(--w);">2 728 &#8381;</td>
+              <td style="padding:12px 16px;text-align:right;"><span class="status status-completed">Выполнен</span></td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:12px 16px;color:var(--t2);">20.03.2026</td>
+              <td style="padding:12px 16px;font-family:var(--m);color:var(--t3);">#14801</td>
+              <td style="padding:12px 16px;color:var(--w);">Gold Pass Standoff 2</td>
+              <td style="padding:12px 16px;text-align:right;font-weight:700;color:var(--w);">184 &#8381;</td>
+              <td style="padding:12px 16px;text-align:right;"><span class="status status-completed">Выполнен</span></td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:12px 16px;color:var(--t2);">15.03.2026</td>
+              <td style="padding:12px 16px;font-family:var(--m);color:var(--t3);">#14756</td>
+              <td style="padding:12px 16px;color:var(--w);">Steam 1 000&#8381;</td>
+              <td style="padding:12px 16px;text-align:right;font-weight:700;color:var(--w);">1 000 &#8381;</td>
+              <td style="padding:12px 16px;text-align:right;"><span class="status status-completed">Выполнен</span></td>
+            </tr>
+            <tr>
+              <td style="padding:12px 16px;color:var(--t2);">10.03.2026</td>
+              <td style="padding:12px 16px;font-family:var(--m);color:var(--t3);">#14700</td>
+              <td style="padding:12px 16px;color:var(--w);">500 Gold Standoff 2</td>
+              <td style="padding:12px 16px;text-align:right;font-weight:700;color:var(--w);">723 &#8381;</td>
+              <td style="padding:12px 16px;text-align:right;"><span class="status status-completed">Выполнен</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ═══ SETTINGS ═══ -->
+    <div id="tab-settings" style="display:none;">
+      <h2>Настройки профиля</h2>
+
+      <div style="background:var(--s1);border:1px solid var(--border);border-radius:var(--rl);padding:24px;margin-bottom:24px;">
+        <h3 style="font-weight:700;font-size:16px;margin-bottom:20px;">Профиль</h3>
+        <div class="form-group">
+          <label class="form-label">Имя</label>
+          <input class="form-input" type="text" value="Алексей К.">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input class="form-input" type="email" value="alexey@mail.ru">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Telegram</label>
+          <input class="form-input" type="text" value="@alexey_k" placeholder="@username">
+        </div>
+        <button class="btn btn-lime" style="padding:12px 24px;">Сохранить изменения</button>
+      </div>
+
+      <div style="background:var(--s1);border:1px solid var(--border);border-radius:var(--rl);padding:24px;margin-bottom:24px;">
+        <h3 style="font-weight:700;font-size:16px;margin-bottom:20px;">Безопасность</h3>
+        <div class="form-group">
+          <label class="form-label">Текущий пароль</label>
+          <input class="form-input" type="password" placeholder="Введите текущий пароль">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Новый пароль</label>
+          <input class="form-input" type="password" placeholder="Минимум 8 символов">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Подтверждение пароля</label>
+          <input class="form-input" type="password" placeholder="Повторите новый пароль">
+        </div>
+        <button class="btn-ghost">Изменить пароль</button>
+      </div>
+
+      <div style="background:var(--s1);border:1px solid var(--border);border-radius:var(--rl);padding:24px;">
+        <h3 style="font-weight:700;font-size:16px;margin-bottom:20px;">Уведомления</h3>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border);">
+          <span style="font-size:14px;">Email-уведомления о заказах</span>
+          <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border);">
+          <span style="font-size:14px;">Telegram-уведомления</span>
+          <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;">
+          <span style="font-size:14px;">Промо-рассылка</span>
+          <div class="toggle" onclick="this.classList.toggle('on')"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SUPPORT ═══ -->
+    <div id="tab-support" style="display:none;">
+      <h2>Поддержка</h2>
+
+      <div style="background:var(--s1);border:1px solid var(--border);border-radius:var(--rl);padding:24px;margin-bottom:24px;">
+        <h3 style="font-weight:700;font-size:16px;margin-bottom:20px;">Новое обращение</h3>
+        <div class="form-group">
+          <label class="form-label">Тема</label>
+          <select class="form-select">
+            <option>Проблема с заказом</option>
+            <option>Возврат средств</option>
+            <option>Общий вопрос</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Сообщение</label>
+          <textarea class="form-textarea" placeholder="Опишите вашу проблему..."></textarea>
+        </div>
+        <div style="display:flex;gap:12px;align-items:center;">
+          <button class="btn btn-lime" style="padding:12px 24px;">Отправить</button>
+          <button class="btn-ghost" style="font-size:12px;">Прикрепить файл</button>
+        </div>
+      </div>
+
+      <h3 style="font-weight:700;font-size:16px;margin-bottom:16px;">История обращений</h3>
+      <div class="ticket-card">
+        <div>
+          <div class="ticket-title">Проблема с заказом #14856</div>
+          <div class="ticket-meta">2 дня назад</div>
+        </div>
+        <span class="status status-completed">Решено</span>
+      </div>
+      <div class="ticket-card">
+        <div>
+          <div class="ticket-title">Вопрос по возврату</div>
+          <div class="ticket-meta">5 дней назад</div>
+        </div>
+        <span class="status status-processing">В работе</span>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ORDER DETAIL MODAL -->
+<div class="modal-overlay" id="order-modal">
+  <div class="modal-box" style="position:relative;" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeOrderDetail()">&times;</button>
+    <h3 style="font-family:var(--d);font-weight:900;font-size:1.3rem;margin-bottom:20px;">Заказ #14892</h3>
+
+    <div class="progress-tracker">
+      <div class="progress-step done"><div class="progress-dot">&#10003;</div><span>Оплачен</span></div>
+      <div class="progress-line done"></div>
+      <div class="progress-step current"><div class="progress-dot">2</div><span>В обработке</span></div>
+      <div class="progress-line"></div>
+      <div class="progress-step"><div class="progress-dot">3</div><span>Выполнен</span></div>
+    </div>
+
+    <div style="background:var(--bg);border-radius:12px;padding:16px;margin-bottom:20px;">
+      <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+        <span style="color:var(--t3);font-size:13px;">Товар</span>
+        <span style="font-weight:600;">1 000 Gold &middot; Standoff 2</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+        <span style="color:var(--t3);font-size:13px;">Метод</span>
+        <span>Через рынок</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+        <span style="color:var(--t3);font-size:13px;">Сумма</span>
+        <span style="font-weight:800;color:var(--lime);">1 268 &#8381;</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;">
+        <span style="color:var(--t3);font-size:13px;">Дата</span>
+        <span>29 марта 2026</span>
+      </div>
+    </div>
+
+    <h4 style="font-weight:700;font-size:14px;margin-bottom:12px;">Чат с поддержкой</h4>
+    <div class="chat-log">
+      <div class="chat-msg bot">Заказ принят. Ожидайте выполнения. Среднее время &mdash; от 3 минут.</div>
+      <div class="chat-msg user">Скриншот прикреплён</div>
+      <div class="chat-msg bot">Скриншот получен. Ищем ваш скин на рынке.</div>
+    </div>
+    <div style="display:flex;gap:8px;">
+      <input class="form-input" type="text" placeholder="Написать сообщение..." style="margin:0;flex:1;">
+      <button class="btn btn-lime" style="padding:10px 16px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+function switchTab(id) {
+  ['orders','history','settings','support'].forEach(t => {
+    const el = document.getElementById('tab-' + t);
+    if (el) el.style.display = t === id ? 'block' : 'none';
+  });
+  document.querySelectorAll('.sidebar-item').forEach((b,i) => {
+    const tabs = ['orders','history','settings','support'];
+    b.classList.toggle('active', tabs[i] === id);
+  });
+  document.querySelectorAll('.mobile-tabs .sub-tab').forEach((b,i) => {
+    const tabs = ['orders','history','settings','support'];
+    b.classList.toggle('active', tabs[i] === id);
+  });
+}
+
+function switchOrderSub(sub, btn) {
+  ['active','done','cancelled'].forEach(s => {
+    const el = document.getElementById('orders-' + s);
+    if (el) el.style.display = s === sub ? 'block' : 'none';
+  });
+  btn.parentElement.querySelectorAll('.sub-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function openOrderDetail() {
+  document.getElementById('order-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeOrderDetail() {
+  document.getElementById('order-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('order-modal').addEventListener('click', closeOrderDetail);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeOrderDetail(); });
+</script>
+
+</body>
+</html>
