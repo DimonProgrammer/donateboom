@@ -14,13 +14,33 @@
   var _otpTimer = null;
 
   /* ---------- Init ---------- */
+  // Pages that require auth — redirect to index + open modal if not logged in
+  var PROTECTED_PAGES = ['profile.html', 'checkout.html'];
+
   function init() {
     _auth = loadAuth();
     injectModal();
     updateNavButton();
 
+    // Auth guard for protected pages
+    var page = location.pathname.split('/').pop() || 'index.html';
+    if (PROTECTED_PAGES.indexOf(page) !== -1 && !_auth) {
+      location.href = 'index.html?auth=1';
+      return;
+    }
+
     // Open modal if URL has ?auth=1
     if (location.search.indexOf('auth=1') !== -1) openAuthModal();
+  }
+
+  /* ---------- XSS helper ---------- */
+  function esc(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
   }
 
   /* ---------- Storage ---------- */
@@ -45,10 +65,11 @@
     var wrapper = btn.parentElement; // position:relative wrapper
 
     if (_auth) {
-      var initials = (_auth.name || 'П').charAt(0).toUpperCase();
+      var safeName = esc(_auth.name || 'Профиль');
+      var initials = esc((_auth.name || 'П').charAt(0).toUpperCase());
       btn.innerHTML =
         '<span style="width:30px;height:30px;border-radius:50%;background:var(--lime);display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:#fff;flex-shrink:0">' + initials + '</span>' +
-        '<span style="max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + (_auth.name || 'Профиль') + '</span>' +
+        '<span style="max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + safeName + '</span>' +
         '<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
       btn.style.gap = '8px';
       btn.onclick = function(e) { e.stopPropagation(); toggleUserDropdown(); };
