@@ -249,53 +249,39 @@ body{background:var(--bg);color:var(--w);font-family:var(--b);font-size:15px;lin
   </div>
 
   <!-- ═══════════════════════════════════
-       STEP 1 — Заказ + выбор метода
+       STEP 1 — Проверка заказа (readonly)
   ════════════════════════════════════ -->
   <div id="step-1">
     <h2>Проверка заказа</h2>
 
     <div class="summary-card">
       <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;">
-        <div style="width:48px;height:48px;border-radius:12px;background:#3a0a0a;display:flex;align-items:center;justify-content:center;font-family:var(--m);font-weight:800;font-size:13px;color:#FF8080;flex-shrink:0;">S2</div>
+        <div id="s1-game-icon" style="width:48px;height:48px;border-radius:12px;background:#3a0a0a;display:flex;align-items:center;justify-content:center;font-family:var(--m);font-weight:800;font-size:13px;color:#FF8080;flex-shrink:0;">S2</div>
         <div>
-          <div style="font-weight:700;font-size:16px;">Золото Standoff 2</div>
-          <div style="font-size:13px;color:var(--t3);font-family:var(--m);">1&nbsp;000 Gold</div>
+          <div style="font-weight:700;font-size:16px;" id="s1-game-name">Золото Standoff 2</div>
+          <div style="font-size:13px;color:var(--t3);font-family:var(--m);" id="s1-gold-label">1&nbsp;000 Gold</div>
         </div>
-        <a href="standoff-2.html" class="back-link" style="margin:0 0 0 auto;font-size:12px;">
+        <a href="standoff-2.html" id="s1-change-link" class="back-link" style="margin:0 0 0 auto;font-size:12px;">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5H6a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-5"/><polyline points="17 3 21 3 21 7"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
           Изменить
         </a>
       </div>
 
-      <div class="summary-row"><span class="label">Цена</span><span><s style="color:var(--t3);margin-right:8px;">1&nbsp;585&nbsp;₽</s><span style="font-weight:800;color:var(--lime);" id="price-display">1&nbsp;268&nbsp;₽</span></span></div>
-      <div class="summary-row"><span class="label">Скидка</span><span style="color:var(--mint);font-weight:600;">−20%</span></div>
-
-      <!-- Метод -->
-      <div style="margin-top:20px;">
-        <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--t3);margin-bottom:8px;">Способ пополнения</div>
-        <div class="method-toggle">
-          <button class="method-btn active" id="btn-market" onclick="setMethod('market')">
-            Через рынок <span class="method-cheap">ДЕШЕВЛЕ</span>
-          </button>
-          <button class="method-btn" id="btn-uid" onclick="setMethod('uid')">
-            По UID
-          </button>
-        </div>
-
-        <!-- Info: Рынок -->
-        <div class="method-info" id="info-market">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-          <span>Вы выставляете предмет в игровом магазине → мы покупаем → получаете золото. Пароль не нужен.</span>
-        </div>
-        <!-- Info: UID -->
-        <div class="method-info" id="info-uid" style="display:none;">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-          <span>Зачисление напрямую по вашему Player ID без входа в аккаунт. Чуть дороже рынка.</span>
-        </div>
+      <div class="summary-row">
+        <span class="label">Сумма</span>
+        <span style="font-weight:800;color:var(--lime);" id="s1-price">1&nbsp;268&nbsp;₽</span>
+      </div>
+      <div class="summary-row">
+        <span class="label">Способ пополнения</span>
+        <span id="s1-method-label" style="font-weight:600;color:var(--w);">Через рынок</span>
+      </div>
+      <div class="summary-row" id="s1-pid-row" style="display:none;">
+        <span class="label">Player ID</span>
+        <span id="s1-pid-val" style="font-family:var(--m);color:var(--w);font-weight:600;"></span>
       </div>
     </div>
 
-    <button class="btn-full" onclick="goToStep(2)">Продолжить</button>
+    <button class="btn-full" onclick="goToStep(2)">Подтвердить</button>
   </div>
 
   <!-- ═══════════════════════════════════
@@ -318,7 +304,16 @@ body{background:var(--bg);color:var(--w);font-family:var(--b);font-size:15px;lin
 
     <!-- ─── БЛОК UID ─────────────────────────────── -->
     <div id="block-uid" style="display:none;">
-      <div class="form-group">
+      <!-- Если Player ID пришёл со страницы товара — показываем readonly -->
+      <div class="form-group" id="pid-readonly-group" style="display:none;">
+        <label class="form-label">Player ID</label>
+        <div style="background:var(--s2);border:1.5px solid var(--border);border-radius:var(--rs);padding:12px 16px;font-family:var(--m);font-size:14px;color:var(--t1);display:flex;align-items:center;justify-content:space-between;">
+          <span id="pid-readonly-val"></span>
+          <a href="standoff-2.html" style="font-size:11px;color:var(--t3);text-decoration:underline;">изменить</a>
+        </div>
+      </div>
+      <!-- Если зашли напрямую — показываем инпут -->
+      <div class="form-group" id="pid-input-group">
         <label class="form-label">Player ID <span>*</span></label>
         <input class="form-input" id="playerIdInput" type="text" placeholder="Например: 8291847362" inputmode="numeric">
         <div class="form-hint"><a href="about.html#faq">Где найти Player ID?</a> — откройте игру → Настройки → Профиль</div>
@@ -484,15 +479,52 @@ body{background:var(--bg);color:var(--w);font-family:var(--b);font-size:15px;lin
 <script>
 let currentMethod = 'market'; // 'market' | 'uid'
 let currentStep = 1;
+let _order = null; // данные из sessionStorage
 
-/* ── METHOD SWITCH ─────────────────────── */
-function setMethod(m) {
-  currentMethod = m;
-  document.getElementById('btn-market').classList.toggle('active', m === 'market');
-  document.getElementById('btn-uid').classList.toggle('active', m === 'uid');
-  document.getElementById('info-market').style.display = m === 'market' ? 'flex' : 'none';
-  document.getElementById('info-uid').style.display   = m === 'uid'    ? 'flex' : 'none';
-}
+/* ── INIT FROM sessionStorage ─────────── */
+(function initOrder() {
+  try {
+    var raw = sessionStorage.getItem('db_order');
+    if (!raw) return;
+    _order = JSON.parse(raw);
+  } catch(e) { return; }
+
+  currentMethod = _order.method || 'market';
+
+  // Шаг 1: заполняем readonly-карточку
+  if (_order.gameCode) document.getElementById('s1-game-icon').textContent = _order.gameCode;
+  if (_order.gameBg)   document.getElementById('s1-game-icon').style.background = _order.gameBg;
+  if (_order.gameColor) document.getElementById('s1-game-icon').style.color = _order.gameColor;
+  if (_order.game)     document.getElementById('s1-game-name').textContent = _order.game;
+  if (_order.goldLabel) document.getElementById('s1-gold-label').textContent = _order.goldLabel;
+  if (_order.rub)      document.getElementById('s1-price').textContent = _order.rub.toLocaleString('ru') + ' ₽';
+  document.getElementById('s1-method-label').textContent = currentMethod === 'uid' ? 'По UID' : 'Через рынок';
+
+  if (currentMethod === 'uid' && _order.playerId) {
+    var pidRow = document.getElementById('s1-pid-row');
+    if (pidRow) { pidRow.style.display = 'flex'; document.getElementById('s1-pid-val').textContent = _order.playerId; }
+  }
+
+  // Шаг 2: Player ID pre-fill если UID
+  if (currentMethod === 'uid' && _order.playerId) {
+    var ro = document.getElementById('pid-readonly-group');
+    var inp = document.getElementById('pid-input-group');
+    if (ro) { ro.style.display = 'block'; document.getElementById('pid-readonly-val').textContent = _order.playerId; }
+    if (inp) inp.style.display = 'none';
+    // Также заполняем скрытый инпут чтобы валидация проходила
+    var hiddenPid = document.getElementById('playerIdInput');
+    if (hiddenPid) hiddenPid.value = _order.playerId;
+  }
+
+  // Итоговая строка шага 2
+  var totalLabel = document.querySelector('.total-label');
+  var totalVal   = document.querySelector('.total-val');
+  if (totalLabel && _order.goldLabel) totalLabel.textContent = _order.goldLabel + ' ' + (_order.game || '');
+  if (totalVal && _order.rub) totalVal.textContent = _order.rub.toLocaleString('ru') + ' ₽';
+})();
+
+/* ── METHOD SWITCH (legacy, не используется после рефактора) ── */
+function setMethod(m) { currentMethod = m; }
 
 /* ── STEPS ─────────────────────────────── */
 function goToStep(n) {

@@ -1717,6 +1717,37 @@
   }, { threshold: 0.08 });
   document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
 
+  // -- "К оплате" → sessionStorage → checkout --
+  document.getElementById('panel-buy-btn').addEventListener('click', function() {
+    if (method === 'uid') {
+      var pid = document.getElementById('panel-uid-input').value.trim();
+      if (!pid) {
+        var el = document.getElementById('panel-uid-input');
+        el.focus();
+        el.style.borderColor = 'var(--lime)';
+        setTimeout(function(){ el.style.borderColor = ''; }, 2000);
+        return;
+      }
+    }
+    var rub  = method === 'market'
+      ? parseInt(document.getElementById('market-amount').value) || 500
+      : uidSelectedRub;
+    var gold = method === 'market'
+      ? parseInt(document.getElementById('market-gold-input').value) || 0
+      : uidSelectedGold;
+    sessionStorage.setItem('db_order', JSON.stringify({
+      game:      'Standoff 2',
+      gameCode:  'S2',
+      gameBg:    '#3a0a0a',
+      gameColor: '#FF8080',
+      goldLabel: gold > 0 ? gold.toLocaleString('ru') + ' Gold' : uidSelectedLabel,
+      rub:       rub,
+      method:    method,
+      playerId:  method === 'uid' ? document.getElementById('panel-uid-input').value.trim() : ''
+    }));
+    location.href = 'checkout.html';
+  });
+
   // -- Init --
   updateSliderFill(document.getElementById('market-slider'));
   updateMarketFromRub();
