@@ -1005,14 +1005,14 @@
         </div>
         <div class="grid gap-3 mb-8 product-cards-grid" style="grid-template-columns: repeat(4, 1fr);">
           <div class="product-card" data-rub="177" data-gold="100" data-type="gold" onclick="selectUidCard(this)">
-            <div class="product-card-img">🪙</div>
+            <div class="product-card-img" style="background:transparent;padding:2px;"><svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="32" width="28" height="8" fill="#C8941A"/><ellipse cx="22" cy="40" rx="14" ry="4" fill="#A07010"/><ellipse cx="22" cy="32" rx="14" ry="4" fill="#FFD700"/><ellipse cx="18" cy="31" rx="4" ry="1.5" fill="#FFF5C0" opacity="0.55"/></svg></div>
             <div class="product-card-body">
               <div class="product-card-title">100 золота</div>
               <div class="product-card-price">177 &#8381;</div>
             </div>
           </div>
           <div class="product-card" data-rub="723" data-gold="500" data-type="gold" onclick="selectUidCard(this)">
-            <div class="product-card-img">🪙</div>
+            <div class="product-card-img" style="background:transparent;padding:2px;"><svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="32" width="28" height="8" fill="#C8941A"/><ellipse cx="22" cy="40" rx="14" ry="4" fill="#A07010"/><ellipse cx="22" cy="32" rx="14" ry="4" fill="#D4A520"/><rect x="8" y="24" width="28" height="8" fill="#C8941A"/><ellipse cx="22" cy="24" rx="14" ry="4" fill="#FFD700"/><ellipse cx="18" cy="23" rx="4" ry="1.5" fill="#FFF5C0" opacity="0.55"/></svg></div>
             <div class="product-card-body">
               <div class="product-card-title">500 золота</div>
               <div class="product-card-price">723 &#8381;<span class="product-card-old">850 &#8381;</span></div>
@@ -1020,7 +1020,7 @@
             <div class="product-card-discount">-15%</div>
           </div>
           <div class="product-card active" data-rub="1268" data-gold="1000" data-type="gold" onclick="selectUidCard(this)">
-            <div class="product-card-img">🪙</div>
+            <div class="product-card-img" style="background:transparent;padding:2px;"><svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="32" width="28" height="8" fill="#C8941A"/> <ellipse cx="22" cy="40" rx="14" ry="4" fill="#A07010"/> <ellipse cx="22" cy="32" rx="14" ry="4" fill="#D4A520"/> <rect x="8" y="24" width="28" height="8" fill="#C8941A"/> <ellipse cx="22" cy="24" rx="14" ry="4" fill="#D4A520"/> <rect x="8" y="16" width="28" height="8" fill="#C8941A"/> <ellipse cx="22" cy="16" rx="14" ry="4" fill="#FFD700"/> <ellipse cx="18" cy="15" rx="4" ry="1.5" fill="#FFF5C0" opacity="0.55"/></svg></div>
             <div class="product-card-body">
               <div class="product-card-title">1 000 золота</div>
               <div class="product-card-price">1 268 &#8381;<span class="product-card-old">1 585 &#8381;</span></div>
@@ -1028,7 +1028,7 @@
             <div class="product-card-discount">-20%</div>
           </div>
           <div class="product-card" data-rub="2728" data-gold="3000" data-type="gold" onclick="selectUidCard(this)">
-            <div class="product-card-img">🪙</div>
+            <div class="product-card-img" style="background:transparent;padding:2px;"><svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="32" width="28" height="8" fill="#C8941A"/><ellipse cx="22" cy="40" rx="14" ry="4" fill="#A07010"/><ellipse cx="22" cy="32" rx="14" ry="4" fill="#D4A520"/><rect x="8" y="24" width="28" height="8" fill="#C8941A"/><ellipse cx="22" cy="24" rx="14" ry="4" fill="#D4A520"/><rect x="8" y="16" width="28" height="8" fill="#C8941A"/><ellipse cx="22" cy="16" rx="14" ry="4" fill="#D4A520"/><rect x="8" y="8" width="28" height="8" fill="#C8941A"/><ellipse cx="22" cy="8" rx="14" ry="4" fill="#FFD700"/><ellipse cx="18" cy="7" rx="4" ry="1.5" fill="#FFF5C0" opacity="0.55"/></svg></div>
             <div class="product-card-body">
               <div class="product-card-title">3 000 золота</div>
               <div class="product-card-price">2 728 &#8381;<span class="product-card-old">3 410 &#8381;</span></div>
@@ -1699,8 +1699,7 @@
   updateSliderFill(document.getElementById('market-slider'));
   updateMarketFromRub();
 </script>
-
-
+<script>
 // Nav: catalog dropdown
 // Nav dropdown
 var _navCat=document.getElementById('navCat');
@@ -1709,5 +1708,6 @@ if(_navCatBtn)_navCatBtn.addEventListener('click',function(e){e.stopPropagation(
 document.addEventListener('click',function(e){if(_navCat&&!_navCat.contains(e.target))_navCat.classList.remove('open')});
 function toggleMobile(){document.getElementById('mobileMenu').classList.toggle('open');document.getElementById('burgerBtn').classList.toggle('active')}
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&_navCat)_navCat.classList.remove('open')});
+</script>
 </body>
 </html>

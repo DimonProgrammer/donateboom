@@ -1261,7 +1261,6 @@ img{display:block;max-width:100%}
 <!-- ═══════════ PAYMENTS ═══════════ -->
 <div class="pay">
   <div class="pay-inner">
-    <div class="pay-i"><img src="assets/logos/visa.svg" alt="Visa"></div>
     <div class="pay-i"><img src="assets/logos/mastercard.svg" alt="Mastercard"></div>
     <div class="pay-i"><img src="assets/logos/mir.svg" alt="МИР"></div>
     <div class="pay-i"><img src="assets/logos/sbp-white.svg" alt="СБП"></div>
@@ -1419,8 +1418,7 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 revealEls.forEach(el => revealObserver.observe(el));
 </script>
-
-
+<script>
 // Nav: catalog dropdown
 // Nav dropdown
 var _navCat=document.getElementById('navCat');
@@ -1429,5 +1427,6 @@ if(_navCatBtn)_navCatBtn.addEventListener('click',function(e){e.stopPropagation(
 document.addEventListener('click',function(e){if(_navCat&&!_navCat.contains(e.target))_navCat.classList.remove('open')});
 function toggleMobile(){document.getElementById('mobileMenu').classList.toggle('open');document.getElementById('burgerBtn').classList.toggle('active')}
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&_navCat)_navCat.classList.remove('open')});
+</script>
 </body>
 </html>
