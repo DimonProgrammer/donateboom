@@ -294,7 +294,7 @@ body{background:var(--bg);color:var(--w);font-family:var(--b);font-size:15px;lin
       </div>
     </div>
 
-    <button class="btn-full" onclick="goToStep(2)">Подтвердить</button>
+    <button class="btn-full" onclick="goToCheckoutStep(2)">Подтвердить</button>
   </div>
 
   <!-- ═══════════════════════════════════
@@ -302,7 +302,7 @@ body{background:var(--bg);color:var(--w);font-family:var(--b);font-size:15px;lin
   ════════════════════════════════════ -->
   <div id="step-2" style="display:none;">
 
-    <span class="back-link" onclick="goToStep(1)">
+    <span class="back-link" onclick="goToCheckoutStep(1)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
       Назад
     </span>
@@ -391,7 +391,7 @@ body{background:var(--bg);color:var(--w);font-family:var(--b);font-size:15px;lin
   ════════════════════════════════════ -->
   <div id="step-3" style="display:none;">
 
-    <span class="back-link" onclick="goToStep(2)">
+    <span class="back-link" onclick="goToCheckoutStep(2)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
       Назад
     </span>
@@ -540,7 +540,7 @@ let _order = null; // данные из sessionStorage
 function setMethod(m) { currentMethod = m; }
 
 /* ── STEPS ─────────────────────────────── */
-function goToStep(n) {
+function goToCheckoutStep(n) {
   currentStep = n;
   for (let i = 1; i <= 4; i++) {
     document.getElementById('step-' + i).style.display = i === n ? 'block' : 'none';
@@ -601,7 +601,7 @@ function validateAndContinue() {
     setTimeout(function(){ pid.style.borderColor = ''; }, 2000);
     return;
   }
-  goToStep(3);
+  goToCheckoutStep(3);
 }
 
 /* ── PAYMENT SUBMIT ───────────────────── */
@@ -613,7 +613,7 @@ function submitPayment(btn) {
   }
   btn.disabled = true;
   btn.textContent = 'Обрабатываем оплату…';
-  setTimeout(function(){ goToStep(4); }, 1500);
+  setTimeout(function(){ goToCheckoutStep(4); }, 1500);
 }
 </script>
 <script>
