@@ -252,9 +252,9 @@ body{background:var(--bg);color:var(--w);font-family:var(--b);font-size:15px;lin
 
   <!-- PROGRESS -->
   <div class="steps">
-    <div class="step active" id="s1"><div class="step-dot">1</div><div class="step-label">Заказ</div></div>
-    <div class="step-line" id="l1"></div>
-    <div class="step" id="s2"><div class="step-dot">2</div><div class="step-label">Данные</div></div>
+    <div class="step done" id="s1"><div class="step-dot">1</div><div class="step-label">Заказ</div></div>
+    <div class="step-line done" id="l1"></div>
+    <div class="step active" id="s2"><div class="step-dot">2</div><div class="step-label">Данные</div></div>
     <div class="step-line" id="l2"></div>
     <div class="step" id="s3"><div class="step-dot">3</div><div class="step-label">Оплата</div></div>
     <div class="step-line" id="l3"></div>
@@ -264,7 +264,7 @@ body{background:var(--bg);color:var(--w);font-family:var(--b);font-size:15px;lin
   <!-- ═══════════════════════════════════
        STEP 1 — Проверка заказа (readonly)
   ════════════════════════════════════ -->
-  <div id="step-1">
+  <div id="step-1" style="display:none;">
     <h2>Проверка заказа</h2>
 
     <div class="summary-card">
@@ -300,7 +300,7 @@ body{background:var(--bg);color:var(--w);font-family:var(--b);font-size:15px;lin
   <!-- ═══════════════════════════════════
        STEP 2 — Данные (метод-зависимые)
   ════════════════════════════════════ -->
-  <div id="step-2" style="display:none;">
+  <div id="step-2">
 
     <span class="back-link" onclick="goToCheckoutStep(1)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
@@ -334,7 +334,7 @@ body{background:var(--bg);color:var(--w);font-family:var(--b);font-size:15px;lin
     </div>
 
     <!-- ─── БЛОК РЫНОК ───────────────────────────── -->
-    <div id="block-market">
+    <div id="block-market" style="display:block;">
       <div style="font-size:14px;font-weight:700;color:var(--w);margin-bottom:12px;">Как выставить предмет:</div>
       <div class="steps-list">
         <div class="steps-list-item">
